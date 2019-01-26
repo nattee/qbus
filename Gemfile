@@ -37,14 +37,17 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # ------------------------ dae --------------------------
+gem 'jquery-rails'
 gem 'devise'
 gem 'jquery-turbolinks'
 gem 'simple_form'
 gem 'material_icons'
 gem 'materialize-sass'
-gem 'materialize-form'
+#gem 'materialize-form'
 
 gem 'haml'
+
+gem 'jquery-datatables'
 # ------------------------ end --------------------------
 
 group :development, :test do

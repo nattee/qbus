@@ -1,0 +1,35 @@
+%ul#slide-out.sidenav
+  %li
+    .user-view
+      .background
+        = image_tag("office.jpg")
+      %a{:href => "#!user"}= image_tag("yuna.jpg", class: "circle")
+      /- if user_signed_in?
+      - if false
+        %a
+          %span.white-text.name Hello World
+        %a
+          %span.white-text.email= current_user.email
+      - else
+        %a
+          %span.white-text.name Welcome
+  / li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li
+  %li
+    %a{:href => "/"} Home
+  %li
+    %a{:href => "/demos"} Demos
+  %li
+    %a{:href => "/parts"} Parts
+  /- if user_signed_in?
+  - if false
+    %li
+      .divider
+    %li
+      %a.subheader
+        %i.material-icons> account_circle
+        User Profile
+    / %li= link_to (t :profile), edit_user_registration_url
+    / %li= link_to (t :sign_out), destroy_user_session_url, data: {method: :delete}
+  - else
+    / %li= link_to (t :sign_in), new_user_session_url
+/ a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a

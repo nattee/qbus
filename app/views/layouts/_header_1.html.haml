@@ -1,0 +1,43 @@
+%header.navbar-fixed
+  %nav
+    .nav-wrapper
+      %a.sidenav-trigger{"data-target" => "slide-out", "data-turbolinks" => "false", :href => "#"}
+        %i.material-icons menu
+      %a#logo-container.brand-logo.center{:href => "/"}
+        %img{:height => "60", :src => "/rails-logo.svg", :style => "fill: white !important;", :width => "112"}/
+      %ul#nav-mobile.right.hide-on-med-and-down
+        %li
+          %a{:href => "/"} Home
+        %li
+          %a{:href => "/demos"}
+            %span Demos
+            %span.new.badge 4
+        %li
+          %a{:href => "/parts"} Parts
+        / Dropdown Trigger
+        / - if user_signed_in?
+        - if false
+          %li
+            %a.dropdown-button{"data-activates" => "dropdown1", :href => "#!"}
+              %span
+                = current_user.email
+              %i.material-icons.right arrow_drop_down
+        - else
+          / %li= link_to (t :sign_in), new_user_session_url
+      /- if user_signed_in?
+      - if false
+        %ul#dropdown1.dropdown-content
+          / %li= link_to (t :profile), edit_user_registration_url
+          %li.divider
+          / %li= link_to (t :sign_out), destroy_user_session_url, data: {method: :delete}
+  / Tap Target Structure
+  .tap-target.sidenav{"data-activates" => "sidenav"}
+    .tap-target-content
+      %h5 Open Sidebar
+      %p Tell me what not working
+  /
+    \% if current_hit <= 1 %>
+    <script>
+    $('.tap-target.sidenav').tapTarget('open');
+    </script>
+    <% end %
