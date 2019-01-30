@@ -1,0 +1,34 @@
+.form-padding
+  .row
+    #admin.col.s12
+      .card.material-table.card-default
+        .table-header
+          %h5 ผู้ใช้ระบบ
+          .actions{"data-turbolinks" => "false"}
+            %a.search-toggle.waves-effect.btn-flat.nopadding{:href => "#"}
+              %i.material-icons
+                search
+        %table#dttb.table
+          %thead
+            %tr
+              %th{:width => "30%"} อีเมล์
+              %th ชื่อ
+              %th
+          %tbody
+            - @users.each do |user|
+              %tr
+                %td= user.title
+                %td= user.body
+                %td.right-align
+                  = link_to 'Show ', demo
+                  = link_to ' Edit ', edit_demo_path(demo)
+                  = link_to ' Destroy', demo, data: {:confirm => 'Are you sure?'}, :method => :delete
+  .fixed-action-btn
+    %a#newpost.waves-effect.waves-light.btn.btn-floating.btn-large.cyan{:href => new_user_path}
+      %i.large.material-icons add
+  / Tap Target Structure
+  .tap-target.newpost.cyan{"data-activates" => "newpost"}
+    .tap-target-content
+      %h5 Start posting
+      %p
+        Tell me what not working

@@ -1,0 +1,102 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1.0, user-scal\n         able=no", :name => "viewport"}/
+    %meta{:content => "/", :name => "turbolinks-root"}/
+    %meta{:content => "no-preview", :name => "turbolinks-cache-control"}/
+    %title Materialize
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': true
+    %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
+    = javascript_include_tag 'application', 'data-turbolinks-track': true
+    = csrf_meta_tags
+    - swatch = %w(lighten darken accent).sample
+  %body
+    %header.navbar-fixed
+      %nav.red.darken-1
+        .nav-wrapper.container
+          %a#sidenav.button-collapse.show-on-large{"data-activates" => "slide-out", "data-turbolinks" => "false", :href => "#"}
+            %i.material-icons.right apps
+          %a#logo-container.brand-logo{:href => "/"}
+            %img{:height => "60", :src => "/rails-logo.svg", :style => "fill: white !important;", :width => "112"}/
+          %ul#nav-mobile.right
+            %li
+              %a{:href => "/"} Home
+            %li
+              %a{:href => "/posts"}
+                %span Posts
+                %span.new.badge 4
+            %li
+              %a{:href => "/components"} Components
+            / Dropdown Trigger
+            - if user_signed_in?
+              %li
+                %a.dropdown-button{"data-activates" => "dropdown1", :href => "#!"}
+                  %span
+                    = current_user.email
+                  %i.material-icons.right arrow_drop_down
+            - else
+              %li
+                = link_to (t :sign_in), new_user_session_url
+          - if user_signed_in?
+            %ul#dropdown1.dropdown-content
+              %li= link_to (t :profile), edit_user_registration_url
+              %li.divider
+              %li= link_to (t :sign_out), destroy_user_session_url, data: {method: :delete}
+      / Tap Target Structure
+      .tap-target.sidenav.red.darken-1{"data-activates" => "sidenav"}
+        .tap-target-content
+          %h5 Open Sidebar
+          %p Tell me what not working
+      - if current_hit <= 1
+        :javascript
+          $('.tap-target.sidenav').tapTarget('open');
+    %aside
+      %ul#slide-out.side-nav
+        %li
+          .userView
+            .background
+              %img{:src => "http://materializecss.com/images/office.jpg"}/
+            %a{:href => "#!user"}
+              %img.circle{:src => "http://materializecss.com/images/yuna.jpg"}/
+            %a{:href => "#!name"}
+              %span.white-text.name Yuna
+            %a{:href => "#!email"}
+              %span.white-text.email yunalis@gmail.com
+        %li
+          %a{:href => "/posts"}
+            %i.material-icons cloud
+            %span Posts
+        %li
+          %a{:href => "/components"}
+            %i.material-icons settings
+            %span Component
+        %li
+          .divider
+        %li
+          %a.subheader Give some star
+        %li
+          %a.waves-effect{:href => "https://github.com/mkhairi/materialize-sass"}
+            GitH
+            ub
+    %main
+      = yield(:jumbotron) if content_for?(:jumbotron)
+      - if devise_controller?
+        %section#login
+          .container-fluid.pt-3
+            .row
+              .col.s4.offset-s4
+                = yield
+      - else
+        .container
+          = yield
+    %footer
+    :javascript
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'
+      );
+      
+      ga('create', 'UA-41818279-4', 'auto');   
+      ga('send', 'pageview');

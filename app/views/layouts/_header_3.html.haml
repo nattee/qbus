@@ -1,0 +1,33 @@
+%nav.nav-extended
+  .nav-wrapper
+    %a.brand-logo.center{:href => "#"} Logo
+    %a.button-collapse{"data-activates" => "mobile-demo", :href => "#"}
+      %i.material-icons menu
+    %ul#nav-mobile.right.hide-on-med-and-down
+      %li
+        %a{:href => "#"} Sass
+      %li
+        %a{:href => "#"} Components
+      %li
+        %a{:href => "#"} JavaScript
+    %ul#mobile-demo.side-nav
+      %li
+        %a{:href => "#"} Sass
+      %li
+        %a{:href => "#"} Components
+      %li
+        %a{:href => "#"} JavaScript
+  .nav-content
+    %ul.tabs.tabs-transparent
+      %li.tab
+        %a{:href => "#test1"} Test 1
+      %li.tab
+        %a.active{:href => "#test2"} Test 2
+      %li.tab.disabled
+        %a{:href => "#test3"} Disabled Tab
+      %li.tab
+        %a{:href => "#test4"} Test 4
+#test1.col.s12 Test 1
+#test2.col.s12 Test 2
+#test3.col.s12 Test 3
+#test4.col.s12 Test 4

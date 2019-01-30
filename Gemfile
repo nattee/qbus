@@ -47,6 +47,7 @@ gem 'materialize-sass'
 #gem 'materialize-form'
 
 gem 'haml'
+gem 'haml-rails'
 
 gem 'jquery-datatables'
 # ------------------------ end --------------------------
