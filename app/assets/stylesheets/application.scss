@@ -22,3 +22,5 @@ $secondary-color: color("purple", "base") !default;
 @import "materialize/extras/nouislider";
 @import 'default';
 @import "datatables";
+@import 'select2';
+@import 'select2-material';

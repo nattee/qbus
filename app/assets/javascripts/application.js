@@ -18,7 +18,7 @@
 //= require materialize/extras/nouislider
 //= require datatables
 //= require init
-//
+//= require select2-full
 //
 //
 //
