@@ -50,7 +50,7 @@ gem 'haml'
 gem 'haml-rails'
 
 gem 'jquery-datatables'
-gem 'select2-rails'
+#gem 'select2-rails'
 # ------------------------ end --------------------------
 
 group :development, :test do

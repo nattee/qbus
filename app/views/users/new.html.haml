@@ -1,6 +1,10 @@
-%h1 สร้างผู้ใช้ใหม่
 
-= render partial: 'form', locals: {back_link: users_path}
+.row
+  .col.s12
+    .container
+      .card-panel
+        %h3 สร้างผู้ใช้ใหม่
+        = render partial: 'form', locals: {back_link: users_path}
 
 %p
 

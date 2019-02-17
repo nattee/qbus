@@ -1,43 +1,111 @@
-%header.navbar-fixed
-  %nav
-    .nav-wrapper
-      %a.sidenav-trigger{"data-target" => "slide-out", "data-turbolinks" => "false", :href => "#"}
-        %i.material-icons menu
-      %a#logo-container.brand-logo.center{:href => "/"}
-        %img{:height => "60", :src => "/rails-logo.svg", :style => "fill: white !important;", :width => "112"}/
-      %ul#nav-mobile.right.hide-on-med-and-down
-        %li
-          %a{:href => "/"} Home
-        %li
-          %a{:href => "/demos"}
-            %span Demos
-            %span.new.badge 4
-        %li
-          %a{:href => "/parts"} Parts
-        / Dropdown Trigger
-        / - if user_signed_in?
-        - if false
+%header#header.page-topbar
+  .navbar.navbar-fixed
+    %nav.navbar-main.navbar-color.nav-collapsible.sideNav-lock.navbar-dark.gradient-45deg-purple-deep-orange.gradient-shadow
+      .nav-wrapper
+        .header-search-wrapper.hide-on-med-and-down
+          %i.material-icons search
+          %input.header-search-input.z-depth-2{:name => "Search", :placeholder => "Explore Materialize", :type => "text"}/
+        %ul.navbar-list.right
+          %li.hide-on-med-and-down
+            %a.waves-effect.waves-block.waves-light.translation-button{"data-target" => "translation-dropdown", :href => "javascript:void(0);"}
+              %span.flag-icon.flag-icon-gb
+          %li.hide-on-med-and-down
+            %a.waves-effect.waves-block.waves-light.toggle-fullscreen{:href => "javascript:void(0);"}
+              %i.material-icons settings_overscan
+          %li.hide-on-large-only
+            %a.waves-effect.waves-block.waves-light.search-button{:href => "javascript:void(0);"}
+              %i.material-icons search
           %li
-            %a.dropdown-button{"data-activates" => "dropdown1", :href => "#!"}
-              %span
-                = current_user.email
-              %i.material-icons.right arrow_drop_down
-        - else
-          / %li= link_to (t :sign_in), new_user_session_url
-      /- if user_signed_in?
-      - if false
-        %ul#dropdown1.dropdown-content
-          / %li= link_to (t :profile), edit_user_registration_url
+            %a.waves-effect.waves-block.waves-light.notification-button{"data-target" => "notifications-dropdown", :href => "javascript:void(0);"}
+              %i.material-icons
+                notifications_none
+                %small.notification-badge 5
+          %li
+            %a.waves-effect.waves-block.waves-light.profile-button{"data-target" => "profile-dropdown", :href => "javascript:void(0);"}
+              %span.avatar-status.avatar-online
+                = image_tag 'avatar/avatar-7.png', alt: 'asdf'
+                %i
+          %li
+            %a.waves-effect.waves-block.waves-light.sidenav-trigger{"data-target" => "slide-out-right", :href => "#"}
+              %i.material-icons format_indent_increase
+        / translation-button
+        %ul#translation-dropdown.dropdown-content
+          %li
+            %a.grey-text.text-darken-1{:href => "#!"}
+              %i.flag-icon.flag-icon-gb
+              English
+          %li
+            %a.grey-text.text-darken-1{:href => "#!"}
+              %i.flag-icon.flag-icon-fr
+              French
+          %li
+            %a.grey-text.text-darken-1{:href => "#!"}
+              %i.flag-icon.flag-icon-cn
+              Chinese
+          %li
+            %a.grey-text.text-darken-1{:href => "#!"}
+              %i.flag-icon.flag-icon-de
+              German
+        / notifications-dropdown
+        %ul#notifications-dropdown.dropdown-content
+          %li
+            %h6
+              NOTIFICATIONS
+              %span.new.badge 5
           %li.divider
-          / %li= link_to (t :sign_out), destroy_user_session_url, data: {method: :delete}
-  / Tap Target Structure
-  .tap-target.sidenav{"data-activates" => "sidenav"}
-    .tap-target-content
-      %h5 Open Sidebar
-      %p Tell me what not working
-  /
-    \% if current_hit <= 1 %>
-    <script>
-    $('.tap-target.sidenav').tapTarget('open');
-    </script>
-    <% end %
+          %li
+            %a.grey-text.text-darken-2{:href => "#!"}
+              %span.material-icons.icon-bg-circle.cyan.small add_shopping_cart
+              A new order has been placed!
+            %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 2 hours ago
+          %li
+            %a.grey-text.text-darken-2{:href => "#!"}
+              %span.material-icons.icon-bg-circle.red.small stars
+              Completed the task
+            %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 3 days ago
+          %li
+            %a.grey-text.text-darken-2{:href => "#!"}
+              %span.material-icons.icon-bg-circle.teal.small settings
+              Settings updated
+            %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 4 days ago
+          %li
+            %a.grey-text.text-darken-2{:href => "#!"}
+              %span.material-icons.icon-bg-circle.deep-orange.small today
+              Director meeting started
+            %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 6 days ago
+          %li
+            %a.grey-text.text-darken-2{:href => "#!"}
+              %span.material-icons.icon-bg-circle.amber.small trending_up
+              Generate monthly report
+            %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 1 week ago
+        / profile-dropdown
+        %ul#profile-dropdown.dropdown-content
+          %li
+            %a.grey-text.text-darken-1{:href => "user-profile-page.html"}
+              %i.material-icons person_outline
+              Profile
+          %li
+            %a.grey-text.text-darken-1{:href => "app-chat.html"}
+              %i.material-icons chat_bubble_outline
+              Chat
+          %li
+            %a.grey-text.text-darken-1{:href => "page-faq.html"}
+              %i.material-icons help_outline
+              Help
+          %li.divider
+          %li
+            %a.grey-text.text-darken-1{:href => "user-lock-screen.html"}
+              %i.material-icons lock_outline
+              Lock
+          %li
+            %a.grey-text.text-darken-1{:href => "user-login.html"}
+              %i.material-icons keyboard_tab
+              Logout
+      %nav.display-none.search-sm
+        .nav-wrapper
+          %form
+            .input-field
+              %input.search-box-sm{:required => "", :type => "search"}/
+              %label.label-icon{:for => "search"}
+                %i.material-icons.search-sm-icon search
+              %i.material-icons.search-sm-close close

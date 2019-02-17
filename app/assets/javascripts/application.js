@@ -14,12 +14,14 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require materialize-sprockets
-//= require materialize/extras/nouislider
+//= require materialize-admin/vendors.min
+//= require materialize-admin/materialize
+//= require materialize-admin/scripts/form-elements
+//= require materialize-admin/vendor/noUiSlider/nouislider
+//= require materialize-admin/plugins
+//= require materialize-admin/custom/custom-script
 //= require datatables
 //= require init
-//= require select2-full
-//
 //
 //
 

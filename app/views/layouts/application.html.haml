@@ -12,15 +12,13 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': true
     = csrf_meta_tags
     = csp_meta_tag
-  %body
+  %body.vertical-layout.page-header-light.vertical-menu-collapsible.vertical-menu-nav-dark.2-columns{"data-col" => "2-columns", "data-menu" => "vertical-menu-nav-dark", "data-open" => "click"}
+    /header
     = render 'layouts/header_1'
     = render 'layouts/side_bar'
     - flash.each do |message_type, message|
       = javascript_tag "Materialize.toast('#{message}', 4000)"
+    /main
     = render 'layouts/main'
-    - if current_page?(root_path)
-      = render 'layouts/footer_2'
-    - else
-      :css
-        .page-footer { padding-top: 0px; }
-      = render 'layouts/footer_1'
+    /footer
+    = render 'layouts/footer_1'
