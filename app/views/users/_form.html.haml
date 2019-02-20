@@ -1,5 +1,16 @@
 = simple_form_for(@user) do |f|
-  = f.error_notification
+  - if f.error_notification
+    .row
+      .col.s12
+        .card-alert.card.gradient-45deg-red-pink
+          .card-content.white-text
+            %i.material-icons.prefix error
+            aaaa
+          %button.close.white-text{type: "button", data: {dismiss: 'alert'}, :area-label => 'Close'}
+            %span{:area-hidden => 'true'} ×
+  /= @user.errors.full_messages.each do |msg|
+  /  = msg
+  /  %br
   .row
     .col.s12
       .row
@@ -7,13 +18,13 @@
           %i.material-icons.prefix face
           = f.label :name, label: "ชื่อ-สกุล"
           = f.input_field :name
-          = f.error "asdffffffffffffffff"
+          = f.full_error :name
       .row
         .input-field.col.s12
           %i.material-icons.prefix email
           = f.text_field :email
           = f.label :email, label: "อีเมล์"
-          = f.error "asdffffffffffffffff"
+          = f.full_error :email
       .row
         .input-field.col.s12
           %i.material-icons.prefix person
@@ -63,8 +74,8 @@
 
 
 :javascript
-  $('.datepicker').pickadate({
-    selectMonths: true, // Creates a dropdown to control month
-    selectYears: 15 // Creates a dropdown of 15 years to control year
-  });
+  //$('.datepicker').pickadate({
+  // selectMonths: true, // Creates a dropdown to control month
+  // selectYears: 15 // Creates a dropdown of 15 years to control year
+  //);
 
