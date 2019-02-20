@@ -5,8 +5,7 @@
         .card-alert.card.gradient-45deg-red-pink
           .card-content.white-text
             %i.material-icons.prefix error
-            = f.error_notification
-            aaaa
+            = strip_tags(f.error_notification)
           %button.close.white-text{type: "button", data: {dismiss: 'alert'}, :area-label => 'Close'}
             %span{:area-hidden => 'true'} ×
   /= @user.errors.full_messages.each do |msg|
@@ -26,14 +25,24 @@
           = f.input_field :email
           = f.label :email
           = f.full_error :email
+
+      .row
+        .input-field.col.s12
+          %i.material-icons.prefix lock
+          = f.input_field :password
+          = f.label :password
+          = f.full_error :password
+      .row
+        .input-field.col.s12
+          %i.material-icons.prefix lock
+          = f.input_field :password_confirmation
+          = f.label :password_confirmation
+          = f.full_error :password_confirmation
       .row
         .input-field.col.s12
           %i.material-icons.prefix person
-          /= f.input_field :roles, collection: 12..33
           = f.input_field :roles
-          /= f.select :roles, options_for_select([ "VISA", "AAA" ], "MasterCard"), {}, class: 'select2'
           = f.label :roles, label: "สิทธิ์ในการใช้งาน"
-          /- f.select :email, options_for_select([ "VISA", "AAA" ], "MasterCard")
       .row
         .input-field.col.s12
           %i.material-icons.prefix person
@@ -41,16 +50,16 @@
       .row
         .input-field.col.s11.offset-s1
           %p
-            = f.label :admin?  do
-              = f.input_field :admin?, as: :boolean
+            = f.label :admin  do
+              = f.input_field :admin, as: :boolean
               %span ผู้ดูแลระบบ
           %p
-            = f.label :verifier?  do
-              = f.input_field :verifier?, as: :boolean
+            = f.label :verifier  do
+              = f.input_field :verifier, as: :boolean
               %span เจ้าหน้าที่ตรวจสอบใบสมัคร
           %p
-            = f.label :surveyor?  do
-              = f.input_field :verifier?, as: :boolean
+            = f.label :surveyor  do
+              = f.input_field :surveyor, as: :boolean
               %span เจ้าหน้าที่ประเมิน
       /.row
       /  .input-field.col.s12

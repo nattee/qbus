@@ -1,7 +1,6 @@
-%h1 Editing user
-
-= render 'form'
-
-= link_to 'Show', @user
-\|
-= link_to 'Back', users_path
+.row
+  .col.s12
+    .container
+      .card-panel
+        %h3 แก้ไขผู้ใช้
+        = render partial: 'form', locals: {back_link: users_path}

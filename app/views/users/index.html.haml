@@ -17,12 +17,12 @@
           %tbody
             - @users.each do |user|
               %tr
-                %td= user.title
-                %td= user.body
+                %td= user.name
+                %td= user.email
                 %td.right-align
-                  = link_to 'Show ', demo
-                  = link_to ' Edit ', edit_demo_path(demo)
-                  = link_to ' Destroy', demo, data: {:confirm => 'Are you sure?'}, :method => :delete
+                  = link_to 'Show ', user
+                  = link_to ' Edit ', edit_user_path(user)
+                  = link_to ' Destroy', user, data: {:confirm => 'Are you sure?'}, :method => :delete
   .fixed-action-btn
     %a#newpost.waves-effect.waves-light.btn.btn-floating.btn-large.cyan{:href => new_user_path}
       %i.large.material-icons add

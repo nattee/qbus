@@ -4,6 +4,8 @@ th:
       user:
         name: 'asdf-----'
   simple_form:
+    error_notification:
+      default_message: กรุณาตรวจสอบข้อผิดพลาดด้านล่างนี้่
     labels:
       user:
         name: ชื่อ-สกุล #if not defined, it will use active record name instead
