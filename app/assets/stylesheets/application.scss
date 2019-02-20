@@ -12,7 +12,7 @@
  *
  *  require_tree .
  *  require_self
- *  require material_icons
+ *=  require material_icons
  */
 
 
@@ -20,7 +20,6 @@
 @import "materialize-admin/style";
 @import "materialize-admin/vendor/vendors.min";
 //@import "materialize-admin/vendor/noUiSlider/nouislider";
-@import "material_icons";
 
 @import "default";
 @import "datatables"; //seems to conflict with materialize-admin

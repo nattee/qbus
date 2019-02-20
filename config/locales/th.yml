@@ -1,0 +1,16 @@
+th:
+  helpers:
+    label:
+      user:
+        name: 'asdf-----'
+  simple_form:
+    labels:
+      user:
+        name: ชื่อ-สกุล #if not defined, it will use active record name instead
+  activerecord:
+    models:
+    attributes:
+      user:
+        name: 'ชื่อ-สกุล'
+        email: 'อีเมล์'
+        password: 'รหัสผ่าน'

@@ -15,5 +15,10 @@ module Qbus
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+
+    #setup I18n
+    config.i18n.available_locales = [:en, :th]
+    config.i18n.default_locale = :th
+    config.i18n.fallbacks = [:en]
   end
 end
