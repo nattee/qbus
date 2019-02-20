@@ -6,32 +6,32 @@
         .input-field.col.s12
           %i.material-icons.prefix face
           = f.label :name, label: "ชื่อ-นามสกุล ผู้ประกอบการ"
-          = f.text_field :name
+          = f.input_field :name
       .row
         .input-field.col.s12
           %i.material-icons.prefix assignment
           = f.label :license_no, label: "เลขที่ใบอนุญาต"
-          = f.text_field :license_no
+          = f.input_field :license_no
       .row
         .input-field.col.s12
           %i.material-icons.prefix event
           = f.label :license_expire, label: "วันที่หมดอายุ"
-          = f.text_field :license_expire
+          = f.input_field :license_expire
       .row
         .input-field.col.s12
           %i.material-icons.prefix local_taxi
           = f.label :car_count, label: "จำนวนรถที่มีอยู่จริง ณ วันที่ขอ"
-          = f.text_field :car_count
+          = f.input_field :car_count
       .row
         .input-field.col.s12
           %i.material-icons.prefix contacts
           = f.label :contact, label: "ชื่อผู้ประสานงาน"
-          = f.text_field :contact
+          = f.input_field :contact
       .row
         .input-field.col.s12
           %i.material-icons.prefix contact_phone
           = f.label :contact_tel, label: "เบอร์โทรศัพท์ผู้ประสานงาน"
-          = f.text_field :contact_tel
+          = f.input_field :contact_tel
   = f.button :submit, class: "btn waves-light left"
 - if back_link
   = link_to 'Back', back_link, style: "margin-left: 2em", class: "btn white black-text waves-black waves-effect"
