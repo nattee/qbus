@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  license_no: MyString
+  license_expire: 2019-02-19
+  car_count: MyString
+  contact: MyString
+  contact_tel: MyString
+
+two:
+  name: MyString
+  license_no: MyString
+  license_expire: 2019-02-19
+  car_count: MyString
+  contact: MyString
+  contact_tel: MyString

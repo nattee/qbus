@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @licensee.name
+%p
+  %b License no:
+  = @licensee.license_no
+%p
+  %b License expire:
+  = @licensee.license_expire
+%p
+  %b Car count:
+  = @licensee.car_count
+%p
+  %b Contact:
+  = @licensee.contact
+%p
+  %b Contact tel:
+  = @licensee.contact_tel
+
+= link_to 'Edit', edit_licensee_path(@licensee)
+\|
+= link_to 'Back', licensees_path

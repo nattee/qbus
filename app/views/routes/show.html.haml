@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @route.name
+%p
+  %b Start:
+  = @route.start
+%p
+  %b Destination:
+  = @route.destination
+%p
+  %b Car count:
+  = @route.car_count
+%p
+  %b Type:
+  = @route.type
+
+= link_to 'Edit', edit_route_path(@route)
+\|
+= link_to 'Back', routes_path

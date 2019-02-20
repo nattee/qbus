@@ -1,0 +1,2 @@
+class Licensee < ApplicationRecord
+end
