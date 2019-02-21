@@ -54,6 +54,7 @@ gem 'jquery-datatables'
 #
 
 gem 'rails-i18n'
+gem 'i18n_generators'
 # ------------------------ end --------------------------
 
 group :development, :test do
