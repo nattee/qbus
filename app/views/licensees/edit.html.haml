@@ -1,7 +1,6 @@
-%h1 Editing licensee
-
-= render 'form'
-
-= link_to 'Show', @licensee
-\|
-= link_to 'Back', licensees_path
+.row
+  .col.s12
+    .card
+      .card-content
+        .card-title= "แก้ไข#{t :licensee, scope: 'activerecord.models'}"
+        = render partial: 'form', locals: {back_link: licensees_path}

@@ -1,5 +1,5 @@
 th:
-  helpers:
+  cancel: ยกเลิก
   simple_form:
     error_notification:
       default_message: กรุณาตรวจสอบข้อผิดพลาดด้านล่างนี้่
