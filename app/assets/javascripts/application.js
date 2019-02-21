@@ -10,18 +10,18 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
 //= require rails-ujs
+//= require jquery
 //= require activestorage
-//= require turbolinks
+//= re quire turbolinks
 //= require materialize-admin/vendors.min
 //= require materialize-admin/materialize
-//= require materialize-admin/scripts/form-elements
-//= require materialize-admin/vendor/noUiSlider/nouislider
+//= re/quire materialize-admin/scripts/form-elements
+//= re/quire materialize-admin/vendor/noUiSlider/nouislider
 //= require materialize-admin/plugins
 //= require materialize-admin/custom/custom-script
 //= require datatables
 //= require init
-//
+//= require_tree .
 //
 

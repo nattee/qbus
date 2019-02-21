@@ -12,14 +12,16 @@
  *
  *  require_tree .
  *  require_self
- *= require material_icons
+ *=  require material_icons
  */
 
+//load font
+@import url('https://fonts.googleapis.com/css?family=Kanit');
 
 @import "materialize-admin/materialize";
 @import "materialize-admin/style";
 @import "materialize-admin/vendor/vendors.min";
-@import "materialize-admin/vendor/noUiSlider/nouislider.min";
+//@import "materialize-admin/vendor/noUiSlider/nouislider";
 
-@import 'default';
-@import "datatables";
+@import "default";
+@import "datatables"; //seems to conflict with materialize-admin

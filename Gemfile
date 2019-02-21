@@ -51,6 +51,10 @@ gem 'haml-rails'
 
 gem 'jquery-datatables'
 #gem 'select2-rails'
+#
+
+gem 'rails-i18n'
+gem 'i18n_generators'
 # ------------------------ end --------------------------
 
 group :development, :test do

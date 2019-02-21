@@ -16,7 +16,7 @@
         .input-field.col.s12
           %i.material-icons.prefix event
           = f.label :license_expire, label: "วันที่หมดอายุ"
-          = f.input_field :license_expire
+          = f.text_field :license_expire, class: 'datepicker'
       .row
         .input-field.col.s12
           %i.material-icons.prefix local_taxi

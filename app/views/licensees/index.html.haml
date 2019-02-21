@@ -1,31 +1,36 @@
-%h1 Listing licensees
+- header_scope = 'activerecord.attributes.licensee'
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th License no
-      %th License expire
-      %th Car count
-      %th Contact
-      %th Contact tel
-      %th
-      %th
-      %th
+.row
+  .col.s12
+    .card
+      .card-content
+        .card-title
+          = t :licensee, scope: 'activerecord.models'
+                
+        %table
+          %thead
+            %tr
+              %th= t :name, scope: header_scope
+              %th= t :license_no, scope: header_scope
+              %th= t :License_expire, scope: header_scope
+              %th= t :contact, scope: header_scope
+              %th= t :contact_tel, scope: header_scope
+              %th
+              %th
+              %th
 
-  %tbody
-    - @licensees.each do |licensee|
-      %tr
-        %td= licensee.name
-        %td= licensee.license_no
-        %td= licensee.license_expire
-        %td= licensee.car_count
-        %td= licensee.contact
-        %td= licensee.contact_tel
-        %td= link_to 'Show', licensee
-        %td= link_to 'Edit', edit_licensee_path(licensee)
-        %td= link_to 'Destroy', licensee, method: :delete, data: { confirm: 'Are you sure?' }
+          %tbody
+            - @licensees.each do |licensee|
+              %tr
+                %td= licensee.name
+                %td= licensee.license_no
+                %td= licensee.license_expire
+                %td= licensee.contact
+                %td= licensee.contact_tel
+                %td= link_to material_icon.zoom_in, licensee
+                %td= link_to material_icon.edit, edit_licensee_path(licensee)
+                %td= link_to material_icon.delete, licensee, method: :delete, data: { confirm: 'Are you sure?' }
 
-%br
+        %br
 
-= link_to 'New Licensee', new_licensee_path
+        = link_to 'New Licensee', new_licensee_path

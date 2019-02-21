@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2019_02_19_092449) do
 
-  create_table "licensees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "licensees", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.string "license_no"
     t.date "license_expire"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2019_02_19_092449) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "routes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "routes", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.string "start"
     t.string "destination"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_02_19_092449) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
