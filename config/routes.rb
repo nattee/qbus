@@ -5,4 +5,13 @@ Rails.application.routes.draw do
   root 'static_pages#home'
 
   resources :users
+
+  resources :applications do
+    member do
+      get 'apply/:step', to: 'application#apply', as: 'apply_step'
+    end
+    collection do
+      get 'apply'
+    end
+  end
 end

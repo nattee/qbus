@@ -17,6 +17,10 @@ class ApplicationsController < ApplicationController
     @application = Application.new
   end
 
+  def apply
+    @application = Application.new
+  end
+
   # GET /applications/1/edit
   def edit
   end
