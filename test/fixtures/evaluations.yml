@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  application: 
+  criteria: 
+  evaluator: MyString
+  evaluation_date: 2019-02-24
+  result: 
+  description: MyText
+
+two:
+  application: 
+  criteria: 
+  evaluator: MyString
+  evaluation_date: 2019-02-24
+  result: 
+  description: MyText

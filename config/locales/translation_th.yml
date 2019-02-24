@@ -18,9 +18,58 @@ th:
         name: ชื่อเส้นทาง  #g
         start: เริ่มต้น  #g
 
+      car:
+        plate: หมายเลขป้ายทะเบียน  #g
+        chassis: หมายเลขตัวถัง  #g
+        licensee_id: เจ้าของรถ  #g
+        route_id: เส้นทาง  #g
+        last_accident: วันที่ล่าสุดทีเ่กิดอุบัติเหตุร้ายแรง  #g
+        last_accident_desc: คำอธิบายการเกิดอุบัติเหตุครั้งล่าสุด  #g
+        type: ประเภทรถ  #g
+
+      application:
+        number: หมายเลขใบสมัคร  #g
+        user_id: ผู้สมัคร  #g
+        state: สถานะใบสมัคร  #g
+        licensee_id: ผู้ประกอบการ  #g
+        route_id: เส้นทาง  #g
+        category: หมวดการเดินรถ  #g
+        appointment_date: วันนัด  #g
+        appointment_remark: คำอธิบายการนัด  #g
+        appointment_user_id: ผู้ทำการนัด  #g
+        evaluation_finish_date: วันที่สิ้นสุดการประเมิน  #g
+        award_date: วันที่ตัดสินผลรางวัล  #g
+        award: ผลการให้รางวัล  #g
+        award_remark: คำอธิบายการให้รางวัล  #g
+
+      criterium:
+        number: หมายเลขข้อกำหนด  #g
+        name: ชื่อข้อกำหนด แบบสั้น  #g
+        description: คำอธิบายข้อกำหนด แบบยาว  #g
+        approach: แนวทางการตรวจประเมิน  #g
+        weight: น้ำหนักคะแนนในกลุ่ม  #g
+        criteria_group_id: ประเภทข้อกำหนด  #g
+
+      criteria_group:
+        name: ชื่อประเภทของข้อกำหนด  #g
+        group_weight: น้ำหนักคะแนนของประเภท  #g
+
+      evaluation:
+        application_id: ในสมัคร  #g
+        criteria_id: ข้อกำหนด  #g
+        evaluator: ผู้ตรวจประเมิน  #g
+        evaluation_date: วันที่ประเมิน  #g
+        result: ผลการตรวจ  #g
+        description: ระบุผลการประเมิน  #g
+
       user:
         email: อีเมล์  #g
         name: ชื่อ-สกุล  #g
         password: รหัสผ่านย่อย  #g
         password_digest: รหัสผ่านย่อย  #g
         roles: บทบาท  #g
+
+      attachment:
+        filename: ชื่อไฟล์  #g
+        type: ประเภทของไฟล์  #g
+        data: ข้อมูลของไฟล์  #g

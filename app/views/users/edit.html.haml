@@ -1,6 +1,6 @@
 .row
   .col.s12
-    .container
-      .card-panel
-        %h3 แก้ไขผู้ใช้
+    .card
+      .card-content
+        .card-title= "แก้ไข#{t :user, scope: 'activerecord.models'}"
         = render partial: 'form', locals: {back_link: users_path}

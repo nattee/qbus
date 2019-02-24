@@ -24,6 +24,7 @@ class RoutesController < ApplicationController
   # POST /routes
   # POST /routes.json
   def create
+    puts route_params
     @route = Route.new(route_params)
 
     respond_to do |format|

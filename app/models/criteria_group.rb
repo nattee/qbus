@@ -1,0 +1,2 @@
+class CriteriaGroup < ApplicationRecord
+end

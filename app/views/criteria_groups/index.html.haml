@@ -1,0 +1,19 @@
+%h1 Listing criteria_groups
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @criteria_groups.each do |criteria_group|
+      %tr
+        %td= link_to 'Show', criteria_group
+        %td= link_to 'Edit', edit_criteria_group_path(criteria_group)
+        %td= link_to 'Destroy', criteria_group, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Criteria group', new_criteria_group_path
