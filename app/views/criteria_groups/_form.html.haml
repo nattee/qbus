@@ -1,0 +1,10 @@
+= form_for @criteria_group do |f|
+  - if @criteria_group.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@criteria_group.errors.count, "error")} prohibited this criteria_group from being saved:"
+      %ul
+        - @criteria_group.errors.full_messages.each do |message|
+          %li= message
+
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  name: MyString
+  description: MyText
+  approach: MyText
+  weight: 1
+  criteria_group: 
+
+two:
+  number: MyString
+  name: MyString
+  description: MyText
+  approach: MyText
+  weight: 1
+  criteria_group: 

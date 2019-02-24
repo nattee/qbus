@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  number: MyString
+  user: 
+  state: 1
+  licensee: 
+  route: 
+  category: MyString
+  appointment_date: 2019-02-24 16:18:14
+  appointment_remark: MyText
+  appointment_user: 
+  evaluation_finish_date: 2019-02-24 16:18:14
+  award_date: 2019-02-24 16:18:14
+  award: MyText
+  award_remark: MyText
+
+two:
+  number: MyString
+  user: 
+  state: 1
+  licensee: 
+  route: 
+  category: MyString
+  appointment_date: 2019-02-24 16:18:14
+  appointment_remark: MyText
+  appointment_user: 
+  evaluation_finish_date: 2019-02-24 16:18:14
+  award_date: 2019-02-24 16:18:14
+  award: MyText
+  award_remark: MyText

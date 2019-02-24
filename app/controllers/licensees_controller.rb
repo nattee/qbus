@@ -24,6 +24,7 @@ class LicenseesController < ApplicationController
   # POST /licensees
   # POST /licensees.json
   def create
+    puts licensee_params
     @licensee = Licensee.new(licensee_params)
 
     respond_to do |format|
