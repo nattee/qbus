@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
 
   def set_locale
-    puts "asdfasdfasdf #{I18n.locale} #{I18n.default_locale}"
     I18n.locale = I18n.default_locale
   end
 end

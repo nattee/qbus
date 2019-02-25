@@ -1,32 +1,27 @@
 .row
   .col.s12
-    .row
-      .col.s12
-        .card
-          .card-content
-            .row
-              .col.s12
-                %h4 เลือกประเภท
-            .row
-              .col.s8
-                = form_for @application do |f|
-                  %p
-                    %label
-                      = f.radio_button :category, t(:category1, scope: 'qbus.application')
-                      %span= t(:category1, scope: 'qbus.application')
-                  %br
-                  %p
-                    %label
-                      = f.radio_button :category, t(:category2, scope: 'qbus.application').html_safe
-                      %span= t(:category2, scope: 'qbus.application')
-                  %br
-                  %p
-                    %label
-                      = f.radio_button :category, t(:category3, scope: 'qbus.application').html_safe
-                      %span= t(:category3, scope: 'qbus.application')
-                  %br
-                  = f.submit 'ต่อไป', class: 'btn'
-              .col.s4
-
-      
-                
+    .card
+      .card-content
+        .row
+          .col.s12.m3
+            = render "current_apply_step"
+          .col.s12.m9
+            %h4 เลือกประเภท
+            = form_for @application, url: apply_applications_path do |f|
+              = hidden_field_tag 'application[stage]', 'apply'
+              %p
+                %label
+                  = f.radio_button :category, t(:category1, scope: 'qbus.application')
+                  %span= t(:category1, scope: 'qbus.application')
+              %br
+              %p
+                %label
+                  = f.radio_button :category, t(:category2, scope: 'qbus.application').html_safe
+                  %span= t(:category2, scope: 'qbus.application')
+              %br
+              %p
+                %label
+                  = f.radio_button :category, t(:category3, scope: 'qbus.application').html_safe
+                  %span= t(:category3, scope: 'qbus.application')
+              %br
+              = f.submit 'ต่อไป', class: 'btn'

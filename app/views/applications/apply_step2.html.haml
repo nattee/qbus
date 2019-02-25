@@ -1,0 +1,20 @@
+.row
+  .col.s12
+    .card
+      .card-content
+        .row
+          .col.s12.m3
+            = render "current_apply_step"
+          .col.s12.m9
+            = simple_form_for(@application, url: apply_step2_application_path(@application)) do |f|
+              %h4 กรอกข้อมูลรถ
+              .section
+                %h5 ข้อมูลเส้นทาง
+                .divider
+              .section
+                %h5 รถที่ใช้ในเส้นทาง
+              = hidden_field_tag 'application[stage]', 'step2'
+              = f.button :submit, 'ยืนยันใบสมัคร', class: "btn waves-light left"
+
+
+

@@ -41,6 +41,8 @@ th:
         award_date: วันที่ตัดสินผลรางวัล  #g
         award: ผลการให้รางวัล  #g
         award_remark: คำอธิบายการให้รางวัล  #g
+        contact: ชื่อ-สกุล ผู้ประสานงาน  #g
+        contact_tel: หมายเลขโทรศัพท์ผู้ประสานงาน  #g
 
       criterium:
         number: หมายเลขข้อกำหนด  #g
