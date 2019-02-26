@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_25_113453) do
+ActiveRecord::Schema.define(version: 2019_02_26_165718) do
 
   create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "number"
@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 2019_02_25_113453) do
     t.integer "state"
     t.bigint "licensee_id"
     t.bigint "route_id"
-    t.string "category"
     t.datetime "appointment_date"
     t.text "appointment_remark"
     t.bigint "appointment_user_id"
@@ -30,6 +29,7 @@ ActiveRecord::Schema.define(version: 2019_02_25_113453) do
     t.datetime "updated_at", null: false
     t.string "contact"
     t.string "contact_tel"
+    t.integer "category"
     t.index ["appointment_user_id"], name: "index_applications_on_appointment_user_id"
     t.index ["licensee_id"], name: "index_applications_on_licensee_id"
     t.index ["route_id"], name: "index_applications_on_route_id"

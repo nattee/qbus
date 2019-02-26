@@ -16,7 +16,8 @@ class Application < ApplicationRecord
   has_many :evaluations
 
   #scope
-  scope :to_be_appointed, -> { where(state: :approved) }
+  scope :to_be_appointed, -> { where(state: :approved, appointment_date: nil) }
+  scope :to_be_appointed_filled, -> { where(state: :approved).where.not(appointment_date: !nil) }
 
   def category_text
     Application.enum_to_st(:category,category)

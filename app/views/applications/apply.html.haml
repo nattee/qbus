@@ -11,17 +11,17 @@
               = hidden_field_tag 'application[stage]', 'apply'
               %p
                 %label
-                  = f.radio_button :category, 2
+                  = f.radio_button :category, :category1
                   %span= t(:category1, scope: 'qbus.application')
               %br
               %p
                 %label
-                  = f.radio_button :category, 3
+                  = f.radio_button :category, :category2
                   %span= t(:category2, scope: 'qbus.application')
               %br
               %p
                 %label
-                  = f.radio_button :category, 4
+                  = f.radio_button :category, :category3
                   %span= t(:category3, scope: 'qbus.application')
               %br
               = f.submit 'ต่อไป', class: 'btn'

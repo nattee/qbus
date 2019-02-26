@@ -49,9 +49,12 @@ class ApplicationsController < ApplicationController
 
   def post_step1
     #routes and licensee data
-    @route = Route.new(start: params[:route][:start], destination: params[:route][:destination])
+    @route = Route.new(route_params)
     @route.save
+
+    @licensee = Licensee.new(licensee_params)
     @application.route = @route
+    @application.licensee = @licensee
     if @application.save
       redirect_to apply_step2_application_path(@application) , notice: 'aa'
     else
@@ -138,6 +141,14 @@ class ApplicationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
       params.require(:application).permit(:number, :user, :state, :licensee, :route, :category, :appointment_date, :appointment_remark, :appointment_user, :evaluation_finish_date, :award_date, :award, :award_remark, :contact, :contact_tel)
+    end
+
+    def route_params
+      params.require(:route).permit(:start, :destination)
+    end
+
+    def licensee_params
+      params.require(:licensee).permit(:name, :contact, :contact_tel)
     end
 
 end

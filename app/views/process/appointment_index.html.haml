@@ -20,27 +20,54 @@
                     %td= app.licensee.name
                     %td= app.route.start
                     %td= app.route.destination
-                    %td= t(app.created_at)
+                    %td= l(app.created_at, format: '%d %b %y')
                     %td= app.contact
                     %td= app.contact_tel
                     %td
-                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint'}} บันทึกนัดหมาย
+                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date, remark: app.appointment_remark}} นัดหมาย
           .col.s12.m3
             %h4 การนัดหมาย
-            หลังจากเจ้าหน้าที่ติดต่อไปยังผู้ประกอบการเพื่อนัดหมายวันที่จะเข้าทำการตรวจประเมินแล้ว ให้กรอกข้อมูลการนัดหมายทางด้านซ้าย
+            .section
+              %p หลังจากเจ้าหน้าที่ติดต่อไปยังผู้ประกอบการเพื่อนัดหมายวันที่จะเข้าทำการตรวจประเมินแล้ว ให้กรอกข้อมูลการนัดหมายทางด้านซ้ายโดยกดปุ่ม "นัดหมาย"
+            .section
+              %p เมื่อนัดหมายเสร็จแล้ว ให้กดปุ่ม "ส่งต่อ" เพื่อทำการส่งใบสมัครไปให้ฝ่ายประเมิน
     .card
       .card-content
         .row
           .col.s12
             %h4 ใบสมัครที่นัดหมายแล้ว
-            %a.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint', remote: 'true'}, href: process_appointment_form_path} บันทึกนัดหมาย
-            %br
-            %a.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint', remote: 'true', application: 20, date: '10-10-2010', remark: 'asdf'}} บันทึก ่ujs
+            %table
+              %thead
+                %th= t(:name, scope: 'activerecord.attributes.licensee')
+                %th= t(:start, scope: 'activerecord.attributes.route')
+                %th= t(:destination, scope: 'activerecord.attributes.route')
+                %th วันที่ยื่นใบสมัคร
+                %th= t(:contact, scope: 'activerecord.attributes.application')
+                %th= t(:contact_tel, scope: 'activerecord.attributes.application')
+                %th= t(:appointment_date, scope: 'activerecord.attributes.application')
+                %th= t(:appointment_remark, scope: 'activerecord.attributes.application')
+                %th
+                %th
+              %tbody
+                - @to_be_appointed_filled.each do |app|
+                  %tr
+                    %td= app.licensee.name
+                    %td= app.route.start
+                    %td= app.route.destination
+                    %td= l(app.created_at, format: '%d %b %Y')
+                    %td= app.contact
+                    %td= app.contact_tel
+                    %td= l(app.appointment_date, format: '%d %b %Y')
+                    %td= app.appointment_remark
+                    %td
+                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date, remark: app.appointment_remark}} แก้ไขนัดหมาย
+                    %td
+                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint'}} ส่งต่อ
 
 
 /modal
 #appoint.modal{style: 'width: 60% !important;'}
-  = form_with url: appoint_process_appointment_path do |f|
+  = form_with url: appoint_process_appointment_path, local: true do |f|
     .modal-content
       %h4 ระบุข้อมูลนัดหมาย
 
@@ -70,7 +97,7 @@
     M.updateTextFields()
 
   $ ->
-    $("a[data-application]").click (e) ->
+    $("button[data-application]").click (e) ->
       e.preventDefault()
       date = $(this).data("date")
       remark = $(this).data("remark")
