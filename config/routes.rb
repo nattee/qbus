@@ -26,12 +26,14 @@ Rails.application.routes.draw do
 
   #process
   get  'process/appointment',     to: 'process#appointment_index'
-  post 'process/appointment/:id', to: 'process#appointment_post'
+  get  'process/appointment_form'
+  post 'process/appointment',     to: 'process#appointment_post', as: 'appoint_process_appointment'
   get  'process/evaluation',      to: 'process#evaluation_index'
   get  'process/evaluation/:id',  to: 'process#evaluation'
   post 'process/evaluation/:id',  to: 'process#evaluation_post'
   get  'process/award',           to: 'process#award_index'
   get  'process/award/:id',       to: 'process#award'
   post 'process/award/:id',       to: 'process#award_post'
+
 
 end

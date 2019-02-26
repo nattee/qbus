@@ -1,0 +1,78 @@
+.row
+  .col.s12
+    .card
+      .card-content
+        .row
+          .col.s12.m9
+            %h4 ใบสมัครที่ยังไม่ได้นัดหมาย
+            %table
+              %thead
+                %th= t(:name, scope: 'activerecord.attributes.licensee')
+                %th= t(:start, scope: 'activerecord.attributes.route')
+                %th= t(:destination, scope: 'activerecord.attributes.route')
+                %th วันที่ยื่นใบสมัคร
+                %th= t(:contact, scope: 'activerecord.attributes.application')
+                %th= t(:contact_tel, scope: 'activerecord.attributes.application')
+                %th
+              %tbody
+                - @to_be_appointed.each do |app|
+                  %tr
+                    %td= app.licensee.name
+                    %td= app.route.start
+                    %td= app.route.destination
+                    %td= t(app.created_at)
+                    %td= app.contact
+                    %td= app.contact_tel
+                    %td
+                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint'}} บันทึกนัดหมาย
+          .col.s12.m3
+            %h4 การนัดหมาย
+            หลังจากเจ้าหน้าที่ติดต่อไปยังผู้ประกอบการเพื่อนัดหมายวันที่จะเข้าทำการตรวจประเมินแล้ว ให้กรอกข้อมูลการนัดหมายทางด้านซ้าย
+    .card
+      .card-content
+        .row
+          .col.s12
+            %h4 ใบสมัครที่นัดหมายแล้ว
+            %a.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint', remote: 'true'}, href: process_appointment_form_path} บันทึกนัดหมาย
+            %br
+            %a.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint', remote: 'true', application: 20, date: '10-10-2010', remark: 'asdf'}} บันทึก ่ujs
+
+
+/modal
+#appoint.modal{style: 'width: 60% !important;'}
+  = form_with url: appoint_process_appointment_path do |f|
+    .modal-content
+      %h4 ระบุข้อมูลนัดหมาย
+
+      กรุณาพิมพ์ข้อมูลการนัดหมาย
+      .row
+        .input-field.col.s6
+          = f.text_field :appointment_date, class: 'datepicker'
+          = f.label t(:appointment_date, scope: 'activerecord.attributes.application')
+      .row
+        .input-field.col.s6
+          = f.text_area :appointment_remark, class: 'materialize-textarea'
+          = f.label t(:appointment_remark, scope: 'activerecord.attributes.application')
+      = hidden_field_tag :id, 1, id: 'application_id'
+      %br
+      %br
+      %br
+      %br
+    .modal-footer
+      = f.submit 'ทำการนัดหมาย', class: 'waves-effect green waves-green btn-flat'
+      %a.modal-close.waves-effect.waves-red.btn-flat{href: "#!"} ยกเลิก
+
+:coffee
+  @setform = (date,remark,id) ->
+    $(".modal #appointment_date").val(date)
+    $(".modal #appointment_remark").val(remark)
+    $(".modal #application_id").val(id)
+    M.updateTextFields()
+
+  $ ->
+    $("a[data-application]").click (e) ->
+      e.preventDefault()
+      date = $(this).data("date")
+      remark = $(this).data("remark")
+      id = $(this).data("application")
+      setform(date,remark,id)

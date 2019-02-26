@@ -10,9 +10,9 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= re quire rails-ujs
+//= require rails-ujs
 //= re quire jquery
-//= re quire activestorage
+//= require activestorage
 //= re quire turbolinks
 //= require materialize-admin/vendors.min
 //= require materialize-admin/materialize

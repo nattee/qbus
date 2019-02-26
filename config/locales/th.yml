@@ -8,9 +8,9 @@ th:
         name: ชื่อ-สกุล #if not defined, it will use active record name instead
   qbus:
     application:
-      category1: asdf 
-      category2: asdf11
-      category3: asdf22
+      category1: ประจำทาง หมวด 2 
+      category2: ประจำทาง หมวด 3
+      category3: ไม่ประจำทาง
     
 
 
