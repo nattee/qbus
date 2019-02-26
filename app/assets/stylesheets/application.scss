@@ -18,10 +18,13 @@
 //load font
 @import url('https://fonts.googleapis.com/css?family=Kanit');
 
+@import "materialize-admin/vendor/vendors.min";
 @import "materialize-admin/materialize";
 @import "materialize-admin/style";
-@import "materialize-admin/vendor/vendors.min";
 //@import "materialize-admin/vendor/noUiSlider/nouislider";
+@import "materialize-admin/vendor/data-tables/css/jquery.dataTables.min.css";
+@import "materialize-admin/vendor/data-tables/extensions/responsive/css/responsive.dataTables.min.css";
+@import "materialize-admin/vendor/data-tables/css/select.dataTables.min.css";
 
 @import "default";
-@import "datatables"; //seems to conflict with materialize-admin
+//@import "datatables"; //seems to conflict with materialize-admin

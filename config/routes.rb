@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       post 'apply_step1', to: 'applications#post_step1'
       post 'apply_step2', to: 'applications#post_step2'
       post 'apply_step3', to: 'applications#post_step3'
+
+      post 'add_car', to: 'applications#add_car'
     end
     collection do
       get 'apply'
@@ -21,5 +23,15 @@ Rails.application.routes.draw do
       get 'dashboard'
     end
   end
+
+  #process
+  get  'process/appointment',     to: 'process#appointment_index'
+  post 'process/appointment/:id', to: 'process#appointment_post'
+  get  'process/evaluation',      to: 'process#evaluation_index'
+  get  'process/evaluation/:id',  to: 'process#evaluation'
+  post 'process/evaluation/:id',  to: 'process#evaluation_post'
+  get  'process/award',           to: 'process#award_index'
+  get  'process/award/:id',       to: 'process#award'
+  post 'process/award/:id',       to: 'process#award_post'
 
 end

@@ -1,7 +1,9 @@
 class ApplicationsController < ApplicationController
   before_action :set_application, only: [:show, :edit, :update, :destroy, 
                                          :apply_step1, :apply_step2, :apply_step3,
-                                         :post_step1,:post_step2,:post_step3]
+                                         :post_step1,:post_step2,:post_step3,
+                                         :add_car
+                                        ]
 
   # GET /applications
   # GET /applications.json
@@ -75,6 +77,12 @@ class ApplicationsController < ApplicationController
       redirect_to apply_applications_path
     end
 
+  end
+
+  def add_car
+    car = Car.new(plate: params[:plate], chassis: params[:chassis])
+    @application.route.cars << car
+    redirect_to apply_step2_application_path(@application)
   end
 
   # GET /applications/1/edit
