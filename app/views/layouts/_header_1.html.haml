@@ -2,9 +2,9 @@
   .navbar.navbar-fixed
     %nav.navbar-main.navbar-color.nav-collapsible.sideNav-lock.navbar-dark.gradient-45deg-purple-deep-orange.gradient-shadow
       .nav-wrapper
-        .header-search-wrapper.hide-on-med-and-down
-          %i.material-icons search
-          %input.header-search-input.z-depth-2{:name => "Search", :placeholder => "Explore Materialize", :type => "text"}/
+        /.header-search-wrapper.hide-on-med-and-down.center
+        /  %i.material-icons search
+        /  %input.header-search-input.z-depth-2{:name => "Search", :placeholder => "Explore Materialize", :type => "text"}/
         %ul.navbar-list.right
           /%li.hide-on-med-and-down
           / %a.waves-effect.waves-block.waves-light.translation-button{"data-target" => "translation-dropdown", :href => "javascript:void(0);"}
@@ -25,9 +25,9 @@
               %span.avatar-status.avatar-online
                 = image_tag 'avatar/avatar-7.png', alt: 'asdf'
                 %i
-          %li
-            %a.waves-effect.waves-block.waves-light.sidenav-trigger{"data-target" => "slide-out-right", :href => "#"}
-              %i.material-icons format_indent_increase
+        /  %li
+        /    %a.waves-effect.waves-block.waves-light.sidenav-trigger{"data-target" => "slide-out-right", :href => "#"}
+        /      %i.material-icons format_indent_increase
         / translation-button
         /%ul#translation-dropdown.dropdown-content
         /  %li
@@ -101,11 +101,11 @@
             %a.grey-text.text-darken-1{:href => "user-login.html"}
               %i.material-icons keyboard_tab
               Logout
-      %nav.display-none.search-sm
-        .nav-wrapper
-          %form
-            .input-field
-              %input.search-box-sm{:required => "", :type => "search"}/
-              %label.label-icon{:for => "search"}
-                %i.material-icons.search-sm-icon search
-              %i.material-icons.search-sm-close close
+      /%nav.display-none.search-sm
+      /  .nav-wrapper
+      /    %form
+      /      .input-field
+      /        %input.search-box-sm{:required => "", :type => "search"}/
+      /        %label.label-icon{:for => "search"}
+      /          %i.material-icons.search-sm-icon search
+      /        %i.material-icons.search-sm-close close
