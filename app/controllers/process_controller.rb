@@ -1,5 +1,6 @@
 class ProcessController < ApplicationController
-  before_action :set_application, only: [ :appointment_post,
+  before_action :set_application, only: [ :appointment_post, :appointed,
+                                          :evaluation, :evaluation_post
                                         ]
   def appointment_index
     @to_be_appointed = Application.to_be_appointed
@@ -10,10 +11,17 @@ class ProcessController < ApplicationController
     @application.appointment_date = params[:appointment_date]
     @application.appointment_remark = params[:appointment_remark]
     @application.save
-    redirect_to process_appointment_path
+    redirect_to process_appointments_path
+  end
+
+  def appointed
+    @application.state = :appointed;
+    @application.save
+    redirect_to process_appointments_path
   end
 
   def evaluation_index
+    @to_be_evaluated = Application.to_be_evaluated
   end
 
   def evaluation

@@ -61,8 +61,7 @@
                     %td= app.appointment_remark
                     %td
                       %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date, remark: app.appointment_remark}} แก้ไขนัดหมาย
-                    %td
-                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint'}} ส่งต่อ
+                    %td= link_to 'ส่งต่อ', process_appointed_path(app.id), class: 'waves-effect waves-light green btn'
 
 
 /modal
