@@ -1,2 +1,69 @@
-%h1 Process#evaluation
-%p Find me in app/views/process/evaluation.html.haml
+.row
+  .col.s12
+    .card
+      .card-content
+        เมื่อผู้ประเมินได้ทำการประเมินข้อกำหนดต่าง ๆ แล้ว ให้บันทึกผลการประเมินลงในแบบฟอร์มด้านล่างนี้ และเมื่อบันทึกข้อมูลเสร็จแล้ว ให้กดปุ่ม "ย้อนกลับ" เพื่อกลับไปยังหน้าแสดงรายการใบสมัครทั้งหมด
+        %br
+        = link_to 'ย้อนกลับ', process_evaluations_path, class: 'waves-effect waves-light green btn'
+    .card
+      .card-content
+        .row
+          .col.s12.m8
+          .col.s12.m3
+        .row
+          .col.s12
+            %ul.tabs
+              %li.tab.col.m3
+                %a{href: '#tab_eval'}การประเมิน
+              %li.tab.col.m3
+                %a{href: '#tab_app'}ข้อมูลใบสมัคร
+              %li.tab.col.m3
+                %a{href: '#tab_car'}ข้อมูลรถ
+          #tab_eval.col.s12
+            - last_cg = nil
+            - @application.evaluations.joins(:criterium => :criteria_group).order('criteria_groups.id, criteria.number').each do |ev|
+              - if ev.criterium.criteria_group != last_cg
+                - last_cg = ev.criterium.criteria_group
+                .divider
+                .row
+                  .col.s12
+                    %h5= last_cg.name
+                .row
+                  .col.s4
+                    = t(:name, scope: 'activerecord.attributes.criterium')
+                  .col.s2
+                    ผลการประเมิน
+                  .col.s4
+                    คำอธิบายผลการประเมิน
+                  .col.s2
+              .row
+                = simple_form_for ev, remote: true do |f|
+                  .col.s4
+                    = "#{ev.criterium.number}. #{ev.criterium.name}"
+                  .col.s2
+                  .col.s4
+                    .input-field
+                      = f.text_field :description
+                  .col.s2
+                    = f.submit 'บันทึก', class: 'btn'
+          #tab_app.col.s12
+            .section
+              .row
+                .col.s12
+                  %h5 ข้อมูลใบสมัคร
+                  = render partial: "applications/application"
+            .divider
+            .section
+              .row
+                .col.s8
+                  %h5 ข้อมูลผู้ประกอบการ
+                  = render partial: "applications/licensee"
+                .col.s4
+                  %h5 ข้อมูลเส้นทางเดินรถ
+                  = render partial: "applications/route"
+            .divider
+          #tab_route.col.s12
+          #tab_car.col.s12
+            = render partial: "applications/cars"
+
+

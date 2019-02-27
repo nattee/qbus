@@ -24,8 +24,18 @@ class Application < ApplicationRecord
     Application.enum_to_st(:category,category)
   end
 
+  def state_text
+    Application.enum_to_st(:state,state)
+  end
+
   def evaluated_count
     evaluations.where.not(result: nil).count
+  end
+
+  def add_missing_evaluation
+    Criterium.where.not(id: Evaluation.select(:criterium_id).where(application: self)).each do  |cri|
+      evaluations << Evaluation.new(criterium_id: cri.id)
+    end
   end
 
 end

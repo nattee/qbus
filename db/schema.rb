@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_26_165718) do
+ActiveRecord::Schema.define(version: 2019_02_27_095546) do
 
   create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "number"
@@ -79,15 +79,15 @@ ActiveRecord::Schema.define(version: 2019_02_26_165718) do
 
   create_table "evaluations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.bigint "application_id"
-    t.bigint "criteria_id"
     t.string "evaluator"
     t.date "evaluation_date"
     t.boolean "result"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "criterium_id"
     t.index ["application_id"], name: "index_evaluations_on_application_id"
-    t.index ["criteria_id"], name: "index_evaluations_on_criteria_id"
+    t.index ["criterium_id"], name: "index_evaluations_on_criterium_id"
   end
 
   create_table "licensees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|

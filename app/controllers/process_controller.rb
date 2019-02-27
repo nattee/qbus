@@ -25,6 +25,7 @@ class ProcessController < ApplicationController
   end
 
   def evaluation
+    @application.add_missing_evaluation
   end
 
   def evaluation_post

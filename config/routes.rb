@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :evaluations
+
   #process
   get  'process/appointments',     to: 'process#appointment_index'
   get  'process/appointment_form'
