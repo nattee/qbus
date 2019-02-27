@@ -2,11 +2,13 @@
   .col.s12
     .card
       .card-content
+        .card-title
+          %h3 สมัครเข้าร่วมโครงการ Q-BUS
         .row
           .col.s12.m3
             = render "current_apply_step"
           .col.s12.m9
-            %h4 เลือกประเภท
+            %h4 เลือกหมวดการเดินรถ
             = form_for @application, url: apply_applications_path do |f|
               = hidden_field_tag 'application[stage]', 'apply'
               %p

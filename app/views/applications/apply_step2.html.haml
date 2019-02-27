@@ -2,6 +2,8 @@
   .col.s12
     .card
       .card-content
+        .card-title
+          %h3 สมัครเข้าร่วมโครงการ Q-BUS
         .row
           .col.s12.m3
             = render "current_apply_step"
@@ -9,9 +11,11 @@
             %h4 กรอกข้อมูลรถ
             .section
               %h5 ข้อมูลเส้นทาง
+              = render "route"
               .divider
             .section
               %h5 รถที่ใช้ในเส้นทาง
+              จำนวน #{@application.route.cars.count} คัน
               %table.dataTables
                 %thead
                   %th= t :plate, scope: 'activerecord.attributes.car'
@@ -29,13 +33,14 @@
               %br
               %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'add-car'}} เพิ่มรถ
             %br
-            = simple_form_for(@application, url: apply_step2_application_path(@application)) do |f|
+            = simple_form_for(@application, url: apply_step2_application_path(@application), method: 'post') do |f|
               = hidden_field_tag 'application[stage]', 'step2'
-              = f.button :submit, 'ยืนยันใบสมัคร', class: "btn waves-light left"
+              = f.button :submit, 'ไปยังขั้นตอนต่อไป', class: "btn waves-light left"
+              /= f.button :submit, 'ยืนยันใบสมัคร', class: "btn waves-light left"
 
 /modal
 #add-car.modal
-  = form_with url: add_car_application_path(@application) do |f|
+  = form_with url: add_car_application_path(@application), local: true do |f|
     .modal-content
       %h4 เพิ่มข้อมูลรถ
 

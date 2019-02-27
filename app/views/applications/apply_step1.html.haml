@@ -2,6 +2,8 @@
   .col.s12
     .card
       .card-content
+        .card-title
+          %h3 สมัครเข้าร่วมโครงการ Q-BUS
         .row
           .col.s12.m3
             = render "current_apply_step"
@@ -25,12 +27,15 @@
                     = f.input :contact_tel
               .section
                 %h5 ข้อมูลเส้นทาง
-                .input-field
-                  = text_field_tag 'route[start]'
-                  = label_tag :asdf, t(:start, scope: 'activerecord.attributes.route')
-                .input-field
-                  = text_field_tag 'route[destination]'
-                  = label_tag :asdf, t(:destination, scope: 'activerecord.attributes.route')
+                - if @application.category3?
+                  %h6 ไม่ประจำทาง
+                - else
+                  .input-field
+                    = text_field_tag 'route[start]'
+                    = label_tag :asdf, t(:start, scope: 'activerecord.attributes.route')
+                  .input-field
+                    = text_field_tag 'route[destination]'
+                    = label_tag :asdf, t(:destination, scope: 'activerecord.attributes.route')
 
               = hidden_field_tag 'application[stage]', 'step1'
               = f.button :submit, 'ไปยังขั้นตอนต่อไป', class: "btn waves-light left"
