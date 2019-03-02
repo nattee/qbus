@@ -6,6 +6,16 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :account_activations, only: [:edit]
+
+  #session
+  get 'register', to: 'sessions#register'
+  post 'register', to: 'sessions#register_post'
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+  get 'profile', to: 'sessions#profile'
+
   resources :applications do
     member do
       get 'apply_step1'
@@ -30,7 +40,7 @@ Rails.application.routes.draw do
   get  'process/appointments',     to: 'process#appointment_index'
   get  'process/appointment_form'
   post 'process/appointment',     to: 'process#appointment_post', as: 'appoint_process_appointment'
-  get  'process/appointed/:id',   to: 'process#appointed', as: 'process_appointed' 
+  get  'process/appointed/:id',   to: 'process#appointed', as: 'process_appointed'
   get  'process/evaluations',     to: 'process#evaluation_index'
   get  'process/evaluation/:id',  to: 'process#evaluation', as: 'process_evaluation'
   post 'process/evaluation/:id',  to: 'process#evaluation_post'

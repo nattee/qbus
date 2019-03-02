@@ -1,0 +1,10 @@
+%h1
+  QBUS
+
+%p
+  สวัสดี คุณ <%= @user.name %>,
+
+%p
+  ยินดีต้อนรับสู่  QBUS! กรุณาคลิกที่ลิงค์ด้านล่างเพื่อเปิดใช้งานบัญชีของคุณ:
+
+= link_to "เปิดการใช้งาน QBUS", edit_account_activation_url(@user.activation_token, email: @user.email)

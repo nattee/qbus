@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_095546) do
+ActiveRecord::Schema.define(version: 2019_03_02_104332) do
 
-  create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "number"
     t.bigint "user_id"
     t.integer "state"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2019_02_27_095546) do
     t.index ["user_id"], name: "index_applications_on_user_id"
   end
 
-  create_table "attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "filename"
     t.integer "type"
     t.binary "data"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2019_02_27_095546) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "cars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "cars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "plate"
     t.string "chassis"
     t.bigint "licensse_id"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2019_02_27_095546) do
     t.index ["route_id"], name: "index_cars_on_route_id"
   end
 
-  create_table "criteria", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "criteria", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "number"
     t.string "name"
     t.text "description"
@@ -70,14 +70,14 @@ ActiveRecord::Schema.define(version: 2019_02_27_095546) do
     t.index ["criteria_group_id"], name: "index_criteria_on_criteria_group_id"
   end
 
-  create_table "criteria_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "criteria_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.integer "group_weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "evaluations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "evaluations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "application_id"
     t.string "evaluator"
     t.date "evaluation_date"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2019_02_27_095546) do
     t.index ["criterium_id"], name: "index_evaluations_on_criterium_id"
   end
 
-  create_table "licensees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "licensees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.string "license_no"
     t.date "license_expire"
@@ -101,7 +101,7 @@ ActiveRecord::Schema.define(version: 2019_02_27_095546) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "routes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "routes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.string "start"
     t.string "destination"
@@ -111,13 +111,17 @@ ActiveRecord::Schema.define(version: 2019_02_27_095546) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
     t.string "roles"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "remember_digest"
+    t.string "activation_digest"
+    t.boolean "activated", default: false
+    t.datetime "activated_at"
   end
 
 end

@@ -11,48 +11,60 @@
       %a.navigation-header-text ระบบงานหลัก
       %i.navigation-header-icon.material-icons more_horiz
     %li.bold
-      %a.waves-effect.waves-cyan{:href => "app-email.html"}
+      %a.waves-effect.waves-cyan{:href => root_url}
         %i.material-icons home
         %span.menu-title{"data-i18n" => ""} หน้าหลัก
-    %li.bold
-      %a.waves-effect.waves-cyan{:href => "app-email.html"}
-        %i.material-icons mail_outline
-        %span.menu-title{"data-i18n" => ""} ยืนยันใบสมัคร
-        %span.badge.new.badge.pill.pink.accent-2.float-right.mr-10 5
-    %li.bold
-      %a.waves-effect.waves-cyan{:href => "app-chat.html"}
-        %i.material-icons chat_bubble_outline
-        %span.menu-title{"data-i18n" => ""} นัดหมาย
-    %li.bold
-      %a.waves-effect.waves-cyan{:href => "app-todo.html"}
-        %i.material-icons check
-        %span.menu-title{"data-i18n" => ""} ประเมิน
-    %li.bold
-      %a.waves-effect.waves-cyan{:href => "app-contacts.html"}
-        %i.material-icons import_contacts
-        %span.menu-title{"data-i18n" => ""} ตัดสินรางวัล
-    %li.navigation-header
-      %a.navigation-header-text จัดการข้อมูล
-      %i.navigation-header-icon.material-icons more_horiz
-    %li.bold
-      %a.waves-effect.waves-cyan{:href => "app-contacts.html"}
-        %i.material-icons content_paste
-        %span.menu-title{"data-i18n" => ""} ใบสมัคร
-    %li.bold
-      %a.waves-effect.waves-cyan{:href => "app-contacts.html"}
-        %i.material-icons face
-        %span.menu-title{"data-i18n" => ""} ผู้ประกอบการ
-    %li.bold
-      %a.waves-effect.waves-cyan{:href => "app-contacts.html"}
-        %i.material-icons face
-        %span.menu-title{"data-i18n" => ""} เส้นทาง
-    %li.navigation-header
-      %a.navigation-header-text อื่น ๆ
-      %i.navigation-header-icon.material-icons more_horiz
-    %li.bold
-      %a.waves-effect.waves-cyan{:href => "app-contacts.html"}
-        %i.material-icons face
-        %span.menu-title{"data-i18n" => ""} ออกจากระบบ
+    - if logged_in?
+      %li.bold
+        %span
+          สวัสดี คุณ
+          %a{:href => profile_path}
+            =@current_user.name
+      %li.bold
+        %a.waves-effect.waves-cyan{:href => "app-email.html"}
+          %i.material-icons mail_outline
+          %span.menu-title{"data-i18n" => ""} ยืนยันใบสมัคร
+          %span.badge.new.badge.pill.pink.accent-2.float-right.mr-10 5
+      %li.bold
+        %a.waves-effect.waves-cyan{:href => "app-chat.html"}
+          %i.material-icons chat_bubble_outline
+          %span.menu-title{"data-i18n" => ""} นัดหมาย
+      %li.bold
+        %a.waves-effect.waves-cyan{:href => "app-todo.html"}
+          %i.material-icons check
+          %span.menu-title{"data-i18n" => ""} ประเมิน
+      %li.bold
+        %a.waves-effect.waves-cyan{:href => "app-contacts.html"}
+          %i.material-icons import_contacts
+          %span.menu-title{"data-i18n" => ""} ตัดสินรางวัล
+      %li.navigation-header
+        %a.navigation-header-text จัดการข้อมูล
+        %i.navigation-header-icon.material-icons more_horiz
+      %li.bold
+        %a.waves-effect.waves-cyan{:href => "app-contacts.html"}
+          %i.material-icons content_paste
+          %span.menu-title{"data-i18n" => ""} ใบสมัคร
+      %li.bold
+        %a.waves-effect.waves-cyan{:href => "app-contacts.html"}
+          %i.material-icons face
+          %span.menu-title{"data-i18n" => ""} ผู้ประกอบการ
+      %li.bold
+        %a.waves-effect.waves-cyan{:href => "app-contacts.html"}
+          %i.material-icons face
+          %span.menu-title{"data-i18n" => ""} เส้นทาง
+      %li.navigation-header
+        %a.navigation-header-text อื่น ๆ
+        %i.navigation-header-icon.material-icons more_horiz
+      %li.bold
+        %a.waves-effect.waves-cyan{"href" => "logout", "data-method" => "delete"}
+          %i.material-icons face
+          %span.menu-title{"data-i18n" => ""} ออกจากระบบ
+    - else
+      %li.bold
+        %a.waves-effect.waves-cyan{"href" => "login"}
+          %i.material-icons face
+          %span.menu-title{"data-i18n" => ""} เข้าสู่ระบบ
+
   .navigation-background
   %a.sidenav-trigger.btn-sidenav-toggle.btn-floating.btn-medium.waves-effect.waves-light.hide-on-large-only{"data-target" => "slide-out", :href => "#"}
     %i.material-icons menu

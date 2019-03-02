@@ -1,5 +1,14 @@
 %p#notice= notice
 
+%p
+  %b Name:
+  = @user.name
+%p
+  %b Email:
+  = @user.email
+%p
+  %b Roles:
+  = @user.roles
 
 = link_to 'Edit', edit_user_path(@user)
 \|
