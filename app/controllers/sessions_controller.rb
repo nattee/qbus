@@ -14,8 +14,9 @@ class SessionsController < ApplicationController
     respond_to do |format|
       if @user.save
         @user.send_activation_email
-        # TODO: remove this line when sending email is working properly
+        # TODO: remove those two line when sending email is working properly
         @user.activate
+        log_in @user
         format.html { redirect_to root_url, notice: 'Please check your email to activate your account.' }
         format.json { render :show, status: :created, location: @user }
       else
