@@ -1,0 +1,9 @@
+.row
+  .col.s12
+    %p
+      %h6= t(:name, scope: 'activerecord.attributes.licensee')
+      = @application.licensee.name
+    %p
+      %h6= t(:license_no, scope: 'activerecord.attributes.licensee')
+      = @application.licensee.license_no
+

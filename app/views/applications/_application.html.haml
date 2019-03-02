@@ -1,0 +1,23 @@
+.row
+  .col.s4
+    .section
+      %h6= t(:number, scope: 'activerecord.attributes.application')
+      = @application.id
+    .section
+      %h6 วันที่ยื่นใบสมัคร
+      =l( @application.created_at, format: :long)
+    .section
+      %h6= t(:category, scope: 'activerecord.attributes.application')
+      = @application.category_text
+  .col.s4
+    .section
+      %h6 สถานะ
+      = @application.state_text
+  .col.s4
+    .section
+      %h6= t(:contact, scope: 'activerecord.attributes.application')
+      = @application.contact || "-" 
+    .section
+      %h6= t(:contact_tel, scope: 'activerecord.attributes.application')
+      = @application.contact_tel || "-"
+

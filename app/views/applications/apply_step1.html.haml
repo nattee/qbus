@@ -1,0 +1,44 @@
+.row
+  .col.s12
+    .card
+      .card-content
+        .card-title
+          %h3 สมัครเข้าร่วมโครงการ Q-BUS
+        .row
+          .col.s12.m3
+            = render "current_apply_step"
+          .col.s12.m9
+            = simple_form_for(@application, url: apply_step1_application_path(@application), method: :post) do |f|
+              %h4 กรอกข้อมูลพื้นฐาน
+              .section
+                %h5 ข้อมูลผู้ประกอบการ
+                .row
+                  .input-field.col.s12
+                    = text_field_tag 'licensee[name]'
+                    = f.label 'licensee[name]', t(:name , scope: 'activerecord.attributes.licensee')
+                .row
+                  .col.s12
+                    %h6 หมวดการเดินรถ
+                    = @application.category_text
+                .row
+                  .input-field.col.s6
+                    = f.input :contact
+                  .input-field.col.s6
+                    = f.input :contact_tel
+              .section
+                %h5 ข้อมูลเส้นทาง
+                - if @application.category3?
+                  %h6 ไม่ประจำทาง
+                - else
+                  .input-field
+                    = text_field_tag 'route[start]'
+                    = label_tag :asdf, t(:start, scope: 'activerecord.attributes.route')
+                  .input-field
+                    = text_field_tag 'route[destination]'
+                    = label_tag :asdf, t(:destination, scope: 'activerecord.attributes.route')
+
+              = hidden_field_tag 'application[stage]', 'step1'
+              = f.button :submit, 'ไปยังขั้นตอนต่อไป', class: "btn waves-light left"
+              
+
+            

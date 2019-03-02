@@ -1,0 +1,500 @@
+%aside.sidenav-main.nav-expanded.nav-lock.nav-collapsible.sidenav-light.navbar-full.sidenav-active-rounded
+  .brand-sidebar
+    %h1.logo-wrapper
+      %a.brand-logo.darken-1{:href => "index.html"}
+        = image_tag "logo/materialize-logo.png", alt: 'logo'
+        %span.logo-text.hide-on-med-and-down Q-Bus
+      %a.navbar-toggler{:href => "#", data: {turbolinks: "false"}}
+        %i.material-icons radio_button_checked
+  %ul#slide-out.sidenav.sidenav-collapsible.leftside-navigation.collapsible.sidenav-fixed.menu-shadow{"data-collapsible" => "menu-accordion", "data-menu" => "menu-navigation"}
+    %li.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons settings_input_svideo
+        %span.menu-title{"data-i18n" => ""} Dashboard
+        %span.badge.badge.pill.orange.float-right.mr-10 3
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "dashboard-modern.html"}
+              %i.material-icons radio_button_unchecked
+              %span Modern
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "dashboard-ecommerce.html"}
+              %i.material-icons radio_button_unchecked
+              %span eCommerce
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "dashboard-analytics.html"}
+              %i.material-icons radio_button_unchecked
+              %span Analytics
+    %li.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons dvr
+        %span.menu-title{"data-i18n" => ""} Templates
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li
+            %a.collapsible-body.collapsible-header.waves-effect.waves-cyan{"data-i18n" => "", :href => "#"}
+              %i.material-icons radio_button_unchecked
+              %span Vertical
+            .collapsible-body
+              %ul.collapsible{"data-collapsible" => "accordion"}
+                %li
+                  %a.collapsible-body{"data-i18n" => "", :href => "../vertical-modern-menu-template/"}
+                    %i.material-icons radio_button_unchecked
+                    %span Modern  Menu
+                %li
+                  %a.collapsible-body{"data-i18n" => "", :href => "../vertical-menu-nav-dark-template/"}
+                    %i.material-icons radio_button_unchecked
+                    %span Navbar Dark
+                %li
+                  %a.collapsible-body{"data-i18n" => "", :href => "../vertical-gradient-menu-template/"}
+                    %i.material-icons radio_button_unchecked
+                    %span Gradient Menu
+                %li
+                  %a.collapsible-body{"data-i18n" => "", :href => "../vertical-dark-menu-template/"}
+                    %i.material-icons radio_button_unchecked
+                    %span Dark Menu
+          %li
+            %a.collapsible-body.collapsible-header.waves-effect.waves-cyan{"data-i18n" => "", :href => "#"}
+              %i.material-icons radio_button_unchecked
+              %span Horizontal
+            .collapsible-body
+              %ul.collapsible{"data-collapsible" => "accordion"}
+                %li
+                  %a.collapsible-body{"data-i18n" => "", :href => "../horizontal-menu-template/"}
+                    %i.material-icons radio_button_unchecked
+                    %span Horizontal Menu
+    %li.navigation-header
+      %a.navigation-header-text Applications
+      %i.navigation-header-icon.material-icons more_horiz
+    %li.bold
+      %a.waves-effect.waves-cyan{:href => "app-email.html"}
+        %i.material-icons mail_outline
+        %span.menu-title{"data-i18n" => ""} Mail
+        %span.badge.new.badge.pill.pink.accent-2.float-right.mr-10 5
+    %li.bold
+      %a.waves-effect.waves-cyan{:href => "app-chat.html"}
+        %i.material-icons chat_bubble_outline
+        %span.menu-title{"data-i18n" => ""} Chat
+    %li.bold
+      %a.waves-effect.waves-cyan{:href => "app-todo.html"}
+        %i.material-icons check
+        %span.menu-title{"data-i18n" => ""} ToDo
+    %li.bold
+      %a.waves-effect.waves-cyan{:href => "app-contacts.html"}
+        %i.material-icons import_contacts
+        %span.menu-title{"data-i18n" => ""} Contacts
+    %li.bold
+      %a.waves-effect.waves-cyan{:href => "app-calendar.html"}
+        %i.material-icons today
+        %span.menu-title{"data-i18n" => ""} Calendar
+    %li.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons add_shopping_cart
+        %span.menu-title{"data-i18n" => ""} eCommerce
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "eCommerce-products-page.html"}
+              %i.material-icons radio_button_unchecked
+              %span Products Page
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "eCommerce-pricing.html"}
+              %i.material-icons radio_button_unchecked
+              %span Pricing
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "eCommerce-invoice.html"}
+              %i.material-icons radio_button_unchecked
+              %span Invoice
+    %li.navigation-header
+      %a.navigation-header-text Pages
+      %i.navigation-header-icon.material-icons more_horiz
+    %li.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons content_paste
+        %span.menu-title{"data-i18n" => ""} Pages
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "page-contact.html"}
+              %i.material-icons radio_button_unchecked
+              %span Contact
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "page-blog-list.html"}
+              %i.material-icons radio_button_unchecked
+              %span Blog
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "page-search.html"}
+              %i.material-icons radio_button_unchecked
+              %span Search
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "page-knowledge.html"}
+              %i.material-icons radio_button_unchecked
+              %span Knowledge
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "page-faq.html"}
+              %i.material-icons radio_button_unchecked
+              %span FAQs
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "page-blank.html"}
+              %i.material-icons radio_button_unchecked
+              %span Page Blank
+    %li.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons crop_original
+        %span.menu-title{"data-i18n" => ""} Medias
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "media-gallery-page.html"}
+              %i.material-icons radio_button_unchecked
+              %span Gallery Page
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "media-hover-effects.html"}
+              %i.material-icons radio_button_unchecked
+              %span Media Hover Effects
+    %li.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons face
+        %span.menu-title{"data-i18n" => ""} User
+        %span.badge.badge.pill.purple.float-right.mr-10 10
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "user-profile-page.html"}
+              %i.material-icons radio_button_unchecked
+              %span User Profile
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "user-login.html"}
+              %i.material-icons radio_button_unchecked
+              %span Login
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "user-register.html"}
+              %i.material-icons radio_button_unchecked
+              %span Register
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "user-forgot-password.html"}
+              %i.material-icons radio_button_unchecked
+              %span Forgot Password
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "user-lock-screen.html"}
+              %i.material-icons radio_button_unchecked
+              %span Lock Screen
+    %li.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons filter_tilt_shift
+        %span.menu-title{"data-i18n" => ""} Misc
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "page-404.html"}
+              %i.material-icons radio_button_unchecked
+              %span 404
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "page-maintenance.html"}
+              %i.material-icons radio_button_unchecked
+              %span Page Maintenanace
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "page-500.html"}
+              %i.material-icons radio_button_unchecked
+              %span 500
+    %li.navigation-header
+      %a.navigation-header-text User Interface
+      %i.navigation-header-icon.material-icons more_horiz
+    %li.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons cast
+        %span.menu-title{"data-i18n" => ""} Cards
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "cards-basic.html"}
+              %i.material-icons radio_button_unchecked
+              %span Cards
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "cards-advance.html"}
+              %i.material-icons radio_button_unchecked
+              %span Cards Advance
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "cards-extended.html"}
+              %i.material-icons radio_button_unchecked
+              %span Cards Extended
+    %li.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons invert_colors
+        %span.menu-title{"data-i18n" => ""} CSS
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "css-typography.html"}
+              %i.material-icons radio_button_unchecked
+              %span Typograpy
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "css-color.html"}
+              %i.material-icons radio_button_unchecked
+              %span Color
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "css-grid.html"}
+              %i.material-icons radio_button_unchecked
+              %span Grid
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "css-helpers.html"}
+              %i.material-icons radio_button_unchecked
+              %span Helpers
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "css-media.html"}
+              %i.material-icons radio_button_unchecked
+              %span Media
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "css-pulse.html"}
+              %i.material-icons radio_button_unchecked
+              %span Pulse
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "css-sass.html"}
+              %i.material-icons radio_button_unchecked
+              %span Sass
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "css-shadow.html"}
+              %i.material-icons radio_button_unchecked
+              %span Shadow
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "css-animations.html"}
+              %i.material-icons radio_button_unchecked
+              %span Animations
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "css-transitions.html"}
+              %i.material-icons radio_button_unchecked
+              %span Transitions
+    %li.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons photo_filter
+        %span.menu-title{"data-i18n" => ""} Basic UI
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li
+            %a.collapsible-body.collapsible-header.waves-effect.waves-cyan{"data-i18n" => "", :href => "#"}
+              %i.material-icons radio_button_unchecked
+              %span Buttons
+            .collapsible-body
+              %ul.collapsible{"data-collapsible" => "accordion"}
+                %li
+                  %a.collapsible-body{"data-i18n" => "", :href => "ui-basic-buttons.html"}
+                    %i.material-icons radio_button_unchecked
+                    %span Basic
+                %li
+                  %a.collapsible-body{"data-i18n" => "", :href => "ui-extended-buttons.html"}
+                    %i.material-icons radio_button_unchecked
+                    %span Extended
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "ui-icons.html"}
+              %i.material-icons radio_button_unchecked
+              %span Icons
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "ui-alerts.html"}
+              %i.material-icons radio_button_unchecked
+              %span Alerts
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "ui-badges.html"}
+              %i.material-icons radio_button_unchecked
+              %span Badges
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "ui-breadcrumbs.html"}
+              %i.material-icons radio_button_unchecked
+              %span Breadcrumbs
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "ui-chips.html"}
+              %i.material-icons radio_button_unchecked
+              %span Chips
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "ui-collections.html"}
+              %i.material-icons radio_button_unchecked
+              %span Collections
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "ui-navbar.html"}
+              %i.material-icons radio_button_unchecked
+              %span Navbar
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "ui-pagination.html"}
+              %i.material-icons radio_button_unchecked
+              %span Pagination
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "ui-preloader.html"}
+              %i.material-icons radio_button_unchecked
+              %span Preloader
+    %li.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons settings_brightness
+        %span.menu-title{"data-i18n" => ""} Advanced UI
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "advance-ui-carousel.html"}
+              %i.material-icons radio_button_unchecked
+              %span Carousel
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "advance-ui-collapsibles.html"}
+              %i.material-icons radio_button_unchecked
+              %span Collapsibles
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "advance-ui-toasts.html"}
+              %i.material-icons radio_button_unchecked
+              %span Toasts
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "advance-ui-tooltip.html"}
+              %i.material-icons radio_button_unchecked
+              %span Tooltip
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "advance-ui-dropdown.html"}
+              %i.material-icons radio_button_unchecked
+              %span Dropdown
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "advance-ui-feature-discovery.html"}
+              %i.material-icons radio_button_unchecked
+              %span Discovery
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "advance-ui-media.html"}
+              %i.material-icons radio_button_unchecked
+              %span Media
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "advance-ui-modals.html"}
+              %i.material-icons radio_button_unchecked
+              %span Modals
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "advance-ui-scrollspy.html"}
+              %i.material-icons radio_button_unchecked
+              %span Scrollspy
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "advance-ui-tabs.html"}
+              %i.material-icons radio_button_unchecked
+              %span Tabs
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "advance-ui-waves.html"}
+              %i.material-icons radio_button_unchecked
+              %span Waves
+    %li.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons add_to_queue
+        %span.menu-title{"data-i18n" => ""} Extra Components
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "extra-components-range-slider.html"}
+              %i.material-icons radio_button_unchecked
+              %span Range Slider
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "extra-components-sweetalert.html"}
+              %i.material-icons radio_button_unchecked
+              %span Sweetalert
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "extra-components-nestable.html"}
+              %i.material-icons radio_button_unchecked
+              %span Nestable
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "extra-components-translation.html"}
+              %i.material-icons radio_button_unchecked
+              %span Translation
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "extra-components-highlight.html"}
+              %i.material-icons radio_button_unchecked
+              %span Highlight
+    %li.navigation-header
+      %a.navigation-header-text Tables &amp; Forms
+      %i.navigation-header-icon.material-icons more_horiz
+    %li.bold
+      %a.waves-effect.waves-cyan{:href => "table-basic.html"}
+        %i.material-icons border_all
+        %span.menu-title{"data-i18n" => ""} Basic Tables
+    %li.bold
+      %a.waves-effect.waves-cyan{:href => "table-data-table.html"}
+        %i.material-icons grid_on
+        %span.menu-title{"data-i18n" => ""} Data Tables
+    %li.active.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons chrome_reader_mode
+        %span.menu-title{"data-i18n" => ""} Forms
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li.active
+            %a.collapsible-body.active{"data-i18n" => "", :href => "form-elements.html"}
+              %i.material-icons radio_button_unchecked
+              %span Form Elements
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "form-validation.html"}
+              %i.material-icons radio_button_unchecked
+              %span Form Validation
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "form-masks.html"}
+              %i.material-icons radio_button_unchecked
+              %span Form Masks
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "form-file-uploads.html"}
+              %i.material-icons radio_button_unchecked
+              %span File Uploads
+    %li.bold
+      %a.waves-effect.waves-cyan{:href => "form-layouts.html"}
+        %i.material-icons image_aspect_ratio
+        %span.menu-title{"data-i18n" => ""} Form Layouts
+    %li.bold
+      %a.waves-effect.waves-cyan{:href => "form-wizard.html"}
+        %i.material-icons settings_ethernet
+        %span.menu-title{"data-i18n" => ""} Form Wizard
+    %li.navigation-header
+      %a.navigation-header-text Charts &amp; Maps
+      %i.navigation-header-icon.material-icons more_horiz
+    %li.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons pie_chart_outlined
+        %span.menu-title{"data-i18n" => ""} Chart
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "charts-chartjs.html"}
+              %i.material-icons radio_button_unchecked
+              %span ChartJS
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "charts-chartist.html"}
+              %i.material-icons radio_button_unchecked
+              %span Chartist
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "charts-sparklines.html"}
+              %i.material-icons radio_button_unchecked
+              %span Sparkline Charts
+    %li.navigation-header
+      %a.navigation-header-text Misc
+      %i.navigation-header-icon.material-icons more_horiz
+    %li.bold
+      %a.collapsible-header.waves-effect.waves-cyan{:href => "#"}
+        %i.material-icons photo_filter
+        %span.menu-title{"data-i18n" => ""} Menu levels
+      .collapsible-body
+        %ul.collapsible.collapsible-sub{"data-collapsible" => "accordion"}
+          %li
+            %a.collapsible-body{"data-i18n" => "", :href => "#"}
+              %i.material-icons radio_button_unchecked
+              %span Second level
+          %li
+            %a.collapsible-body.collapsible-header.waves-effect.waves-cyan{"data-i18n" => "", :href => "#"}
+              %i.material-icons radio_button_unchecked
+              %span Second level child
+            .collapsible-body
+              %ul.collapsible{"data-collapsible" => "accordion"}
+                %li
+                  %a.collapsible-body{"data-i18n" => "", :href => "#"}
+                    %i.material-icons radio_button_unchecked
+                    %span Third level
+    %li.bold
+      %a.waves-effect.waves-cyan{:href => "changelog.html"}
+        %i.material-icons track_changes
+        %span.menu-title{"data-i18n" => ""} Changelog
+        %span.badge.badge.pill.light-blue.float-right.mr-10 5.0
+    %li.bold
+      %a.waves-effect.waves-cyan{:href => "../../../../documentation/index.html"}
+        %i.material-icons import_contacts
+        %span.menu-title{"data-i18n" => ""} Documentation
+    %li.bold
+      %a.waves-effect.waves-cyan{:href => "https://pixinvent.ticksy.com/"}
+        %i.material-icons help_outline
+        %span.menu-title{"data-i18n" => ""} Support
+  .navigation-background
+  %a.sidenav-trigger.btn-sidenav-toggle.btn-floating.btn-medium.waves-effect.waves-light.hide-on-large-only{"data-target" => "slide-out", :href => "#"}
+    %i.material-icons menu

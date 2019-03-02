@@ -1,0 +1,8 @@
+.row
+  .col.s12
+    %p
+      %h6= t(:start, scope: 'activerecord.attributes.route')
+      = @application.route.start
+    %p
+      %h6= t(:destination, scope: 'activerecord.attributes.route')
+      = @application.route.destination

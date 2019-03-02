@@ -31,9 +31,20 @@ th:
         number: หมายเลขใบสมัคร  #g
         user_id: ผู้สมัคร  #g
         state: สถานะใบสมัคร  #g
+        states:
+          appying: กำลังสมัคร
+          applied: รอการตรวจสอบหลักฐาน
+          approved: รอการนัดหมาย
+          appointed: รอการตรวจประเมิน
+          surveyed: รอการตัดสินผล
+          evaluated: ตัดสินผลแล้ว
         licensee_id: ผู้ประกอบการ  #g
         route_id: เส้นทาง  #g
         category: หมวดการเดินรถ  #g
+        categories:
+          category1: ประจำทาง หมวด 2
+          category2: ประจำทาง หมวด 3
+          category3: ไม่ประจำทาง
         appointment_date: วันนัด  #g
         appointment_remark: คำอธิบายการนัด  #g
         appointment_user_id: ผู้ทำการนัด  #g
@@ -41,6 +52,8 @@ th:
         award_date: วันที่ตัดสินผลรางวัล  #g
         award: ผลการให้รางวัล  #g
         award_remark: คำอธิบายการให้รางวัล  #g
+        contact: ชื่อ-สกุล ผู้ประสานงาน  #g
+        contact_tel: หมายเลขโทรศัพท์ผู้ประสานงาน  #g
 
       criterium:
         number: หมายเลขข้อกำหนด  #g

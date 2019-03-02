@@ -9,8 +9,9 @@ $(document).ready ->
 
   #$(".sidenav").sidenav()
   #$('.dropdown-button').dropdown()
-  #$('.modal').modal()
   #$('select').material_select()
+  $('.dataTable').DataTable()
+  $('.modal').modal()
   $('select').formSelect()
   $('.datepicker').datepicker( {
     i18n: {
@@ -28,6 +29,7 @@ $(document).ready ->
     formatSubmit: 'yyyy/mm/dd'
 
   }); # initialize any datepicker
+
   Waves.displayEffect()
 
   #$('.select2').select2({
