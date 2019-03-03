@@ -1,7 +1,6 @@
-%h1 Editing criterium
-
-= render 'form'
-
-= link_to 'Show', @criterium
-\|
-= link_to 'Back', criteria_path
+.row
+  .col.s12
+    .card
+      .card-content
+        .card-title= "แก้ไข#{t :criterium, scope: 'activerecord.models'}"
+        = render partial: 'form', locals: {back_link: criteria_path}

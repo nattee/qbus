@@ -1,5 +1,23 @@
 %p#notice= notice
 
+%p
+  %b=t(:number)
+  = @criterium.number
+%p
+  %b=t(:name)
+  = @criterium.name
+%p
+  %b=t(:description)
+  = @criterium.description
+%p
+  %b=t(:approach)
+  = @criterium.approach
+%p
+  %b=t(:weight)
+  = @criterium.weight
+%p
+  %b=t(:criteria_group)
+  = @criterium.criteria_group
 
 = link_to 'Edit', edit_criterium_path(@criterium)
 \|

@@ -3,7 +3,7 @@
   .col.s12
     .container
       .card-panel
-        %h3 สร้างผู้ประกอบการใหม่
+        %h3= "สร้าง#{t :licensee, scope: 'activerecord.models'}ใหม่"
         = render partial: 'form', locals: {back_link: licensees_path}
 
 %p

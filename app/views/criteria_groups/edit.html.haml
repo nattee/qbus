@@ -1,7 +1,6 @@
-%h1 Editing criteria_group
-
-= render 'form'
-
-= link_to 'Show', @criteria_group
-\|
-= link_to 'Back', criteria_groups_path
+.row
+  .col.s12
+    .card
+      .card-content
+        .card-title= "แก้ไข#{t :criteria_group, scope: 'activerecord.models'}"
+        = render partial: 'form', locals: {back_link: criteria_groups_path}

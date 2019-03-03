@@ -3,7 +3,7 @@
   .col.s12
     .container
       .card-panel
-        %h3 สร้างแบบประเมินใหม่
+        %h3= "สร้าง#{t :evaluation, scope: 'activerecord.models'}ใหม่"
         = render partial: 'form', locals: {back_link: evaluations_path}
 
 %p

@@ -1,5 +1,11 @@
 %p#notice= notice
 
+%p
+  %b=t(:name)
+  = @criteria_group.name
+%p
+  %b=t(:group_weight)
+  = @criteria_group.group_weight
 
 = link_to 'Edit', edit_criteria_group_path(@criteria_group)
 \|
