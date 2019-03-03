@@ -1,5 +1,9 @@
-%h1 New car
 
-= render 'form'
+.row
+  .col.s12
+    .container
+      .card-panel
+        %h3= "สร้าง#{t :car, scope: 'activerecord.models'}ใหม่"
+        = render partial: 'form', locals: {back_link: cars_path}
 
-= link_to 'Back', cars_path
+%p

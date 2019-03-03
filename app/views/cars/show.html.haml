@@ -1,5 +1,27 @@
 %p#notice= notice
 
+%p
+  %b=t(:plate)
+  = @car.plate
+%p
+  %b=t(:chassis)
+  = @car.chassis
+%p
+  %b=t(:licensee)
+  = @car.licensee
+%p
+  %b=t(:route)
+  = @car.route
+%p
+  %b=t(:last_accident)
+  = @car.last_accident
+%p
+  %b=t(:last_accident_desc)
+  = @car.last_accident_desc
+%p
+  %b=t(:type)
+  = @car.type
+
 
 = link_to 'Edit', edit_car_path(@car)
 \|

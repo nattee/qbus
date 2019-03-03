@@ -1,7 +1,6 @@
-%h1 Editing car
-
-= render 'form'
-
-= link_to 'Show', @car
-\|
-= link_to 'Back', cars_path
+.row
+  .col.s12
+    .card
+      .card-content
+        .card-title= "แก้ไข#{t :car, scope: 'activerecord.models'}"
+        = render partial: 'form', locals: {back_link: cars_path}

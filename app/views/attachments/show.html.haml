@@ -1,6 +1,14 @@
 %p#notice= notice
 
 
+%p
+  %b=t(:filename)
+  = @attachment.filename
+%p
+  %b=t(:type)
+  = @attachment.type
+
+
 = link_to 'Edit', edit_attachment_path(@attachment)
 \|
 = link_to 'Back', attachments_path

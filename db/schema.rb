@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_03_050506) do
+ActiveRecord::Schema.define(version: 2019_03_03_072101) do
 
   create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "number"
@@ -47,14 +47,14 @@ ActiveRecord::Schema.define(version: 2019_03_03_050506) do
   create_table "cars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "plate"
     t.string "chassis"
-    t.bigint "licensse_id"
+    t.bigint "licensee_id"
     t.bigint "route_id"
     t.date "last_accident"
     t.text "last_accident_desc"
     t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["licensse_id"], name: "index_cars_on_licensse_id"
+    t.index ["licensee_id"], name: "index_cars_on_licensee_id"
     t.index ["route_id"], name: "index_cars_on_route_id"
   end
 

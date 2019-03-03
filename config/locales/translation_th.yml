@@ -3,7 +3,15 @@ th:
     models:
       licensee: ผู้ประกอบการ  #g
       route: เส้นทาง  #g
+      car: รถ
+      violation: ข้อมูลการฝ่าฝืน
+      application: ใบสมัคร
+      criterium: ข้อกำหนด
+      criteria_group: ประเภทข้อกำหนด
+      evaluation: แบบประเมิน
+      datafile: ไฟล์ข้อมูล
       user: ผู้ใช้งาน  #g
+      attachment: ไฟล์แนบ
 
     attributes:
       licensee:
