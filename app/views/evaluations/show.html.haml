@@ -1,5 +1,23 @@
 %p#notice= notice
 
+%p
+  %b=t(:application)
+  = @evaluation.application
+%p
+  %b=t(:criterium)
+  = @evaluation.criterium
+%p
+  %b=t(:evaluator)
+  = @evaluation.evaluator
+%p
+  %b=t(:evaluation_date)
+  = @evaluation.evaluation_date
+%p
+  %b=t(:result)
+  = @evaluation.result
+%p
+  %b=t(:description)
+  = @evaluation.description
 
 = link_to 'Edit', edit_evaluation_path(@evaluation)
 \|
