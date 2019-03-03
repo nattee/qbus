@@ -12,26 +12,26 @@
     .col.s12
       .row
         .input-field.col.s12
-          %i.material-icons.prefix face
-          = f.input_field :application
+          %i.material-icons.prefix help
+          = f.association :application
           = f.label :application
           = f.full_error :application
       .row
         .input-field.col.s12
-          %i.material-icons.prefix email
-          = f.input_field :criterium
+          %i.material-icons.prefix help
+          = f.association :criterium
           = f.label :criterium
           = f.full_error :criterium
 
       .row
         .input-field.col.s12
-          %i.material-icons.prefix lock
+          %i.material-icons.prefix help
           = f.input_field :evaluator
           = f.label :evaluator
           = f.full_error :evaluator
       .row
         .input-field.col.s12
-          %i.material-icons.prefix lock
+          %i.material-icons.prefix help
           = f.input_field :evaluation_date
           = f.label :evaluation_date
           = f.full_error :evaluation_date
@@ -43,7 +43,7 @@
               %span= "#{t :result, scope: 'activerecord.attributes.evaluation'}"
       .row
         .input-field.col.s12
-          %i.material-icons.prefix lock
+          %i.material-icons.prefix help
           = f.input_field :description
           = f.label :description
           = f.full_error :description

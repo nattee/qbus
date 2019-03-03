@@ -13,6 +13,7 @@ class Application < ApplicationRecord
   belongs_to :route, optional: true
   belongs_to :licensee, optional: true
   belongs_to :user, optional: true
+  belongs_to :appointment_user, :class_name => :User, :foreign_key => "appointment_user_id", optional: true
   has_many :evaluations
 
   #scope
