@@ -20,11 +20,15 @@
               %i.material-icons
                 notifications_none
                 %small.notification-badge 5
-          %li
-            %a.waves-effect.waves-block.waves-light.profile-button{"data-target" => "profile-dropdown", :href => "javascript:void(0);"}
-              %span.avatar-status.avatar-online
-                = image_tag 'avatar/avatar-7.png', alt: 'asdf'
-                %i
+          - if logged_in?
+            %li
+              %a.waves-effect.waves-block.waves-light.profile-button{"data-target" => "profile-dropdown", :href => "javascript:void(0);"}
+                %i.material-icons person_pin
+          - else
+            %li
+              %a.waves-effect.waves-block.waves-light.profile-button{:href => login_path}
+                %i.material-icons input
+
         /  %li
         /    %a.waves-effect.waves-block.waves-light.sidenav-trigger{"data-target" => "slide-out-right", :href => "#"}
         /      %i.material-icons format_indent_increase
@@ -79,28 +83,29 @@
               Generate monthly report
             %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 1 week ago
         / profile-dropdown
-        %ul#profile-dropdown.dropdown-content
-          %li
-            %a.grey-text.text-darken-1{:href => "user-profile-page.html"}
-              %i.material-icons person_outline
-              Profile
-          %li
-            %a.grey-text.text-darken-1{:href => "app-chat.html"}
-              %i.material-icons chat_bubble_outline
-              Chat
-          %li
-            %a.grey-text.text-darken-1{:href => "page-faq.html"}
-              %i.material-icons help_outline
-              Help
-          %li.divider
-          %li
-            %a.grey-text.text-darken-1{:href => "user-lock-screen.html"}
-              %i.material-icons lock_outline
-              Lock
-          %li
-            %a.grey-text.text-darken-1{:href => "user-login.html"}
-              %i.material-icons keyboard_tab
-              Logout
+        - if logged_in?
+          %ul#profile-dropdown.dropdown-content
+            %li
+              %a.grey-text.text-darken-1{:href => profile_path}
+                %i.material-icons portrait
+                Profile
+            / %li
+            /   %a.grey-text.text-darken-1{:href => "app-chat.html"}
+            /     %i.material-icons chat_bubble_outline
+            /     Chat
+            / %li
+            /   %a.grey-text.text-darken-1{:href => "page-faq.html"}
+            /     %i.material-icons help_outline
+            /     Help
+            %li.divider
+            / %li
+            /   %a.grey-text.text-darken-1{:href => "user-lock-screen.html"}
+            /     %i.material-icons lock_outline
+            /     Lock
+            %li
+              %a.grey-text.text-darken-1{"href" => logout_path, "data-method" => "delete"}
+                %i.material-icons keyboard_tab
+                Logout
       /%nav.display-none.search-sm
       /  .nav-wrapper
       /    %form

@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b=t(:car)
+  = @violation.car
+%p
+  %b=t(:count)
+  = @violation.count
+%p
+  %b=t(:month_year)
+  = @violation.month_year
+%p
+  %b=t(:datafile)
+  = @violation.datafile
+
+= link_to 'Edit', edit_violation_path(@violation)
+\|
+= link_to 'Back', violations_path

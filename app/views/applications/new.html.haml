@@ -1,5 +1,9 @@
-%h1 New application
 
-= render 'form'
+.row
+  .col.s12
+    .container
+      .card-panel
+        %h3= "สร้าง#{t :application, scope: 'activerecord.models'}ใหม่"
+        = render partial: 'form', locals: {back_link: applications_path}
 
-= link_to 'Back', applications_path
+%p

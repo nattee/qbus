@@ -1,19 +1,19 @@
 %p#notice= notice
 
 %p
-  %b Name:
+  %b=t(:name)
   = @route.name
 %p
-  %b Start:
+  %b=t(:start)
   = @route.start
 %p
-  %b Destination:
+  %b=t(:destination)
   = @route.destination
 %p
-  %b Car count:
+  %b=t(:car_count)
   = @route.car_count
 %p
-  %b Type:
+  %b=t(:type)
   = @route.type
 
 = link_to 'Edit', edit_route_path(@route)

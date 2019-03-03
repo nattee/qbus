@@ -1,6 +1,50 @@
 %p#notice= notice
 
 
+%p
+  %b=t(:number)
+  = @application.number
+%p
+  %b=t(:user)
+  = @application.user
+%p
+  %b=t(:state)
+  = @application.state
+%p
+  %b=t(:licensee)
+  = @application.licensee
+%p
+  %b=t(:route)
+  = @application.route
+%p
+  %b=t(:category)
+  = @application.category
+%p
+  %b=t(:appointment_date)
+  = @application.appointment_date
+%p
+  %b=t(:appointment_remark)
+  = @application.appointment_remark
+%p
+  %b=t(:appointment_user)
+  = @application.appointment_user
+%p
+  %b=t(:evaluation_finish_date)
+  = @application.evaluation_finish_date
+%p
+  %b=t(:award_date)
+  = @application.award_date
+%p
+  %b=t(:award)
+  = @application.award
+%p
+  %b=t(:contact)
+  = @application.contact
+%p
+  %b=t(:contact_tel)
+  = @application.contact_tel
+
+
 = link_to 'Edit', edit_application_path(@application)
 \|
 = link_to 'Back', applications_path

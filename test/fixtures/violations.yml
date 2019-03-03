@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  car: one
+  count: 1
+  month_year: 2019-03-03
+  datafile: one
+
+two:
+  car: two
+  count: 1
+  month_year: 2019-03-03
+  datafile: two

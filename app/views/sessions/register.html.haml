@@ -1,0 +1,44 @@
+
+.row
+  .col.s12
+    .container
+      .card-panel
+        %h3 สร้างผู้ใช้ใหม่
+        = simple_form_for(@user, :url => register_path, :method => :post) do |f|
+          - if f.error_notification
+            .row
+              .col.s12
+                .card-alert.card.gradient-45deg-red-pink
+                  .card-content.white-text
+                    %i.material-icons.prefix error
+                    = strip_tags(f.error_notification)
+                  %button.close.white-text{type: "button", data: {dismiss: 'alert'}, :area-label => 'Close'}
+                    %span{:area-hidden => 'true'} ×
+          /= @user.errors.full_messages.each do |msg|
+          /  = msg
+          /  %br
+          .row
+            .col.s12
+              .row
+                .input-field.col.s12
+                  %i.material-icons.prefix email
+                  = f.input_field :email
+                  = f.label :email
+                  = f.full_error :email
+
+              .row
+                .input-field.col.s12
+                  %i.material-icons.prefix lock
+                  = f.input_field :password
+                  = f.label :password
+                  = f.full_error :password
+              .row
+                .input-field.col.s12
+                  %i.material-icons.prefix lock
+                  = f.input_field :password_confirmation
+                  = f.label :password_confirmation
+                  = f.full_error :password_confirmation
+          = f.button :submit, class: "btn waves-light left"
+          = link_to t(:cancel), users_path, style: "margin-left: 2em", class: "btn white black-text waves-black waves-effect"
+%p
+

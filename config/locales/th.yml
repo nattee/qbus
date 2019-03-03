@@ -1,16 +1,24 @@
 th:
   cancel: ยกเลิก
+  # BEGIN session login form
+  remember_me: จดจำผู้ใช้งาน
+  session_login_submit: ลงชื่อเข้าใช้
+  # END session login form
   simple_form:
     error_notification:
       default_message: กรุณาตรวจสอบข้อผิดพลาดด้านล่างนี้่
     labels:
       user:
         name: ชื่อ-สกุล #if not defined, it will use active record name instead
+      # not in active record
+      session:
+        email: อีเมล์
+        password: รหัสผ่านย่อย
   qbus:
     application:
-      category1: ประจำทาง หมวด 2 
+      category1: ประจำทาง หมวด 2
       category2: ประจำทาง หมวด 3
       category3: ไม่ประจำทาง
-    
+
 
 

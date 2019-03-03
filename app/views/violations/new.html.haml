@@ -1,0 +1,9 @@
+
+.row
+  .col.s12
+    .container
+      .card-panel
+        %h3= "สร้าง#{t :violation, scope: 'activerecord.models'}ใหม่"
+        = render partial: 'form', locals: {back_link: violations_path}
+
+%p

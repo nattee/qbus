@@ -1,22 +1,22 @@
 %p#notice= notice
 
 %p
-  %b Name:
+  %b=t(:name)
   = @licensee.name
 %p
-  %b License no:
+  %b=t(:license_no)
   = @licensee.license_no
 %p
-  %b License expire:
+  %b=t(:license_expire)
   = @licensee.license_expire
 %p
-  %b Car count:
+  %b=t(:car_count)
   = @licensee.car_count
 %p
-  %b Contact:
+  %b=t(:contact)
   = @licensee.contact
 %p
-  %b Contact tel:
+  %b=t(:contact_tel)
   = @licensee.contact_tel
 
 = link_to 'Edit', edit_licensee_path(@licensee)

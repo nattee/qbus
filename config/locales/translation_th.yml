@@ -3,7 +3,15 @@ th:
     models:
       licensee: ผู้ประกอบการ  #g
       route: เส้นทาง  #g
+      car: รถ
+      violation: ข้อมูลการฝ่าฝืน
+      application: ใบสมัคร
+      criterium: ข้อกำหนด
+      criteria_group: ประเภทข้อกำหนด
+      evaluation: แบบประเมิน
+      datafile: ไฟล์ข้อมูล
       user: ผู้ใช้งาน  #g
+      attachment: ไฟล์แนบ
 
     attributes:
       licensee:
@@ -21,15 +29,21 @@ th:
       car:
         plate: หมายเลขป้ายทะเบียน  #g
         chassis: หมายเลขตัวถัง  #g
-        licensee_id: เจ้าของรถ  #g
-        route_id: เส้นทาง  #g
+        licensee: เจ้าของรถ  #g
+        route: เส้นทาง  #g
         last_accident: วันที่ล่าสุดทีเ่กิดอุบัติเหตุร้ายแรง  #g
         last_accident_desc: คำอธิบายการเกิดอุบัติเหตุครั้งล่าสุด  #g
         type: ประเภทรถ  #g
 
+      violation:
+        car: รถที่ฝ่าฝืน
+        count: จำนวนครั้งที่ฝ่าฝืน
+        month_year: เดือน/ปี ของข้อมูลการฝ่าฝืน
+        file: ไฟล์ข้อมูลการฝ่าฝืน
+
       application:
         number: หมายเลขใบสมัคร  #g
-        user_id: ผู้สมัคร  #g
+        user: ผู้สมัคร  #g
         state: สถานะใบสมัคร  #g
         states:
           appying: กำลังสมัคร
@@ -47,7 +61,7 @@ th:
           category3: ไม่ประจำทาง
         appointment_date: วันนัด  #g
         appointment_remark: คำอธิบายการนัด  #g
-        appointment_user_id: ผู้ทำการนัด  #g
+        appointment_user: ผู้ทำการนัด  #g
         evaluation_finish_date: วันที่สิ้นสุดการประเมิน  #g
         award_date: วันที่ตัดสินผลรางวัล  #g
         award: ผลการให้รางวัล  #g
@@ -61,19 +75,24 @@ th:
         description: คำอธิบายข้อกำหนด แบบยาว  #g
         approach: แนวทางการตรวจประเมิน  #g
         weight: น้ำหนักคะแนนในกลุ่ม  #g
-        criteria_group_id: ประเภทข้อกำหนด  #g
+        criteria_group: ประเภทข้อกำหนด  #g
 
       criteria_group:
         name: ชื่อประเภทของข้อกำหนด  #g
         group_weight: น้ำหนักคะแนนของประเภท  #g
 
       evaluation:
-        application_id: ในสมัคร  #g
-        criteria_id: ข้อกำหนด  #g
+        application: ในสมัคร  #g
+        criteria: ข้อกำหนด  #g
         evaluator: ผู้ตรวจประเมิน  #g
         evaluation_date: วันที่ประเมิน  #g
         result: ผลการตรวจ  #g
         description: ระบุผลการประเมิน  #g
+
+      datafile:
+        name: ชื่อไฟล์
+        month_year: เดือน/ปี ของข้อมูล
+        user: ผู้นำข้อมูลเข้า
 
       user:
         email: อีเมล์  #g

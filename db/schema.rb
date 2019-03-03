@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_095546) do
+ActiveRecord::Schema.define(version: 2019_03_03_072101) do
 
   create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "number"
@@ -47,14 +47,14 @@ ActiveRecord::Schema.define(version: 2019_02_27_095546) do
   create_table "cars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "plate"
     t.string "chassis"
-    t.bigint "licensse_id"
+    t.bigint "licensee_id"
     t.bigint "route_id"
     t.date "last_accident"
     t.text "last_accident_desc"
     t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["licensse_id"], name: "index_cars_on_licensse_id"
+    t.index ["licensee_id"], name: "index_cars_on_licensee_id"
     t.index ["route_id"], name: "index_cars_on_route_id"
   end
 
@@ -75,6 +75,15 @@ ActiveRecord::Schema.define(version: 2019_02_27_095546) do
     t.integer "group_weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "datafiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.string "name"
+    t.date "month_year"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_datafiles_on_user_id"
   end
 
   create_table "evaluations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
@@ -118,6 +127,24 @@ ActiveRecord::Schema.define(version: 2019_02_27_095546) do
     t.string "roles"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "remember_digest"
+    t.string "activation_digest"
+    t.boolean "activated", default: false
+    t.datetime "activated_at"
   end
 
+  create_table "violations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.bigint "car_id"
+    t.integer "count"
+    t.date "month_year"
+    t.bigint "datafile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_violations_on_car_id"
+    t.index ["datafile_id"], name: "index_violations_on_datafile_id"
+  end
+
+  add_foreign_key "datafiles", "users"
+  add_foreign_key "violations", "cars"
+  add_foreign_key "violations", "datafiles"
 end

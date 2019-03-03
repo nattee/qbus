@@ -1,0 +1,19 @@
+%h1 Listing datafiles
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @datafiles.each do |datafile|
+      %tr
+        %td= link_to 'Show', datafile
+        %td= link_to 'Edit', edit_datafile_path(datafile)
+        %td= link_to 'Destroy', datafile, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Datafile', new_datafile_path
