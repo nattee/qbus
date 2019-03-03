@@ -2,6 +2,14 @@ class ProcessController < ApplicationController
   before_action :set_application, only: [ :appointment_post, :appointed,
                                           :evaluation, :evaluation_post
                                         ]
+
+  def dashboard
+    @to_be_appointed = Application.to_be_appointed
+    @to_be_appointed_filled = Application.to_be_appointed_filled
+    @to_be_evaluated = Application.to_be_evaluated
+    @to_be_awarded = Application.to_be_awarded
+
+  end
   def appointment_index
     @to_be_appointed = Application.to_be_appointed
     @to_be_appointed_filled = Application.to_be_appointed_filled

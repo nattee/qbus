@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :evaluations
 
   #process
+  get  'process/dashboard'
   get  'process/appointments',     to: 'process#appointment_index'
   get  'process/appointment_form'
   post 'process/appointment',     to: 'process#appointment_post', as: 'appoint_process_appointment'
@@ -34,8 +35,8 @@ Rails.application.routes.draw do
   get  'process/evaluations',     to: 'process#evaluation_index'
   get  'process/evaluation/:id',  to: 'process#evaluation', as: 'process_evaluation'
   post 'process/evaluation/:id',  to: 'process#evaluation_post'
-  get  'process/award',           to: 'process#award_index'
-  get  'process/award/:id',       to: 'process#award'
+  get  'process/awards',          to: 'process#award_index'
+  get  'process/award/:id',       to: 'process#award', as: 'process_award'
   post 'process/award/:id',       to: 'process#award_post'
 
 

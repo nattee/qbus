@@ -36,8 +36,8 @@ th:
           applied: รอการตรวจสอบหลักฐาน
           approved: รอการนัดหมาย
           appointed: รอการตรวจประเมิน
-          surveyed: รอการตัดสินผล
-          evaluated: ตัดสินผลแล้ว
+          evaluated: รอการตัดสินผล
+          awarded: ตัดสินผลแล้ว
         licensee_id: ผู้ประกอบการ  #g
         route_id: เส้นทาง  #g
         category: หมวดการเดินรถ  #g
