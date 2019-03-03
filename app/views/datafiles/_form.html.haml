@@ -1,0 +1,10 @@
+= form_for @datafile do |f|
+  - if @datafile.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@datafile.errors.count, "error")} prohibited this datafile from being saved:"
+      %ul
+        - @datafile.errors.full_messages.each do |message|
+          %li= message
+
+  .actions
+    = f.submit 'Save'

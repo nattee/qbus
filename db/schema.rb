@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_02_104332) do
+ActiveRecord::Schema.define(version: 2019_03_03_044602) do
 
   create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "number"
@@ -77,6 +77,15 @@ ActiveRecord::Schema.define(version: 2019_03_02_104332) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "datafiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "name"
+    t.date "month_year"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_datafiles_on_user_id"
+  end
+
   create_table "evaluations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "application_id"
     t.string "evaluator"
@@ -124,4 +133,5 @@ ActiveRecord::Schema.define(version: 2019_03_02_104332) do
     t.datetime "activated_at"
   end
 
+  add_foreign_key "datafiles", "users"
 end
