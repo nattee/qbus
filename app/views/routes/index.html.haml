@@ -7,7 +7,7 @@
       %th Start
       %th Destination
       %th Car count
-      %th Type
+      %th Route Type
       %th
       %th
       %th
@@ -19,7 +19,7 @@
         %td= route.start
         %td= route.destination
         %td= route.car_count
-        %td= route.type
+        %td= route.route_type
         %td= link_to 'Show', route
         %td= link_to 'Edit', edit_route_path(route)
         %td= link_to 'Destroy', route, method: :delete, data: { confirm: 'Are you sure?' }

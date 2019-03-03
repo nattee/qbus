@@ -1,0 +1,34 @@
+.row
+  .col.s12
+    .row
+      .col.s12.m6
+        .card
+          .card-content
+            .card-title
+              สร้างใบสมัคร
+            blah blah blah
+            
+          .card-action
+            = link_to 'สร้างใบสมัคร', apply_applications_path, class: 'btn waves-effect waves-light green'
+      .col.s12.m6
+        .card
+          .card-content
+            .card-title
+              ระบบงานนัดหมาย
+            มีใบสมัครจำนวน #{@to_be_appointed.count} ใบที่รอการนัดหมาย และ #{@to_be_appointed_filled.count} ที่รอการส่งต่อไปยังขั้นตอนการประเมิน
+          .card-action
+            = link_to 'นัดหมาย', process_appointments_path, class: 'btn '
+        .card
+          .card-content
+            %span.card-title
+              ระบบงานประเมิน
+            มีใบสมัครจำนวน #{@to_be_evaluated.count} ใบที่รอการประเมิน
+          .card-action
+            = link_to 'ประเมิน', process_evaluations_path, class: 'btn '
+        .card
+          .card-content
+            .card-title
+              ระบบงานตัดสินผล
+            มีใบสมัครจำนวน #{@to_be_awarded.count} ใบที่รอการตัดสินผลตราสัญลักษณ์
+          .card-action
+            = link_to 'ตัดสินผล', process_awards_path, class: 'btn '
