@@ -27,6 +27,12 @@ th:
         last_accident_desc: คำอธิบายการเกิดอุบัติเหตุครั้งล่าสุด  #g
         type: ประเภทรถ  #g
 
+      violation:
+        car_id: รถที่ฝ่าฝืน
+        count: จำนวนครั้งที่ฝ่าฝืน
+        month_year: เดือน/ปี ของข้อมูลการฝ่าฝืน
+        file_id: ไฟล์ข้อมูลการฝ่าฝืน
+
       application:
         number: หมายเลขใบสมัคร  #g
         user_id: ผู้สมัคร  #g
@@ -74,6 +80,11 @@ th:
         evaluation_date: วันที่ประเมิน  #g
         result: ผลการตรวจ  #g
         description: ระบุผลการประเมิน  #g
+
+      datafile:
+        name: ชื่อไฟล์
+        month_year: เดือน/ปี ของข้อมูล
+        user_id: ผู้นำข้อมูลเข้า
 
       user:
         email: อีเมล์  #g

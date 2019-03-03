@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_03_044602) do
+ActiveRecord::Schema.define(version: 2019_03_03_050506) do
 
   create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "number"
@@ -133,5 +133,18 @@ ActiveRecord::Schema.define(version: 2019_03_03_044602) do
     t.datetime "activated_at"
   end
 
+  create_table "violations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "car_id"
+    t.integer "count"
+    t.date "month_year"
+    t.bigint "datafile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_violations_on_car_id"
+    t.index ["datafile_id"], name: "index_violations_on_datafile_id"
+  end
+
   add_foreign_key "datafiles", "users"
+  add_foreign_key "violations", "cars"
+  add_foreign_key "violations", "datafiles"
 end
