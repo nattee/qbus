@@ -17,7 +17,7 @@ class CriteriaGroupsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create criteria_group" do
     assert_difference('CriteriaGroup.count') do
-      post criteria_groups_url, params: { criteria_group: {  } }
+      post criteria_groups_url, params: { criteria_group: { name: 'three', group_weight: 3 } }
     end
 
     assert_redirected_to criteria_group_url(CriteriaGroup.last)
@@ -34,7 +34,7 @@ class CriteriaGroupsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update criteria_group" do
-    patch criteria_group_url(@criteria_group), params: { criteria_group: {  } }
+    patch criteria_group_url(@criteria_group), params: { criteria_group: { name: 'one one' } }
     assert_redirected_to criteria_group_url(@criteria_group)
   end
 

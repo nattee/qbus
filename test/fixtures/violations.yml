@@ -4,8 +4,10 @@ one:
   car: one
   count: 1
   month_year: <%= Time.zone.now %>
+  datafile: one
 
 two:
   car: two
   count: 1
   month_year: <%= Time.zone.now %>
+  datafile: two

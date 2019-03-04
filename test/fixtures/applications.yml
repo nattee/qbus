@@ -10,8 +10,6 @@ one:
   appointment_date: 2019-02-24 16:18:14
   appointment_remark: appointment remark 1
   appointment_user: one
-  evaluation_finish_date: <%= Time.zone.now %>
-  award_date: <%= Time.zone.now %>
   award: false
   award_remark: no award
 
@@ -25,7 +23,5 @@ two:
   appointment_date: <%= Time.zone.now %>
   appointment_remark: appointment remark 2
   appointment_user: two
-  evaluation_finish_date: <%= Time.zone.now %>
-  award_date: <%= Time.zone.now %>
   award: true
   award_remark: awarded

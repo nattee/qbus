@@ -4,10 +4,8 @@ one:
   name: datafile1
   month_year: <%= Time.zone.now %>
   user: one
-  violation: one
 
 two:
   name: datafile2
   month_year: <%= Time.zone.now %>
   user: two
-  violation: two

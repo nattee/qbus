@@ -2,10 +2,8 @@
 
 one:
   filename: attachment 1
-  attachment_type: 1
   data:
 
 two:
   filename: attachment 2
-  attachment_type: 2
   data:

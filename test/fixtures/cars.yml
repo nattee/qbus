@@ -7,7 +7,6 @@ one:
   route: one
   last_accident: <%= Time.zone.now %>
   last_accident_desc: accident 1
-  car_type: bus
 
 two:
   plate: car plate 2
@@ -16,4 +15,3 @@ two:
   route: two
   last_accident: <%= Time.zone.now %>
   last_accident_desc: accident 2
-  car_type: taxi

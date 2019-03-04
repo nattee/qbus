@@ -1,4 +1,4 @@
 class Violation < ApplicationRecord
   belongs_to :car
-  has_many :datafiles
+  belongs_to :datafile
 end
