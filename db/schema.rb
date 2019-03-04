@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_03_072101) do
+ActiveRecord::Schema.define(version: 2019_03_04_033741) do
 
   create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "number"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2019_03_03_072101) do
     t.bigint "route_id"
     t.date "last_accident"
     t.text "last_accident_desc"
-    t.string "type"
+    t.string "car_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["licensee_id"], name: "index_cars_on_licensee_id"
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 2019_03_03_072101) do
     t.string "start"
     t.string "destination"
     t.integer "car_count"
-    t.string "type"
+    t.string "route_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

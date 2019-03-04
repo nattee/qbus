@@ -3,6 +3,9 @@ class User < ApplicationRecord
   before_save :downcase_email
   before_create :create_activation_digest
 
+  has_many :applications
+  has_many :appointed_applications, foreign_key: "appointment_user_id", class_name: "Application"
+
   VALID_EMAIL_REGEX =/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :name, presence: true, length: { minimum: 10, maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },

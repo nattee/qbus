@@ -15,6 +15,7 @@ class Application < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :appointment_user, :class_name => :User, :foreign_key => "appointment_user_id", optional: true
   has_many :evaluations
+  has_many :attachments
 
   #scope
   scope :to_be_appointed, -> { where(state: :approved, appointment_date: nil) }
