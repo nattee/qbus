@@ -25,17 +25,59 @@
                     = f.input :contact
                   .input-field.col.s6
                     = f.input :contact_tel
+              .divider
+              .section
+                .row
+                  .col.s12.m8
+                    %h5 เอกสารที่เกี่ยวข้อง
+                    ให้ผู้สมัครทำการอัพโหลดเอกสารต่อไปนี้ ในรูปแบบไฟล์ภาพถ่ายหรือการแสกนเอกสาร โดยให้ใช้ไฟล์ในรูปแบบ pdf, jpg หรือ png เท่านั้น โดยที่ไฟล์ดังกล่าวจะต้องเห็นรายละเอียดที่ชัดเจน
+                    %ol
+                      %li หน้าแรกของสัญญาการเดินรถ
+                      %li 
+                        หนังสือยืนยันการเข้าร่วมโครงการ (สามารถดาวน์โหลดได้จาก
+                        %a ที่นี่
+                        )
+                  .col.s12.m4
+                .row
+                  .col.s12.m6
+                    %h6 สัญญาการเดินรถ
+                    .input-field.file-field
+                      .btn
+                        %span เลือกไฟล์
+                        = file_field_tag 'contract'
+                      .file-path-wrapper
+                        = text_field_tag 'contract_file_name'
+                  .col.s12.m6
+                    %h6 เอกสารยืนยันการเข้าร่วมโครงการ
+                    .input-field.file-field
+                      .btn
+                        %span เลือกไฟล์
+                        = file_field_tag 'contract'
+                      .file-path-wrapper
+                        = text_field_tag 'contract_file_name'
+
+
+              .divider
               .section
                 %h5 ข้อมูลเส้นทาง
                 - if @application.category3?
                   %h6 ไม่ประจำทาง
                 - else
-                  .input-field
-                    = text_field_tag 'route[start]'
-                    = label_tag :asdf, t(:start, scope: 'activerecord.attributes.route')
-                  .input-field
-                    = text_field_tag 'route[destination]'
-                    = label_tag :asdf, t(:destination, scope: 'activerecord.attributes.route')
+                  .row
+                    .col.s6
+                      .input-field
+                        = text_field_tag 'route[start]'
+                        = label_tag :asdf, t(:start, scope: 'activerecord.attributes.route')
+                      .input-field
+                        = text_field_tag 'route[destination]'
+                        = label_tag :asdf, t(:destination, scope: 'activerecord.attributes.route')
+                    .col.s6
+                      .input-field
+                        = f.input_field :car_count
+                        = f.label :car_count
+                      .input-field
+                        = f.input_field :trip_count
+                        = f.label :trip_count
 
               = hidden_field_tag 'application[stage]', 'step1'
               = f.button :submit, 'ไปยังขั้นตอนต่อไป', class: "btn waves-light left"

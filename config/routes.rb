@@ -44,13 +44,24 @@ Rails.application.routes.draw do
 
   #process
   get  'process/dashboard'
-  get  'process/appointments',     to: 'process#appointment_index'
+
+  get  'process/registers',   to: 'process#registered_index'
+  get  'process/register/:id',to: 'process#registered', as: 'process_register'
+  post 'process/register/:id',to: 'process#registered_post', as: 'confirm_process_register'
+
+  get  'process/appointments',    to: 'process#appointment_index'
   get  'process/appointment_form'
   post 'process/appointment',     to: 'process#appointment_post', as: 'appoint_process_appointment'
   get  'process/appointed/:id',   to: 'process#appointed', as: 'process_appointed'
+
+  get  'process/verifications',   to: 'process#verification_index'
+  get  'process/verification/:id',to: 'process#verification', as: 'process_verify'
+  post 'process/verification/:id',to: 'process#verification_post'
+
   get  'process/evaluations',     to: 'process#evaluation_index'
   get  'process/evaluation/:id',  to: 'process#evaluation', as: 'process_evaluation'
   post 'process/evaluation/:id',  to: 'process#evaluation_post'
+
   get  'process/awards',          to: 'process#award_index'
   get  'process/award/:id',       to: 'process#award', as: 'process_award'
   post 'process/award/:id',       to: 'process#award_post'

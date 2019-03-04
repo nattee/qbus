@@ -74,8 +74,9 @@ class ApplicationsController < ApplicationController
   end
 
   def post_step3
+    @application.state = :registered
     if @application.save
-      redirect_to dashboard_application_path(@application) , notice: 'สร้างใบสมัครเรียบร้อย'
+      redirect_to process_dashboard_path , notice: 'สร้างใบสมัครเรียบร้อย'
     else
       redirect_to apply_applications_path
     end
@@ -140,7 +141,7 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(:number, :user, :state, :licensee, :route, :category, :appointment_date, :appointment_remark, :appointment_user, :evaluation_finish_date, :award_date, :award, :award_remark, :contact, :contact_tel)
+      params.require(:application).permit(:number, :user, :state, :licensee, :route, :category, :appointment_date, :appointment_remark, :appointment_user, :evaluation_finish_date, :award_date, :award, :award_remark, :contact, :contact_tel, :confirmed_date, :awarded_date,:evaluated_date, :submitted_date, :car_count, :trip_count)
     end
 
     def route_params

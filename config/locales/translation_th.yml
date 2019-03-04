@@ -47,10 +47,10 @@ th:
         state: สถานะใบสมัคร  #g
         states:
           appying: กำลังสมัคร
-          applied: รอการตรวจสอบหลักฐาน
-          approved: รอการนัดหมาย
-          appointed: รอการตรวจประเมิน
-          evaluated: รอการตัดสินผล
+          registered: รอการตรวจสอบหลักฐาน
+          confirmed: รอหลักฐานประกอบการประเมิน
+          submitted: รอการตรวจหลักฐาน
+          evaluated: หลักฐานครบ รอการตัดสินผล
           awarded: ตัดสินผลแล้ว
         licensee_id: ผู้ประกอบการ  #g
         route_id: เส้นทาง  #g
@@ -62,12 +62,17 @@ th:
         appointment_date: วันนัด  #g
         appointment_remark: คำอธิบายการนัด  #g
         appointment_user: ผู้ทำการนัด  #g
-        evaluation_finish_date: วันที่สิ้นสุดการประเมิน  #g
-        award_date: วันที่ตัดสินผลรางวัล  #g
         award: ผลการให้รางวัล  #g
         award_remark: คำอธิบายการให้รางวัล  #g
         contact: ชื่อ-สกุล ผู้ประสานงาน  #g
         contact_tel: หมายเลขโทรศัพท์ผู้ประสานงาน  #g
+        confirmed_date: วันที่ตรวจใบสมัคร
+        registered_date: วันที่ยื่นใบสมัคร
+        submitted_date: วันที่ยืนยันหลักฐาน  
+        evaluationed_date: วันที่สิ้นสุดการประเมิน  #g
+        awarded_date: วันที่ตัดสินผลรางวัล  #g
+        car_count: จำนวนรถในเส้นทาง
+        trip_count: จำนวนเที่ยวต่อวัน
 
       criterium:
         number: หมายเลขข้อกำหนด  #g
