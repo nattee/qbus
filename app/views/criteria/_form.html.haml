@@ -25,13 +25,13 @@
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.input_field :description
+          = f.input_field :description, class: 'materialize-textarea', style: 'height: 70px;'
           = f.label :description
           = f.full_error :description
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.input_field :approach
+          = f.input_field :approach, class: 'materialize-textarea', style: 'height: 100px;'
           = f.label :approach
           = f.full_error :approach
       .row
@@ -43,7 +43,8 @@
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.association :criteria_group
+          /= f.association :criteria_group
+          = f.input_field :criteria_group_id, data: {contrainwidth: 'false'}, collection: CriteriaGroup.all, label_method: :name, value_method: :id
           = f.label :criteria_group
           = f.full_error :criteria_group
   = f.button :submit, class: "btn waves-light left"
