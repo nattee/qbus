@@ -4,7 +4,7 @@ one:
   name: test1@gmail.com
   email: test1@gmail.com
   password_digest: <%= User.digest('testtest') %>
-  roles: '{"admin" => true, "verifier" => true}'
+  roles: '{"admin": "1", "verifier": "1", "surveyor": "0"}'
   activated: true
   activated_at: <%= Time.zone.now %>
 
@@ -12,6 +12,6 @@ two:
   name: test1@gmail.com
   email: test1@gmail.com
   password_digest: <%= User.digest('testtest') %>
-  roles: '{"surveyor" => true}'
+  roles: '{"admin": "0", "verifier": "0", "surveyor": "1"}'
   activated: true
   activated_at: <%= Time.zone.now %>

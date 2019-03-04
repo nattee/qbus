@@ -39,15 +39,6 @@
           = f.label :password_confirmation
           = f.full_error :password_confirmation
       .row
-        .input-field.col.s12
-          %i.material-icons.prefix person
-          = f.input_field :roles
-          = f.label :roles, label: "สิทธิ์ในการใช้งาน"
-      .row
-        .input-field.col.s12
-          %i.material-icons.prefix person
-          = f.label :roles, label: "สิทธิ์ในการใช้งาน"
-      .row
         .input-field.col.s11.offset-s1
           %p
             = f.label :admin  do

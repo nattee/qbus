@@ -8,7 +8,7 @@ class UserMailer < ApplicationMailer
   def account_activation(user)
     @user = user
 
-    mail to: user.email, subject: "QBUS Account Activation"
+    mail to: user.email, subject: "QBUS Account Activation", host: root_url
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -19,6 +19,6 @@ class UserMailer < ApplicationMailer
   def password_reset(user)
     @user = user
 
-    mail to: user.email, subject: "QBUS Password Reset"
+    mail to: user.email, subject: "QBUS Password Reset", host: root_url
   end
 end

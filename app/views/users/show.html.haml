@@ -7,8 +7,14 @@
   %b Email:
   = @user.email
 %p
-  %b Roles:
-  = @user.roles
+  %b Admin:
+  = @user.admin
+%p
+  %b Verifier:
+  = @user.verifier
+%p
+  %b Surveyor:
+  = @user.surveyor
 
 = link_to 'Edit', edit_user_path(@user)
 \|
