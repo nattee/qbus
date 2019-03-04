@@ -77,7 +77,8 @@
           = f.label t(:appointment_date, scope: 'activerecord.attributes.application')
       .row
         .input-field.col.s6
-          = f.text_area :appointment_remark, class: 'materialize-textarea'
+          %i.material-icons.prefix face
+          = f.text_area :appointment_remark, class: 'materialize-textarea', rows: 4, style: 'height: 200px;'
           = f.label t(:appointment_remark, scope: 'activerecord.attributes.application')
       = hidden_field_tag :id, 1, id: 'application_id'
       %br
