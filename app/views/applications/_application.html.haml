@@ -1,23 +1,44 @@
 .row
-  .col.s4
+  .col.s12.m4
+    .card-title
+      %h5 ข้อมูลพื้นฐาน
     .section
       %h6= t(:number, scope: 'activerecord.attributes.application')
       = @application.id
     .section
       %h6 วันที่ยื่นใบสมัคร
-      =l( @application.created_at, format: :long)
-    .section
-      %h6= t(:category, scope: 'activerecord.attributes.application')
-      = @application.category_text
-  .col.s4
+      =l( @application.created_at, format: "%d %B %Y")
     .section
       %h6 สถานะ
       = @application.state_text
-  .col.s4
+  .col.s12.m4
+    .card-title
+      %h5 ข้อมูลผู้ประกอบการ
+    .section
+      %h6= t(:name, scope: 'activerecord.attributes.licensee')
+      = @application.licensee.name || "-"
+    .section
+      %h6= t(:category, scope: 'activerecord.attributes.application')
+      = @application.category_text
     .section
       %h6= t(:contact, scope: 'activerecord.attributes.application')
-      = @application.contact || "-" 
+      = @application.contact || "-"
     .section
       %h6= t(:contact_tel, scope: 'activerecord.attributes.application')
       = @application.contact_tel || "-"
+  .col.s12.m4
+    .card-title
+      %h5 ข้อมูลเส้นทาง
+    .section
+      %h6= t(:start, scope: 'activerecord.attributes.route')
+      = @application.route.start
+    .section
+      %h6= t(:destination, scope: 'activerecord.attributes.route')
+      = @application.route.destination
+    .section
+      %h6= t(:car_count, scope: 'activerecord.attributes.application')
+      = @application.car_count
+    .section
+      %h6= t(:trip_count, scope: 'activerecord.attributes.application')
+      = @application.trip_count
 

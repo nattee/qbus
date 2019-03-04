@@ -15,6 +15,7 @@ class Application < ApplicationRecord
   belongs_to :user, optional: true
   belongs_to :appointment_user, :class_name => :User, :foreign_key => "appointment_user_id", optional: true
   has_many :evaluations
+  has_many :attachments
 
   #scope
   scope :to_be_confirmed, -> { where(state: :registered) }
@@ -35,16 +36,26 @@ class Application < ApplicationRecord
 
   #state manipulation
   def confirm_registration() change_state(:confirmed)  end
-  def submit_evidence()      change_state(:submitted)  end
+  def submit_for_approve()   change_state(:submitted)  end
   def reject_evidence()      change_state(:confirmed)  end
+
+  def sorted_attachments
+    return attachments.includes(:criterium_attachment => [:criterium => :criteria_group]).order('criteria_groups.id, criteria.number') 
+  end
 
   def evaluated_count
     evaluations.where.not(result: nil).count
   end
 
   def add_missing_evaluation
-    Criterium.where.not(id: Evaluation.select(:criterium_id).where(application: self)).each do  |cri|
+    Criterium.where.not(id: Evaluation.select(:criterium_id).where(application: self)).each do |cri|
       evaluations << Evaluation.new(criterium_id: cri.id)
+    end
+  end
+
+  def add_missing_attachments
+    CriteriumAttachment.where.not(id: Attachment.select(:criterium_attachment_id).where(application: self)).each do |cri|
+      attachments << Attachment.new(criterium_attachment_id: cri.id)
     end
   end
 

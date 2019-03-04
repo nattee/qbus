@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_04_050010) do
+ActiveRecord::Schema.define(version: 2019_03_04_073810) do
 
   create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "number"
@@ -47,6 +47,10 @@ ActiveRecord::Schema.define(version: 2019_03_04_050010) do
     t.binary "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "criterium_attachment_id"
+    t.bigint "application_id"
+    t.index ["application_id"], name: "index_attachments_on_application_id"
+    t.index ["criterium_attachment_id"], name: "index_attachments_on_criterium_attachment_id"
   end
 
   create_table "cars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
@@ -80,6 +84,16 @@ ActiveRecord::Schema.define(version: 2019_03_04_050010) do
     t.integer "group_weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "criterium_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.bigint "criterium_id"
+    t.boolean "required"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["criterium_id"], name: "index_criterium_attachments_on_criterium_id"
   end
 
   create_table "datafiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
@@ -149,6 +163,8 @@ ActiveRecord::Schema.define(version: 2019_03_04_050010) do
     t.index ["datafile_id"], name: "index_violations_on_datafile_id"
   end
 
+  add_foreign_key "attachments", "applications"
+  add_foreign_key "attachments", "criterium_attachments"
   add_foreign_key "datafiles", "users"
   add_foreign_key "violations", "cars"
   add_foreign_key "violations", "datafiles"

@@ -2,6 +2,7 @@ class ApplicationsController < ApplicationController
   before_action :set_application, only: [:show, :edit, :update, :destroy, 
                                          :apply_step1, :apply_step2, :apply_step3,
                                          :post_step1,:post_step2,:post_step3,
+                                         :add_evidences,:add_attachment,
                                          :add_car
                                         ]
 
@@ -87,6 +88,25 @@ class ApplicationsController < ApplicationController
     car = Car.new(plate: params[:plate], chassis: params[:chassis])
     @application.route.cars << car
     redirect_to apply_step2_application_path(@application)
+  end
+
+  #attachment index
+  def add_evidences
+    @application.add_missing_attachments
+    @att = Attachment.new
+  end
+
+  #post
+  def add_attachment
+    @att = Attachment.create
+    @application.attachments << @att
+    @application.save
+  end
+
+
+  def submit
+    @application.submit_for_approve
+    redirect_to process_dashboard_path, notice: 'Application is submitted'
   end
 
   # GET /applications/1/edit
