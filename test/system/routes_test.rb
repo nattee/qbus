@@ -18,7 +18,7 @@ class RoutesTest < ApplicationSystemTestCase
     fill_in "Destination", with: @route.destination
     fill_in "Name", with: @route.name
     fill_in "Start", with: @route.start
-    fill_in "Type", with: @route.type
+    fill_in "Route type", with: @route.route_type
     click_on "Create Route"
 
     assert_text "Route was successfully created"
@@ -33,7 +33,7 @@ class RoutesTest < ApplicationSystemTestCase
     fill_in "Destination", with: @route.destination
     fill_in "Name", with: @route.name
     fill_in "Start", with: @route.start
-    fill_in "Type", with: @route.type
+    fill_in "Route type", with: @route.route_type
     click_on "Update Route"
 
     assert_text "Route was successfully updated"

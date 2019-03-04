@@ -5,8 +5,8 @@
   %b=t(:filename)
   = @attachment.filename
 %p
-  %b=t(:type)
-  = @attachment.type
+  %b=t(:attachment_type)
+  = @attachment.attachment_type
 
 
 = link_to 'Edit', edit_attachment_path(@attachment)

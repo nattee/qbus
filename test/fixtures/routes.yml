@@ -5,11 +5,11 @@ one:
   start: MyString
   destination: MyString
   car_count: 1
-  type: 
+  route_type:
 
 two:
   name: MyString
   start: MyString
   destination: MyString
   car_count: 1
-  type: 
+  route_type:

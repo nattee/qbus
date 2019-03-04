@@ -3,17 +3,17 @@
 one:
   plate: MyString
   chassis: MyString
-  licensse: 
-  route: 
+  licensse:
+  route:
   last_accident: 2019-02-24
   last_accident_desc: MyText
-  type: 
+  car_type:
 
 two:
   plate: MyString
   chassis: MyString
-  licensse: 
-  route: 
+  licensse:
+  route:
   last_accident: 2019-02-24
   last_accident_desc: MyText
-  type: 
+  car_type:

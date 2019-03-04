@@ -2,10 +2,10 @@
 
 one:
   filename: MyString
-  type: 1
-  data: 
+  attachment_type: 1
+  data:
 
 two:
   filename: MyString
-  type: 1
-  data: 
+  attachment_type: 1
+  data:

@@ -20,11 +20,14 @@ th:
         license_expire: ใบอนุญาตหมดอายุ  #g
         license_no: หมายเลขใบอนุญาต  #g
         name: ชื่อผู้ประกอบการ  #g
+        car_count: จำนวนรถที่มีอยู่จริง ณ วันที่ขอ
 
       route:
         destination: ปลายทาง  #g
         name: ชื่อเส้นทาง  #g
         start: เริ่มต้น  #g
+        car_count: จำนวนรถในเส้นทาง
+        route_type: ประเภทเส้นทาง
 
       car:
         plate: หมายเลขป้ายทะเบียน  #g
@@ -33,7 +36,7 @@ th:
         route: เส้นทาง  #g
         last_accident: วันที่ล่าสุดทีเ่กิดอุบัติเหตุร้ายแรง  #g
         last_accident_desc: คำอธิบายการเกิดอุบัติเหตุครั้งล่าสุด  #g
-        type: ประเภทรถ  #g
+        car_type: ประเภทรถ  #g
 
       violation:
         car: รถที่ฝ่าฝืน
@@ -103,5 +106,5 @@ th:
 
       attachment:
         filename: ชื่อไฟล์  #g
-        type: ประเภทของไฟล์  #g
+        attachment_type: ประเภทของไฟล์  #g
         data: ข้อมูลของไฟล์  #g
