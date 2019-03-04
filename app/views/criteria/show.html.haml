@@ -1,24 +1,29 @@
 %p#notice= notice
 
-%p
-  %b=t(:number)
-  = @criterium.number
-%p
-  %b=t(:name)
-  = @criterium.name
-%p
-  %b=t(:description)
-  = @criterium.description
-%p
-  %b=t(:approach)
-  = @criterium.approach
-%p
-  %b=t(:weight)
-  = @criterium.weight
-%p
-  %b=t(:criteria_group)
-  = @criterium.criteria_group
-
-= link_to 'Edit', edit_criterium_path(@criterium)
-\|
-= link_to 'Back', criteria_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          =t(:criterium, scope: 'activerecord.models')
+          =@criterium.id
+      .card-content
+        .section
+          %h6= t(:criteria_group, scope: 'activerecord.models')
+          = @criterium.criteria_group.name
+        .section
+        %p
+          %h6= t(:number, scope: 'activerecord.attributes.criterium')
+          = @criterium.number
+        .section
+          %h6= t(:name, scope: 'activerecord.attributes.criterium')
+          = @criterium.name
+        .section
+          %h6= t(:description, scope: 'activerecord.attributes.criterium')
+          = @criterium.description
+        .section
+          %h6= t(:weight, scope: 'activerecord.attributes.criterium')
+          = @criterium.weight
+      .card-action
+        = link_to t(:edit), edit_criterium_path(@criterium)
+        = link_to t(:back), criteria_path
