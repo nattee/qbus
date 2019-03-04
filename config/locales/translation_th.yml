@@ -36,13 +36,12 @@ th:
         route: เส้นทาง  #g
         last_accident: วันที่ล่าสุดทีเ่กิดอุบัติเหตุร้ายแรง  #g
         last_accident_desc: คำอธิบายการเกิดอุบัติเหตุครั้งล่าสุด  #g
-        car_type: ประเภทรถ  #g
 
       violation:
         car: รถที่ฝ่าฝืน
         count: จำนวนครั้งที่ฝ่าฝืน
         month_year: เดือน/ปี ของข้อมูลการฝ่าฝืน
-        file: ไฟล์ข้อมูลการฝ่าฝืน
+        datafile: ไฟล์ข้อมูลการฝ่าฝืน
 
       application:
         number: หมายเลขใบสมัคร  #g
@@ -71,7 +70,7 @@ th:
         contact_tel: หมายเลขโทรศัพท์ผู้ประสานงาน  #g
         confirmed_date: วันที่ตรวจใบสมัคร
         registered_date: วันที่ยื่นใบสมัคร
-        submitted_date: วันที่ยืนยันหลักฐาน  
+        submitted_date: วันที่ยืนยันหลักฐาน
         evaluationed_date: วันที่สิ้นสุดการประเมิน  #g
         awarded_date: วันที่ตัดสินผลรางวัล  #g
         car_count: จำนวนรถในเส้นทาง
@@ -106,10 +105,10 @@ th:
         email: อีเมล์  #g
         name: ชื่อ-สกุล  #g
         password: รหัสผ่านย่อย  #g
+        password_confirmation: ทวนรหัสผ่านย่อย
         password_digest: รหัสผ่านย่อย  #g
         roles: บทบาท  #g
 
       attachment:
         filename: ชื่อไฟล์  #g
-        attachment_type: ประเภทของไฟล์  #g
         data: ข้อมูลของไฟล์  #g
