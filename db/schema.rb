@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_04_073810) do
+ActiveRecord::Schema.define(version: 2019_03_04_104903) do
 
   create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "number"
@@ -43,7 +43,6 @@ ActiveRecord::Schema.define(version: 2019_03_04_073810) do
 
   create_table "attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "filename"
-    t.integer "type"
     t.binary "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -60,7 +59,6 @@ ActiveRecord::Schema.define(version: 2019_03_04_073810) do
     t.bigint "route_id"
     t.date "last_accident"
     t.text "last_accident_desc"
-    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["licensee_id"], name: "index_cars_on_licensee_id"
