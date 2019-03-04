@@ -1,8 +1,15 @@
 .row
-  .col.s12
+  .col.s6
     %p
       %h6= t(:start, scope: 'activerecord.attributes.route')
       = @application.route.start
     %p
       %h6= t(:destination, scope: 'activerecord.attributes.route')
       = @application.route.destination
+  .col.s6
+    %p
+      %h6= t(:car_count, scope: 'activerecord.attributes.application')
+      = @application.car_count || "ไม่ระบุ"
+    %p
+      %h6= t(:trip_count, scope: 'activerecord.attributes.application')
+      = @application.trip_count || "ไม่ระบุ"

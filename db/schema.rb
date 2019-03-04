@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_04_082214) do
+ActiveRecord::Schema.define(version: 2019_03_04_104903) do
 
   create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "number"
@@ -21,8 +21,6 @@ ActiveRecord::Schema.define(version: 2019_03_04_082214) do
     t.datetime "appointment_date"
     t.text "appointment_remark"
     t.bigint "appointment_user_id"
-    t.datetime "evaluation_finish_date"
-    t.datetime "award_date"
     t.text "award"
     t.text "award_remark"
     t.datetime "created_at", null: false
@@ -30,6 +28,13 @@ ActiveRecord::Schema.define(version: 2019_03_04_082214) do
     t.string "contact"
     t.string "contact_tel"
     t.integer "category"
+    t.datetime "confirmed_date"
+    t.datetime "submitted_date"
+    t.datetime "approved_date"
+    t.datetime "awarded_date"
+    t.datetime "evaluated_date"
+    t.integer "car_count"
+    t.integer "trip_count"
     t.index ["appointment_user_id"], name: "index_applications_on_appointment_user_id"
     t.index ["licensee_id"], name: "index_applications_on_licensee_id"
     t.index ["route_id"], name: "index_applications_on_route_id"
@@ -38,10 +43,13 @@ ActiveRecord::Schema.define(version: 2019_03_04_082214) do
 
   create_table "attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "filename"
-    t.integer "attachment_type"
     t.binary "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "criterium_attachment_id"
+    t.bigint "application_id"
+    t.index ["application_id"], name: "index_attachments_on_application_id"
+    t.index ["criterium_attachment_id"], name: "index_attachments_on_criterium_attachment_id"
   end
 
   create_table "cars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -51,7 +59,6 @@ ActiveRecord::Schema.define(version: 2019_03_04_082214) do
     t.bigint "route_id"
     t.date "last_accident"
     t.text "last_accident_desc"
-    t.string "car_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["licensee_id"], name: "index_cars_on_licensee_id"
@@ -75,6 +82,16 @@ ActiveRecord::Schema.define(version: 2019_03_04_082214) do
     t.integer "group_weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "criterium_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.bigint "criterium_id"
+    t.boolean "required"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["criterium_id"], name: "index_criterium_attachments_on_criterium_id"
   end
 
   create_table "datafiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -146,6 +163,8 @@ ActiveRecord::Schema.define(version: 2019_03_04_082214) do
     t.index ["datafile_id"], name: "index_violations_on_datafile_id"
   end
 
+  add_foreign_key "attachments", "applications"
+  add_foreign_key "attachments", "criterium_attachments"
   add_foreign_key "datafiles", "users"
   add_foreign_key "violations", "cars"
   add_foreign_key "violations", "datafiles"

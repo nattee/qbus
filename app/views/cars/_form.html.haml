@@ -43,7 +43,7 @@
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.input_field :last_accident_desc
+          = f.input_field :last_accident_desc, class: 'materialize-textarea', style: 'height: 100px;'
           = f.label :last_accident_desc
           = f.full_error :last_accident_desc
       .row

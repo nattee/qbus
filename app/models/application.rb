@@ -1,10 +1,10 @@
 class Application < ApplicationRecord
   enum state: [ :appying,
-                :applied,
-                :approved,
-                :appointed,
-                :surveyed,
-                :evaluated
+                :registered,
+                :confirmed,
+                :submitted,
+                :evaluated,
+                :awarded,
               ]
 
   enum category: [ :category1, :category2, :category3 ]
@@ -18,10 +18,14 @@ class Application < ApplicationRecord
   has_many :attachments
 
   #scope
-  scope :to_be_appointed, -> { where(state: :approved, appointment_date: nil) }
-  scope :to_be_appointed_filled, -> { where(state: :approved).where.not(appointment_date: !nil) }
-  scope :to_be_evaluated, -> { where(state: :appointed) }
+  scope :to_be_confirmed, -> { where(state: :registered) }
+  scope :latest_confirmed, -> { where(state: :confirmed).where('confirmed_date >= ?',30.days.ago) }
+  scope :to_be_appointed, -> { where(state: :confirmed, appointment_date: nil) }
+  scope :to_be_appointed_filled, -> { where(state: :confirmed).where.not(appointment_date: !nil) }
+  scope :to_be_evaluated, -> { where(state: :submitted) }
+  scope :to_be_awarded, -> {where(state: :evaluated) }
 
+  #some getter for enum
   def category_text
     Application.enum_to_st(:category,category)
   end
@@ -30,14 +34,35 @@ class Application < ApplicationRecord
     Application.enum_to_st(:state,state)
   end
 
+  #state manipulation
+  def confirm_registration() change_state(:confirmed)  end
+  def submit_for_approve()   change_state(:submitted)  end
+  def reject_evidence()      change_state(:confirmed)  end
+
+  def sorted_attachments
+    return attachments.includes(:criterium_attachment => [:criterium => :criteria_group]).order('criteria_groups.id, criteria.number') 
+  end
+
   def evaluated_count
     evaluations.where.not(result: nil).count
   end
 
   def add_missing_evaluation
-    Criterium.where.not(id: Evaluation.select(:criterium_id).where(application: self)).each do  |cri|
+    Criterium.where.not(id: Evaluation.select(:criterium_id).where(application: self)).each do |cri|
       evaluations << Evaluation.new(criterium_id: cri.id)
     end
+  end
+
+  def add_missing_attachments
+    CriteriumAttachment.where.not(id: Attachment.select(:criterium_attachment_id).where(application: self)).each do |cri|
+      attachments << Attachment.new(criterium_attachment_id: cri.id)
+    end
+  end
+
+  private
+  def change_state(new_state)
+    state = new_state
+    save
   end
 
 end

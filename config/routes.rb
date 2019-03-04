@@ -32,6 +32,9 @@ Rails.application.routes.draw do
       post 'apply_step3', to: 'applications#post_step3'
 
       post 'add_car', to: 'applications#add_car'
+
+      get 'add_evidences'
+      post 'add_attachment'
     end
     collection do
       get 'apply'
@@ -43,15 +46,27 @@ Rails.application.routes.draw do
   resources :evaluations
 
   #process
-  get  'process/appointments',     to: 'process#appointment_index'
+  get  'process/dashboard'
+
+  get  'process/registers',   to: 'process#registered_index'
+  get  'process/register/:id',to: 'process#registered', as: 'process_register'
+  post 'process/register/:id',to: 'process#registered_post', as: 'confirm_process_register'
+
+  get  'process/appointments',    to: 'process#appointment_index'
   get  'process/appointment_form'
   post 'process/appointment',     to: 'process#appointment_post', as: 'appoint_process_appointment'
   get  'process/appointed/:id',   to: 'process#appointed', as: 'process_appointed'
+
+  get  'process/verifications',   to: 'process#verification_index'
+  get  'process/verification/:id',to: 'process#verification', as: 'process_verify'
+  post 'process/verification/:id',to: 'process#verification_post'
+
   get  'process/evaluations',     to: 'process#evaluation_index'
   get  'process/evaluation/:id',  to: 'process#evaluation', as: 'process_evaluation'
   post 'process/evaluation/:id',  to: 'process#evaluation_post'
-  get  'process/award',           to: 'process#award_index'
-  get  'process/award/:id',       to: 'process#award'
+
+  get  'process/awards',          to: 'process#award_index'
+  get  'process/award/:id',       to: 'process#award', as: 'process_award'
   post 'process/award/:id',       to: 'process#award_post'
 
 

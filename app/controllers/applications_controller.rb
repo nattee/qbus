@@ -2,6 +2,7 @@ class ApplicationsController < ApplicationController
   before_action :set_application, only: [:show, :edit, :update, :destroy, 
                                          :apply_step1, :apply_step2, :apply_step3,
                                          :post_step1,:post_step2,:post_step3,
+                                         :add_evidences,:add_attachment,
                                          :add_car
                                         ]
 
@@ -74,8 +75,9 @@ class ApplicationsController < ApplicationController
   end
 
   def post_step3
+    @application.state = :registered
     if @application.save
-      redirect_to dashboard_application_path(@application) , notice: 'สร้างใบสมัครเรียบร้อย'
+      redirect_to process_dashboard_path , notice: 'สร้างใบสมัครเรียบร้อย'
     else
       redirect_to apply_applications_path
     end
@@ -86,6 +88,25 @@ class ApplicationsController < ApplicationController
     car = Car.new(plate: params[:plate], chassis: params[:chassis])
     @application.route.cars << car
     redirect_to apply_step2_application_path(@application)
+  end
+
+  #attachment index
+  def add_evidences
+    @application.add_missing_attachments
+    @att = Attachment.new
+  end
+
+  #post
+  def add_attachment
+    @att = Attachment.create
+    @application.attachments << @att
+    @application.save
+  end
+
+
+  def submit
+    @application.submit_for_approve
+    redirect_to process_dashboard_path, notice: 'Application is submitted'
   end
 
   # GET /applications/1/edit
@@ -140,7 +161,7 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(:number, :user, :state, :licensee, :route, :category, :appointment_date, :appointment_remark, :appointment_user, :evaluation_finish_date, :award_date, :award, :award_remark, :contact, :contact_tel)
+      params.require(:application).permit(:number, :user, :state, :licensee, :route, :category, :appointment_date, :appointment_remark, :appointment_user, :evaluation_finish_date, :award_date, :award, :award_remark, :contact, :contact_tel, :confirmed_date, :awarded_date,:evaluated_date, :submitted_date, :car_count, :trip_count)
     end
 
     def route_params

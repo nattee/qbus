@@ -4,7 +4,7 @@
       .card-content
         .row
           .col.s12.m9
-            %h4 ใบสมัครที่ยังไม่ได้นัดหมาย
+            %h4 ใบสมัครรอการตรวจ
             %table
               %thead
                 %th= t(:name, scope: 'activerecord.attributes.licensee')
@@ -15,7 +15,7 @@
                 %th= t(:contact_tel, scope: 'activerecord.attributes.application')
                 %th
               %tbody
-                - @to_be_appointed.each do |app|
+                - @to_be_confirmed.each do |app|
                   %tr
                     %td= app.licensee.name
                     %td= app.route.start
@@ -24,18 +24,18 @@
                     %td= app.contact
                     %td= app.contact_tel
                     %td
-                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date, remark: app.appointment_remark}} นัดหมาย
+                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date, remark: app.appointment_remark}} ตรวจ
           .col.s12.m3
-            %h4 การนัดหมาย
+            %h4 การตรวจใบสมัคร
             .section
-              %p หลังจากเจ้าหน้าที่ติดต่อไปยังผู้ประกอบการเพื่อนัดหมายวันที่จะเข้าทำการตรวจประเมินแล้ว ให้กรอกข้อมูลการนัดหมายทางด้านซ้ายโดยกดปุ่ม "นัดหมาย"
+              %p ทำการตรวจสอบและยืนยันการสมัครเข้าร่วมโครงการโดยพิจารณาจากข้อมูล รวมถึงรูปถ่ายหรือสำเนาของ หนังสือสัญญา และ ใบยืนยันการเข้าร่วมโครงการ
             .section
-              %p เมื่อนัดหมายเสร็จแล้ว ให้กดปุ่ม "ส่งต่อ" เพื่อทำการส่งใบสมัครไปให้ฝ่ายประเมิน
+              %p กดปุ่ม "ตรวจ" เพื่อดูใบสมัครแต่ละใบ และกดปุ่ม "ยืนยันใบสมัคร" ถ้าใบสมัครดังกล่าวถูกต้อง
     .card
       .card-content
         .row
           .col.s12
-            %h4 ใบสมัครที่นัดหมายแล้ว
+            %h4 ใบสมัครล่าสุดที่ยืนยันแล้ว
             %table
               %thead
                 %th= t(:name, scope: 'activerecord.attributes.licensee')
@@ -44,12 +44,10 @@
                 %th วันที่ยื่นใบสมัคร
                 %th= t(:contact, scope: 'activerecord.attributes.application')
                 %th= t(:contact_tel, scope: 'activerecord.attributes.application')
-                %th= t(:appointment_date, scope: 'activerecord.attributes.application')
-                %th= t(:appointment_remark, scope: 'activerecord.attributes.application')
-                %th
+                %th= t(:confirmed_date, scope: 'activerecord.attributes.application')
                 %th
               %tbody
-                - @to_be_appointed_filled.each do |app|
+                - @latest_confirmed.each do |app|
                   %tr
                     %td= app.licensee.name
                     %td= app.route.start
@@ -57,11 +55,9 @@
                     %td= l(app.created_at, format: '%d %b %Y')
                     %td= app.contact
                     %td= app.contact_tel
-                    %td= l(app.appointment_date, format: '%d %b %Y')
-                    %td= app.appointment_remark
+                    %td= l(app.confirmed_date, format: '%d %b %Y')
                     %td
-                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date, remark: app.appointment_remark}} แก้ไขนัดหมาย
-                    %td= link_to 'ส่งต่อ', process_appointed_path(app.id), class: 'waves-effect waves-light green btn'
+                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date, remark: app.appointment_remark}} ดูใบสมัคร
 
 
 /modal
