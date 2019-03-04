@@ -3,11 +3,9 @@
 one:
   car: one
   count: 1
-  month_year: 2019-03-03
-  datafile: one
+  month_year: <%= Time.zone.now %>
 
 two:
   car: two
   count: 1
-  month_year: 2019-03-03
-  datafile: two
+  month_year: <%= Time.zone.now %>

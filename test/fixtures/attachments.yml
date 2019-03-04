@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  filename: MyString
+  filename: attachment 1
   attachment_type: 1
   data:
 
 two:
-  filename: MyString
-  attachment_type: 1
+  filename: attachment 2
+  attachment_type: 2
   data:

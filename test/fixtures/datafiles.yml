@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  month_year: 2019-03-03
+  name: datafile1
+  month_year: <%= Time.zone.now %>
   user: one
+  violation: one
 
 two:
-  name: MyString
-  month_year: 2019-03-03
+  name: datafile2
+  month_year: <%= Time.zone.now %>
   user: two
+  violation: two
