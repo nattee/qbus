@@ -1,19 +1,22 @@
-%h1 Listing cars
-
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
-
-  %tbody
-    - @cars.each do |car|
-      %tr
-        %td= link_to 'Show', car
-        %td= link_to 'Edit', edit_car_path(car)
-        %td= link_to 'Destroy', car, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Car', new_car_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          %h1= t(:list) + t(:car, scope: 'activerecord.models')
+      .card-content
+        %ul.collection
+          - @cars.each do |car|
+            %li.collection-item.avatar
+              %i.material-icons.circle directions_car
+              %span.title=car.plate
+              %p=car.chassis
+              .secondary-content
+                %a{:href => car_path(car)}
+                  %i.material-icons pageview
+                %a{:href => edit_car_path(car)}
+                  %i.material-icons edit
+                %a{"href" => car_path(car), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                  %i.material-icons delete
+      .card-action
+        = link_to t(:new), new_car_path

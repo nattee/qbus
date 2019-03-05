@@ -25,13 +25,13 @@
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.association :licensee
+          = f.input_field :licensee_id, data: {contrainwidth: 'false'}, collection: Licensee.all, label_method: :name, value_method: :id
           = f.label :licensee
           = f.full_error :licensee
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.association :route
+          = f.input_field :route_id, data: {contrainwidth: 'false'}, collection: Route.all, label_method: :name, value_method: :id
           = f.label :route
           = f.full_error :route
       .row

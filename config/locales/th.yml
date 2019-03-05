@@ -1,7 +1,10 @@
 th:
   cancel: ยกเลิก
   back: ย้อนกลับ
+  new: เพิ่ม
   edit: แก้ไข
+  list: รายการ
+  confirm_delete: ยืนยันการลบ?
   # BEGIN session login form
   remember_me: จดจำผู้ใช้งาน
   session_login_submit: ลงชื่อเข้าใช้
