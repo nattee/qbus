@@ -87,7 +87,7 @@ th:
 
       evaluation:
         application: ในสมัคร  #g
-        criteria: ข้อกำหนด  #g
+        criterium: ข้อกำหนด  #g
         evaluator: ผู้ตรวจประเมิน  #g
         evaluation_date: วันที่ประเมิน  #g
         result: ผลการตรวจ  #g
@@ -117,7 +117,8 @@ th:
       user:
         email: อีเมล์  #g
         name: ชื่อ-สกุล  #g
-        password: รหัสผ่านย่อย  #g
-        password_confirmation: ทวนรหัสผ่านย่อย
-        password_digest: รหัสผ่านย่อย  #g
+        password: รหัสผ่าน  #g
+        password_confirmation: ทวนรหัสผ่าน
         roles: บทบาท  #g
+        activated: เปิดการใช้บัญชี
+        activated_at: เปิดการใช้บัญชี เมื่อวันที่
