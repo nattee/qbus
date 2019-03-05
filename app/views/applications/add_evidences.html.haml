@@ -29,43 +29,17 @@
                     = f.label 'ประเภทหลักฐาน'
                 .row
                   .input-field.file-field.col.s12
-                    .btn.green
+                    .btn.blue
                       %span เลือกไฟล์
                       = file_field_tag 'contract'
                     .file-path-wrapper
                       = text_field_tag 'contract_file_name'
                 .row
                   .col.s12
-                    = f.button :submit, class: "btn waves-light left"
+                    = f.button :submit, 'ส่งไฟล์แนบ', class: "btn waves-light left green"
         .divider
         .section
           .row
             .col.s12
               %h4 รายการหลักฐาน
-              - last_cg = last_name = nil
-              - @application.sorted_attachments.each do |att|
-                - cri = att.criterium_attachment.criterium
-                - if cri.criteria_group != last_cg
-                  - last_cg = cri.criteria_group
-                  .divider
-                  .row
-                    .col.s12
-                      %h5= last_cg.name
-                  .row
-                    .col.s4.strong
-                      = t(:name, scope: 'activerecord.attributes.criterium')
-                    .col.s4.strong
-                      เอกสารที่ใช้ในการยื่น
-                    .col.s2.strong
-                      วัน/เวลา ยื่นเอกสาร
-                    .col.s2.strong
-                      ดูเอกสาร
-                .row
-                  .col.s4
-                    - if last_name != cri.name
-                      - last_name = cri.name
-                      = "#{cri.name}"
-                  .col.s4
-                    = "#{att.criterium_attachment.name}"
-                  .col.s2
-                  .col.s2
+              = render "process/evidence"
