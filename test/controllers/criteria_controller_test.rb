@@ -17,7 +17,7 @@ class CriteriaControllerTest < ActionDispatch::IntegrationTest
 
   test "should create criterium" do
     assert_difference('Criterium.count') do
-      post criteria_url, params: { criterium: {  } }
+      post criteria_url, params: { criterium: { name: 'test new' } }
     end
 
     assert_redirected_to criterium_url(Criterium.last)
@@ -34,7 +34,7 @@ class CriteriaControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update criterium" do
-    patch criterium_url(@criterium), params: { criterium: {  } }
+    patch criterium_url(@criterium), params: { criterium: { name: 'test edit' } }
     assert_redirected_to criterium_url(@criterium)
   end
 

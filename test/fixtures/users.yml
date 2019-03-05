@@ -12,6 +12,6 @@ two:
   name: test1@gmail.com
   email: test1@gmail.com
   password_digest: <%= User.digest('testtest') %>
+  activation_digest: <%= User.digest('testtest') %>
   roles: '{"admin": "0", "verifier": "0", "surveyor": "1"}'
-  activated: true
-  activated_at: <%= Time.zone.now %>
+  activated: false

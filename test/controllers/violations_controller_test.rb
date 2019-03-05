@@ -17,7 +17,7 @@ class ViolationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create violation" do
     assert_difference('Violation.count') do
-      new_violation = { count: 3, month_year: Time.zone.now, car: cars(:one), datafile: datafiles(:two) }
+      new_violation = { count: 3, month_year: Time.zone.now }
       post violations_url, params: { violation: new_violation }
     end
 

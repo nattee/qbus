@@ -29,11 +29,8 @@
   %b=t(:appointment_user)
   = @application.appointment_user
 %p
-  %b=t(:evaluation_finish_date)
-  = @application.evaluation_finish_date
-%p
-  %b=t(:award_date)
-  = @application.award_date
+  %b=t(:awarded_date)
+  = @application.awarded_date
 %p
   %b=t(:award)
   = @application.award
@@ -43,6 +40,24 @@
 %p
   %b=t(:contact_tel)
   = @application.contact_tel
+%p
+  %b=t(:confirmed_date)
+  = @application.confirmed_date
+%p
+  %b=t(:submitted_date)
+  = @application.submitted_date
+%p
+  %b=t(:approved_date)
+  = @application.approved_date
+%p
+  %b=t(:evaluated_date)
+  = @application.evaluated_date
+%p
+  %b=t(:car_count)
+  = @application.car_count
+%p
+  %b=t(:trip_count)
+  = @application.trip_count
 
 
 = link_to 'Edit', edit_application_path(@application)

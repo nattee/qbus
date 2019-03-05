@@ -1,4 +1,4 @@
-= simple_form_for @attachment do |f|
+= simple_form_for @attachment, html: {multipart: true} do |f|
   - if f.error_notification
     .row
       .col.s12
@@ -19,13 +19,19 @@
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.input_field :attachment_type
-          = f.label :attachment_type
-          = f.full_error :attachment_type
+          = f.association :application
+          = f.label :application
+          = f.full_error :application
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.input_field :data
+          = f.association :criterium_attachment
+          = f.label :criterium_attachment
+          = f.full_error :criterium_attachment
+      .row
+        .input-field.col.s12
+          %i.material-icons.prefix help
+          = f.input_field :data, as: :file
           = f.label :data
           = f.full_error :data
   = f.button :submit, class: "btn waves-light left"
