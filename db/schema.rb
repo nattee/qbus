@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_04_104903) do
+ActiveRecord::Schema.define(version: 2019_03_05_095619) do
 
   create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
     t.string "number"
@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 2019_03_04_104903) do
     t.datetime "evaluated_date"
     t.integer "car_count"
     t.integer "trip_count"
+    t.text "register_result"
+    t.text "evaluation_result"
     t.index ["appointment_user_id"], name: "index_applications_on_appointment_user_id"
     t.index ["licensee_id"], name: "index_applications_on_licensee_id"
     t.index ["route_id"], name: "index_applications_on_route_id"
