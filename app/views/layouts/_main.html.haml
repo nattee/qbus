@@ -1,4 +1,12 @@
-- puts 'hahaha'
-- puts I18n.locale
 #main
+  - flash.each do |message_type, message|
+    .row
+      .col.s12
+        .card.card-alert{class: flash_class(message_type)}
+          .card-content{class: flash_textcolor(message_type)}
+            = message
+            %button.close{type: :button, data: {dismiss: :alert}, class: flash_textcolor(message_type)} ×
+      
+    /= javascript_tag "Materialize.toast('#{message}', 4000)"
+    /#{message}
   = yield

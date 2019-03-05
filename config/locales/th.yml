@@ -1,5 +1,7 @@
 th:
   cancel: ยกเลิก
+  back: ย้อนกลับ
+  edit: แก้ไข
   # BEGIN session login form
   remember_me: จดจำผู้ใช้งาน
   session_login_submit: ลงชื่อเข้าใช้
