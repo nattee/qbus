@@ -1,65 +1,68 @@
-%p#notice= notice
-
-
-%p
-  %b=t(:number)
-  = @application.number
-%p
-  %b=t(:user)
-  = @application.user
-%p
-  %b=t(:state)
-  = @application.state
-%p
-  %b=t(:licensee)
-  = @application.licensee
-%p
-  %b=t(:route)
-  = @application.route
-%p
-  %b=t(:category)
-  = @application.category
-%p
-  %b=t(:appointment_date)
-  = @application.appointment_date
-%p
-  %b=t(:appointment_remark)
-  = @application.appointment_remark
-%p
-  %b=t(:appointment_user)
-  = @application.appointment_user
-%p
-  %b=t(:awarded_date)
-  = @application.awarded_date
-%p
-  %b=t(:award)
-  = @application.award
-%p
-  %b=t(:contact)
-  = @application.contact
-%p
-  %b=t(:contact_tel)
-  = @application.contact_tel
-%p
-  %b=t(:confirmed_date)
-  = @application.confirmed_date
-%p
-  %b=t(:submitted_date)
-  = @application.submitted_date
-%p
-  %b=t(:approved_date)
-  = @application.approved_date
-%p
-  %b=t(:evaluated_date)
-  = @application.evaluated_date
-%p
-  %b=t(:car_count)
-  = @application.car_count
-%p
-  %b=t(:trip_count)
-  = @application.trip_count
-
-
-= link_to 'Edit', edit_application_path(@application)
-\|
-= link_to 'Back', applications_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          =t(:application, scope: 'activerecord.models')
+          =@application.id
+      .card-content
+        .section
+          %h6= t(:number, scope: 'activerecord.attributes.application')
+          = @application.number
+        .section
+          %h6= t(:user, scope: 'activerecord.attributes.application')
+          = @application.user.name
+        .section
+          %h6= t(:state, scope: 'activerecord.attributes.application')
+          = @application.state_text
+        .section
+          %h6= t(:licensee, scope: 'activerecord.attributes.application')
+          = @application.licensee.name
+        .section
+          %h6= t(:route, scope: 'activerecord.attributes.application')
+          = @application.route.name
+        .section
+          %h6= t(:category, scope: 'activerecord.attributes.application')
+          = @application.category_text
+        .section
+          %h6= t(:appointment_date, scope: 'activerecord.attributes.application')
+          = @application.appointment_date
+        .section
+          %h6= t(:appointment_remark, scope: 'activerecord.attributes.application')
+          = @application.appointment_remark
+        .section
+          %h6= t(:appointment_user, scope: 'activerecord.attributes.application')
+          = @application.appointment_user.name
+        .section
+          %h6= t(:awarded_date, scope: 'activerecord.attributes.application')
+          = @application.awarded_date
+        .section
+          %h6= t(:award, scope: 'activerecord.attributes.application')
+          = @application.award
+        .section
+          %h6= t(:contact, scope: 'activerecord.attributes.application')
+          = @application.contact
+        .section
+          %h6= t(:contact_tel, scope: 'activerecord.attributes.application')
+          = @application.contact_tel
+        .section
+          %h6= t(:confirmed_date, scope: 'activerecord.attributes.application')
+          = @application.confirmed_date
+        .section
+          %h6= t(:submitted_date, scope: 'activerecord.attributes.application')
+          = @application.submitted_date
+        .section
+          %h6= t(:approved_date, scope: 'activerecord.attributes.application')
+          = @application.approved_date
+        .section
+          %h6= t(:evaluated_date, scope: 'activerecord.attributes.application')
+          = @application.evaluated_date
+        .section
+          %h6= t(:car_count, scope: 'activerecord.attributes.application')
+          = @application.car_count
+        .section
+          %h6= t(:trip_count, scope: 'activerecord.attributes.application')
+          = @application.trip_count
+      .card-action
+        = link_to t(:edit), edit_application_path(@application)
+        = link_to t(:back), applications_path

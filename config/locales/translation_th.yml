@@ -41,9 +41,10 @@ th:
         contact: ชื่อ-สกุล ผู้ประสานงาน  #g
         contact_tel: หมายเลขโทรศัพท์ผู้ประสานงาน  #g
         confirmed_date: วันที่ตรวจใบสมัคร
-        registered_date: วันที่ยื่นใบสมัคร
+        #registered_date: วันที่ยื่นใบสมัคร
         submitted_date: วันที่ยืนยันหลักฐาน
-        evaluationed_date: วันที่สิ้นสุดการประเมิน  #g
+        approved_date: วันที่อนุมัติ  #g
+        evaluated_date: วันที่สิ้นสุดการประเมิน  #g
         awarded_date: วันที่ตัดสินผลรางวัล  #g
         car_count: จำนวนรถในเส้นทาง
         trip_count: จำนวนเที่ยวต่อวัน
