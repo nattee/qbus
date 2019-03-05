@@ -2,9 +2,31 @@
   .col.s12
     .card
       .card-content
-        เมื่อผู้ประเมินได้ทำการประเมินข้อกำหนดต่าง ๆ แล้ว ให้บันทึกผลการประเมินลงในแบบฟอร์มด้านล่างนี้ และเมื่อบันทึกข้อมูลเสร็จแล้ว ให้กดปุ่ม "ย้อนกลับ" เพื่อกลับไปยังหน้าแสดงรายการใบสมัครทั้งหมด
-        %br
-        = link_to 'ย้อนกลับ', process_evaluations_path, class: 'waves-effect waves-light green btn'
+        .row
+          .col.s12.m4.push-m8
+            .card
+              .card-content
+                เมื่อผู้ประเมินได้ทำการประเมินข้อกำหนดต่าง ๆ แล้ว ให้บันทึกผลการประเมินลงในแบบฟอร์มด้านล่างนี้ และเมื่อบันทึกข้อมูลเสร็จแล้ว ให้กดปุ่ม "ย้อนกลับ" เพื่อกลับไปยังหน้าแสดงรายการใบสมัครทั้งหมด
+          .col.s12.m8.pull-m4
+            .card-title
+              %h4 การประเมินผล
+            %h5 บันทึกผลการประเมิน
+            = simple_form_for @application do |f|
+              .row
+                .col.s12
+                  %label
+                    = radio_button_tag :result, 'ok'
+                    %span หลักฐานครบถ้วน และ ทำการประเมินเรียบร้อย
+              .row
+                .col.s12
+                  %label
+                    = radio_button_tag :result, 'no'
+                    %span หลักฐานไม่ครบ
+              .row
+                .input-field.col.s12
+                  = f.input :appointment_remark
+              = f.button :submit, 'ยืนยันผลการประเมิน'
+              = link_to 'ย้อนกลับ', process_evaluations_path, class: 'waves-effect waves-light green btn'
     .card
       .card-content
         .row
@@ -14,11 +36,14 @@
           .col.s12
             %ul.tabs
               %li.tab.col.m3
-                %a{href: '#tab_eval'}การประเมิน
-              %li.tab.col.m3
                 %a{href: '#tab_app'}ข้อมูลใบสมัคร
               %li.tab.col.m3
+                %a{href: '#tab_evidence'}หลักฐาน
+              %li.tab.col.m3
+                %a{href: '#tab_eval'}การประเมิน
+              %li.tab.col.m3
                 %a{href: '#tab_car'}ข้อมูลรถ
+
           #tab_eval.col.s12
             - last_cg = nil
             - @application.evaluations.joins(:criterium => :criteria_group).order('criteria_groups.id, criteria.number').each do |ev|
@@ -46,22 +71,15 @@
                       = f.text_field :description
                   .col.s2
                     = f.submit 'บันทึก', class: 'btn'
+          #tab_evidence.col.s12
+            %h4 รายการหลักฐาน
+            = render "evidence"
           #tab_app.col.s12
             .section
               .row
                 .col.s12
                   %h5 ข้อมูลใบสมัคร
                   = render partial: "applications/application"
-            .divider
-            .section
-              .row
-                .col.s8
-                  %h5 ข้อมูลผู้ประกอบการ
-                  = render partial: "applications/licensee"
-                .col.s4
-                  %h5 ข้อมูลเส้นทางเดินรถ
-                  = render partial: "applications/route"
-            .divider
           #tab_route.col.s12
           #tab_car.col.s12
             = render partial: "applications/cars"

@@ -48,9 +48,9 @@ Rails.application.routes.draw do
   #process
   get  'process/dashboard'
 
-  get  'process/registers',   to: 'process#registered_index'
-  get  'process/register/:id',to: 'process#registered', as: 'process_register'
-  post 'process/register/:id',to: 'process#registered_post', as: 'confirm_process_register'
+  get  'process/registers',       to: 'process#registered_index'
+  get  'process/register/:id',    to: 'process#registered', as: 'process_register'
+  post 'process/register/:id',    to: 'process#registered_post', as: 'confirm_process_register'
 
   get  'process/appointments',    to: 'process#appointment_index'
   get  'process/appointment_form'

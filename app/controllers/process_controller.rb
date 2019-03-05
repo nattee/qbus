@@ -1,5 +1,5 @@
 class ProcessController < ApplicationController
-  before_action :set_application, only: [ :register_post, :register,
+  before_action :set_application, only: [ :register_post, :registered, :registered_post,
                                           :appointment_post, :appointed,
                                           :evaluation, :evaluation_post
                                         ]
@@ -39,8 +39,6 @@ class ProcessController < ApplicationController
   end
 
   def appointed
-    @application.state = :appointed;
-    @application.save
     redirect_to process_appointments_path
   end
 

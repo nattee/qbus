@@ -24,7 +24,7 @@
                     %td= app.contact
                     %td= app.contact_tel
                     %td
-                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date, remark: app.appointment_remark}} ตรวจ
+                      = link_to 'ตรวจ', process_register_path(app), class: 'button waves-effect waves-light green btn'
           .col.s12.m3
             %h4 การตรวจใบสมัคร
             .section
@@ -60,42 +60,3 @@
                       %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date, remark: app.appointment_remark}} ดูใบสมัคร
 
 
-/modal
-#appoint.modal{style: 'width: 60% !important;'}
-  = form_with url: appoint_process_appointment_path, local: true do |f|
-    .modal-content
-      %h4 ระบุข้อมูลนัดหมาย
-
-      กรุณาพิมพ์ข้อมูลการนัดหมาย
-      .row
-        .input-field.col.s6
-          = f.text_field :appointment_date, class: 'datepicker'
-          = f.label t(:appointment_date, scope: 'activerecord.attributes.application')
-      .row
-        .input-field.col.s6
-          %i.material-icons.prefix face
-          = f.text_area :appointment_remark, class: 'materialize-textarea', rows: 4, style: 'height: 200px;'
-          = f.label t(:appointment_remark, scope: 'activerecord.attributes.application')
-      = hidden_field_tag :id, 1, id: 'application_id'
-      %br
-      %br
-      %br
-      %br
-    .modal-footer
-      = f.submit 'ทำการนัดหมาย', class: 'waves-effect green waves-green btn-flat'
-      %a.modal-close.waves-effect.waves-red.btn-flat{href: "#!"} ยกเลิก
-
-:coffee
-  @setform = (date,remark,id) ->
-    $(".modal #appointment_date").val(date)
-    $(".modal #appointment_remark").val(remark)
-    $(".modal #application_id").val(id)
-    M.updateTextFields()
-
-  $ ->
-    $("button[data-application]").click (e) ->
-      e.preventDefault()
-      date = $(this).data("date")
-      remark = $(this).data("remark")
-      id = $(this).data("application")
-      setform(date,remark,id)
