@@ -1,17 +1,23 @@
-%p#notice= notice
-
-
-%p
-  %b=t(:filename)
-  = @attachment.filename
-%p
-  %b=t(:criterium_attachment)
-  = @attachment.criterium_attachment
-%p
-  %b=t(:application)
-  = @attachment.application
-
-
-= link_to 'Edit', edit_attachment_path(@attachment)
-\|
-= link_to 'Back', attachments_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          =t(:attachment, scope: 'activerecord.models')
+          =@attachment.id
+      .card-content
+        .section
+          %h6= t(:filename, scope: 'activerecord.attributes.attachment')
+          = @attachment.filename
+        .section
+          %h6= t(:criterium_attachment, scope: 'activerecord.attributes.attachment')
+          = @attachment.criterium_attachment.name
+        .section
+          %h6= t(:application, scope: 'activerecord.attributes.attachment')
+          = @attachment.application.to_label
+        .section
+          %h6= t(:data, scope: 'activerecord.attributes.attachment')
+          = link_to t(:download), rails_blob_path(@attachment.data, disposition: "attachment")
+      .card-action
+        = link_to t(:edit), edit_attachment_path(@attachment)
+        = link_to t(:back), attachments_path

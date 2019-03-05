@@ -25,6 +25,10 @@ class Application < ApplicationRecord
   scope :to_be_evaluated, -> { where(state: :submitted) }
   scope :to_be_awarded, -> {where(state: :evaluated) }
 
+  def to_label
+    "#{self.number} - #{self.state_text}"
+  end
+
   #some getter for enum
   def category_text
     Application.enum_to_st(:category,category)
@@ -40,7 +44,7 @@ class Application < ApplicationRecord
   def reject_evidence()      change_state(:confirmed)  end
 
   def sorted_attachments
-    return attachments.includes(:criterium_attachment => [:criterium => :criteria_group]).order('criteria_groups.id, criteria.number') 
+    return attachments.includes(:criterium_attachment => [:criterium => :criteria_group]).order('criteria_groups.id, criteria.number')
   end
 
   def evaluated_count

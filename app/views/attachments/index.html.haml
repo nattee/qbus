@@ -1,19 +1,22 @@
-%h1 Listing attachments
-
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
-
-  %tbody
-    - @attachments.each do |attachment|
-      %tr
-        %td= link_to 'Show', attachment
-        %td= link_to 'Edit', edit_attachment_path(attachment)
-        %td= link_to 'Destroy', attachment, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Attachment', new_attachment_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          %h1= t(:list) + t(:attachment, scope: 'activerecord.models')
+      .card-content
+        %ul.collection
+          - @attachments.each do |attachment|
+            %li.collection-item.avatar
+              %i.material-icons.circle attachment
+              %span.title=attachment.filename
+              %p=attachment.updated_at
+              .secondary-content
+                %a{:href => attachment_path(attachment)}
+                  %i.material-icons pageview
+                %a{:href => edit_attachment_path(attachment)}
+                  %i.material-icons edit
+                %a{"href" => attachment_path(attachment), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                  %i.material-icons delete
+      .card-action
+        = link_to t(:new), new_attachment_path

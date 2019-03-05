@@ -1,5 +1,5 @@
 class AttachmentsController < ApplicationController
-  before_action :set_attachment, only: [:show, :edit, :update, :destroy]
+  before_action :set_attachment, only: [:show, :edit, :update, :destroy, :download]
 
   # GET /attachments
   # GET /attachments.json
@@ -70,6 +70,6 @@ class AttachmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attachment_params
-      params.require(:attachment).permit(:filename, :attachment_type, :data)
+      params.require(:attachment).permit(:filename, :application_id, :criterium_attachment_id, :data)
     end
 end
