@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_05_154935) do
+ActiveRecord::Schema.define(version: 2019_03_06_033937) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -149,6 +149,14 @@ ActiveRecord::Schema.define(version: 2019_03_05_154935) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "application_id"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["application_id"], name: "index_logs_on_application_id"
+  end
+
   create_table "routes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.string "start"
@@ -187,6 +195,7 @@ ActiveRecord::Schema.define(version: 2019_03_05_154935) do
   add_foreign_key "attachments", "applications"
   add_foreign_key "attachments", "criterium_attachments"
   add_foreign_key "datafiles", "users"
+  add_foreign_key "logs", "applications"
   add_foreign_key "violations", "cars"
   add_foreign_key "violations", "datafiles"
 end
