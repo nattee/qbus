@@ -1,19 +1,22 @@
-%h1 Listing datafiles
-
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
-
-  %tbody
-    - @datafiles.each do |datafile|
-      %tr
-        %td= link_to 'Show', datafile
-        %td= link_to 'Edit', edit_datafile_path(datafile)
-        %td= link_to 'Destroy', datafile, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Datafile', new_datafile_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          %h1= t(:list) + t(:datafile, scope: 'activerecord.models')
+      .card-content
+        %ul.collection
+          - @datafiles.each do |datafile|
+            %li.collection-item.avatar
+              %i.material-icons.circle storage
+              %span.title="#{datafile.name}"
+              %p="#{t(:user, scope: 'activerecord.models')} #{datafile.user.name}"
+              .secondary-content
+                %a{:href => datafile_path(datafile)}
+                  %i.material-icons pageview
+                %a{:href => edit_datafile_path(datafile)}
+                  %i.material-icons edit
+                %a{"href" => datafile_path(datafile), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                  %i.material-icons delete
+      .card-action
+        = link_to t(:new), new_datafile_path
