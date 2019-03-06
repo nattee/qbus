@@ -1,12 +1,28 @@
-%p#notice= notice
-
-%p
-  %b=t(:name)
-  = @criteria_group.name
-%p
-  %b=t(:group_weight)
-  = @criteria_group.group_weight
-
-= link_to 'Edit', edit_criteria_group_path(@criteria_group)
-\|
-= link_to 'Back', criteria_groups_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          =t(:criteria_group, scope: 'activerecord.models')
+          =@criteria_group.id
+      .card-content
+        .section
+          %h6= t(:criteria_group, scope: 'activerecord.models')
+          = @criteria_group.name
+        .section
+          %h6= t(:group_weight, scope: 'activerecord.attributes.criteria_group')
+          = @criteria_group.group_weight
+        .section
+          %h6= "#{t(:list)} #{t(:criterium, scope: 'activerecord.models')}"
+          %ul.collection
+            - @criteria_group.criterium.each do |criterium|
+              %li.collection-item.avatar
+                %i.material-icons.circle check_box
+                %span.title="[#{criterium.number}] #{criterium.name}"
+                %p="#{t(:weight, scope: 'activerecord.attributes.criterium')} #{criterium.weight}"
+                .secondary-content
+                  %a{:href => criterium_path(criterium)}
+                    %i.material-icons pageview
+      .card-action
+        = link_to t(:edit), edit_criteria_group_path(@criteria_group)
+        = link_to t(:back), criteria_groups_path
