@@ -1,21 +1,26 @@
-%p#notice= notice
-
-%p
-  %b=t(:name)
-  = @route.name
-%p
-  %b=t(:start)
-  = @route.start
-%p
-  %b=t(:destination)
-  = @route.destination
-%p
-  %b=t(:car_count)
-  = @route.car_count
-%p
-  %b=t(:route_type)
-  = @route.route_type
-
-= link_to 'Edit', edit_route_path(@route)
-\|
-= link_to 'Back', routes_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          =t(:route, scope: 'activerecord.models')
+          =@route.id
+      .card-content
+        .section
+          %h6= t(:name, scope: 'activerecord.attributes.route')
+          = @route.name
+        .section
+          %h6= t(:start, scope: 'activerecord.attributes.route')
+          = @route.start
+        .section
+          %h6= t(:destination, scope: 'activerecord.attributes.route')
+          = @route.destination
+        .section
+          %h6= t(:car_count, scope: 'activerecord.attributes.route')
+          = @route.car_count
+        .section
+          %h6= t(:route_type, scope: 'activerecord.attributes.route')
+          = @route.route_type
+      .card-action
+        = link_to t(:edit), edit_route_path(@route)
+        = link_to t(:back), routes_path
