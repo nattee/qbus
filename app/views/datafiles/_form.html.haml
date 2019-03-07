@@ -25,7 +25,7 @@
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.association :user
+          = f.input_field :user_id, data: {contrainwidth: 'false'}, collection: User.all, label_method: :name, value_method: :id
           = f.label :user
           = f.full_error :user
   = f.button :submit, class: "btn waves-light left"

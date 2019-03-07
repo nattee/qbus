@@ -69,6 +69,6 @@ class DatafilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def datafile_params
-      params.fetch(:datafile, {})
+      params.require(:datafile).permit(:name, :month_year, :user_id)
     end
 end

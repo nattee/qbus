@@ -44,6 +44,7 @@ class ProcessController < ApplicationController
 
   def evaluation_index
     @to_be_evaluated = Application.to_be_evaluated
+    @to_be_evaluated_filled = Application.to_be_evaluated_filled
   end
 
   def evaluation

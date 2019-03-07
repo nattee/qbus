@@ -1,15 +1,20 @@
-%p#notice= notice
-
-%p
-  %b=t(:name)
-  = @datafile.name
-%p
-  %b=t(:month_year)
-  = @datafile.month_year
-%p
-  %b=t(:user)
-  = @datafile.user
-
-= link_to 'Edit', edit_datafile_path(@datafile)
-\|
-= link_to 'Back', datafiles_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          =t(:datafile, scope: 'activerecord.models')
+          =@datafile.id
+      .card-content
+        .section
+          %h6= t(:name, scope: 'activerecord.attributes.datafile')
+          = @datafile.name
+        .section
+          %h6= t(:month_year, scope: 'activerecord.attributes.datafile')
+          = @datafile.month_year
+        .section
+          %h6= t(:user, scope: 'activerecord.attributes.datafile')
+          = @datafile.user.name
+      .card-action
+        = link_to t(:edit), edit_datafile_path(@datafile)
+        = link_to t(:back), datafiles_path

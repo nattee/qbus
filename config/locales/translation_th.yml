@@ -1,46 +1,20 @@
 th:
   activerecord:
     models:
+      application: ใบสมัคร
+      attachment: ไฟล์แนบ
+      car: รถ
+      criteria_group: ประเภทข้อกำหนด
+      criterium: ข้อกำหนด
+      criterium_attachment: ไฟล์แนบของข้อกำหนด
+      datafile: ไฟล์ข้อมูล
+      evaluation: แบบประเมิน
       licensee: ผู้ประกอบการ  #g
       route: เส้นทาง  #g
-      car: รถ
-      violation: ข้อมูลการฝ่าฝืน
-      application: ใบสมัคร
-      criterium: ข้อกำหนด
-      criteria_group: ประเภทข้อกำหนด
-      evaluation: แบบประเมิน
-      datafile: ไฟล์ข้อมูล
       user: ผู้ใช้งาน  #g
-      attachment: ไฟล์แนบ
+      violation: ข้อมูลการฝ่าฝืน
 
     attributes:
-      licensee:
-        contact: ชื่อ-สกุล ผู้ประสานงาน  #g
-        contact_tel: หมายเลขโทรศัพท์ผู้ประสานงาน  #g
-        license_expire: ใบอนุญาตหมดอายุ  #g
-        license_no: หมายเลขใบอนุญาต  #g
-        name: ชื่อผู้ประกอบการ  #g
-
-      route:
-        destination: ปลายทาง  #g
-        name: ชื่อเส้นทาง  #g
-        start: เริ่มต้น  #g
-
-      car:
-        plate: หมายเลขป้ายทะเบียน  #g
-        chassis: หมายเลขตัวถัง  #g
-        licensee: เจ้าของรถ  #g
-        route: เส้นทาง  #g
-        last_accident: วันที่ล่าสุดทีเ่กิดอุบัติเหตุร้ายแรง  #g
-        last_accident_desc: คำอธิบายการเกิดอุบัติเหตุครั้งล่าสุด  #g
-        type: ประเภทรถ  #g
-
-      violation:
-        car: รถที่ฝ่าฝืน
-        count: จำนวนครั้งที่ฝ่าฝืน
-        month_year: เดือน/ปี ของข้อมูลการฝ่าฝืน
-        file: ไฟล์ข้อมูลการฝ่าฝืน
-
       application:
         number: หมายเลขใบสมัคร  #g
         user: ผู้สมัคร  #g
@@ -52,8 +26,8 @@ th:
           submitted: รอการตรวจหลักฐาน
           evaluated: หลักฐานครบ รอการตัดสินผล
           awarded: ตัดสินผลแล้ว
-        licensee_id: ผู้ประกอบการ  #g
-        route_id: เส้นทาง  #g
+        licensee: ผู้ประกอบการ  #g
+        route: เส้นทาง  #g
         category: หมวดการเดินรถ  #g
         categories:
           category1: ประจำทาง หมวด 2
@@ -67,12 +41,31 @@ th:
         contact: ชื่อ-สกุล ผู้ประสานงาน  #g
         contact_tel: หมายเลขโทรศัพท์ผู้ประสานงาน  #g
         confirmed_date: วันที่ตรวจใบสมัคร
-        registered_date: วันที่ยื่นใบสมัคร
-        submitted_date: วันที่ยืนยันหลักฐาน  
-        evaluationed_date: วันที่สิ้นสุดการประเมิน  #g
+        #registered_date: วันที่ยื่นใบสมัคร
+        submitted_date: วันที่ยืนยันหลักฐาน
+        approved_date: วันที่อนุมัติ  #g
+        evaluated_date: วันที่สิ้นสุดการประเมิน  #g
         awarded_date: วันที่ตัดสินผลรางวัล  #g
         car_count: จำนวนรถในเส้นทาง
         trip_count: จำนวนเที่ยวต่อวัน
+
+      attachment:
+        filename: ชื่อไฟล์  #g
+        data: ข้อมูลของไฟล์  #g
+        criterium_attachment: ไฟล์แนบของข้อกำหนด
+        application: ใบสมัคร
+
+      car:
+        plate: หมายเลขป้ายทะเบียน  #g
+        chassis: หมายเลขตัวถัง  #g
+        licensee: เจ้าของรถ  #g
+        route: เส้นทาง  #g
+        last_accident: วันที่ล่าสุดทีเ่กิดอุบัติเหตุร้ายแรง  #g
+        last_accident_desc: คำอธิบายการเกิดอุบัติเหตุครั้งล่าสุด  #g
+
+      criteria_group:
+        name: ชื่อประเภทของข้อกำหนด  #g
+        group_weight: น้ำหนักคะแนนของประเภท  #g
 
       criterium:
         number: หมายเลขข้อกำหนด  #g
@@ -82,31 +75,51 @@ th:
         weight: น้ำหนักคะแนนในกลุ่ม  #g
         criteria_group: ประเภทข้อกำหนด  #g
 
-      criteria_group:
-        name: ชื่อประเภทของข้อกำหนด  #g
-        group_weight: น้ำหนักคะแนนของประเภท  #g
-
-      evaluation:
-        application: ในสมัคร  #g
-        criteria: ข้อกำหนด  #g
-        evaluator: ผู้ตรวจประเมิน  #g
-        evaluation_date: วันที่ประเมิน  #g
-        result: ผลการตรวจ  #g
-        description: ระบุผลการประเมิน  #g
+      criterium_attachment:
+        name: ชื่อไฟล์แนบ  #g
+        description: รายละเอียด  #g
+        criterium: ข้อกำหนด
+        required: จำเป็นต้องแนบ #g
 
       datafile:
         name: ชื่อไฟล์
         month_year: เดือน/ปี ของข้อมูล
         user: ผู้นำข้อมูลเข้า
 
+      evaluation:
+        application: ในสมัคร  #g
+        criterium: ข้อกำหนด  #g
+        evaluator: ผู้ตรวจประเมิน  #g
+        evaluation_date: วันที่ประเมิน  #g
+        result: ผลการตรวจ  #g
+        description: ระบุผลการประเมิน  #g
+
+      licensee:
+        contact: ชื่อ-สกุล ผู้ประสานงาน  #g
+        contact_tel: หมายเลขโทรศัพท์ผู้ประสานงาน  #g
+        license_expire: ใบอนุญาตหมดอายุ  #g
+        license_no: หมายเลขใบอนุญาต  #g
+        name: ชื่อผู้ประกอบการ  #g
+        car_count: จำนวนรถที่มีอยู่จริง ณ วันที่ขอ
+
+      route:
+        destination: ปลายทาง  #g
+        name: ชื่อเส้นทาง  #g
+        start: เริ่มต้น  #g
+        car_count: จำนวนรถในเส้นทาง
+        route_type: ประเภทเส้นทาง
+
+      violation:
+        car: รถที่ฝ่าฝืน
+        count: จำนวนครั้งที่ฝ่าฝืน
+        month_year: เดือน/ปี ของข้อมูลการฝ่าฝืน
+        datafile: ไฟล์ข้อมูลการฝ่าฝืน
+
       user:
         email: อีเมล์  #g
         name: ชื่อ-สกุล  #g
-        password: รหัสผ่านย่อย  #g
-        password_digest: รหัสผ่านย่อย  #g
+        password: รหัสผ่าน  #g
+        password_confirmation: ทวนรหัสผ่าน
         roles: บทบาท  #g
-
-      attachment:
-        filename: ชื่อไฟล์  #g
-        type: ประเภทของไฟล์  #g
-        data: ข้อมูลของไฟล์  #g
+        activated: เปิดการใช้บัญชี
+        activated_at: เปิดการใช้บัญชี เมื่อวันที่

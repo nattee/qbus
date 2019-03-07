@@ -17,7 +17,7 @@ class RoutesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create route" do
     assert_difference('Route.count') do
-      post routes_url, params: { route: { car_count: @route.car_count, destination: @route.destination, name: @route.name, start: @route.start, type: @route.type } }
+      post routes_url, params: { route: { car_count: @route.car_count, destination: @route.destination, name: @route.name, start: @route.start, route_type: @route.route_type } }
     end
 
     assert_redirected_to route_url(Route.last)
@@ -34,7 +34,7 @@ class RoutesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update route" do
-    patch route_url(@route), params: { route: { car_count: @route.car_count, destination: @route.destination, name: @route.name, start: @route.start, type: @route.type } }
+    patch route_url(@route), params: { route: { car_count: @route.car_count, destination: @route.destination, name: @route.name, start: @route.start, route_type: @route.route_type } }
     assert_redirected_to route_url(@route)
   end
 

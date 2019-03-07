@@ -1,28 +1,29 @@
-%p#notice= notice
-
-%p
-  %b=t(:plate)
-  = @car.plate
-%p
-  %b=t(:chassis)
-  = @car.chassis
-%p
-  %b=t(:licensee)
-  = @car.licensee
-%p
-  %b=t(:route)
-  = @car.route
-%p
-  %b=t(:last_accident)
-  = @car.last_accident
-%p
-  %b=t(:last_accident_desc)
-  = @car.last_accident_desc
-%p
-  %b=t(:type)
-  = @car.type
-
-
-= link_to 'Edit', edit_car_path(@car)
-\|
-= link_to 'Back', cars_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          =t(:car, scope: 'activerecord.models')
+          =@car.id
+      .card-content
+        .section
+          %h6= t(:plate, scope: 'activerecord.attributes.car')
+          = @car.plate
+        .section
+          %h6= t(:chassis, scope: 'activerecord.attributes.car')
+          = @car.chassis
+        .section
+          %h6= t(:licensee, scope: 'activerecord.attributes.car')
+          = @car.licensee.name
+        .section
+          %h6= t(:route, scope: 'activerecord.attributes.car')
+          = @car.route.name
+        .section
+          %h6= t(:last_accident, scope: 'activerecord.attributes.car')
+          = @car.last_accident
+        .section
+          %h6= t(:last_accident_desc, scope: 'activerecord.attributes.car')
+          = @car.last_accident_desc
+      .card-action
+        = link_to t(:edit), edit_car_path(@car)
+        = link_to t(:back), cars_path

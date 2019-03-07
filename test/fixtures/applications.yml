@@ -1,31 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  number: MyString
-  user: 
+  number: application num 1
+  user: one
   state: 1
-  licensee: 
-  route: 
-  category: MyString
+  licensee: one
+  route: one
+  category: category 1
   appointment_date: 2019-02-24 16:18:14
-  appointment_remark: MyText
-  appointment_user: 
-  evaluation_finish_date: 2019-02-24 16:18:14
-  award_date: 2019-02-24 16:18:14
-  award: MyText
-  award_remark: MyText
+  appointment_remark: appointment remark 1
+  appointment_user: one
+  award: false
+  award_remark: no award
 
 two:
-  number: MyString
-  user: 
-  state: 1
-  licensee: 
-  route: 
-  category: MyString
-  appointment_date: 2019-02-24 16:18:14
-  appointment_remark: MyText
-  appointment_user: 
-  evaluation_finish_date: 2019-02-24 16:18:14
-  award_date: 2019-02-24 16:18:14
-  award: MyText
-  award_remark: MyText
+  number: application num 2
+  user: two
+  state: 2
+  licensee: two
+  route: two
+  category: category 2
+  appointment_date: <%= Time.zone.now %>
+  appointment_remark: appointment remark 2
+  appointment_user: two
+  award: true
+  award_remark: awarded
