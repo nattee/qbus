@@ -1,36 +1,29 @@
-- header_scope = 'activerecord.attributes.licensee'
-
 .row
-  .col.s12
+  .col.s6.offset-s3
     .card
+      .card-content.deep-purple
+        .card-title.white-text
+          %h1= t(:list) + t(:licensee, scope: 'activerecord.models')
       .card-content
-        .card-title
-          = t :licensee, scope: 'activerecord.models'
-                
-        %table
-          %thead
-            %tr
-              %th= t :name, scope: header_scope
-              %th= t :license_no, scope: header_scope
-              %th= t :License_expire, scope: header_scope
-              %th= t :contact, scope: header_scope
-              %th= t :contact_tel, scope: header_scope
-              %th
-              %th
-              %th
-
-          %tbody
-            - @licensees.each do |licensee|
-              %tr
-                %td= licensee.name
-                %td= licensee.license_no
-                %td= licensee.license_expire
-                %td= licensee.contact
-                %td= licensee.contact_tel
-                %td= link_to material_icon.zoom_in, licensee
-                %td= link_to material_icon.edit, edit_licensee_path(licensee)
-                %td= link_to material_icon.delete, licensee, method: :delete, data: { confirm: 'Are you sure?' }
-
-        %br
-
-        = link_to 'New Licensee', new_licensee_path
+        %ul.collection
+          - @licensees.each do |licensee|
+            %li.collection-item.avatar
+              %i.material-icons.circle people
+              %span.title="#{licensee.name}"
+              %p
+                ="#{t(:license_no, scope: 'activerecord.attributes.licensee')} #{licensee.license_no}"
+                %br
+                ="#{t(:license_expire, scope: 'activerecord.attributes.licensee')} #{licensee.license_expire}"
+                %br
+                ="#{t(:contact, scope: 'activerecord.attributes.licensee')} #{licensee.contact}"
+                %br
+                ="#{t(:contact_tel, scope: 'activerecord.attributes.licensee')} #{licensee.contact_tel}"
+              .secondary-content
+                %a{:href => licensee_path(licensee)}
+                  %i.material-icons pageview
+                %a{:href => edit_licensee_path(licensee)}
+                  %i.material-icons edit
+                %a{"href" => licensee_path(licensee), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                  %i.material-icons delete
+      .card-action
+        = link_to t(:new), new_licensee_path

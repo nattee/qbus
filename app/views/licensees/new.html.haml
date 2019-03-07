@@ -1,9 +1,8 @@
-
 .row
-  .col.s12
-    .container
-      .card-panel
-        %h3= "สร้าง#{t :licensee, scope: 'activerecord.models'}ใหม่"
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          %h1= t(:new) + t(:licensee, scope: 'activerecord.models')
+      .card-content
         = render partial: 'form', locals: {back_link: licensees_path}
-
-%p

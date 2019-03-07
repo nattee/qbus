@@ -1,6 +1,8 @@
 .row
-  .col.s12
+  .col.s6.offset-s3
     .card
+      .card-content.deep-purple
+        .card-title.white-text
+          %h1= t(:edit) + t(:licensee, scope: 'activerecord.models')
       .card-content
-        .card-title= "แก้ไข#{t :licensee, scope: 'activerecord.models'}"
         = render partial: 'form', locals: {back_link: licensees_path}
