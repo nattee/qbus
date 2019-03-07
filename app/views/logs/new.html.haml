@@ -1,5 +1,8 @@
-%h1 New log
-
-= render 'form'
-
-= link_to 'Back', logs_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          %h1= t(:new) + t(:log, scope: 'activerecord.models')
+      .card-content
+        = render partial: 'form', locals: {back_link: logs_path}

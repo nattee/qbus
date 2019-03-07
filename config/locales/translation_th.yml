@@ -10,6 +10,7 @@ th:
       datafile: ไฟล์ข้อมูล
       evaluation: แบบประเมิน
       licensee: ผู้ประกอบการ  #g
+      log: ข้อมูลบันทึก
       route: เส้นทาง  #g
       user: ผู้ใช้งาน  #g
       violation: ข้อมูลการฝ่าฝืน
@@ -101,6 +102,10 @@ th:
         license_no: หมายเลขใบอนุญาต  #g
         name: ชื่อผู้ประกอบการ  #g
         car_count: จำนวนรถที่มีอยู่จริง ณ วันที่ขอ
+
+      log:
+        application: ใบสมัคร
+        description: รายละเอียด
 
       route:
         destination: ปลายทาง  #g

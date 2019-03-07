@@ -1,10 +1,19 @@
-= form_for @log do |f|
-  - if @log.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@log.errors.count, "error")} prohibited this log from being saved:"
-      %ul
-        - @log.errors.full_messages.each do |message|
-          %li= message
-
-  .actions
-    = f.submit 'Save'
+= simple_form_for(@log) do |f|
+  = f.error_notification
+  .row
+    .col.s12
+      .row
+        .input-field.col.s12
+          %i.material-icons.prefix help
+          = f.input_field :application_id, data: {contrainwidth: 'false'}, collection: Application.all, label_method: :to_label, value_method: :id
+          = f.label :application
+          = f.full_error :application
+      .row
+        .input-field.col.s12
+          %i.material-icons.prefix help
+          = f.input_field :description, class: 'materialize-textarea', style: 'height: 100px;'
+          = f.label :description
+          = f.full_error :description
+  = f.button :submit, class: "btn waves-light left"
+- if back_link
+  = link_to t(:cancel), back_link, style: "margin-left: 2em", class: "btn white black-text waves-black waves-effect"
