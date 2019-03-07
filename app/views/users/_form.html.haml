@@ -1,16 +1,5 @@
 = simple_form_for(@user) do |f|
-  - if f.error_notification
-    .row
-      .col.s12
-        .card-alert.card.gradient-45deg-red-pink
-          .card-content.white-text
-            %i.material-icons.prefix error
-            = strip_tags(f.error_notification)
-          %button.close.white-text{type: "button", data: {dismiss: 'alert'}, :area-label => 'Close'}
-            %span{:area-hidden => 'true'} ×
-  /= @user.errors.full_messages.each do |msg|
-  /  = msg
-  /  %br
+  = f.error_notification
   .row
     .col.s12
       .row
@@ -25,7 +14,13 @@
           = f.input_field :email
           = f.label :email
           = f.full_error :email
-
+      .row
+        .input-field.col.s12
+          %p
+            = f.label :activated do
+              = f.input_field :activated, as: :boolean
+              %span= "#{t :activated, scope: 'activerecord.attributes.user'}"
+              %span=" - #{@user.activated_at}"
       .row
         .input-field.col.s12
           %i.material-icons.prefix lock

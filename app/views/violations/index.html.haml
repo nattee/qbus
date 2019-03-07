@@ -1,19 +1,27 @@
-%h1 Listing violations
-
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
-
-  %tbody
-    - @violations.each do |violation|
-      %tr
-        %td= link_to 'Show', violation
-        %td= link_to 'Edit', edit_violation_path(violation)
-        %td= link_to 'Destroy', violation, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Violation', new_violation_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          %h1= t(:list) + t(:violation, scope: 'activerecord.models')
+      .card-content
+        %ul.collection
+          - @violations.each do |violation|
+            %li.collection-item.avatar
+              %i.material-icons.circle warning
+              %span.title="#{violation.car.plate}"
+              %p
+                ="#{t(:count, scope: 'activerecord.attributes.violation')} #{violation.count}"
+                %br
+                ="#{t(:month_year, scope: 'activerecord.attributes.violation')} #{violation.month_year}"
+                %br
+                ="#{t(:datafile, scope: 'activerecord.attributes.violation')} #{violation.datafile.name}"
+              .secondary-content
+                %a{:href => violation_path(violation)}
+                  %i.material-icons pageview
+                %a{:href => edit_violation_path(violation)}
+                  %i.material-icons edit
+                %a{"href" => violation_path(violation), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                  %i.material-icons delete
+      .card-action
+        = link_to t(:new), new_violation_path
