@@ -24,7 +24,7 @@
                     %span หลักฐานไม่ครบ
               .row
                 .input-field.col.s12
-                  = f.input :appointment_remark
+                  = f.input :evaluation_result
               = f.button :submit, 'ยืนยันผลการประเมิน'
               = link_to 'ย้อนกลับ', process_evaluations_path, class: 'waves-effect waves-light green btn'
     .card
@@ -66,6 +66,12 @@
                   .col.s4
                     = "#{ev.criterium.number}. #{ev.criterium.name}"
                   .col.s2
+                    %label
+                      = radio_button_tag :result, 'ok'
+                      %span ผ่าน
+                    %label
+                      = radio_button_tag :result, 'no'
+                      %span ไม่ผ่าน
                   .col.s4
                     .input-field
                       = f.text_field :description

@@ -25,6 +25,7 @@ class Application < ApplicationRecord
   scope :to_be_evaluated, -> { where(state: :submitted) }
   scope :to_be_evaluated_filled, -> { where(state: :submitted).where(id:1999) }
   scope :to_be_awarded, -> {where(state: :evaluated) }
+  scope :awarded_recent, -> {where(state: :awarded).where('awarded_date >= ?',30.days.ago) }
 
   def to_label
     "#{self.number} - #{self.state_text}"
@@ -62,6 +63,14 @@ class Application < ApplicationRecord
     CriteriumAttachment.where.not(id: Attachment.select(:criterium_attachment_id).where(application: self)).each do |cri|
       attachments << Attachment.new(criterium_attachment_id: cri.id)
     end
+  end
+
+  def total_score
+    return '85/100'
+  end
+
+  def passed
+    return "ผ่าน 26 ไม่ผ่าน 1"
   end
 
   private

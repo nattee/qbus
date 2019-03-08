@@ -45,6 +45,7 @@ th:
         submitted_date: วันที่ยืนยันหลักฐาน
         approved_date: วันที่อนุมัติ  #g
         evaluated_date: วันที่สิ้นสุดการประเมิน  #g
+        evaluation_result: คำอธิบายผลการประเมิน
         awarded_date: วันที่ตัดสินผลรางวัล  #g
         car_count: จำนวนรถในเส้นทาง
         trip_count: จำนวนเที่ยวต่อวัน

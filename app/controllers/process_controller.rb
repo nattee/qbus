@@ -1,7 +1,8 @@
 class ProcessController < ApplicationController
   before_action :set_application, only: [ :register_post, :registered, :registered_post,
                                           :appointment_post, :appointed,
-                                          :evaluation, :evaluation_post
+                                          :evaluation, :evaluation_post,
+                                          :award, :award_post,
                                         ]
 
 
@@ -55,6 +56,8 @@ class ProcessController < ApplicationController
   end
 
   def award_index
+    @to_be_awarded = Application.to_be_awarded
+    @awarded_recent = Application.awarded_recent
   end
 
   def award

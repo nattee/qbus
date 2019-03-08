@@ -1,2 +1,56 @@
-%h1 Process#award_index
-%p Find me in app/views/process/award_index.html.haml
+.row
+  .col.s12
+    .card
+      .card-content
+        .row
+          .col.s12.m9
+            %h4 ใบสมัครรอการตัดสินผล
+            %table
+              %thead
+                %th= t(:name, scope: 'activerecord.attributes.licensee')
+                %th= t(:start, scope: 'activerecord.attributes.route')
+                %th= t(:destination, scope: 'activerecord.attributes.route')
+                %th วันที่ยื่นใบสมัคร
+                %th คะแนนรวม
+                %th จำนวนเกณฑ์ที่่ผ่าน
+                %th
+              %tbody
+                - @to_be_awarded.each do |app|
+                  %tr
+                    %td= app.licensee.name
+                    %td= app.route.start
+                    %td= app.route.destination
+                    %td= l(app.created_at, format: '%d %b %y')
+                    %td= app.total_score
+                    %td= app.passed
+                    %td= link_to 'ตัดสินผล', process_award_path(app.id), class: 'waves-effect waves-light green btn'
+          .col.s12.m3
+            %h4 การบันทึกผลการให้ตราสัญลักษณ์
+            .section
+              %p ให้พิจารณาผลการประเมินของใบสมัคร โดยให้กดปุ่ม "ดูข้อมูล" เพื่อดูข้อมูลใบสมัครโดยละเอียดและทำการบันทึกผลการตัดสิน
+    .card
+      .card-content
+        .row
+          .col.s12
+            %h4 ใบสมัครล่าสุดที่ตัดสินผลแล้ว
+            %table
+              %thead
+                %th= t(:name, scope: 'activerecord.attributes.licensee')
+                %th= t(:start, scope: 'activerecord.attributes.route')
+                %th= t(:destination, scope: 'activerecord.attributes.route')
+                %th วันที่ยื่นใบสมัคร
+                %th คะแนนรวม
+                %th จำนวนเกณฑ์ที่่ผ่าน
+                %th
+              %tbody
+                - @awarded_recent.each do |app|
+                  %tr
+                    %td= app.licensee.name
+                    %td= app.route.start
+                    %td= app.route.destination
+                    %td= l(app.created_at, format: '%d %b %y')
+                    %td= app.total_score
+                    %td= app.passed
+                    %td= link_to 'ตัดสินผล', process_award_path(app.id), class: 'waves-effect waves-light green btn'
+
+
