@@ -15,17 +15,17 @@
 //= require activestorage
 //= re quire turbolinks
 //= require materialize-admin/vendors.min
-//= require materialize-admin/materialize
-//= re quire materialize-admin/scripts/form-elements
-//= re quire materialize-admin/vendor/noUiSlider/nouislider
+//= /require materialize-admin/materialize
+//= /require materialize-admin/scripts/form-elements
+//= /require materialize-admin/vendor/noUiSlider/nouislider
 //= require materialize-admin/vendor/data-tables/js/jquery.dataTables.min.js
 //= require materialize-admin/vendor/data-tables/extensions/responsive/js/dataTables.responsive.min.js
 //= require materialize-admin/vendor/data-tables/js/dataTables.select.min.js
 //
 //= require materialize-admin/plugins
 //= require materialize-admin/custom/custom-script
-//= re quire datatables
+//= /require datatables
 //= require init
-//= re quire_tree .
+//= /require_tree .
 //
 

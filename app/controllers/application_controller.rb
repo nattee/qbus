@@ -16,6 +16,6 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def force_login
-    log_in(User.first)
+    #log_in(User.first)
   end
 end
