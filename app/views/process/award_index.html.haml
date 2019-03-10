@@ -1,2 +1,32 @@
-%h1 Process#award_index
-%p Find me in app/views/process/award_index.html.haml
+.row
+  .col.s12
+    .card
+      .card-content
+        .row
+          .col.s12.m9
+            %h4 ใบสมัครรอการสรุปผลรางวัล
+            %table
+              %thead
+                %th= t(:name, scope: 'activerecord.attributes.licensee')
+                %th= t(:start, scope: 'activerecord.attributes.route')
+                %th= t(:destination, scope: 'activerecord.attributes.route')
+                %th วันที่ยื่นใบสมัคร
+                %th= t(:appointment_date, scope: 'activerecord.attributes.application')
+                %th= t(:appointment_remark, scope: 'activerecord.attributes.application')
+                %th กรอกแล้ว
+                %th
+              %tbody
+                - @to_be_awarded.each do |app|
+                  %tr
+                    %td= app.licensee.name
+                    %td= app.route.start
+                    %td= app.route.destination
+                    %td= l(app.created_at, format: '%d %b %y')
+                    %td= l(app.appointment_date, format: '%d %b %Y')
+                    %td= app.appointment_remark
+                    %td= "#{app.evaluated_count}/#{Criterium.count}"
+                    %td= link_to 'ตัดสิน', process_award_path(app.id), class: 'waves-effect waves-light green btn'
+          .col.s12.m3
+            %h4 การสรุปผลรางวัล
+            .section
+              %p หลังจากเจ้าหน้าที่ประเมินผลงานของผู้ประกอบการแล้ว ให้กรรมการตัดสินผลรางวัลทางด้านซ้ายโดยกดปุ่ม "ตัดสิน"

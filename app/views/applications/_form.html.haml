@@ -19,31 +19,31 @@
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.association :user
+          = f.input_field :user_id, data: {contrainwidth: 'false'}, collection: User.all, label_method: :name, value_method: :id
           = f.label :user
           = f.full_error :user
       .row
         .input-field.col.s12
-          %i.material-icons.prefix help
-          = f.input_field :state
+          %i.material-icons.prefix business_center
+          = f.input_field :state, :as => :select, data: {contrainwidth: 'false'}, collection: Application.states_t
           = f.label :state
           = f.full_error :state
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.association :licensee
+          = f.input_field :licensee_id, data: {contrainwidth: 'false'}, collection: Licensee.all, label_method: :name, value_method: :id
           = f.label :licensee
           = f.full_error :licensee
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.association :route
+          = f.input_field :route_id, data: {contrainwidth: 'false'}, collection: Route.all, label_method: :name, value_method: :id
           = f.label :route
           = f.full_error :route
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.input_field :category
+          = f.input_field :category, :as => :select, data: {contrainwidth: 'false'}, collection: Application.categories_t
           = f.label :category
           = f.full_error :category
       .row
@@ -61,7 +61,7 @@
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.association :appointment_user
+          = f.input_field :appointment_user_id, data: {contrainwidth: 'false'}, collection: User.all, label_method: :name, value_method: :id
           = f.label :appointment_user
           = f.full_error :appointment_user
       .row

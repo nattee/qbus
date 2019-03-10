@@ -1,5 +1,5 @@
 class Application < ApplicationRecord
-  enum state: [ :appying,
+  enum state: [ :applying,
                 :registered,
                 :confirmed,
                 :submitted,
@@ -31,11 +31,27 @@ class Application < ApplicationRecord
 
   #some getter for enum
   def category_text
-    Application.enum_to_st(:category,category)
+    Application.category_enum_to_text(category)
   end
 
   def state_text
-    Application.enum_to_st(:state,state)
+    Application.state_enum_to_text(state)
+  end
+
+  def self.state_enum_to_text(enum)
+    Application.enum_to_st(:state,enum)
+  end
+
+  def self.category_enum_to_text(enum)
+    Application.enum_to_st(:category, enum)
+  end
+
+  def self.states_t
+    states.map{|x| [Application.state_enum_to_text(x.first), x.first]}
+  end
+
+  def self.categories_t
+    categories.map{|x| [Application.category_enum_to_text(x.first), x.first]}
   end
 
   #state manipulation

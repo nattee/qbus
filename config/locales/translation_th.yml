@@ -21,7 +21,7 @@ th:
         user: ผู้สมัคร  #g
         state: สถานะใบสมัคร  #g
         states:
-          appying: กำลังสมัคร
+          applying: กำลังสมัคร
           registered: รอการตรวจสอบหลักฐาน
           confirmed: รอหลักฐานประกอบการประเมิน
           submitted: รอการตรวจหลักฐาน
@@ -126,5 +126,8 @@ th:
         password: รหัสผ่าน  #g
         password_confirmation: ทวนรหัสผ่าน
         roles: บทบาท  #g
+        admin: ผู้ดูแลระบบ
+        verifier: เจ้าหน้าที่ตรวจสอบใบสมัคร
+        surveyor: เจ้าหน้าที่ประเมิน
         activated: เปิดการใช้บัญชี
         activated_at: เปิดการใช้บัญชี เมื่อวันที่

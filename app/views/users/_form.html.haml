@@ -34,19 +34,24 @@
           = f.label :password_confirmation
           = f.full_error :password_confirmation
       .row
+        .input-field.col.s12
+          %i.material-icons.prefix business_center
+          = f.label :roles
+          = f.full_error :roles
+      .row
         .input-field.col.s11.offset-s1
           %p
             = f.label :admin  do
               = f.input_field :admin, as: :boolean
-              %span ผู้ดูแลระบบ
+              %span= t(:admin, scope: 'activerecord.attributes.user')
           %p
             = f.label :verifier  do
               = f.input_field :verifier, as: :boolean
-              %span เจ้าหน้าที่ตรวจสอบใบสมัคร
+              %span= t(:verifier, scope: 'activerecord.attributes.user')
           %p
             = f.label :surveyor  do
               = f.input_field :surveyor, as: :boolean
-              %span เจ้าหน้าที่ประเมิน
+              %span= t(:surveyor, scope: 'activerecord.attributes.user')
       /.row
       /  .input-field.col.s12
       /    %i.material-icons.prefix face
