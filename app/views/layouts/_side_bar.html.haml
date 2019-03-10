@@ -21,20 +21,19 @@
           %a{:href => profile_path}
             =@current_user.name
       %li.bold
-        %a.waves-effect.waves-cyan{:href => "app-email.html"}
-          %i.material-icons mail_outline
-          %span.menu-title{"data-i18n" => ""} ยืนยันใบสมัคร
-          %span.badge.new.badge.pill.pink.accent-2.float-right.mr-10 5
+        %a.waves-effect.waves-cyan{:href => apply_applications_path}
+          %i.material-icons content_paste
+          %span.menu-title{"data-i18n" => ""} สร้างใบสมัคร
       %li.bold
-        %a.waves-effect.waves-cyan{:href => "app-chat.html"}
+        %a.waves-effect.waves-cyan{:href => process_appointments_path}
           %i.material-icons chat_bubble_outline
           %span.menu-title{"data-i18n" => ""} นัดหมาย
       %li.bold
-        %a.waves-effect.waves-cyan{:href => "app-todo.html"}
+        %a.waves-effect.waves-cyan{:href => process_evaluations_path}
           %i.material-icons check
           %span.menu-title{"data-i18n" => ""} ประเมิน
       %li.bold
-        %a.waves-effect.waves-cyan{:href => "app-contacts.html"}
+        %a.waves-effect.waves-cyan{:href => process_awards_path}
           %i.material-icons import_contacts
           %span.menu-title{"data-i18n" => ""} ตัดสินรางวัล
       %li.navigation-header
