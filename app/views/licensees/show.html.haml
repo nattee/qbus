@@ -1,24 +1,29 @@
-%p#notice= notice
-
-%p
-  %b=t(:name)
-  = @licensee.name
-%p
-  %b=t(:license_no)
-  = @licensee.license_no
-%p
-  %b=t(:license_expire)
-  = @licensee.license_expire
-%p
-  %b=t(:car_count)
-  = @licensee.car_count
-%p
-  %b=t(:contact)
-  = @licensee.contact
-%p
-  %b=t(:contact_tel)
-  = @licensee.contact_tel
-
-= link_to 'Edit', edit_licensee_path(@licensee)
-\|
-= link_to 'Back', licensees_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          =t(:licensee, scope: 'activerecord.models')
+          =@licensee.id
+      .card-content
+        .section
+          %h6= t(:name, scope: 'activerecord.attributes.licensee')
+          = @licensee.name
+        .section
+          %h6= t(:license_no, scope: 'activerecord.attributes.licensee')
+          = @licensee.license_no
+        .section
+          %h6= t(:license_expire, scope: 'activerecord.attributes.licensee')
+          = @licensee.license_expire
+        .section
+          %h6= t(:car_count, scope: 'activerecord.attributes.licensee')
+          = @licensee.car_count
+        .section
+          %h6= t(:contact, scope: 'activerecord.attributes.licensee')
+          = @licensee.contact
+        .section
+          %h6= t(:contact_tel, scope: 'activerecord.attributes.licensee')
+          = @licensee.contact_tel
+      .card-action
+        = link_to t(:edit), edit_licensee_path(@licensee)
+        = link_to t(:back), licensees_path

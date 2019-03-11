@@ -10,6 +10,7 @@ th:
       datafile: ไฟล์ข้อมูล
       evaluation: แบบประเมิน
       licensee: ผู้ประกอบการ  #g
+      log: ข้อมูลบันทึก
       route: เส้นทาง  #g
       user: ผู้ใช้งาน  #g
       violation: ข้อมูลการฝ่าฝืน
@@ -20,7 +21,7 @@ th:
         user: ผู้สมัคร  #g
         state: สถานะใบสมัคร  #g
         states:
-          appying: กำลังสมัคร
+          applying: กำลังสมัคร
           registered: รอการตรวจสอบหลักฐาน
           confirmed: รอหลักฐานประกอบการประเมิน
           submitted: รอการตรวจหลักฐาน
@@ -103,6 +104,10 @@ th:
         name: ชื่อผู้ประกอบการ  #g
         car_count: จำนวนรถที่มีอยู่จริง ณ วันที่ขอ
 
+      log:
+        application: ใบสมัคร
+        description: รายละเอียด
+
       route:
         destination: ปลายทาง  #g
         name: ชื่อเส้นทาง  #g
@@ -122,5 +127,8 @@ th:
         password: รหัสผ่าน  #g
         password_confirmation: ทวนรหัสผ่าน
         roles: บทบาท  #g
+        admin: ผู้ดูแลระบบ
+        verifier: เจ้าหน้าที่ตรวจสอบใบสมัคร
+        surveyor: เจ้าหน้าที่ประเมิน
         activated: เปิดการใช้บัญชี
         activated_at: เปิดการใช้บัญชี เมื่อวันที่

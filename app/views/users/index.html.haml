@@ -1,34 +1,60 @@
-.form-padding
-  .row
-    #admin.col.s12
-      .card.material-table.card-default
-        .table-header
-          %h5 ผู้ใช้ระบบ
-          .actions{"data-turbolinks" => "false"}
-            %a.search-toggle.waves-effect.btn-flat.nopadding{:href => "#"}
-              %i.material-icons
-                search
-        %table#dttb.table
-          %thead
-            %tr
-              %th{:width => "30%"} อีเมล์
-              %th ชื่อ
-              %th
-          %tbody
-            - @users.each do |user|
-              %tr
-                %td= user.name
-                %td= user.email
-                %td.right-align
-                  = link_to 'Show ', user
-                  = link_to ' Edit ', edit_user_path(user)
-                  = link_to ' Destroy', user, data: {:confirm => 'Are you sure?'}, :method => :delete
-  .fixed-action-btn
-    %a#newpost.waves-effect.waves-light.btn.btn-floating.btn-large.cyan{:href => new_user_path}
-      %i.large.material-icons add
-  / Tap Target Structure
-  .tap-target.newpost.cyan{"data-activates" => "newpost"}
-    .tap-target-content
-      %h5 Start posting
-      %p
-        Tell me what not working
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          %h1= t(:list) + t(:user, scope: 'activerecord.models')
+      .card-content
+        %ul.collection
+          - @users.each do |user|
+            %li.collection-item.avatar
+              %i.material-icons.circle face
+              %span.title="#{user.name}"
+              %p
+                ="#{t(:email, scope: 'activerecord.attributes.user')} #{user.email}"
+                %br
+                ="#{t(:activated, scope: 'activerecord.attributes.user')} #{user.activated}"
+              .secondary-content
+                %a{:href => user_path(user)}
+                  %i.material-icons pageview
+                %a{:href => edit_user_path(user)}
+                  %i.material-icons edit
+                %a{"href" => user_path(user), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                  %i.material-icons delete
+      .card-action
+        = link_to t(:new), new_user_path
+        = link_to t(:register), register_path
+/ .form-padding
+/   .row
+/     #admin.col.s12
+/       .card.material-table.card-default
+/         .table-header
+/           %h5 ผู้ใช้ระบบ
+/           .actions{"data-turbolinks" => "false"}
+/             %a.search-toggle.waves-effect.btn-flat.nopadding{:href => "#"}
+/               %i.material-icons
+/                 search
+/         %table#dttb.table
+/           %thead
+/             %tr
+/               %th{:width => "30%"} อีเมล์
+/               %th ชื่อ
+/               %th
+/           %tbody
+/             - @users.each do |user|
+/               %tr
+/                 %td= user.name
+/                 %td= user.email
+/                 %td.right-align
+/                   = link_to 'Show ', user
+/                   = link_to ' Edit ', edit_user_path(user)
+/                   = link_to ' Destroy', user, data: {:confirm => 'Are you sure?'}, :method => :delete
+/   .fixed-action-btn
+/     %a#newpost.waves-effect.waves-light.btn.btn-floating.btn-large.cyan{:href => new_user_path}
+/       %i.large.material-icons add
+/   / Tap Target Structure
+/   .tap-target.newpost.cyan{"data-activates" => "newpost"}
+/     .tap-target-content
+/       %h5 Start posting
+/       %p
+/         Tell me what not working

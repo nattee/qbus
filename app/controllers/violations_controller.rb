@@ -69,6 +69,6 @@ class ViolationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def violation_params
-      params.require(:violation).permit(:count, :month_year, :car, :datafile)
+      params.require(:violation).permit(:car_id, :count, :month_year, :datafile_id)
     end
 end

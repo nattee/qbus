@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Evaluation.delete_all;
+Attachment.delete_all;
 Application.delete_all;
 Violation.delete_all;
 Datafile.delete_all;
@@ -14,13 +15,12 @@ Car.delete_all;
 Route.delete_all;
 Licensee.delete_all;
 User.delete_all;
-Attachment.delete_all;
 CriteriumAttachment.delete_all;
 Criterium.delete_all;
 CriteriaGroup.delete_all;
 
-User.create(id: 1, name: 'test1@gmail.com', email: 'test1@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: '{"admin": "1", "verifier": "1", "surveyor": "0"}')
-User.create(id: 2, name: 'test2@gmail.com', email: 'test2@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: '{"admin": "0", "verifier": "0", "surveyor": "1"}')
+User.create(id: 1, name: 'test1@gmail.com', email: 'test1@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 1, verifier: 1, surveyor: 0})
+User.create(id: 2, name: 'test2@gmail.com', email: 'test2@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 0, verifier: 0, surveyor: 1})
 
 Licensee.create(id: 1, name: 'ผู้ประกอบการหนึ่ง', license_no: 'หมายเลขผู้ประกอบการหนึ่ง', license_expire: 5.year.from_now, car_count: '100', contact: 'เจ้านายผู้ประกบอการ', contact_tel: '0123456789')
 Licensee.create(id: 2, name: 'ผู้ประกอบการสอง', license_no: 'หมายเลขผู้ประกอบการสอง', license_expire: 5.year.from_now, car_count: '10', contact: 'ลูกน้องผู้ประกบอการ', contact_tel: '0987654321')
@@ -39,9 +39,6 @@ Violation.create(id: 2, car: Car.last(), count: 20, month_year: Time.zone.now, d
 
 Application.create(id: 1, number: 'หนึ่ง', user: User.first(), state: 0, licensee: Licensee.first(), route: Route.first(), appointment_date: 5.day.from_now, appointment_remark: 'กำหนดการนัดหมาย', appointment_user: User.last(), award: 'ถ้วยรางวัล', award_remark: 'พร้อมเงินโบนัส', contact: 'ผู้มารับรางวัล', contact_tel: '0192837465', category: 0, car_count: 10, trip_count: 1000)
 Application.create(id: 2, number: 'สอง', user: User.last(), state: 0, licensee: Licensee.last(), route: Route.last(), appointment_date: 3.day.from_now, appointment_remark: 'นัดแล้วนะ', appointment_user: User.first(), award: 'รางวัลชมเชย', award_remark: 'พร้อมหนี้สิน', contact: 'ตัวแทน', contact_tel: '0594875632', category: 0, car_count: 4, trip_count: 100)
-
-Evaluation.create(id: 1, application: Application.first(), evaluator: 'ผู้ตรวรการ', evaluation_date: 1.month.ago, result: true, description: 'ผ่าน', criterium: Criterium.first())
-Evaluation.create(id: 2, application: Application.last(), evaluator: 'ผู้คุม', evaluation_date: 1.year.ago, result: false, description: 'ไม่ผ่าน', criterium: Criterium.last())
 
 CriteriaGroup.create(id: 1, name: 'ข้อกำหนดด้านองค์กรและการบริหารจัดการ',group_weight: 15)
 CriteriaGroup.create(id: 2, name: 'ข้อกำหนดด้านปฏิบัติงาน',group_weight: 15)
@@ -112,3 +109,6 @@ CriteriumAttachment.create(id: 24, name: 'มีการบันทึกข�
 CriteriumAttachment.create(id: 25, name: 'มีการวางแผนอบรมพนักงานขับรถให้ขับขี่อย่างปลอดภัย  เป็นประจำ', description: 'มีการวางแผนอบรมพนักงานขับรถให้ขับขี่อย่างปลอดภัย  เป็นประจำ', required: true, criterium_id: 25)
 CriteriumAttachment.create(id: 26, name: 'มีการอบรมการตรวจสภาพและบำรุงรักษายานพาหนะเบื้องต้นสำหรับพนักงานขับรถ', description: 'มีการอบรมการตรวจสภาพและบำรุงรักษายานพาหนะเบื้องต้นสำหรับพนักงานขับรถ', required: true, criterium_id: 26)
 CriteriumAttachment.create(id: 27, name: 'มีแผนการป้องกันการเกิดอุบัติเหตุที่ชัดเจน', description: 'มีแผนการป้องกันการเกิดอุบัติเหตุที่ชัดเจน', required: true, criterium_id: 27)
+
+Evaluation.create(id: 1, application: Application.first(), evaluator: 'ผู้ตรวรการ', evaluation_date: 1.month.ago, result: true, description: 'ผ่าน', criterium: Criterium.first())
+Evaluation.create(id: 2, application: Application.last(), evaluator: 'ผู้คุม', evaluation_date: 1.year.ago, result: false, description: 'ไม่ผ่าน', criterium: Criterium.last())

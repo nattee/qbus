@@ -1,19 +1,25 @@
-%h1 Listing evaluations
-
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
-
-  %tbody
-    - @evaluations.each do |evaluation|
-      %tr
-        %td= link_to 'Show', evaluation
-        %td= link_to 'Edit', edit_evaluation_path(evaluation)
-        %td= link_to 'Destroy', evaluation, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Evaluation', new_evaluation_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          %h1= t(:list) + t(:evaluation, scope: 'activerecord.models')
+      .card-content
+        %ul.collection
+          - @evaluations.each do |evaluation|
+            %li.collection-item.avatar
+              %i.material-icons.circle playlist_add_check
+              %span.title="#{evaluation.application.to_label}"
+              %p
+                ="#{t(:evaluator, scope: 'activerecord.attributes.evaluation')} #{evaluation.evaluator}"
+                %br
+                ="#{t(:evaluation_date, scope: 'activerecord.attributes.evaluation')} #{evaluation.evaluation_date}"
+              .secondary-content
+                %a{:href => evaluation_path(evaluation)}
+                  %i.material-icons pageview
+                %a{:href => edit_evaluation_path(evaluation)}
+                  %i.material-icons edit
+                %a{"href" => evaluation_path(evaluation), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                  %i.material-icons delete
+      .card-action
+        = link_to t(:new), new_evaluation_path

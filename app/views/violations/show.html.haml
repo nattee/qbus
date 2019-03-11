@@ -1,18 +1,23 @@
-%p#notice= notice
-
-%p
-  %b=t(:car)
-  = @violation.car
-%p
-  %b=t(:count)
-  = @violation.count
-%p
-  %b=t(:month_year)
-  = @violation.month_year
-%p
-  %b=t(:datafile)
-  = @violation.datafile
-
-= link_to 'Edit', edit_violation_path(@violation)
-\|
-= link_to 'Back', violations_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          =t(:violation, scope: 'activerecord.models')
+          =@violation.id
+      .card-content
+        .section
+          %h6= t(:car, scope: 'activerecord.attributes.violation')
+          = @violation.car.plate
+        .section
+          %h6= t(:count, scope: 'activerecord.attributes.violation')
+          = @violation.count
+        .section
+          %h6= t(:month_year, scope: 'activerecord.attributes.violation')
+          = @violation.month_year
+        .section
+          %h6= t(:datafile, scope: 'activerecord.attributes.violation')
+          = @violation.datafile.name
+      .card-action
+        = link_to t(:edit), edit_violation_path(@violation)
+        = link_to t(:back), violations_path

@@ -1,21 +1,32 @@
-%p#notice= notice
-
-%p
-  %b Name:
-  = @user.name
-%p
-  %b Email:
-  = @user.email
-%p
-  %b Admin:
-  = @user.admin
-%p
-  %b Verifier:
-  = @user.verifier
-%p
-  %b Surveyor:
-  = @user.surveyor
-
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          =t(:user, scope: 'activerecord.models')
+          =@user.id
+      .card-content
+        .section
+          %h6= t(:name, scope: 'activerecord.attributes.user')
+          = @user.name
+        .section
+          %h6= t(:email, scope: 'activerecord.attributes.user')
+          = @user.email
+        .section
+          %h6= t(:activated, scope: 'activerecord.attributes.user')
+          = @user.activated
+        .section
+          %h6= t(:activated_at, scope: 'activerecord.attributes.user')
+          = @user.activated_at
+        .section
+          %h6= t(:admin, scope: 'activerecord.attributes.user')
+          = @user.admin
+        .section
+          %h6= t(:verifier, scope: 'activerecord.attributes.user')
+          = @user.verifier
+        .section
+          %h6= t(:surveyor, scope: 'activerecord.attributes.user')
+          = @user.surveyor
+      .card-action
+        = link_to t(:edit), edit_user_path(@user)
+        = link_to t(:back), users_path
