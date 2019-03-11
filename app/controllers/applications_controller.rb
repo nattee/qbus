@@ -50,6 +50,7 @@ class ApplicationsController < ApplicationController
 
   def post_step1
     #routes and licensee data
+    @application.update(application_params)
     @route = Route.new(route_params)
     @route.save
 
