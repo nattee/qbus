@@ -1,11 +1,15 @@
 .row
   .col.s6
-    %p
-      %h6= t(:start, scope: 'activerecord.attributes.route')
-      = @application.route.start
-    %p
-      %h6= t(:destination, scope: 'activerecord.attributes.route')
-      = @application.route.destination
+    - unless @application.category3?
+      %p
+        %h6= t(:start, scope: 'activerecord.attributes.route')
+        = @application.route.start
+      %p
+        %h6= t(:destination, scope: 'activerecord.attributes.route')
+        = @application.route.destination
+    - else
+      %p
+        %h6= t(@application.category)
   .col.s6
     %p
       %h6= t(:car_count, scope: 'activerecord.attributes.application')
