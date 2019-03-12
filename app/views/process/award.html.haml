@@ -6,26 +6,27 @@
           .col.s12.m4.push-m8
             .card
               .card-content
-                เมื่อผู้ประเมินได้ทำการบันทึกผลการประเมินแล้ว ให้กรรมการตัดสินผลรางวัลลงในแบบฟอร์มนี้
+                ให้พิจารณาผลการประเมินของใบสมัคร จากรายละเอียด้านล่างนี้ โดยเฉพาะในหัวข้อผลการประเมิน หลังจากนั้นให้บันทึกผลการตัดสินโดยกรอกข้อมูลในฟอร์ม "การบันทึกผล" แล้วกดปุ่ม "ยืนยัน" เพื่อบันทึกข้อมูล
           .col.s12.m8.pull-m4
             .card-title
-              %h4 การตัดสินผลรางวัล
-              %h5 บันทึกผลการตัดสิน
+              %h4 การบันทึกผลการตัดสิน
+            %h5 บันทึกผลการตัดสิน
             = simple_form_for @application do |f|
               .row
                 .col.s12
                   %label
-                    = radio_button_tag :award, 'ok'
-                    %span ให้รางวัล
+                    = radio_button_tag :result, 'yes'
+                    %span ตัดสินให้ตราสัญลักษณ์
+              .section
               .row
                 .col.s12
                   %label
-                    = radio_button_tag :award, 'no'
-                    %span ไม่ให้รางวัล
+                    = radio_button_tag :result, 'no'
+                    %span ตัดสินไม่ให้ตรา
               .row
                 .input-field.col.s12
                   = f.input :award_remark
-              = f.button :submit, 'ยืนยันผลการให้รางวัล'
+              = f.button :submit, 'ยืนยันการตัดสินผล'
               = link_to 'ย้อนกลับ', process_awards_path, class: 'waves-effect waves-light green btn'
     .card
       .card-content
@@ -60,15 +61,21 @@
                     ผลการประเมิน
                   .col.s4
                     คำอธิบายผลการประเมิน
+                  .col.s2
               .row
-                .col.s4
-                  = "#{ev.criterium.number}. #{ev.criterium.name}"
-                .col.s2
-                  %p
-                    = ev.result
-                .col.s4
-                  %p
-                    = ev.description
+                = simple_form_for ev, remote: true do |f|
+                  .col.s4
+                    = "#{ev.criterium.number}. #{ev.criterium.name}"
+                  .col.s2
+                    - if rand(1..2) == 1
+                      %i.material-icons check
+                    - else
+                      %i.material-icons block
+                  .col.s4
+                    .input-field
+                      = f.text_field :description
+                  .col.s2
+                    = link_to 'ดูหลักฐาน', {}, class: 'btn cyan'
           #tab_evidence.col.s12
             %h4 รายการหลักฐาน
             = render "evidence"

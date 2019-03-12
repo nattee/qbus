@@ -24,13 +24,13 @@
               .section
               .row
                 .input-field.col.s12
-                  = f.text_area :register_result, {value: ' ', class: 'materialize-textarea'}
+                  = f.text_area :register_result, {value: @application.register_result, class: 'materialize-textarea'}
                   %label คำอธิบายกรณีใบสมัครไม่ถูกต้อง
               .section
               .row
                 .col.s12
                   = f.button 'ยืนยันผลการประเมิน', class: 'waves-effect waves-light btn'
-                  = link_to 'ย้อนกลับ', process_evaluations_path, class: 'waves-effect waves-light orange btn'
+                  = link_to 'ย้อนกลับ', process_registers_path, class: 'waves-effect waves-light orange btn'
     .card
       .card-content
         = render partial: 'applications/application'

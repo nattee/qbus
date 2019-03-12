@@ -1,34 +1,41 @@
 .row
   .col.s12
     .row
-      .col.s12.m6
+      .col.s12.m4
         .card
           .card-content
-            .card-title
-              สร้างใบสมัคร
-            blah blah blah
-            
+            %h5 ใบสมัคร
+            %h6 ใบสมัครรอการดำเนินการโดยผู้ใช้
+            %h6 ใบสมัครรอการตรวจสอบ
           .card-action
-            = link_to 'สร้างใบสมัคร', apply_applications_path, class: 'btn waves-effect waves-light green'
-      .col.s12.m6
+            = link_to 'สร้างใบสมัครใหม่', apply_applications_path, class: 'btn waves-effect waves-light green'
+      .col.s12.m4
         .card
           .card-content
             .card-title
-              ระบบงานนัดหมาย
+              %h5 ระบบงานตรวจสอบใบสมัคร
+            มีใบสมัครจำนวน #{Application.to_be_confirmed.count} ใบที่รอการตรวจสอบ
+          .card-action
+            = link_to 'ตรวจสอบ', process_registers_path
+        .card
+          .card-content
+            .card-title
+              %h5 ระบบงานนัดหมาย
             มีใบสมัครจำนวน #{@to_be_appointed.count} ใบที่รอการนัดหมาย และ #{@to_be_appointed_filled.count} ที่รอการส่งต่อไปยังขั้นตอนการประเมิน
           .card-action
-            = link_to 'นัดหมาย', process_appointments_path, class: 'btn '
+            = link_to 'นัดหมาย', process_appointments_path
+      .col.s12.m4
         .card
           .card-content
             %span.card-title
-              ระบบงานประเมิน
+              %h5 ระบบงานประเมิน
             มีใบสมัครจำนวน #{@to_be_evaluated.count} ใบที่รอการประเมิน
           .card-action
-            = link_to 'ประเมิน', process_evaluations_path, class: 'btn '
+            = link_to 'ประเมิน', process_evaluations_path
         .card
           .card-content
             .card-title
-              ระบบงานตัดสินผล
-            มีใบสมัครจำนวน #{@to_be_awarded.count} ใบที่รอการตัดสินผลตราสัญลักษณ์
+              %h5 ระบบงานตัดสินผล
+            มีใบสมัครจำนวน #{@to_be_awarded.count} ใบที่รอการตัดสินผลตราสัญลักษณ์ Q-BUS
           .card-action
-            = link_to 'ตัดสินผล', process_awards_path, class: 'btn '
+            = link_to 'ตัดสินผล', process_awards_path

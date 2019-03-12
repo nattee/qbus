@@ -11,15 +11,15 @@
                 %th= t(:start, scope: 'activerecord.attributes.route')
                 %th= t(:destination, scope: 'activerecord.attributes.route')
                 %th วันที่ยื่นใบสมัคร
-                %th= t(:contact, scope: 'activerecord.attributes.application')
-                %th= t(:contact_tel, scope: 'activerecord.attributes.application')
+                %th= t(:contact_short, scope: 'activerecord.attributes.application')
+                %th= t(:contact_tel_short, scope: 'activerecord.attributes.application')
                 %th
               %tbody
                 - @to_be_confirmed.each do |app|
                   %tr
                     %td= app.licensee.name
-                    %td= app.route.start
-                    %td= app.route.destination
+                    %td= app.route_start
+                    %td= app.route_destination
                     %td= l(app.created_at, format: '%d %b %y')
                     %td= app.contact
                     %td= app.contact_tel
@@ -42,9 +42,10 @@
                 %th= t(:start, scope: 'activerecord.attributes.route')
                 %th= t(:destination, scope: 'activerecord.attributes.route')
                 %th วันที่ยื่นใบสมัคร
-                %th= t(:contact, scope: 'activerecord.attributes.application')
-                %th= t(:contact_tel, scope: 'activerecord.attributes.application')
+                %th= t(:contact_short, scope: 'activerecord.attributes.application')
+                %th= t(:contact_tel_short, scope: 'activerecord.attributes.application')
                 %th= t(:confirmed_date, scope: 'activerecord.attributes.application')
+                %th= t(:register_result, scope: 'activerecord.attributes.application')
                 %th
               %tbody
                 - @latest_confirmed.each do |app|
@@ -56,7 +57,8 @@
                     %td= app.contact
                     %td= app.contact_tel
                     %td= l(app.confirmed_date, format: '%d %b %Y')
+                    %td= app.register_result
                     %td
-                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date, remark: app.appointment_remark}} ดูใบสมัคร
+                      = link_to 'แก้ไข', process_register_path(app), class: 'button waves-effect waves-light green btn'
 
 

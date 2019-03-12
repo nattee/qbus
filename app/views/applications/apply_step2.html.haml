@@ -35,8 +35,7 @@
             %br
             = simple_form_for(@application, url: apply_step2_application_path(@application), method: 'post') do |f|
               = hidden_field_tag 'application[stage]', 'step2'
-              = f.button :submit, 'ไปยังขั้นตอนต่อไป', class: "btn waves-light left"
-              /= f.button :submit, 'ยืนยันใบสมัคร', class: "btn waves-light left"
+              %button{class: 'btn waves-effect waves-light'} ไปยังขั้นตอนต่อไป
 
 /modal
 #add-car.modal
@@ -53,8 +52,8 @@
         = f.text_field :chassis
         = f.label :chassis
     .modal-footer
-      = f.submit 'เพิ่มรถ', class: 'waves-effect green waves-green btn-flat'
-      %a.modal-close.waves-effect.waves-red.btn-flat{href: "#!"} ยกเลิก
+      %button.btn.waves-effect.waves-light.green เพิ่มรถ
+      %a.modal-close.waves-effect.wave-flat.btn-flat{href: "#!"} ยกเลิก
 
 
 

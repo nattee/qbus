@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :logs
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'static_pages#home'
+  get 'static_pages/test1'
 
   resources :users
 
@@ -65,6 +66,7 @@ Rails.application.routes.draw do
   get  'process/evaluations',     to: 'process#evaluation_index'
   get  'process/evaluation/:id',  to: 'process#evaluation', as: 'process_evaluation'
   post 'process/evaluation/:id',  to: 'process#evaluation_post'
+  #post 'process/evaluation_detail/:id',  to: 'process#evaluation_detail_post', as: 'process_evaluation_detail'
 
   get  'process/awards',          to: 'process#award_index'
   get  'process/award/:id',       to: 'process#award', as: 'process_award'

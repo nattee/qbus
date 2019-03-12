@@ -50,11 +50,14 @@ class ApplicationsController < ApplicationController
 
   def post_step1
     #routes and licensee data
-    @route = Route.new(route_params)
-    @route.save
+    @application.update(application_params)
+    unless @application.category3?
+      @route = Route.new(route_params)
+      @route.save
+      @application.route = @route
+    end
 
     @licensee = Licensee.new(licensee_params)
-    @application.route = @route
     @application.licensee = @licensee
     if @application.save
       redirect_to apply_step2_application_path(@application) , notice: 'aa'

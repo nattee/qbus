@@ -1,87 +1,87 @@
 .row
   .col.s12
-    .card
-      .card-content
-        .row
-          .col.s12.m4.push-m8
-            .card
-              .card-content
-                เมื่อผู้ประเมินได้ทำการประเมินข้อกำหนดต่าง ๆ แล้ว ให้บันทึกผลการประเมินลงในแบบฟอร์มด้านล่างนี้ และเมื่อบันทึกข้อมูลเสร็จแล้ว ให้กดปุ่ม "ย้อนกลับ" เพื่อกลับไปยังหน้าแสดงรายการใบสมัครทั้งหมด
-          .col.s12.m8.pull-m4
-            .card-title
-              %h4 การประเมินผล
-            %h5 บันทึกผลการประเมิน
-            = simple_form_for @application do |f|
+    = form_with url: process_evaluation_path(@application), local: true do |f|
+      .card
+        .card-content
+          .row
+            .col.s12.m4.push-m8
+              .card
+                .card-content
+                  เมื่อผู้ประเมินได้ทำการประเมินข้อกำหนดต่าง ๆ แล้ว ให้บันทึกผลการประเมินลงในแบบฟอร์มด้านล่างนี้ และเมื่อบันทึกข้อมูลเสร็จแล้ว ให้กดปุ่ม "ย้อนกลับ" เพื่อกลับไปยังหน้าแสดงรายการใบสมัครทั้งหมด
+            .col.s12.m8.pull-m4
+              .card-title
+                %h4 การประเมินผล
+              %h5 บันทึกผลการประเมิน
               .row
                 .col.s12
                   %label
-                    = radio_button_tag :result, 'ok'
+                    = radio_button_tag :eval_result, 'ok'
                     %span หลักฐานครบถ้วน และ ทำการประเมินเรียบร้อย
               .row
                 .col.s12
                   %label
-                    = radio_button_tag :result, 'no'
+                    = radio_button_tag :eval_result, 'no'
                     %span หลักฐานไม่ครบ
               .row
                 .input-field.col.s12
-                  = f.input :appointment_remark
-              = f.button :submit, 'ยืนยันผลการประเมิน'
-              = link_to 'ย้อนกลับ', process_evaluations_path, class: 'waves-effect waves-light green btn'
-    .card
-      .card-content
-        .row
-          .col.s12.m8
-          .col.s12.m3
-        .row
-          .col.s12
-            %ul.tabs
-              %li.tab.col.m3
-                %a{href: '#tab_app'}ข้อมูลใบสมัคร
-              %li.tab.col.m3
-                %a{href: '#tab_evidence'}หลักฐาน
-              %li.tab.col.m3
-                %a{href: '#tab_eval'}การประเมิน
-              %li.tab.col.m3
-                %a{href: '#tab_car'}ข้อมูลรถ
-
-          #tab_eval.col.s12
+                  = f.label :evaluation_result, 'คำอธิบายกรณีหลักฐานไม่ครบ'
+                  = f.text_field :evaluation_result, class: 'materialize-textarea'
+              %button.btn.waves-effect.waves-light{value:  :submit} ยืนยันผลการประเมิน
+              = link_to 'ย้อนกลับ', process_evaluations_path, class: 'waves-effect waves-light orange btn'
+      .card.orange.lighten-2
+        .card-content
+          %h5 ข้อมูลใบสมัคร
+        .card-tabs
+          %ul.tabs.tabs-fixed-width.tabs-transparent
+            %li.tab
+              %a{href: '#tab_app'}ข้อมูลใบสมัคร
+            %li.tab
+              %a{href: '#tab_eval'}การประเมิน
+            %li.tab
+              %a{href: '#tab_evidence'}หลักฐาน
+            %li.tab
+              %a{href: '#tab_car'}ข้อมูลรถ
+        .card-content.orange.lighten-5
+          #tab_eval
             - last_cg = nil
             - @application.evaluations.joins(:criterium => :criteria_group).order('criteria_groups.id, criteria.number').each do |ev|
               - if ev.criterium.criteria_group != last_cg
+                - if last_cg != nil
+                  .divider
                 - last_cg = ev.criterium.criteria_group
-                .divider
                 .row
                   .col.s12
                     %h5= last_cg.name
                 .row
-                  .col.s4
+                  .col.s4.strong
                     = t(:name, scope: 'activerecord.attributes.criterium')
-                  .col.s2
+                  .col.s2.strong
                     ผลการประเมิน
-                  .col.s4
+                  .col.s4.strong
                     คำอธิบายผลการประเมิน
-                  .col.s2
+                  .col.s2.strong
               .row
-                = simple_form_for ev, remote: true do |f|
-                  .col.s4
-                    = "#{ev.criterium.number}. #{ev.criterium.name}"
-                  .col.s2
-                  .col.s4
-                    .input-field
-                      = f.text_field :description
-                  .col.s2
-                    = f.submit 'บันทึก', class: 'btn'
-          #tab_evidence.col.s12
+                .col.s4
+                  = "#{ev.criterium.number}. #{ev.criterium.name}"
+                .col.s2
+                  %label
+                    = radio_button_tag "result[#{ev.id}]", 'ok', ev.result == true
+                    %span ผ่าน
+                  %label
+                    = radio_button_tag "result[#{ev.id}]", 'no', ev.result == false
+                    %span ไม่ผ่าน
+                .col.s4
+                  .input-field
+                    = f.text_field "description[#{ev.id}]", value: ev.description, class: 'materialize-textarea'
+                .col.s2
+                  /= f.submit 'บันทึก', class: 'btn'
+          #tab_evidence
             %h4 รายการหลักฐาน
             = render "evidence"
-          #tab_app.col.s12
-            .section
-              .row
-                .col.s12
-                  %h5 ข้อมูลใบสมัคร
-                  = render partial: "applications/application"
-          #tab_route.col.s12
-          #tab_car.col.s12
+          #tab_app
+            = render partial: "applications/application"
+          #tab_route
+          #tab_car
             = render partial: "applications/cars"
 
 

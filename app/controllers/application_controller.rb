@@ -6,10 +6,16 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
 
+  before_action :force_login
+
   def set_locale
     I18n.locale = I18n.default_locale
   end
 
   protect_from_forgery with: :exception
   include SessionsHelper
+
+  def force_login
+    #log_in(User.first)
+  end
 end
