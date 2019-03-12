@@ -40,7 +40,9 @@ th:
         award: ผลการให้รางวัล  #g
         award_remark: คำอธิบายการให้รางวัล  #g
         contact: ชื่อ-สกุล ผู้ประสานงาน  #g
+        contact_short: ผู้ประสานงาน
         contact_tel: หมายเลขโทรศัพท์ผู้ประสานงาน  #g
+        contact_tel_short: โทรศัพท์  #g
         confirmed_date: วันที่ตรวจใบสมัคร
         #registered_date: วันที่ยื่นใบสมัคร
         submitted_date: วันที่ยืนยันหลักฐาน
@@ -50,6 +52,7 @@ th:
         awarded_date: วันที่ตัดสินผลรางวัล  #g
         car_count: จำนวนรถในเส้นทาง
         trip_count: จำนวนเที่ยวต่อวัน
+        register_result: ผลตรวจใบสมัคร
 
       attachment:
         filename: ชื่อไฟล์  #g

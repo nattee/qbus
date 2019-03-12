@@ -19,7 +19,7 @@ class Application < ApplicationRecord
 
   #scope
   scope :to_be_confirmed, -> { where(state: :registered) }
-  scope :latest_confirmed, -> { where(state: :confirmed).where('confirmed_date >= ?',30.days.ago) }
+  scope :latest_confirmed, -> { where(state: [:confirmed,:applying]).where('confirmed_date >= ?',30.days.ago) }
   scope :to_be_appointed, -> { where(state: :confirmed, appointment_date: nil) }
   scope :to_be_appointed_filled, -> { where(state: :confirmed).where.not(appointment_date: !nil) }
   scope :to_be_evaluated, -> { where(state: :submitted) }
@@ -40,6 +40,16 @@ class Application < ApplicationRecord
     Application.state_enum_to_text(state)
   end
 
+  def route_start
+    return 'ไม่ประจำทาง' if category3? or route == nil
+    return route.start
+  end
+
+  def route_destination
+    return '-' if category3? or route == nil
+    return route.destination
+  end
+
   def self.state_enum_to_text(enum)
     Application.enum_to_st(:state,enum)
   end
@@ -57,7 +67,8 @@ class Application < ApplicationRecord
   end
 
   #state manipulation
-  def confirm_registration() change_state(:confirmed)  end
+  def confirm_registration() self.confirmed_date = Time.zone.now; change_state(:confirmed)  end
+  def reject_registration()  self.confirmed_date = Time.zone.now; change_state(:applying)  end
   def submit_for_approve()   change_state(:submitted)  end
   def reject_evidence()      change_state(:confirmed)  end
 
@@ -89,10 +100,9 @@ class Application < ApplicationRecord
     return "ผ่าน 26 ไม่ผ่าน 1"
   end
 
-  private
   def change_state(new_state)
-    state = new_state
-    save
+    self.state = new_state
+    self.save
   end
 
 end

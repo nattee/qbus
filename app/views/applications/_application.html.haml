@@ -17,7 +17,6 @@
     .section
       %h6 หนังสือยืนยันการเข้าร่วมโครงการ
       %a ดาว์นโหลด
-
   .col.s12.m4
     .card-title
       %h5 ข้อมูลผู้ประกอบการ
@@ -38,10 +37,10 @@
       %h5 ข้อมูลเส้นทาง
     .section
       %h6= t(:start, scope: 'activerecord.attributes.route')
-      = @application.route.start
+      = @application.route_start
     .section
       %h6= t(:destination, scope: 'activerecord.attributes.route')
-      = @application.route.destination
+      = @application.route_destination
     .section
       %h6= t(:car_count, scope: 'activerecord.attributes.application')
       = @application.car_count
