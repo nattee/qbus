@@ -25,5 +25,10 @@
       .col.s3
         = "#{att.criterium_attachment.name}"
       .col.s2
-        %span.red-text - ยังไม่ได้แนบ -
+        - if att.data.attached?
+          %span.green-text=att.updated_at
+        - else
+          %span.red-text - ยังไม่ได้แนบ -
       .col.s2
+        - if att.data.attached?
+          = link_to t(:download), rails_blob_path(att.data, disposition: "attachment")

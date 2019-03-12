@@ -1,5 +1,5 @@
 class ApplicationsController < ApplicationController
-  before_action :set_application, only: [:show, :edit, :update, :destroy, 
+  before_action :set_application, only: [:show, :edit, :update, :destroy,
                                          :apply_step1, :apply_step2, :apply_step3,
                                          :post_step1,:post_step2,:post_step3,
                                          :add_evidences,:add_attachment,
@@ -96,14 +96,17 @@ class ApplicationsController < ApplicationController
   #attachment index
   def add_evidences
     @application.add_missing_attachments
-    @att = Attachment.new
+    @attachment = Attachment.new
   end
 
   #post
   def add_attachment
-    @att = Attachment.create
-    @application.attachments << @att
+    @attachment = Attachment.create(attachment_params)
+    @attachment.data.attach(attachment_params[:data])
+    @attachment.save
+    @application.attachments << @attachment
     @application.save
+    redirect_to add_evidences_application_path(@application), notice: 'Attachment is submitted'
   end
 
 
@@ -173,6 +176,10 @@ class ApplicationsController < ApplicationController
 
     def licensee_params
       params.require(:licensee).permit(:name, :contact, :contact_tel)
+    end
+
+    def attachment_params
+      params.require(:attachment).permit(:criterium_attachment_id, :data)
     end
 
 end
