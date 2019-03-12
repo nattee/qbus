@@ -25,7 +25,7 @@ class Application < ApplicationRecord
   scope :to_be_evaluated, -> { where(state: :submitted) }
   scope :to_be_evaluated_filled, -> { where(state: :submitted).where(id:1999) }
   scope :to_be_awarded, -> {where(state: :evaluated) }
-  scope :awarded_recent, -> {where(state: :awarded).where('awarded_date >= ?',30.days.ago) }
+  scope :latest_awarded, -> {where(state: :awarded).where('awarded_date >= ?',30.days.ago) }
 
   def to_label
     "#{self.number} - #{self.state_text}"
@@ -70,7 +70,19 @@ class Application < ApplicationRecord
   def confirm_registration() self.confirmed_date = Time.zone.now; change_state(:confirmed)  end
   def reject_registration()  self.confirmed_date = Time.zone.now; change_state(:applying)  end
   def submit_for_approve()   change_state(:submitted)  end
-  def reject_evidence()      change_state(:confirmed)  end
+
+
+  def reject_evidence(reason)
+    evaluated_date = Time.zone.now()
+    evaluation_result = reason
+    change_state(:confirmed)
+  end
+
+  def evaluation_finish
+    evaluated_date = Time.zone.now()
+    evaluation_result = ''
+    change_state(:evaluated)
+  end
 
   def sorted_attachments
     return attachments.includes(:criterium_attachment => [:criterium => :criteria_group]).order('criteria_groups.id, criteria.number')

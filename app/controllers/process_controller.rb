@@ -1,7 +1,7 @@
 class ProcessController < ApplicationController
   before_action :set_application, only: [ :register_post, :registered, :registered_post,
                                           :appointment_post, :appointed,
-                                          :evaluation, :evaluation_post,
+                                          :evaluation, :evaluation_post, :evaluation_detail_post,
                                           :award, :award_post,
                                         ]
 
@@ -59,6 +59,32 @@ class ProcessController < ApplicationController
   end
 
   def evaluation_post
+    #save evaluations
+    @application.evaluations.each do |ev|
+      case params.require(:result)[ev.id.to_s]
+      when 'ok'
+        ev.result = true
+      when 'no'
+        ev.result = false
+      else
+        ev.result = nil
+      end
+      ev.description = params.require(:description)[ev.id.to_s]
+      ev.save
+    end
+
+    #save result
+    if params[:eval_result] == 'ok'
+      @application.evaluation_finish
+    else
+      @application.reject_evidence(params[:evaluation_result])
+    end
+
+    redirect_to process_evaluations_path
+
+  end
+
+  def evaluation_detail_post
   end
 
   def award_index
