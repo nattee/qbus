@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_06_033937) do
+ActiveRecord::Schema.define(version: 2019_03_13_040652) do
 
-  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_033937) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_033937) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "applications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "number"
     t.bigint "user_id"
     t.integer "state"
@@ -64,17 +64,18 @@ ActiveRecord::Schema.define(version: 2019_03_06_033937) do
     t.index ["user_id"], name: "index_applications_on_user_id"
   end
 
-  create_table "attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "filename"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "criterium_attachment_id"
     t.bigint "application_id"
+    t.integer "attachment_type"
     t.index ["application_id"], name: "index_attachments_on_application_id"
     t.index ["criterium_attachment_id"], name: "index_attachments_on_criterium_attachment_id"
   end
 
-  create_table "cars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "cars", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "plate"
     t.string "chassis"
     t.bigint "licensee_id"
@@ -87,7 +88,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_033937) do
     t.index ["route_id"], name: "index_cars_on_route_id"
   end
 
-  create_table "criteria", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "criteria", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "number"
     t.string "name"
     t.text "description"
@@ -99,14 +100,14 @@ ActiveRecord::Schema.define(version: 2019_03_06_033937) do
     t.index ["criteria_group_id"], name: "index_criteria_on_criteria_group_id"
   end
 
-  create_table "criteria_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "criteria_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.integer "group_weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "criterium_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "criterium_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.bigint "criterium_id"
@@ -116,7 +117,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_033937) do
     t.index ["criterium_id"], name: "index_criterium_attachments_on_criterium_id"
   end
 
-  create_table "datafiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "datafiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.date "month_year"
     t.bigint "user_id"
@@ -125,7 +126,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_033937) do
     t.index ["user_id"], name: "index_datafiles_on_user_id"
   end
 
-  create_table "evaluations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "evaluations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "application_id"
     t.string "evaluator"
     t.date "evaluation_date"
@@ -138,7 +139,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_033937) do
     t.index ["criterium_id"], name: "index_evaluations_on_criterium_id"
   end
 
-  create_table "licensees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "licensees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.string "license_no"
     t.date "license_expire"
@@ -149,7 +150,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_033937) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "application_id"
     t.text "description"
     t.datetime "created_at", null: false
@@ -157,17 +158,17 @@ ActiveRecord::Schema.define(version: 2019_03_06_033937) do
     t.index ["application_id"], name: "index_logs_on_application_id"
   end
 
-  create_table "routes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "routes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.string "start"
     t.string "destination"
     t.integer "car_count"
+    t.string "route_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "route_type"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
@@ -180,7 +181,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_033937) do
     t.datetime "activated_at"
   end
 
-  create_table "violations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci", force: :cascade do |t|
+  create_table "violations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.bigint "car_id"
     t.integer "count"
     t.date "month_year"
