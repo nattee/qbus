@@ -6,6 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# purge ActiveStorage data
+ActiveStorage::Attachment.all.each { |attachment| attachment.purge }
+
 Evaluation.delete_all;
 Attachment.delete_all;
 Application.delete_all;
