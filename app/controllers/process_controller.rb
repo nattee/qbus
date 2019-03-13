@@ -1,7 +1,7 @@
 class ProcessController < ApplicationController
   before_action :set_application, only: [ :register_post, :registered, :registered_post,
                                           :appointment_post, :appointed,
-                                          :evaluation, :evaluation_post, :evaluation_detail_post,
+                                          :evaluation, :evaluation_post, :evaluation_finish, :evaluation_reject,
                                           :award, :award_post,
                                         ]
 
@@ -51,7 +51,7 @@ class ProcessController < ApplicationController
 
   def evaluation_index
     @to_be_evaluated = Application.to_be_evaluated
-    @to_be_evaluated_filled = Application.to_be_evaluated_filled
+    @latest_evaluated = Application.latest_evaluated
   end
 
   def evaluation
@@ -72,19 +72,16 @@ class ProcessController < ApplicationController
       ev.description = params.require(:description)[ev.id.to_s]
       ev.save
     end
-
-    #save result
-    if params[:eval_result] == 'ok'
-      @application.evaluation_finish
-    else
-      @application.reject_evidence(params[:evaluation_result])
-    end
-
-    redirect_to process_evaluations_path
-
   end
 
-  def evaluation_detail_post
+  def evaluation_finish
+    @application.evaluation_finish
+    redirect_to process_evaluations_path
+  end
+
+  def evaluation_reject
+    @application.reject_evidence(params[:evaluation_result])
+    redirect_to process_evaluations_path
   end
 
   def award_index
