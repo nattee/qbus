@@ -1,3 +1,74 @@
-%p#notice= notice
+.carousel.carousel-slider.center
+  .carousel-item.purple.white-text{href: "#one!"}
+    %h2 aa
+    asdf
+  .carousel-item.purple.white-text{href: "#two!"}
+    %h2 bb
+    asdf
+  .carousel-item.purple.white-text{href: "#three!"}
+    %h2 cc
+    asdf
+  .carousel-item.purple.white-text{href: "#four!"}
+    %h2 dd
+    asdf
+.container{style: 'width: 70% !important;'}
+  .row
+    .col.s12.m4
+      .card.border-radius-6
+        .card-content
+          = form_with url: login_path do |f|
+            .card-title
+              %h4 เข้าสู่ระบบ
+            .row
+              .input-field.col.s12
+                %i.material-icons.prefix.pt-2 person_outline
+                = f.text_field :username
+                = f.label :username
+            .row
+              .input-field.col.s12
+                %i.material-icons.prefix.pt-2 lock_outline
+                = f.password_field :password
+                = f.label :password
+            .row
+              .input-field.col.s12
+                = f.submit 'เข้าสู่ระบบ', class: 'btn border-round col s12'
+            .row
+              .input-field.col.s6
+                %p.margin.medium-small
+                  = link_to 'ลงทะเบียน', register_path
+              .input-field.col.s6
+                %p.margin.right-align.medium-small
+                  = link_to 'ลืมรหัสผ่าน', register_path
+    .col.s12.m8
+      .card
+        .card-content
+          .card-title
+            %h4 เอกสารที่เกี่ยวข้อง
+          .row
+            .col.s4.center
+              %a{href: 'asdf'}
+                %i.material-icons.medium library_books
+                %br
+                คู่มือการใช้งาน
 
-Welcome!
+            .col.s4.center
+              %a
+                %i.material-icons.medium list_alt
+                %br
+                แบบฟอร์ม
+            .col.s4.center
+              %a
+                %i.material-icons.medium question_answer
+                %br
+                คำถามพบบ่อย
+
+            .col.s4.center
+            .col.s4
+
+
+:javascript
+  $('.carousel.carousel-slider').carousel({
+    fullWidth: true,
+    indicators: true
+  });
+

@@ -15,8 +15,13 @@
   %body.vertical-layout.page-header-light.vertical-menu-collapsible.vertical-menu-nav-dark.2-columns{"data-col" => "2-columns", "data-menu" => "vertical-menu-nav-dark", "data-open" => "click"}
     /header
     = render 'layouts/header_1'
-    = render 'layouts/side_bar'
+    - unless current_page?(root_path)
+      = render 'layouts/side_bar'
+      = render 'layouts/main'
+    - else
+      #main{style: 'padding-left: 0px;'}
+        = render 'layouts/flash'
+        = yield
     /main
-    = render 'layouts/main'
     /footer
     = render 'layouts/footer_1'
