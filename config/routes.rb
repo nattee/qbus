@@ -66,7 +66,8 @@ Rails.application.routes.draw do
   get  'process/evaluations',     to: 'process#evaluation_index'
   get  'process/evaluation/:id',  to: 'process#evaluation', as: 'process_evaluation'
   post 'process/evaluation/:id',  to: 'process#evaluation_post'
-  #post 'process/evaluation_detail/:id',  to: 'process#evaluation_detail_post', as: 'process_evaluation_detail'
+  post 'process/evaluation/:id/finish',  to: 'process#evaluation_finish', as: 'process_evaluation_finish'
+  post 'process/evaluation/:id/reject',  to: 'process#evaluation_reject', as: 'process_evaluation_reject'
 
   get  'process/awards',          to: 'process#award_index'
   get  'process/award/:id',       to: 'process#award', as: 'process_award'

@@ -20,10 +20,14 @@ class Application < ApplicationRecord
   #scope
   scope :to_be_confirmed, -> { where(state: :registered) }
   scope :latest_confirmed, -> { where(state: [:confirmed,:applying]).where('confirmed_date >= ?',30.days.ago) }
+
   scope :to_be_appointed, -> { where(state: :confirmed, appointment_date: nil) }
   scope :to_be_appointed_filled, -> { where(state: :confirmed).where.not(appointment_date: !nil) }
+
   scope :to_be_evaluated, -> { where(state: :submitted) }
   scope :to_be_evaluated_filled, -> { where(state: :submitted).where(id:1999) }
+  scope :latest_evaluated, -> {where(state: [:confirmed, :evaluated]).where('evaluated_date >= ?',30.days.ago) }
+
   scope :to_be_awarded, -> {where(state: :evaluated) }
   scope :latest_awarded, -> {where(state: :awarded).where('awarded_date >= ?',30.days.ago) }
 
@@ -73,14 +77,14 @@ class Application < ApplicationRecord
 
 
   def reject_evidence(reason)
-    evaluated_date = Time.zone.now()
-    evaluation_result = reason
+    self.evaluated_date = Time.zone.now()
+    self.evaluation_result = reason
     change_state(:confirmed)
   end
 
   def evaluation_finish
-    evaluated_date = Time.zone.now()
-    evaluation_result = ''
+    self.evaluated_date = Time.zone.now()
+    self.evaluation_result = ''
     change_state(:evaluated)
   end
 

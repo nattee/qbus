@@ -10,7 +10,7 @@ $(document).ready ->
   #$(".sidenav").sidenav()
   #$('.dropdown-button').dropdown()
   #$('select').material_select()
-  $('.dataTable').DataTable()
+  #$('.dataTable').DataTable()
   $('.modal').modal()
   $('select').formSelect()
   $('.datepicker').datepicker( {

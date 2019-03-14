@@ -19,8 +19,8 @@
                 - @to_be_evaluated.each do |app|
                   %tr
                     %td= app.licensee.name
-                    %td= app.route.start
-                    %td= app.route.destination
+                    %td= app.route_start
+                    %td= app.route_destination
                     %td= l(app.created_at, format: '%d %b %y')
                     %td= l(app.appointment_date, format: '%d %b %Y')
                     %td= app.appointment_remark
@@ -36,30 +36,27 @@
       .card-content
         .row
           .col.s12
-            %h4 ใบสมัครที่กรอกข้อมูลการประเมินครบแล้ว
+            %h4 ใบสมัครที่รับการประเมินล่าสุด
             %table
               %thead
                 %th= t(:name, scope: 'activerecord.attributes.licensee')
                 %th= t(:start, scope: 'activerecord.attributes.route')
                 %th= t(:destination, scope: 'activerecord.attributes.route')
                 %th วันที่ยื่นใบสมัคร
-                %th= t(:appointment_date, scope: 'activerecord.attributes.application')
-                %th= t(:appointment_remark, scope: 'activerecord.attributes.application')
-                %th ข้อมูลการประเมินที่กรอกแล้ว
-                %th
+                %th= t(:state, scope: 'activerecord.attributes.application')
+                %th วันประเมิน
+                %th= t(:evaluation_result, scope: 'activerecord.attributes.application')
                 %th
               %tbody
-                - @to_be_evaluated_filled.each do |app|
+                - @latest_evaluated.each do |app|
                   %tr
                     %td= app.licensee.name
-                    %td= app.route.start
-                    %td= app.route.destination
+                    %td= app.route_start
+                    %td= app.route_destination
                     %td= l(app.created_at, format: '%d %b %Y')
-                    %td= l(app.appointment_date, format: '%d %b %Y')
-                    %td= app.appointment_remark
-                    %td= "#{app.evaluated_count}/#{Criterium.count}"
+                    %td= app.state
+                    %td= l(app.evaluated_date, format: '%d %b %Y')
+                    %td= app.evaluation_result
                     %td= link_to 'แก้ไขผลประเมิน', process_evaluation_path(app.id), class: 'waves-effect waves-light green btn'
-                    %td
-                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint'}} ส่งต่อ
 
 

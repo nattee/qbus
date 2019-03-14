@@ -1,48 +1,53 @@
 .row
   .col.s12
-    = form_with url: process_evaluation_path(@application), local: true do |f|
-      .card
-        .card-content
-          .row
-            .col.s12.m4.push-m8
-              .card
-                .card-content
-                  เมื่อผู้ประเมินได้ทำการประเมินข้อกำหนดต่าง ๆ แล้ว ให้บันทึกผลการประเมินลงในแบบฟอร์มด้านล่างนี้ และเมื่อบันทึกข้อมูลเสร็จแล้ว ให้กดปุ่ม "ย้อนกลับ" เพื่อกลับไปยังหน้าแสดงรายการใบสมัครทั้งหมด
-            .col.s12.m8.pull-m4
+    .row
+      .col.s12.m4.push-m8
+        .card
+          .card-content
+            ให้ผู้ประเมินพิจารณาหลักฐานสำหรับเกณฑ์ในหัวข้อต่าง ๆ ด้านล่างนี้และบันทึกผลการประเมินในแต่ละหัวข้อ เมื่อบันทึกเสร็จแล้วให้กดปุ่ม "บันทึก" ด้านล่างสุด
+            .section
+            ในกรณีที่หลักฐานไม่เพียงพอต่อการประเมิน ผู้ประเมินสามารถร้องขอให้ส่งหลักฐานใหม่ได้ โดยการบันทึกข้อความและกดปุ่มในช่อง "ขอหลักฐานเพิ่มเติม" ด้านซ้าย
+            .section
+            หลังจากประเมินข้อมูลทั้งหมดแล้ว ให้ยืนยันผลการประเมิน โดยกดปุ่ม "ยืนยันผลการประเมิน"
+      = form_with url: process_evaluation_finish_path(@application), local: true do |f|
+        .col.s12.m4.pull-m4
+          .card
+            .card-content
               .card-title
-                %h4 การประเมินผล
-              %h5 บันทึกผลการประเมิน
-              .row
-                .col.s12
-                  %label
-                    = radio_button_tag :eval_result, 'ok'
-                    %span หลักฐานครบถ้วน และ ทำการประเมินเรียบร้อย
-              .row
-                .col.s12
-                  %label
-                    = radio_button_tag :eval_result, 'no'
-                    %span หลักฐานไม่ครบ
+                %h4 ยืนยันการประเมินผล
+              กดปุ่ม "ยืนยัน" เมื่อทำการประเมินครบทุกหัวข้อแล้ว
+            .card-action
+              %button.btn.green.waves-effect.waves-light{value:  :submit} ยืนยันผลการประเมิน
+      = form_with url: process_evaluation_reject_path(@application), local: true do |f|
+        .col.s12.m4.pull-m4
+          .card
+            .card-content
+              .card-title
+                %h4 ขอหลักฐานเพิ่มเติม
+              ในกรณีที่หลักฐานไม่ถูกต้อง หรือต้องการหลักฐานเพิ่มเติม ให้กรอกข้อมูลในส่วนนี้แล้วกดปุ่ม "ขอหลักฐาน"
               .row
                 .input-field.col.s12
                   = f.label :evaluation_result, 'คำอธิบายกรณีหลักฐานไม่ครบ'
                   = f.text_field :evaluation_result, class: 'materialize-textarea'
-              %button.btn.waves-effect.waves-light{value:  :submit} ยืนยันผลการประเมิน
-              = link_to 'ย้อนกลับ', process_evaluations_path, class: 'waves-effect waves-light orange btn'
+            .card-action
+              %button.btn.red.waves-effect.waves-light{value:  :submit} ขอหลักฐาน
+              /= link_to 'ย้อนกลับ', process_evaluations_path, class: 'waves-effect waves-light orange btn'
+    = form_with url: process_evaluation_path(@application), local: true do |f|
       .card.orange.lighten-2
         .card-content
           %h5 ข้อมูลใบสมัคร
         .card-tabs
           %ul.tabs.tabs-fixed-width.tabs-transparent
             %li.tab
-              %a{href: '#tab_app'}ข้อมูลใบสมัคร
-            %li.tab
               %a{href: '#tab_eval'}การประเมิน
+            %li.tab
+              %a{href: '#tab_app'}ข้อมูลใบสมัคร
             %li.tab
               %a{href: '#tab_evidence'}หลักฐาน
             %li.tab
               %a{href: '#tab_car'}ข้อมูลรถ
-        .card-content.orange.lighten-5
-          #tab_eval
+        #tab_eval
+          .card-content.orange.lighten-5
             - last_cg = nil
             - @application.evaluations.joins(:criterium => :criteria_group).order('criteria_groups.id, criteria.number').each do |ev|
               - if ev.criterium.criteria_group != last_cg
@@ -75,13 +80,17 @@
                     = f.text_field "description[#{ev.id}]", value: ev.description, class: 'materialize-textarea'
                 .col.s2
                   /= f.submit 'บันทึก', class: 'btn'
-          #tab_evidence
+          .card-action.orange.lighten-5
+            %button.btn.waves-effect.waves-light{value:  :submit} บันทึก
+        #tab_evidence
+          .card-content.orange.lighten-5
             %h4 รายการหลักฐาน
             = render "evidence"
-          #tab_app
+        #tab_app
+          .card-content.orange.lighten-5
             = render partial: "applications/application"
-          #tab_route
-          #tab_car
+        #tab_route
+          .card-content.orange.lighten-5
+        #tab_car
+          .card-content.orange.lighten-5
             = render partial: "applications/cars"
-
-
