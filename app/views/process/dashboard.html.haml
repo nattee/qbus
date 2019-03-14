@@ -48,7 +48,7 @@
                     %td= l(app.created_at, format: '%d %b %Y')
                     %td= app.state_text
                     %td
-                      = link_to 'แก้ไข', apply_step1_application_path(app), class: 'button waves-effect waves-light blue darken-2 btn'
+                      = link_to 'หลักฐาน', add_evidences_application_path(app), class: 'button waves-effect waves-light blue darken-2 btn'
 
           .card-action
             = link_to 'สร้างใบสมัครใหม่', apply_applications_path, class: 'btn waves-effect waves-light green'

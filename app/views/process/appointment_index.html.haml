@@ -18,8 +18,8 @@
                 - @to_be_appointed.each do |app|
                   %tr
                     %td= app.licensee.name
-                    %td= app.route.start
-                    %td= app.route.destination
+                    %td= app.route_start
+                    %td= app.route_destination
                     %td= l(app.created_at, format: '%d %b %y')
                     %td= app.contact
                     %td= app.contact_tel
@@ -52,8 +52,8 @@
                 - @to_be_appointed_filled.each do |app|
                   %tr
                     %td= app.licensee.name
-                    %td= app.route.start
-                    %td= app.route.destination
+                    %td= app.route_start
+                    %td= app.route_destination
                     %td= l(app.created_at, format: '%d %b %Y')
                     %td= app.contact
                     %td= app.contact_tel
@@ -73,6 +73,7 @@
       กรุณาพิมพ์ข้อมูลการนัดหมาย
       .row
         .input-field.col.s6
+          %i.material-icons.prefix today
           = f.text_field :appointment_date, class: 'datepicker'
           = f.label t(:appointment_date, scope: 'activerecord.attributes.application')
       .row
@@ -86,8 +87,8 @@
       %br
       %br
     .modal-footer
-      = f.submit 'ทำการนัดหมาย', class: 'waves-effect green waves-green btn-flat'
-      %a.modal-close.waves-effect.waves-red.btn-flat{href: "#!"} ยกเลิก
+      %button.btn.waves-effect.waves-light.green ทำการนัดหมาย
+      %a.modal-close.waves-effect.waves-green.btn-flat{href: "#!"} ยกเลิก
 
 :coffee
   @setform = (date,remark,id) ->
