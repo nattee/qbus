@@ -6,14 +6,14 @@
 
 // 1. Colors
 // ==========================================================================
-$primary-color: color("cyan", "base");
+$primary-color: color("yellow", "base");
 $primary-color-light: lighten($primary-color, 15%);
 $primary-color-dark: darken($primary-color, 15%);
 
-$secondary-color: color("purple", "base");
-$success-color: color("teal", "accent-4");
+$secondary-color: color("dlp-purple", "base");
+$success-color: color("yellow", "accent-4");
 $error-color: color("red", "accent-2");
-$link-color: color("purple", "darken-1");
+$link-color: color("dlp-purple", "darken-1");
 
 // 3. Buttons
 // ==========================================================================
