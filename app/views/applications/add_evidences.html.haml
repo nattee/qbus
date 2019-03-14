@@ -22,21 +22,28 @@
                   การส่งไฟล์ทำได้โดยเลือก "ประเภทของไฟล์" จากนั้นให้กดปุ่ม "แนบไฟล์" แล้วเลือกไฟล์ที่ต้องการ เมื่อเลือกแล้วให้กดปุ่ม "ส่ง"
             .col.s12.m8.pull-m4
               %h4 แนบหลักฐาน
-              = simple_form_for @attachment, url: add_attachment_application_path(@application), method: :post, html: {:enctype => "multipart/alternative"} do |f|
+              = simple_form_for @attachment, url: add_attachment_application_path(@application), method: :post , html: { multipart: true } do |f|
                 .row
                   .input-field.col.s12
                     = f.input_field :criterium_attachment_id, data: {contrainwidth: 'false'}, collection: @application.sorted_attachments.map {|x| ["(#{x.criterium_attachment.criterium.name}) #{x.criterium_attachment.name}",x.criterium_attachment_id] }
                     = f.label 'ประเภทหลักฐาน'
                 .row
                   .input-field.col.s12
-                    = f.file_field :data
                     = f.label :data
                     = f.full_error :data
-                    /.btn.blue
-                    /  %span เลือกไฟล์
-                    /  = file_field_tag :data
-                    /.file-path-wrapper
-                    /  = text_field_tag :data
+                .row
+                  .input-field.col.s11.offset-s1
+                    = f.file_field :data
+                    -#.btn.blue
+                    -#  %span เลือกไฟล์
+                    -#  = file_field_tag :data
+                    -#.file-path-wrapper
+                    -#  = text_field_tag :data
+                .row
+                  .input-field.col.s12
+                    = f.label :filename
+                    = f.input_field :filename
+                    = f.full_error :filename
                 .row
                   .col.s12
                     = f.button :submit, 'ส่งไฟล์แนบ', class: "btn waves-light left green"

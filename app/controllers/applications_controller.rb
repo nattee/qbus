@@ -65,6 +65,13 @@ class ApplicationsController < ApplicationController
       redirect_to apply_applications_path
     end
 
+    if !@application.attach_contract_data(attachment_contract_signup_params)
+      redirect_to apply_step1_applications_path(@application), notice: 'failed to attach contract data'
+    end
+    if !@application.attach_signup_data(attachment_contract_signup_params)
+      redirect_to apply_step1_applications_path(@application), notice: 'failed to attach signup data'
+    end
+
   end
 
   def post_step2
@@ -176,6 +183,10 @@ class ApplicationsController < ApplicationController
 
     def licensee_params
       params.require(:licensee).permit(:name, :contact, :contact_tel)
+    end
+
+    def attachment_contract_signup_params
+      params.require(:attachment).permit(:contract_data, :contract_file_name, :signup_data, :signup_file_name)
     end
 
     def attachment_params

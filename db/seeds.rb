@@ -9,18 +9,18 @@
 # purge ActiveStorage data
 ActiveStorage::Attachment.all.each { |attachment| attachment.purge }
 
-Evaluation.delete_all;
-Attachment.delete_all;
-Application.delete_all;
-Violation.delete_all;
-Datafile.delete_all;
-Car.delete_all;
-Route.delete_all;
-Licensee.delete_all;
-User.delete_all;
-CriteriumAttachment.delete_all;
-Criterium.delete_all;
-CriteriaGroup.delete_all;
+Evaluation.destroy_all;
+Attachment.destroy_all;
+Application.destroy_all;
+Violation.destroy_all;
+Datafile.destroy_all;
+Car.destroy_all;
+Route.destroy_all;
+Licensee.destroy_all;
+User.destroy_all;
+CriteriumAttachment.destroy_all;
+Criterium.destroy_all;
+CriteriaGroup.destroy_all;
 
 User.create(id: 1, name: 'test1@gmail.com', email: 'test1@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 1, verifier: 1, surveyor: 0})
 User.create(id: 2, name: 'test2@gmail.com', email: 'test2@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 0, verifier: 0, surveyor: 1})
