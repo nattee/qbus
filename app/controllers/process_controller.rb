@@ -19,14 +19,15 @@ class ProcessController < ApplicationController
   end
 
   def registered_post
-    if params[:result] == 'yes'
-      @application.register_reuslt = 'ใบสมัครถูกต้อง'
+    if params[:result] == 'ok'
+      @application.register_result = 'ใบสมัครถูกต้อง'
       @application.confirm_registration
-    else
+    elsif params[:result] == 'no'
       @application.register_result = "ใบสมัครไม่ถูกต้อง #{params[:register_result]}"
       @application.reject_registration
+    else
     end
-    redirect_to process_registers_path
+    redirect_to process_registers_path, notice: "บันทึกผลการตรวจใบสมัครหมายเลข #{@application.id} เรียบร้อย"
   end
 
   def registered

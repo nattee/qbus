@@ -1,41 +1,103 @@
 .row
   .col.s12
     .row
-      .col.s12.m4
+      .col.s12.m6
         .card
           .card-content
-            %h5 ใบสมัคร
-            %h6 ใบสมัครรอการดำเนินการโดยผู้ใช้
-            %h6 ใบสมัครรอการตรวจสอบ
+            %h5 ใบสมัครรอการดำเนินการโดยผู้ใช้
+            ใบสมัครต่อไปนี้ยังมีขั้นตอนที่ต้องดำเนินการโดยผู้ใช้ ขอให้ดำเนินการให้ครบถ้วน
+          .divider
+          .card-content
+            %h6 ใบสมัครอยู่ระหว่างกรอกข้อมูลเบื้องต้น
+            %table
+              %thead
+                %th= t(:name, scope: 'activerecord.attributes.licensee')
+                %th= t(:start, scope: 'activerecord.attributes.route')
+                %th= t(:destination, scope: 'activerecord.attributes.route')
+                %th วันที่ยื่นใบสมัคร
+                %th= t(:state, scope: 'activerecord.attributes.application')
+                %th
+              %tbody
+                - Application.applying.each do |app|
+                  %tr
+                    %td= app.licensee.name
+                    %td= app.route_start
+                    %td= app.route_destination
+                    %td= l(app.created_at, format: '%d %b %Y')
+                    %td= app.state_text
+                    %td
+                      = link_to 'แก้ไข', apply_step1_application_path(app), class: 'button waves-effect waves-light blue darken-2 btn'
+
+          .divider
+          .card-content
+            %h6 ใบสมัครรอการส่งหลักฐานเพิ่มเติม
+            %table
+              %thead
+                %th= t(:name, scope: 'activerecord.attributes.licensee')
+                %th= t(:start, scope: 'activerecord.attributes.route')
+                %th= t(:destination, scope: 'activerecord.attributes.route')
+                %th วันที่ยื่นใบสมัคร
+                %th= t(:state, scope: 'activerecord.attributes.application')
+                %th
+              %tbody
+                - Application.waiting_evidence.each do |app|
+                  %tr
+                    %td= app.licensee.name
+                    %td= app.route_start
+                    %td= app.route_destination
+                    %td= l(app.created_at, format: '%d %b %Y')
+                    %td= app.state_text
+                    %td
+                      = link_to 'แก้ไข', apply_step1_application_path(app), class: 'button waves-effect waves-light blue darken-2 btn'
+
           .card-action
             = link_to 'สร้างใบสมัครใหม่', apply_applications_path, class: 'btn waves-effect waves-light green'
-      .col.s12.m4
+        .card
+          .card-content
+            %h5 ใบสมัครรอการตรวจสอบ
+            ใบสมัครต่อไปนี้อยู่ระหว่างการตรวจสอบข้อมูลหรือหลักฐานต่าง ๆ โดยกรมการขนส่งทางบก ขอให้ผู้ใช้รอผล
+          .card-action
+            = link_to 'สร้างใบสมัครใหม่', apply_applications_path, class: 'btn waves-effect waves-light green'
+      .col.s12.m6
         .card
           .card-content
             .card-title
-              %h5 ระบบงานตรวจสอบใบสมัคร
-            มีใบสมัครจำนวน #{Application.to_be_confirmed.count} ใบที่รอการตรวจสอบ
-          .card-action
-            = link_to 'ตรวจสอบ', process_registers_path
-        .card
+              %h5 ใบสมัครรอการดำเนินการ
+          .divider
           .card-content
             .card-title
-              %h5 ระบบงานนัดหมาย
-            มีใบสมัครจำนวน #{@to_be_appointed.count} ใบที่รอการนัดหมาย และ #{@to_be_appointed_filled.count} ที่รอการส่งต่อไปยังขั้นตอนการประเมิน
-          .card-action
-            = link_to 'นัดหมาย', process_appointments_path
-      .col.s12.m4
-        .card
-          .card-content
-            %span.card-title
-              %h5 ระบบงานประเมิน
-            มีใบสมัครจำนวน #{@to_be_evaluated.count} ใบที่รอการประเมิน
-          .card-action
-            = link_to 'ประเมิน', process_evaluations_path
-        .card
+              %h6 ระบบงานตรวจสอบใบสมัคร
+            .row
+              .col.s8
+                มีใบสมัครจำนวน #{Application.to_be_confirmed.count} ใบที่รอการตรวจสอบ
+              .col.s4.right-align
+                = link_to 'ตรวจสอบ', process_registers_path, class: 'btn'
+          .divider
           .card-content
             .card-title
-              %h5 ระบบงานตัดสินผล
-            มีใบสมัครจำนวน #{@to_be_awarded.count} ใบที่รอการตัดสินผลตราสัญลักษณ์ Q-BUS
-          .card-action
-            = link_to 'ตัดสินผล', process_awards_path
+              %h6 ระบบงานนัดหมาย
+            .row
+              .col.s8
+                มีใบสมัครจำนวน #{@to_be_appointed.count} ใบที่รอการนัดหมาย และ
+                %br
+                มีใบสมัครจำนวน #{@to_be_appointed_filled.count} ใบที่รอการส่งต่อไปยังขั้นตอนการประเมิน
+              .col.s4.right-align
+                = link_to 'นัดหมาย', process_appointments_path, class: 'btn'
+          .divider
+          .card-content
+            .card-title
+              %h6 ระบบงานประเมิน
+            .row
+              .col.s8
+                มีใบสมัครจำนวน #{@to_be_evaluated.count} ใบที่รอการประเมิน
+              .col.s4.right-align
+                = link_to 'ประเมิน', process_evaluations_path, class: 'btn'
+          .divider
+          .card-content
+            .card-title
+              %h6 ระบบงานตัดสินผล
+            .row
+              .col.s8
+                มีใบสมัครจำนวน #{@to_be_awarded.count} ใบที่รอการตัดสินผลตราสัญลักษณ์ Q-BUS
+              .col.s4.right-align
+                = link_to 'ตัดสินผล', process_awards_path, class: 'btn'
