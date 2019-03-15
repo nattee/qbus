@@ -60,7 +60,11 @@ class ApplicationsController < ApplicationController
     @licensee = Licensee.new(licensee_params)
     @application.licensee = @licensee
     if @application.save
-      redirect_to apply_step2_application_path(@application)
+      if @application.category3?
+        redirect_to apply_step3_application_path(@application)
+      else
+        redirect_to apply_step2_application_path(@application)
+      end
     else
       redirect_to apply_applications_path
     end

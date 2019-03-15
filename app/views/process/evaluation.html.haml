@@ -44,8 +44,9 @@
               %a{href: '#tab_app'}ข้อมูลใบสมัคร
             %li.tab
               %a{href: '#tab_evidence'}หลักฐาน
-            %li.tab
-              %a{href: '#tab_car'}ข้อมูลรถ
+            - unless @application.category3?
+              %li.tab
+                %a{href: '#tab_car'}ข้อมูลรถ
         #tab_eval
           .card-content.orange.lighten-5
             - last_cg = nil
@@ -91,6 +92,7 @@
             = render partial: "applications/application"
         #tab_route
           .card-content.orange.lighten-5
-        #tab_car
-          .card-content.orange.lighten-5
-            = render partial: "applications/cars"
+        - unless @application.category3?
+          #tab_car
+            .card-content.orange.lighten-5
+              = render partial: "applications/cars"
