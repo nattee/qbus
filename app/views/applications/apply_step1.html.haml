@@ -13,9 +13,15 @@
               .section
                 %h5 ข้อมูลผู้ประกอบการ
                 .row
-                  .input-field.col.s12
+                  .input-field.col.s6
                     = text_field_tag 'licensee[name]', @application.try(:licensee).try(:name)
                     = f.label 'licensee[name]', t(:name , scope: 'activerecord.attributes.licensee')
+                .row
+                  .input-field.col.s6
+                    = f.input_field :license_no
+                    = f.label :license_no
+                    = f.error :license_no
+                    /= f.label 'licensee[name]', t(:name , scope: 'activerecord.attributes.licensee')
                 .row
                   .col.s12
                     %h6 หมวดการเดินรถ
