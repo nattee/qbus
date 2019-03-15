@@ -3,7 +3,7 @@
     .card
       .card-content
         .card-title
-          %h4 หลักฐานสำหรับการประเมิน
+          %h4 ส่งหลักฐานสำหรับการประเมิน ใบสมัครหมายเลข #{@application.id}
 
         .section
           .row
@@ -13,33 +13,36 @@
               .card
                 .card-content
                   ใบสมัครนี้ได้รับการประเมินเบื้องต้นแล้ว ให้ผู้สมัครทำการนำส่งหลักฐานในหัวข้อต่าง ๆ ต่อไปนี้โดยให้ส่งเป็นไฟล์ประเภท pdf 
-        .divider
-        .section
-          .row
-            .col.s12.m4.push-m8
-              .card
-                .card-content
-                  การส่งไฟล์ทำได้โดยเลือก "ประเภทของไฟล์" จากนั้นให้กดปุ่ม "แนบไฟล์" แล้วเลือกไฟล์ที่ต้องการ เมื่อเลือกแล้วให้กดปุ่ม "ส่ง"
-            .col.s12.m8.pull-m4
-              %h4 แนบหลักฐาน
-              = simple_form_for @att do |f|
-                .row
-                  .input-field.col.s12
-                    = f.input_field :criterium_attachment_id, data: {contrainwidth: 'false'}, collection: @application.sorted_attachments.map {|x| ["(#{x.criterium_attachment.criterium.name}) #{x.criterium_attachment.name}",x.criterium_attachment_id] }
-                    = f.label 'ประเภทหลักฐาน'
-                .row
-                  .input-field.file-field.col.s12
-                    .btn.blue
-                      %span เลือกไฟล์
-                      = file_field_tag 'contract'
-                    .file-path-wrapper
-                      = text_field_tag 'contract_file_name'
-                .row
-                  .col.s12
-                    = f.button :submit, 'ส่งไฟล์แนบ', class: "btn waves-light left green"
-        .divider
-        .section
-          .row
-            .col.s12
-              %h4 รายการหลักฐาน
-              = render "process/evidence"
+    .card
+      .card-content
+        .row
+          .col.s12.m4.push-m8
+            .card
+              .card-content
+                การส่งไฟล์ทำได้โดยเลือก "ประเภทของไฟล์" จากนั้นให้กดปุ่ม "แนบไฟล์" แล้วเลือกไฟล์ที่ต้องการ เมื่อเลือกแล้วให้กดปุ่ม "ส่ง"
+                %br
+                เมื่อแนบหลักฐานครบแล้ว ให้กดปุ่ม "ยืนยันหลักฐาน" ด้านล่างนี้
+            = link_to 'ยืนยันหลักฐาน', finish_add_evidences_application_path(@application), class: 'btn waves-effect waves-light', data: {confirm: 'เมื่อยืนยันแล้ว จะไม่สามารถแก้ไขเพิ่มเติมหลักฐานได้อีก ท่านจะยืนยันหรือไม่?'}
+          .col.s12.m8.pull-m4
+            %h4 แนบหลักฐาน
+            = simple_form_for @att do |f|
+              .row
+                .input-field.col.s12
+                  = f.input_field :criterium_attachment_id, data: {contrainwidth: 'false'}, collection: @application.sorted_attachments.map {|x| ["(#{x.criterium_attachment.criterium.name}) #{x.criterium_attachment.name}",x.criterium_attachment_id] }
+                  = f.label 'ประเภทหลักฐาน'
+              .row
+                .input-field.file-field.col.s12
+                  .btn.blue
+                    %span เลือกไฟล์
+                    = file_field_tag 'contract'
+                  .file-path-wrapper
+                    = text_field_tag 'contract_file_name'
+              .row
+                .col.s12
+                  = f.button :submit, 'ส่งไฟล์แนบ', class: "btn waves-light left green"
+      .divider
+      .card-content
+        .row
+          .col.s12
+            %h4 รายการหลักฐาน
+            = render "process/evidence"

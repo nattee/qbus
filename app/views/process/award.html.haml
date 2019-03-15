@@ -11,11 +11,11 @@
             .card-title
               %h4 การบันทึกผลการตัดสิน
             %h5 บันทึกผลการตัดสิน
-            = simple_form_for @application do |f|
+            = form_with url: process_award_path(@application), local: true do |f|
               .row
                 .col.s12
                   %label
-                    = radio_button_tag :result, 'yes'
+                    = radio_button_tag :result, 'ok'
                     %span ตัดสินให้ตราสัญลักษณ์
               .section
               .row
@@ -25,9 +25,9 @@
                     %span ตัดสินไม่ให้ตรา
               .row
                 .input-field.col.s12
-                  = f.input :award_remark
-              = f.button :submit, 'ยืนยันการตัดสินผล'
-              = link_to 'ย้อนกลับ', process_awards_path, class: 'waves-effect waves-light green btn'
+                  = f.text_area :award_remark, class: 'materialize-textarea'
+              %button.btn.waves-effect.waves-light ยืนยันการตัดสินผล
+              /= link_to 'ย้อนกลับ', process_awards_path, class: 'waves-effect waves-light orange btn'
     .card
       .card-content
         .row

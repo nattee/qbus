@@ -7,10 +7,16 @@ class ProcessController < ApplicationController
 
 
   def dashboard
+    @applying = Application.applying
+    @need_evidences = Application.waiting_evidence
+    @to_be_confirmed = Application.to_be_confirmed
     @to_be_appointed = Application.to_be_appointed
     @to_be_appointed_filled = Application.to_be_appointed_filled
     @to_be_evaluated = Application.to_be_evaluated
     @to_be_awarded = Application.to_be_awarded
+
+    @to_be_done = @to_be_confirmed + @to_be_evaluated + @to_be_awarded
+    @finished = Application.finished
   end
 
   def registered_index
@@ -87,13 +93,22 @@ class ProcessController < ApplicationController
 
   def award_index
     @to_be_awarded = Application.to_be_awarded
-    @awarded_recent = Application.awarded_recent
+    @awarded_recent = Application.latest_awarded
   end
 
   def award
   end
 
   def award_post
+    if params[:result] == 'ok'
+      @application.award = 'ได้รับตราสัญลักษณ์'
+    elsif params[:result] == 'no'
+      @application.award = 'ไม่ได้รับตราสัญลักษณ์'
+      @application.award_remark = params[:award_remark]
+    else
+    end
+    @application.set_award
+    redirect_to process_dashboard_path, notice: "บันทึกการตัดสินผลเรียบร้อย"
   end
 
   private

@@ -9,56 +9,102 @@
           .divider
           .card-content
             %h6 ใบสมัครอยู่ระหว่างกรอกข้อมูลเบื้องต้น
-            %table
-              %thead
-                %th= t(:name, scope: 'activerecord.attributes.licensee')
-                %th= t(:start, scope: 'activerecord.attributes.route')
-                %th= t(:destination, scope: 'activerecord.attributes.route')
-                %th วันที่ยื่นใบสมัคร
-                %th= t(:state, scope: 'activerecord.attributes.application')
-                %th
-              %tbody
-                - Application.applying.each do |app|
-                  %tr
-                    %td= app.licensee.name
-                    %td= app.route_start
-                    %td= app.route_destination
-                    %td= l(app.created_at, format: '%d %b %Y')
-                    %td= app.state_text
-                    %td
-                      = link_to 'แก้ไข', apply_step1_application_path(app)
-                      /= link_to 'แก้ไข', apply_step1_application_path(app), class: 'button waves-effect waves-light blue darken-2 btn'
+            - if @applying.count > 0
+              %table
+                %thead
+                  %th= t(:name, scope: 'activerecord.attributes.licensee')
+                  %th= t(:start, scope: 'activerecord.attributes.route')
+                  %th= t(:destination, scope: 'activerecord.attributes.route')
+                  %th วันที่ยื่นใบสมัคร
+                  %th= t(:state, scope: 'activerecord.attributes.application')
+                  %th
+                %tbody
+                  - @applying.each do |app|
+                    %tr
+                      %td= app.licensee.name
+                      %td= app.route_start
+                      %td= app.route_destination
+                      %td= l(app.created_at, format: '%d %b %Y')
+                      %td= app.state_text
+                      %td
+                        = link_to 'แก้ไข', apply_step1_application_path(app)
+                        /= link_to 'แก้ไข', apply_step1_application_path(app), class: 'button waves-effect waves-light blue darken-2 btn'
+            - else
+              ไม่มีใบสมัครอยู่ระหว่างการกรอกข้อมูลเบื้องต้น
 
           .divider
           .card-content
             %h6 ใบสมัครรอการส่งหลักฐานเพิ่มเติม
-            %table
-              %thead
-                %th= t(:name, scope: 'activerecord.attributes.licensee')
-                %th= t(:start, scope: 'activerecord.attributes.route')
-                %th= t(:destination, scope: 'activerecord.attributes.route')
-                %th วันที่ยื่นใบสมัคร
-                %th= t(:state, scope: 'activerecord.attributes.application')
-                %th
-              %tbody
-                - Application.waiting_evidence.each do |app|
-                  %tr
-                    %td= app.licensee.name
-                    %td= app.route_start
-                    %td= app.route_destination
-                    %td= l(app.created_at, format: '%d %b %Y')
-                    %td= app.state_text
-                    %td
-                      = link_to 'ส่งหลักฐาน', add_evidences_application_path(app)
-
+            - if @need_evidences.count > 0
+              %table
+                %thead
+                  %th= t(:name, scope: 'activerecord.attributes.licensee')
+                  %th= t(:start, scope: 'activerecord.attributes.route')
+                  %th= t(:destination, scope: 'activerecord.attributes.route')
+                  %th วันที่ยื่นใบสมัคร
+                  %th= t(:state, scope: 'activerecord.attributes.application')
+                  %th
+                %tbody
+                  - @need_evidences.each do |app|
+                    %tr
+                      %td= app.licensee.name
+                      %td= app.route_start
+                      %td= app.route_destination
+                      %td= l(app.created_at, format: '%d %b %Y')
+                      %td= app.state_text
+                      %td
+                        = link_to 'ส่งหลักฐาน', add_evidences_application_path(app)
+            - else
+              ไม่มีใบสมัครที่ต้องส่งหลักฐานเพิ่มเติม
           .card-action
             = link_to 'สร้างใบสมัครใหม่', apply_applications_path, class: 'btn waves-effect waves-light green'
         .card
           .card-content
-            %h5 ใบสมัครรอการตรวจสอบ
-            ใบสมัครต่อไปนี้อยู่ระหว่างการตรวจสอบข้อมูลหรือหลักฐานต่าง ๆ โดยกรมการขนส่งทางบก ขอให้ผู้ใช้รอผล
-          .card-action
-            = link_to 'สร้างใบสมัครใหม่', apply_applications_path, class: 'btn waves-effect waves-light green'
+            %h5 ใบสมัครรอการตรวจสอบโดยเจ้าหน้าที่
+            - if @to_be_done.count > 0
+              ใบสมัครต่อไปนี้อยู่ระหว่างการตรวจสอบข้อมูลหรือหลักฐานต่าง ๆ โดยกรมการขนส่งทางบก ขอให้ผู้ใช้รอผล
+              %table
+                %thead
+                  %th= t(:name, scope: 'activerecord.attributes.licensee')
+                  %th= t(:start, scope: 'activerecord.attributes.route')
+                  %th= t(:destination, scope: 'activerecord.attributes.route')
+                  %th วันที่ยื่นใบสมัคร
+                  %th= t(:state, scope: 'activerecord.attributes.application')
+                %tbody
+                  - @to_be_done.each do |app|
+                    %tr
+                      %td= app.licensee.name
+                      %td= app.route_start
+                      %td= app.route_destination
+                      %td= l(app.created_at, format: '%d %b %Y')
+                      %td= app.state_text
+            - else
+              ไม่มีใบสมัครรอการตรวจสอบ
+
+        .card
+          .card-content
+            %h5 ใบสมัครดำเนินการเสร็จแล้ว
+            - if @finished.count > 0
+              ใบสมัครต่อไปนี้ดำเนินการเสร็จสิ้นแล้ว สามารถตรวจดูผลการดำเนินการได้ด้านล่างนี้
+              %table
+                %thead
+                  %th= t(:name, scope: 'activerecord.attributes.licensee')
+                  %th= t(:start, scope: 'activerecord.attributes.route')
+                  %th= t(:destination, scope: 'activerecord.attributes.route')
+                  %th วันที่ยื่นใบสมัคร
+                  %th วันที่ตัดสินผล
+                  %th ผลการตัดสิน
+                %tbody
+                  - @finished.each do |app|
+                    %tr
+                      %td= app.licensee.name
+                      %td= app.route_start
+                      %td= app.route_destination
+                      %td= l(app.created_at, format: '%d %b %Y')
+                      %td= l(app.awarded_date, format: '%d %b %Y')
+                      %td= app.award
+            - else
+              ไม่มีใบสมัครที่ดำเนินการเสร็จแล้ว
       .col.s12.m5
         .card
           .card-content
@@ -70,7 +116,7 @@
               %h6 ระบบงานตรวจสอบใบสมัคร
             .row
               .col.s8
-                มีใบสมัครจำนวน #{Application.to_be_confirmed.count} ใบที่รอการตรวจสอบ
+                มีใบสมัครจำนวน #{@to_be_confirmed.count} ใบที่รอการตรวจสอบ
               .col.s4.right-align
                 = link_to 'ตรวจสอบ', process_registers_path, class: 'btn'
           .divider

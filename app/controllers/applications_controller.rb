@@ -2,7 +2,7 @@ class ApplicationsController < ApplicationController
   before_action :set_application, only: [:show, :edit, :update, :destroy, 
                                          :apply_step1, :apply_step2, :apply_step3,
                                          :post_step1,:post_step2,:post_step3,
-                                         :add_evidences,:add_attachment,
+                                         :add_evidences,:add_attachment,:finish_add_evidences,
                                          :add_car
                                         ]
 
@@ -42,7 +42,7 @@ class ApplicationsController < ApplicationController
     @application = Application.new(application_params)
 
     if @application.save
-      redirect_to apply_step1_application_path(@application) , notice: 'aa'
+      redirect_to apply_step1_application_path(@application)
     else
       redirect_to apply_applications_path
     end
@@ -60,7 +60,7 @@ class ApplicationsController < ApplicationController
     @licensee = Licensee.new(licensee_params)
     @application.licensee = @licensee
     if @application.save
-      redirect_to apply_step2_application_path(@application) , notice: 'aa'
+      redirect_to apply_step2_application_path(@application)
     else
       redirect_to apply_applications_path
     end
@@ -71,7 +71,7 @@ class ApplicationsController < ApplicationController
     #car data
 
     if @application.save
-      redirect_to apply_step3_application_path(@application) , notice: 'aa'
+      redirect_to apply_step3_application_path(@application)
     else
       redirect_to apply_applications_path
     end
@@ -104,6 +104,11 @@ class ApplicationsController < ApplicationController
     @att = Attachment.create
     @application.attachments << @att
     @application.save
+  end
+
+  def finish_add_evidences
+    @application.submit_for_approve
+    redirect_to process_dashboard_path, notice: "ได้ยืนยันการยื่นหลักฐานของใบสมัครหมายเลข #{@application.id} แล้ว"
   end
 
 

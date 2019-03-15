@@ -35,6 +35,7 @@ class Application < ApplicationRecord
   scope :latest_evaluated, -> {where(state: [:confirmed, :evaluated]).where('evaluated_date >= ?',30.days.ago) }
 
   scope :to_be_awarded, -> {where(state: :evaluated) }
+  scope :finished, -> {where(state: :awarded) }
   scope :latest_awarded, -> {where(state: :awarded).where('awarded_date >= ?',30.days.ago) }
 
   def to_label
@@ -79,7 +80,8 @@ class Application < ApplicationRecord
   #state manipulation
   def confirm_registration() self.confirmed_date = Time.zone.now; change_state(:confirmed)  end
   def reject_registration()  self.confirmed_date = Time.zone.now; change_state(:applying)  end
-  def submit_for_approve()   change_state(:submitted)  end
+  def submit_for_approve()   self.submitted_date = Time.zone.now; change_state(:submitted)  end
+  def set_award()            self.awarded_date = Time.zone.now; change_state(:awarded)  end
 
 
   def reject_evidence(reason)
