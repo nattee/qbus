@@ -1,5 +1,7 @@
 class RemoveTypeFromCars < ActiveRecord::Migration[5.2]
   def change
-    #remove_column :cars, :car_type, :integer
+    change_table :cars do |t|
+      t.rename :type, :car_type
+    end
   end
 end

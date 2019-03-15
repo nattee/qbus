@@ -25,18 +25,28 @@
             = link_to 'ยืนยันหลักฐาน', finish_add_evidences_application_path(@application), class: 'btn waves-effect waves-light', data: {confirm: 'เมื่อยืนยันแล้ว จะไม่สามารถแก้ไขเพิ่มเติมหลักฐานได้อีก ท่านจะยืนยันหรือไม่?'}
           .col.s12.m8.pull-m4
             %h4 แนบหลักฐาน
-            = simple_form_for @att do |f|
+            = simple_form_for @attachment, url: add_attachment_application_path(@application), method: :post , html: { multipart: true } do |f|
               .row
                 .input-field.col.s12
-                  = f.input_field :criterium_attachment_id, data: {contrainwidth: 'false'}, collection: @application.sorted_attachments.map {|x| ["(#{x.criterium_attachment.criterium.name}) #{x.criterium_attachment.name}",x.criterium_attachment_id] }
+                  = f.input_field :criterium_attachment_id, data: {constrainwidth: 'false'}, collection: @application.sorted_attachments.map {|x| ["(#{x.criterium_attachment.criterium.name}) #{x.criterium_attachment.name}",x.criterium_attachment_id] }
                   = f.label 'ประเภทหลักฐาน'
               .row
-                .input-field.file-field.col.s12
-                  .btn.blue
-                    %span เลือกไฟล์
-                    = file_field_tag 'contract'
-                  .file-path-wrapper
-                    = text_field_tag 'contract_file_name'
+                .input-field.col.s12
+                  = f.label :data
+                  = f.full_error :data
+              .row
+                .input-field.col.s11.offset-s1
+                  = f.file_field :data
+                  -#.btn.blue
+                  -#  %span เลือกไฟล์
+                  -#  = file_field_tag :data
+                  -#.file-path-wrapper
+                  -#  = text_field_tag :data
+              .row
+                .input-field.col.s12
+                  = f.label :filename
+                  = f.input_field :filename
+                  = f.full_error :filename
               .row
                 .col.s12
                   = f.button :submit, 'ส่งไฟล์แนบ', class: "btn waves-light left green"

@@ -18,32 +18,33 @@
     %h2.white-text ข่าวประชาสัมพันธ์ 2
 .container{style: 'width: 70% !important;'}
   .row
-    .col.s12.m4
-      .card.border-radius-6
-        .card-content
-          = form_with url: login_path do |f|
-            .card-title
-              %h4 เข้าสู่ระบบ
-            .row
-              .input-field.col.s12
-                %i.material-icons.prefix.pt-2 person_outline
-                = f.text_field :username
-                = f.label :username
-            .row
-              .input-field.col.s12
-                %i.material-icons.prefix.pt-2 lock_outline
-                = f.password_field :password
-                = f.label :password
-            .row
-              .input-field.col.s12
-                = f.submit 'เข้าสู่ระบบ', class: 'btn border-round col s12'
-            .row
-              .input-field.col.s6
-                %p.margin.medium-small
-                  = link_to 'ลงทะเบียน', register_path
-              .input-field.col.s6
-                %p.margin.right-align.medium-small
-                  = link_to 'ลืมรหัสผ่าน', register_path
+    - if !logged_in?
+      .col.s12.m4
+        .card.border-radius-6
+          .card-content
+            = simple_form_for(:session, :url => login_path, :method => :post) do |f|
+              .card-title
+                %h4 เข้าสู่ระบบ
+              .row
+                .input-field.col.s12
+                  %i.material-icons.prefix person_outline
+                  = f.input_field :email
+                  = f.label :email
+              .row
+                .input-field.col.s12
+                  %i.material-icons.prefix lock_outline
+                  = f.input_field :password
+                  = f.label :password
+              .row
+                .input-field.col.s12
+                  = f.submit 'เข้าสู่ระบบ', class: 'btn border-round col s12'
+              .row
+                .input-field.col.s6
+                  %p.margin.medium-small
+                    = link_to 'ลงทะเบียน', register_path
+                .input-field.col.s6
+                  %p.margin.right-align.medium-small
+                    = link_to 'ลืมรหัสผ่าน', register_path
     .col.s12.m8
       .card
         .card-content

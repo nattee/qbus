@@ -8,7 +8,7 @@
           .col.s12.m3
             = render "current_apply_step"
           .col.s12.m9
-            = simple_form_for(@application, url: apply_step1_application_path(@application), method: :post) do |f|
+            = simple_form_for(@application, url: apply_step1_application_path(@application), method: :post, html: { multipart: true }) do |f|
               %h4 กรอกข้อมูลพื้นฐาน
               .section
                 %h5 ข้อมูลผู้ประกอบการ
@@ -33,7 +33,7 @@
                     ให้ผู้สมัครทำการอัพโหลดเอกสารต่อไปนี้ ในรูปแบบไฟล์ภาพถ่ายหรือการแสกนเอกสาร โดยให้ใช้ไฟล์ในรูปแบบ pdf, jpg หรือ png เท่านั้น โดยที่ไฟล์ดังกล่าวจะต้องเห็นรายละเอียดที่ชัดเจน
                     %ol
                       %li หน้าแรกของสัญญาการเดินรถ
-                      %li 
+                      %li
                         หนังสือยืนยันการเข้าร่วมโครงการ (สามารถดาวน์โหลดได้จาก
                         %a ที่นี่
                         )
@@ -41,20 +41,28 @@
                 .row
                   .col.s12.m6
                     %h6 สัญญาการเดินรถ
-                    .input-field.file-field
-                      .btn
-                        %span เลือกไฟล์
-                        = file_field_tag 'contract'
-                      .file-path-wrapper
-                        = text_field_tag 'contract_file_name'
+                    .input-field
+                      = file_field_tag 'attachment[contract_data]'
+                    .input-field
+                      = text_field_tag 'attachment[contract_file_name]'
+                    =#.input-field.file-field
+                    =#  .btn
+                    =#    %span เลือกไฟล์
+                    =#    = file_field_tag 'attachment[contract_data]'
+                    =#  .file-path-wrapper
+                    =#    = text_field_tag 'attachment[contract_file_name]'
                   .col.s12.m6
                     %h6 เอกสารยืนยันการเข้าร่วมโครงการ
-                    .input-field.file-field
-                      .btn
-                        %span เลือกไฟล์
-                        = file_field_tag 'contract'
-                      .file-path-wrapper
-                        = text_field_tag 'contract_file_name'
+                    .input-field
+                      = file_field_tag 'attachment[signup_data]'
+                    .input-field
+                      = text_field_tag 'attachment[signup_file_name]'
+                    =#.input-field.file-field
+                    =#  .btn
+                    =#    %span เลือกไฟล์
+                    =#    = file_field_tag 'attachment[signup_data]'
+                    =#  .file-path-wrapper
+                    =#    = text_field_tag 'attachment[signup_file_name]'
 
 
               .divider
@@ -81,6 +89,6 @@
 
               = hidden_field_tag 'application[stage]', 'step1'
               = f.button :submit, 'ไปยังขั้นตอนต่อไป', class: "btn waves-light left"
-              
 
-            
+
+

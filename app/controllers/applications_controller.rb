@@ -1,5 +1,5 @@
 class ApplicationsController < ApplicationController
-  before_action :set_application, only: [:show, :edit, :update, :destroy, 
+  before_action :set_application, only: [:show, :edit, :update, :destroy,
                                          :apply_step1, :apply_step2, :apply_step3,
                                          :post_step1,:post_step2,:post_step3,
                                          :add_evidences,:add_attachment,:finish_add_evidences,
@@ -69,6 +69,13 @@ class ApplicationsController < ApplicationController
       redirect_to apply_applications_path
     end
 
+    if !@application.attach_contract_data(attachment_contract_signup_params)
+      redirect_to apply_step1_applications_path(@application), notice: 'failed to attach contract data'
+    end
+    if !@application.attach_signup_data(attachment_contract_signup_params)
+      redirect_to apply_step1_applications_path(@application), notice: 'failed to attach signup data'
+    end
+
   end
 
   def post_step2
@@ -100,14 +107,17 @@ class ApplicationsController < ApplicationController
   #attachment index
   def add_evidences
     @application.add_missing_attachments
-    @att = Attachment.new
+    @attachment = Attachment.new
   end
 
   #post
   def add_attachment
-    @att = Attachment.create
-    @application.attachments << @att
+    @attachment = Attachment.create(attachment_params)
+    @attachment.data.attach(attachment_params[:data])
+    @attachment.save
+    @application.attachments << @attachment
     @application.save
+    redirect_to add_evidences_application_path(@application), notice: 'Attachment is submitted'
   end
 
   def finish_add_evidences
@@ -182,6 +192,14 @@ class ApplicationsController < ApplicationController
 
     def licensee_params
       params.require(:licensee).permit(:name, :contact, :contact_tel)
+    end
+
+    def attachment_contract_signup_params
+      params.require(:attachment).permit(:contract_data, :contract_file_name, :signup_data, :signup_file_name)
+    end
+
+    def attachment_params
+      params.require(:attachment).permit(:criterium_attachment_id, :data)
     end
 
 end

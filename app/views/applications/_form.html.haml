@@ -24,7 +24,7 @@
           = f.full_error :user
       .row
         .input-field.col.s12
-          %i.material-icons.prefix business_center
+          %i.material-icons.prefix help
           = f.input_field :state, :as => :select, data: {contrainwidth: 'false'}, collection: Application.states_t
           = f.label :state
           = f.full_error :state

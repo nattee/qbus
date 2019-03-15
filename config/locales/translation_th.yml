@@ -59,6 +59,11 @@ th:
         data: ข้อมูลของไฟล์  #g
         criterium_attachment: ไฟล์แนบของข้อกำหนด
         application: ใบสมัคร
+        attachment_type: ประเภทไฟล์
+        attachment_types:
+          criterium_evidence: หลักฐานสำหรับการประเมิน
+          contract: สัญญาการเดินรถ
+          signup: เอกสารยืนยันการเข้าร่วมโครงการ
 
       car:
         plate: หมายเลขป้ายทะเบียน  #g
