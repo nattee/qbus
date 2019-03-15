@@ -27,8 +27,8 @@ class Application < ApplicationRecord
   scope :latest_confirmed, -> { where(state: [:confirmed,:applying]).where('confirmed_date >= ?',30.days.ago) }
 
 
-  scope :to_be_appointed, -> { where(state: :confirmed, appointment_date: nil) }
-  scope :to_be_appointed_filled, -> { where(state: :confirmed).where.not(appointment_date: !nil) }
+  scope :to_be_appointed, -> { where(state: [:confirmed, :submitted], appointment_date: nil) }
+  scope :to_be_appointed_filled, -> { where(state: [:confirmed, :submitted]).where.not(appointment_date: !nil) }
 
   scope :to_be_evaluated, -> { where(state: :submitted) }
   scope :to_be_evaluated_filled, -> { where(state: :submitted).where(id:1999) }
@@ -42,7 +42,7 @@ class Application < ApplicationRecord
     "#{self.number} - #{self.state_text}"
   end
 
-  #some getter for enum
+  #some getter
   def category_text
     Application.category_enum_to_text(category)
   end
@@ -59,6 +59,11 @@ class Application < ApplicationRecord
   def route_destination
     return '-' if category3? or route == nil
     return route.destination
+  end
+
+  def appoint_date
+    return I18n.localize(appointment_date, format: '%d %b %Y') if appointment_date
+    return 'ยังไม่ได้นัดหมาย'
   end
 
   def self.state_enum_to_text(enum)

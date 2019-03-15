@@ -47,7 +47,6 @@
                 %th= t(:appointment_date, scope: 'activerecord.attributes.application')
                 %th= t(:appointment_remark, scope: 'activerecord.attributes.application')
                 %th
-                %th
               %tbody
                 - @to_be_appointed_filled.each do |app|
                   %tr
@@ -61,7 +60,6 @@
                     %td= app.appointment_remark
                     %td
                       %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date, remark: app.appointment_remark}} แก้ไขนัดหมาย
-                    %td= link_to 'ส่งต่อ', process_appointed_path(app.id), class: 'waves-effect waves-light green btn'
 
 
 /modal

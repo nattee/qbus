@@ -22,7 +22,7 @@ th:
         state: สถานะใบสมัคร  #g
         states:
           applying: กำลังสมัคร
-          registered: รอการตรวจสอบหลักฐาน
+          registered: รอตรวจใบสมัคร
           confirmed: รอหลักฐานประกอบการประเมิน
           submitted: รอการตรวจหลักฐาน
           evaluated: หลักฐานครบ รอการตัดสินผล
