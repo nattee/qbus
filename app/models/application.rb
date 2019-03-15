@@ -16,6 +16,7 @@ class Application < ApplicationRecord
   belongs_to :appointment_user, :class_name => :User, :foreign_key => "appointment_user_id", optional: true
   has_many :evaluations
   has_many :attachments
+  has_many :cars
 
   #scope
   #for user
