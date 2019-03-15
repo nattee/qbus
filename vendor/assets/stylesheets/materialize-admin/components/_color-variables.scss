@@ -81,6 +81,23 @@ $deep-purple: (
   "accent-4":    #6200ea
 );
 
+$dlp-purple: (
+  "base":       #39217e,
+  "lighten-5":  #daceef,
+  "lighten-4":  #bda7e3,
+  "lighten-3":  #a88cda,
+  "lighten-2":  #916dd1,
+  "lighten-1":  #7c52c8,
+  "darken-1":   #563098,
+  "darken-2":   #46287d,
+  "darken-3":   #351e5e,
+  "darken-4":   #261543,
+  "accent-1":   #e7bfff,
+  "accent-2":   #ba94ff,
+  "accent-3":   #8e6cd3,
+  "accent-4":   #6445a8
+);
+
 $indigo: (
   "base":       #3f51b5,
   "lighten-5":  #e8eaf6,
@@ -334,7 +351,8 @@ $colors: (
   "materialize-red": $materialize-red,
   "red": $red,
   "pink": $pink,
-  "purple": $purple,
+  //"purple": $purple,
+  "purple": $dlp-purple,
   "deep-purple": $deep-purple,
   "indigo": $indigo,
   "blue": $blue,
@@ -351,7 +369,9 @@ $colors: (
   "brown": $brown,
   "blue-grey": $blue-grey,
   "grey": $grey,
-  "shades": $shades
+  "shades": $shades,
+  "dlp-purple": $dlp-purple
+
 ) !default;
 
 

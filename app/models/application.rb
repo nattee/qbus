@@ -18,8 +18,14 @@ class Application < ApplicationRecord
   has_many :attachments
 
   #scope
+  #for user
+  scope :applying, -> { where(state: :applying) }
+  scope :waiting_evidence, -> { where(state: :confirmed) }
+
+  #for officer
   scope :to_be_confirmed, -> { where(state: :registered) }
   scope :latest_confirmed, -> { where(state: [:confirmed,:applying]).where('confirmed_date >= ?',30.days.ago) }
+
 
   scope :to_be_appointed, -> { where(state: :confirmed, appointment_date: nil) }
   scope :to_be_appointed_filled, -> { where(state: :confirmed).where.not(appointment_date: !nil) }

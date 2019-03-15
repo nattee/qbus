@@ -51,8 +51,8 @@
                 - @latest_confirmed.each do |app|
                   %tr
                     %td= app.licensee.name
-                    %td= app.route.start
-                    %td= app.route.destination
+                    %td= app.route_start
+                    %td= app.route_destination
                     %td= l(app.created_at, format: '%d %b %Y')
                     %td= app.contact
                     %td= app.contact_tel
