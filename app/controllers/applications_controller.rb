@@ -59,6 +59,16 @@ class ApplicationsController < ApplicationController
 
     @licensee = Licensee.new(licensee_params)
     @application.licensee = @licensee
+
+    if !@application.attach_contract_data(attachment_contract_signup_params)
+      redirect_to apply_step1_application_path(@application), error: 'กรุณาใส่ข้อมูลหน้าแรกใบอนุญาต'
+      return
+    end
+    if !@application.attach_signup_data(attachment_contract_signup_params)
+      redirect_to apply_step1_application_path(@application), notice: 'กรุณาแนบไฟล์หนังสือยืนยันเข้าร่วมโครงการ'
+      return
+    end
+
     if @application.save
       if @application.category3?
         redirect_to apply_step3_application_path(@application)
@@ -66,15 +76,9 @@ class ApplicationsController < ApplicationController
         redirect_to apply_step2_application_path(@application)
       end
     else
-      redirect_to apply_applications_path
+      redirect_to(apply_applications_path)
     end
 
-    if !@application.attach_contract_data(attachment_contract_signup_params)
-      redirect_to apply_step1_applications_path(@application), notice: 'failed to attach contract data'
-    end
-    if !@application.attach_signup_data(attachment_contract_signup_params)
-      redirect_to apply_step1_applications_path(@application), notice: 'failed to attach signup data'
-    end
 
   end
 
