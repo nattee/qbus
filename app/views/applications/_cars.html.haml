@@ -4,13 +4,13 @@
       %thead
         %th= t :plate, scope: 'activerecord.attributes.car'
         %th= t :chassis, scope: 'activerecord.attributes.car'
-        %th
+        %th= t :car_type, scope: 'activerecord.attributes.car'
         %th
       %tbody
-        - @application.route.cars.each do |car|
+        - @application.cars.each do |car|
           %tr
             %td= car.plate
             %td= car.chassis
+            %td= car.car_type
             %td
-            %td
-    
+
