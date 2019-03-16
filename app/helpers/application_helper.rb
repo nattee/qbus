@@ -4,14 +4,14 @@ module ApplicationHelper
     success: 'green lighten-4',
     error: 'red lighten-4',
     alert: 'orange lighten-4',
-    notice: 'cyan lighten-4'
+    notice: 'light-blue lighten-4'
   }
 
   FLASH_MSG_TEXTCOLOR = {
     success: 'green-text',
     error: 'red-text',
     alert: 'orange-text',
-    notice: 'cyan-text',
+    notice: 'black-text',
   }
   def flash_class(flash_type)
     FLASH_MSG_CLASS.fetch(flash_type.to_sym, flash_type.to_s)

@@ -2,7 +2,7 @@ class ApplicationsController < ApplicationController
   before_action :set_application, only: [:show, :edit, :update, :destroy,
                                          :apply_step1, :apply_step2, :apply_step3,
                                          :post_step1,:post_step2,:post_step3,
-                                         :add_evidences,:add_attachment,
+                                         :add_evidences,:add_attachment,:finish_add_evidences,
                                          :add_car
                                         ]
 
@@ -42,7 +42,7 @@ class ApplicationsController < ApplicationController
     @application = Application.new(application_params)
 
     if @application.save
-      redirect_to apply_step1_application_path(@application) , notice: 'aa'
+      redirect_to apply_step1_application_path(@application)
     else
       redirect_to apply_applications_path
     end
@@ -59,18 +59,26 @@ class ApplicationsController < ApplicationController
 
     @licensee = Licensee.new(licensee_params)
     @application.licensee = @licensee
-    if @application.save
-      redirect_to apply_step2_application_path(@application) , notice: 'aa'
-    else
-      redirect_to apply_applications_path
-    end
 
     if !@application.attach_contract_data(attachment_contract_signup_params)
-      redirect_to apply_step1_applications_path(@application), notice: 'failed to attach contract data'
+      redirect_to apply_step1_application_path(@application), error: 'กรุณาใส่ข้อมูลหน้าแรกใบอนุญาต'
+      return
     end
     if !@application.attach_signup_data(attachment_contract_signup_params)
-      redirect_to apply_step1_applications_path(@application), notice: 'failed to attach signup data'
+      redirect_to apply_step1_application_path(@application), notice: 'กรุณาแนบไฟล์หนังสือยืนยันเข้าร่วมโครงการ'
+      return
     end
+
+    if @application.save
+      if @application.category3?
+        redirect_to apply_step3_application_path(@application)
+      else
+        redirect_to apply_step2_application_path(@application)
+      end
+    else
+      redirect_to(apply_applications_path)
+    end
+
 
   end
 
@@ -78,7 +86,7 @@ class ApplicationsController < ApplicationController
     #car data
 
     if @application.save
-      redirect_to apply_step3_application_path(@application) , notice: 'aa'
+      redirect_to apply_step3_application_path(@application)
     else
       redirect_to apply_applications_path
     end
@@ -114,6 +122,11 @@ class ApplicationsController < ApplicationController
     @application.attachments << @attachment
     @application.save
     redirect_to add_evidences_application_path(@application), notice: 'Attachment is submitted'
+  end
+
+  def finish_add_evidences
+    @application.submit_for_approve
+    redirect_to process_dashboard_path, notice: "ได้ยืนยันการยื่นหลักฐานของใบสมัครหมายเลข #{@application.id} แล้ว"
   end
 
 
@@ -174,7 +187,7 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(:number, :user, :state, :licensee, :route, :category, :appointment_date, :appointment_remark, :appointment_user, :evaluation_finish_date, :award_date, :award, :award_remark, :contact, :contact_tel, :confirmed_date, :awarded_date,:evaluated_date, :submitted_date, :car_count, :trip_count)
+      params.require(:application).permit(:number, :user, :state, :licensee, :route, :category, :appointment_date, :appointment_remark, :appointment_user, :evaluation_finish_date, :award_date, :award, :award_remark, :contact, :contact_tel, :confirmed_date, :awarded_date,:evaluated_date, :submitted_date, :car_count, :trip_count, :license_no)
     end
 
     def route_params

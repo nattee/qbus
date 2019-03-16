@@ -18,8 +18,8 @@
                 - @to_be_awarded.each do |app|
                   %tr
                     %td= app.licensee.name
-                    %td= app.route.start
-                    %td= app.route.destination
+                    %td= app.route_start
+                    %td= app.route_destination
                     %td= l(app.created_at, format: '%d %b %y')
                     %td= app.total_score
                     %td= app.passed
@@ -46,8 +46,8 @@
                 - @awarded_recent.each do |app|
                   %tr
                     %td= app.licensee.name
-                    %td= app.route.start
-                    %td= app.route.destination
+                    %td= app.route_start
+                    %td= app.route_destination
                     %td= l(app.created_at, format: '%d %b %y')
                     %td= app.total_score
                     %td= app.passed

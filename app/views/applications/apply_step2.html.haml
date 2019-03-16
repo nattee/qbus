@@ -43,7 +43,7 @@
     .modal-content
       %h4 เพิ่มข้อมูลรถ
 
-      เพิ่มข้อมูลรถสำหรับเส้นทาง #{@application.route.start}-#{@application.route.destination}
+      เพิ่มข้อมูลรถสำหรับเส้นทาง #{@application.route_start}-#{@application.route_destination}
       กรุณาพิมพ์ข้อมูลรถแล้วกดปุ่ม บันทึก
       .input-field
         = f.text_field :plate

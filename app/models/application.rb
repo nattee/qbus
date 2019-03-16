@@ -16,6 +16,7 @@ class Application < ApplicationRecord
   belongs_to :appointment_user, :class_name => :User, :foreign_key => "appointment_user_id", optional: true
   has_many :evaluations
   has_many :attachments
+  has_many :cars
 
   #scope
   #for user
@@ -27,21 +28,22 @@ class Application < ApplicationRecord
   scope :latest_confirmed, -> { where(state: [:confirmed,:applying]).where('confirmed_date >= ?',30.days.ago) }
 
 
-  scope :to_be_appointed, -> { where(state: :confirmed, appointment_date: nil) }
-  scope :to_be_appointed_filled, -> { where(state: :confirmed).where.not(appointment_date: !nil) }
+  scope :to_be_appointed, -> { where(state: [:confirmed, :submitted], appointment_date: nil) }
+  scope :to_be_appointed_filled, -> { where(state: [:confirmed, :submitted]).where.not(appointment_date: !nil) }
 
   scope :to_be_evaluated, -> { where(state: :submitted) }
   scope :to_be_evaluated_filled, -> { where(state: :submitted).where(id:1999) }
   scope :latest_evaluated, -> {where(state: [:confirmed, :evaluated]).where('evaluated_date >= ?',30.days.ago) }
 
   scope :to_be_awarded, -> {where(state: :evaluated) }
+  scope :finished, -> {where(state: :awarded) }
   scope :latest_awarded, -> {where(state: :awarded).where('awarded_date >= ?',30.days.ago) }
 
   def to_label
     "#{self.number} - #{self.state_text}"
   end
 
-  #some getter for enum
+  #some getter
   def category_text
     Application.category_enum_to_text(category)
   end
@@ -58,6 +60,11 @@ class Application < ApplicationRecord
   def route_destination
     return '-' if category3? or route == nil
     return route.destination
+  end
+
+  def appoint_date
+    return I18n.localize(appointment_date, format: '%d %b %Y') if appointment_date
+    return 'ยังไม่ได้นัดหมาย'
   end
 
   def self.state_enum_to_text(enum)
@@ -79,7 +86,8 @@ class Application < ApplicationRecord
   #state manipulation
   def confirm_registration() self.confirmed_date = Time.zone.now; change_state(:confirmed)  end
   def reject_registration()  self.confirmed_date = Time.zone.now; change_state(:applying)  end
-  def submit_for_approve()   change_state(:submitted)  end
+  def submit_for_approve()   self.submitted_date = Time.zone.now; change_state(:submitted)  end
+  def set_award()            self.awarded_date = Time.zone.now; change_state(:awarded)  end
 
 
   def reject_evidence(reason)
@@ -110,7 +118,7 @@ class Application < ApplicationRecord
 
   def add_missing_attachments
     CriteriumAttachment.where.not(id: Attachment.select(:criterium_attachment_id).where(application: self)).each do |cri|
-      attachments << Attachment.new(criterium_attachment_id: cri.id)
+      attachments << Attachment.new(criterium_attachment_id: cri.id, attachment_type: :criterium_evidence)
     end
   end
 

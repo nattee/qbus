@@ -11,7 +11,7 @@
       %a.navigation-header-text ระบบงานหลัก
       %i.navigation-header-icon.material-icons more_horiz
     %li.bold
-      %a.waves-effect.waves-cyan{:href => root_url}
+      %a.waves-effect.waves-cyan{:href => process_dashboard_path}
         %i.material-icons home
         %span.menu-title{"data-i18n" => ""} หน้าหลัก
     - if logged_in?
@@ -20,6 +20,9 @@
           สวัสดี คุณ
           %a{:href => profile_path}
             =@current_user.name
+      %li.navigation-header
+        %a.navigation-header-text ระบบงานหลัก
+        %i.navigation-header-icon.material-icons more_horiz
       %li.bold
         %a.waves-effect.waves-cyan{:href => apply_applications_path}
           %i.material-icons content_paste
