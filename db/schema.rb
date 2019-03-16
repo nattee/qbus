@@ -67,7 +67,6 @@ ActiveRecord::Schema.define(version: 2019_03_15_134847) do
 
   create_table "attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "filename"
-    t.integer "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "criterium_attachment_id"
@@ -82,13 +81,11 @@ ActiveRecord::Schema.define(version: 2019_03_15_134847) do
     t.string "chassis"
     t.date "last_accident"
     t.text "last_accident_desc"
-    t.string "type"
+    t.string "car_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "application_id_id"
     t.bigint "application_id"
     t.index ["application_id"], name: "index_cars_on_application_id"
-    t.index ["application_id_id"], name: "index_cars_on_application_id_id"
   end
 
   create_table "criteria", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

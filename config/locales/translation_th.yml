@@ -53,7 +53,7 @@ th:
         car_count: จำนวนรถในเส้นทาง
         trip_count: จำนวนเที่ยวต่อวัน
         register_result: ผลตรวจใบสมัคร
-        license_no: เลขที่ใบอนุญาต 
+        license_no: เลขที่ใบอนุญาต
 
 
       attachment:
@@ -70,8 +70,8 @@ th:
       car:
         plate: หมายเลขป้ายทะเบียน  #g
         chassis: หมายเลขตัวถัง  #g
-        licensee: เจ้าของรถ  #g
-        route: เส้นทาง  #g
+        application: ใบสมัคร  #g
+        car_type: ประเภทรถ  #g
         last_accident: วันที่ล่าสุดทีเ่กิดอุบัติเหตุร้ายแรง  #g
         last_accident_desc: คำอธิบายการเกิดอุบัติเหตุครั้งล่าสุด  #g
 
