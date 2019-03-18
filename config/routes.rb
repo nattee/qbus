@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       post 'apply_step3', to: 'applications#post_step3'
 
       post 'add_car', to: 'applications#add_car'
+      delete 'remove_car/:car_id', to: 'applications#remove_car', as: 'remove_car'
 
       get 'add_evidences'
       post 'add_attachment'

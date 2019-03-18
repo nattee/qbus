@@ -3,7 +3,7 @@ class ApplicationsController < ApplicationController
                                          :apply_step1, :apply_step2, :apply_step3,
                                          :post_step1,:post_step2,:post_step3,
                                          :add_evidences,:add_attachment,:finish_add_evidences,
-                                         :add_car
+                                         :add_car, :remove_car
                                         ]
 
   # GET /applications
@@ -103,8 +103,13 @@ class ApplicationsController < ApplicationController
   end
 
   def add_car
-    car = Car.new(plate: params[:plate], chassis: params[:chassis])
-    @application.route.cars << car
+    car = Car.new(plate: params[:plate], chassis: params[:chassis], car_type: params[:car_type])
+    @application.cars << car
+    redirect_to apply_step2_application_path(@application)
+  end
+
+  def remove_car
+    Car.where(id: params[:car_id], application_id: params[:id]).first()&.destroy
     redirect_to apply_step2_application_path(@application)
   end
 

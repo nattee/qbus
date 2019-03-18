@@ -15,20 +15,20 @@
             .divider
             .section
               %h5 รถที่ใช้ในเส้นทาง
-              จำนวน #{@application.route.cars.count} คัน
+              จำนวน #{@application.cars.count} คัน
               %table.dataTables
                 %thead
                   %th= t :plate, scope: 'activerecord.attributes.car'
                   %th= t :chassis, scope: 'activerecord.attributes.car'
-                  %th
+                  %th= t :car_type, scope: 'activerecord.attributes.car'
                   %th
                 %tbody
-                  - @application.route.cars.each do |car|
+                  - @application.cars.each do |car|
                     %tr
                       %td= car.plate
                       %td= car.chassis
-                      %td
-                      %td
+                      %td= car.car_type
+                      %td= link_to 'ลบ', remove_car_application_path(@application.id, car.id), {rel: :nofollow, method: :delete, confirm: t(:confirm_delete)}
 
               %br
               %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'add-car'}} เพิ่มรถ
@@ -47,10 +47,13 @@
       กรุณาพิมพ์ข้อมูลรถแล้วกดปุ่ม บันทึก
       .input-field
         = f.text_field :plate
-        = f.label :plate
+        = f.label t :plate, scope: 'activerecord.attributes.car'
       .input-field
         = f.text_field :chassis
-        = f.label :chassis
+        = f.label t :chassis, scope: 'activerecord.attributes.car'
+      .input-field
+        = f.text_field :car_type
+        = f.label t :car_type, scope: 'activerecord.attributes.car'
     .modal-footer
       %button.btn.waves-effect.waves-light.green เพิ่มรถ
       %a.modal-close.waves-effect.wave-flat.btn-flat{href: "#!"} ยกเลิก
