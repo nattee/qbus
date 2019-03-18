@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_15_134847) do
+ActiveRecord::Schema.define(version: 2019_03_18_031420) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2019_03_15_134847) do
 
   create_table "attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "filename"
+    t.integer "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "criterium_attachment_id"
@@ -81,7 +82,7 @@ ActiveRecord::Schema.define(version: 2019_03_15_134847) do
     t.string "chassis"
     t.date "last_accident"
     t.text "last_accident_desc"
-    t.string "car_type"
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "application_id"
@@ -98,6 +99,15 @@ ActiveRecord::Schema.define(version: 2019_03_15_134847) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["criteria_group_id"], name: "index_criteria_on_criteria_group_id"
+  end
+
+  create_table "criteria_evidences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.bigint "criterium_id"
+    t.bigint "evidence_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["criterium_id"], name: "index_criteria_evidences_on_criterium_id"
+    t.index ["evidence_id"], name: "index_criteria_evidences_on_evidence_id"
   end
 
   create_table "criteria_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -137,6 +147,12 @@ ActiveRecord::Schema.define(version: 2019_03_15_134847) do
     t.bigint "criterium_id"
     t.index ["application_id"], name: "index_evaluations_on_application_id"
     t.index ["criterium_id"], name: "index_evaluations_on_criterium_id"
+  end
+
+  create_table "evidences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "licensees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -197,6 +213,8 @@ ActiveRecord::Schema.define(version: 2019_03_15_134847) do
   add_foreign_key "attachments", "applications"
   add_foreign_key "attachments", "criterium_attachments"
   add_foreign_key "cars", "applications"
+  add_foreign_key "criteria_evidences", "criteria"
+  add_foreign_key "criteria_evidences", "evidences"
   add_foreign_key "datafiles", "users"
   add_foreign_key "logs", "applications"
   add_foreign_key "violations", "cars"
