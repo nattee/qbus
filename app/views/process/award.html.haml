@@ -29,6 +29,8 @@
               %button.btn.waves-effect.waves-light ยืนยันการตัดสินผล
               /= link_to 'ย้อนกลับ', process_awards_path, class: 'waves-effect waves-light orange btn'
     .card.indigo.lighten-3
+      .card-content
+        %h5 ข้อมูลใบสมัคร
       .card-tabs
         %ul.tabs.tabs-fixed-width.tabs-transparent.grey-text
           %li.tab.col.m3
@@ -83,10 +85,9 @@
               .col.s12
                 %h5 ข้อมูลใบสมัคร
                 = render partial: "applications/application"
-      #tab_route.col.s12
-        - unless @application.category3?
+      - unless @application.category3?
+        #tab_car
           .card-content.purple.lighten-5
-            #tab_car.col.s12
-              = render partial: "applications/cars"
+            = render partial: "applications/cars"
 
 

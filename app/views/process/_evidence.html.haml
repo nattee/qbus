@@ -1,34 +1,20 @@
 - last_cg = last_name = nil
-- @application.sorted_attachments.each do |att|
-  - cri = att.criterium_attachment.criterium
-  - if cri.criteria_group != last_cg
-    - last_cg = cri.criteria_group
-    .divider
-    .row
-      .col.s12
-        %h5= last_cg.name
-    .row
-      .col.s5.strong
-        = t(:name, scope: 'activerecord.attributes.criterium')
-      .col.s3.strong
-        เอกสารที่ใช้ในการยื่น
-      .col.s2.strong
-        วัน/เวลา ยื่นเอกสาร
-      .col.s2.strong
-        ดูเอกสาร
-  .section
-    .row
-      .col.s5
-        - if last_name != cri.name
-          - last_name = cri.name
-          = "#{cri.name}"
-      .col.s3
-        = "#{att.criterium_attachment.name}"
-      .col.s2
-        - if att.data.attached?
-          %span.green-text=att.updated_at
-        - else
-          %span.red-text - ยังไม่ได้แนบ -
-      .col.s2
-        - if att.data.attached?
-          = link_to t(:download), rails_blob_path(att.data, disposition: "attachment")
+%table
+  %thead
+    %th ชื่อ
+    %th วัน/เวลา ยื่นเอการ
+    %th
+  %tbody
+    - Evidence.all.each do |ev|
+      %tr
+        %td= ev.name
+        - att = @application.attachments.where(evidence: ev)
+        %td
+          - if att.count > 0
+            = l(ev.created_at,format: :long)
+          - else
+            %span.red-text - ยังไม่ได้แนบ -
+        %td
+          = link_to t(:download), rails_blob_path(att.data, disposition: "attachment") if att.count > 0
+
+
