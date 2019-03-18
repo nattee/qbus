@@ -15,6 +15,6 @@
           - else
             %span.red-text - ยังไม่ได้แนบ -
         %td
-          = link_to t(:download), rails_blob_path(att.data, disposition: "attachment") if att.count > 0
+          = link_to t(:download), rails_blob_path(att.first.data, disposition: "attachment") if att.count > 0
 
 

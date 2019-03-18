@@ -117,9 +117,9 @@ class Application < ApplicationRecord
   end
 
   def add_missing_attachments
-    CriteriumAttachment.where.not(id: Attachment.select(:criterium_attachment_id).where(application: self)).each do |cri|
-      attachments << Attachment.new(criterium_attachment_id: cri.id, attachment_type: :criterium_evidence)
-    end
+    #CriteriumAttachment.where.not(id: Attachment.select(:criterium_attachment_id).where(application: self)).each do |cri|
+    #  attachments << Attachment.new(criterium_attachment_id: cri.id, attachment_type: :criterium_evidence)
+    #end
   end
 
   def attach_signup_data(signup_params)

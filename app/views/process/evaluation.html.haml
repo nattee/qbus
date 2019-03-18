@@ -81,7 +81,9 @@
                       .col.s3
                         - att = @application.attachments.where(evidence: evid)
                         - if att.count > 0
-                          = link_to t(:download), rails_blob_path(att.data, disposition: "attachment") if att.count > 0
+                          = link_to rails_blob_path(att.first.data, disposition: "attachment") do
+                            %i.material-icons.small insert_drive_file
+                            = t(:download)
                         - else
                           %span.red-text - ไม่ได้แนบ -
                   %br

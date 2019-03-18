@@ -123,10 +123,11 @@ class ApplicationsController < ApplicationController
   def add_attachment
     @attachment = Attachment.create(attachment_params)
     @attachment.data.attach(attachment_params[:data])
+    @attachment.attachment_type = :criterium_evidence
     @attachment.save
     @application.attachments << @attachment
     @application.save
-    redirect_to add_evidences_application_path(@application), notice: 'Attachment is submitted'
+    redirect_to add_evidences_application_path(@application), notice: "แนบหลักฐาน #{@attachment.evidence.name} สำเร็จ"
   end
 
   def finish_add_evidences
@@ -208,7 +209,7 @@ class ApplicationsController < ApplicationController
     end
 
     def attachment_params
-      params.require(:attachment).permit(:criterium_attachment_id, :data)
+      params.require(:attachment).permit(:evidence_id, :data, :filename)
     end
 
 end

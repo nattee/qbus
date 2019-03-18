@@ -53,27 +53,44 @@
                 .col.s12
                   %h5= last_cg.name
               .row
-                .col.s4
+                .col.s7
                   = t(:name, scope: 'activerecord.attributes.criterium')
-                .col.s2
+                .col.s2.center
                   ผลการประเมิน
-                .col.s4
+                .col.s3
                   คำอธิบายผลการประเมิน
-                .col.s2
             .row
               = simple_form_for ev, remote: true do |f|
-                .col.s4
+                .col.s7
                   = "#{ev.criterium.number}. #{ev.criterium.name}"
-                .col.s2
-                  - if rand(1..2) == 1
+                  %br
+                  .row
+                    .col.s2
+                    .col.s7.strong หลักฐานที่แนบมาด้วย
+                    .col.s3
+                  - ev.criterium.evidences.each do |evid|
+                    .row
+                      .col.s2
+                      .col.s7
+                        = evid.name
+                      .col.s3
+                        - att = @application.attachments.where(evidence: evid)
+                        - if att.count > 0
+                          = link_to rails_blob_path(att.first.data, disposition: "attachment") do
+                            %i.material-icons.small insert_drive_file
+                            = t(:download)
+                        - else
+                          %span.red-text - ไม่ได้แนบ -
+                  %br
+                .col.s2.center
+                  - if ev.result?
                     %i.material-icons check
-                  - else
+                  - elsif not ev.result?
                     %i.material-icons block
-                .col.s4
+                  - else
+                .col.s3
                   .input-field
                     = f.text_field :description
-                .col.s2
-                  = link_to 'ดูหลักฐาน', {}, class: 'btn cyan'
       #tab_evidence
         .card-content.indigo.lighten-5
           %h4 รายการหลักฐาน
