@@ -15,6 +15,9 @@
           - else
             %span.red-text - ยังไม่ได้แนบ -
         %td
-          = link_to t(:download), rails_blob_path(att.first.data, disposition: "attachment") if att.count > 0
+          - if att.count > 0
+            = link_to rails_blob_path(att.first.data, disposition: "attachment") do
+              %i.material-icons.small insert_drive_file
+              = t(:download)
 
 

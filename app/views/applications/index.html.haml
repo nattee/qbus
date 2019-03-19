@@ -2,15 +2,15 @@
   .col.s6.offset-s3
     .card
       .card-content.deep-purple
-        .card-title.white-text
-          %h1= t(:list) + t(:application, scope: 'activerecord.models')
+        .card-title
+          %h1.white-text= t(:list) + t(:application, scope: 'activerecord.models')
       .card-content
         %ul.collection
           - @applications.each do |application|
             %li.collection-item.avatar
               %i.material-icons.circle content_paste
-              %span.title=application.number
-              %p=application.user.name
+              %span.strong.title #{application.licensee.name} (#{application.route.start} - #{application.route.destination})
+              %p=application.try(:user).try(:name)
               .secondary-content
                 %a{:href => application_path(application)}
                   %i.material-icons pageview

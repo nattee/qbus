@@ -61,11 +61,11 @@ class ApplicationsController < ApplicationController
     @application.licensee = @licensee
 
     if !@application.attach_contract_data(attachment_contract_signup_params)
-      redirect_to apply_step1_application_path(@application), error: 'กรุณาใส่ข้อมูลหน้าแรกใบอนุญาต'
+      redirect_to apply_step1_application_path(@application), flash: {error: 'กรุณาใส่ข้อมูลหน้าแรกใบอนุญาต'}
       return
     end
     if !@application.attach_signup_data(attachment_contract_signup_params)
-      redirect_to apply_step1_application_path(@application), notice: 'กรุณาแนบไฟล์หนังสือยืนยันเข้าร่วมโครงการ'
+      redirect_to apply_step1_application_path(@application), flash: {error: 'กรุณาแนบไฟล์หนังสือยืนยันเข้าร่วมโครงการ'}
       return
     end
 

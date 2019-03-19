@@ -1,36 +1,38 @@
 .row
-  .col.s12
+  .col.s12.m4.push-m8
+    .card.gradient-45deg-light-green-amber
+      .card-content
+        .card-title
+          %h6 วิธีใช้งาน
+        ให้พิจารณาข้อมูลต่าง ๆ ของใบสมัคร และตรวจสอบเอกสารแนบได้แก่ สำเนาสัญญาหน้าแรก และ หนังสือยืนยันการสมัครเข้าร่วมโครงการ ถ้าหากข้อมูลทั้งหมดถูกต้อง ให้กดปุ่ม "ใบสมัครถูกต้อง" เพื่อยืนยันการสมัคร หรือกดปุ่ม "ใบสมัครไม่ถูกต้อง" เพื่อปฏิเสธใบสมัครและส่งใบสมัครกลับไปให้ผู้สมัครทำการแก้ไข
+  .col.s12.m8.pull-m4
     .card
       .card-content
-        .row
-          .col.s12.m4.push-m8
-            .card
-              .card-content
-                ให้พิจารณาข้อมูลต่าง ๆ ของใบสมัคร และตรวจสอบเอกสารแนบได้แก่ สำเนาสัญญาหน้าแรก และ หนังสือยืนยันการสมัครเข้าร่วมโครงการ ถ้าหากข้อมูลทั้งหมดถูกต้อง ให้กดปุ่ม "ใบสมัครถูกต้อง" เพื่อยืนยันการสมัคร หรือกดปุ่ม "ใบสมัครไม่ถูกต้อง" เพื่อปฏิเสธใบสมัครและส่งใบสมัครกลับไปให้ผู้สมัครทำการแก้ไข
-          .col.s12.m8.pull-m4
-            %h4 ตรวจใบสมัคร
-            = form_with url: confirm_process_register_path(@application), local: true do |f|
-              .row
-                .col.s12
-                  %label
-                    = f.radio_button :result, 'ok'
-                    %span ใบสมัครถูกต้อง
-              .section
-              .row
-                .col.s12
-                  %label
-                    = f.radio_button :result, 'no'
-                    %span ใบสมัครไม่ถูกต้อง
-              .section
-              .row
-                .input-field.col.s12
-                  = f.text_area :register_result, {value: @application.register_result, class: 'materialize-textarea'}
-                  %label คำอธิบายกรณีใบสมัครไม่ถูกต้อง
-              .section
-              .row
-                .col.s12
-                  = f.button 'ยืนยันผลการประเมิน', class: 'waves-effect waves-light btn'
-                  = link_to 'ย้อนกลับ', process_registers_path, class: 'waves-effect waves-light orange btn'
+        %h4 ตรวจใบสมัคร
+        = form_with url: confirm_process_register_path(@application), local: true do |f|
+          .row
+            .col.s12
+              %label
+                = f.radio_button :result, 'ok'
+                %span ใบสมัครถูกต้อง
+          .section
+          .row
+            .col.s12
+              %label
+                = f.radio_button :result, 'no'
+                %span ใบสมัครไม่ถูกต้อง
+          .section
+          .row
+            .input-field.col.s12
+              = f.text_area :register_result, {value: @application.register_result, class: 'materialize-textarea'}
+              %label คำอธิบายกรณีใบสมัครไม่ถูกต้อง
+          .section
+          .row
+            .col.s12
+              = f.button 'ยืนยันผลการประเมิน', class: 'waves-effect waves-light btn'
+              = link_to 'ย้อนกลับ', process_registers_path, class: 'waves-effect waves-light orange btn'
+.row
+  .col.s12
     .card
       .card-content
         = render partial: 'applications/application'

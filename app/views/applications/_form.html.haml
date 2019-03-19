@@ -55,7 +55,7 @@
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.input_field :appointment_remark
+          = f.input_field :appointment_remark, class: 'materialize-textarea'
           = f.label :appointment_remark
           = f.full_error :appointment_remark
       .row
@@ -73,13 +73,13 @@
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.input_field :award
+          = f.input_field :award, class: 'materialize-textarea'
           = f.label :award
           = f.full_error :award
       .row
         .input-field.col.s12
           %i.material-icons.prefix help
-          = f.input_field :award_remark
+          = f.input_field :award_remark, class: 'materialize-textarea'
           = f.label :award_remark
           = f.full_error :award_remark
       .row

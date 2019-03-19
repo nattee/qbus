@@ -45,6 +45,15 @@
                 .input-field.col.s6
                   %p.margin.right-align.medium-small
                     = link_to 'ลืมรหัสผ่าน', register_path
+    - else
+      .col.s12.m4
+        .card.border-radius-6
+          .card-content.center
+            %h4 ยินดีต้อนรับเข้าสู่ระบบ
+          .card-action.center
+            = link_to 'ไปยังหน้าหลัก', process_dashboard_path, class: 'btn border-round col s12 orange waves-effect waves-light'
+            %br
+            %br
     .col.s12.m8
       .card
         .card-content

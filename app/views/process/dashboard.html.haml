@@ -25,8 +25,8 @@
                       %td= app.route_start
                       %td= app.route_destination
                       %td= l(app.created_at, format: '%d %b %Y')
-                      %td= app.state_text
-                      %td
+                      %td.light-blue-text= app.state_text
+                      %td.strong
                         = link_to 'แก้ไข', apply_step1_application_path(app)
                         /= link_to 'แก้ไข', apply_step1_application_path(app), class: 'button waves-effect waves-light blue darken-2 btn'
             - else
@@ -51,8 +51,8 @@
                       %td= app.route_start
                       %td= app.route_destination
                       %td= l(app.created_at, format: '%d %b %Y')
-                      %td= app.state_text
-                      %td
+                      %td.orange-text= app.state_text
+                      %td.strong
                         = link_to 'ส่งหลักฐาน', add_evidences_application_path(app)
             - else
               ไม่มีใบสมัครที่ต้องส่งหลักฐานเพิ่มเติม
@@ -102,7 +102,9 @@
                       %td= app.route_destination
                       %td= l(app.created_at, format: '%d %b %Y')
                       %td= l(app.awarded_date, format: '%d %b %Y')
-                      %td= app.award
+                      %td
+                        %span.green-text
+                          = app.award
             - else
               ไม่มีใบสมัครที่ดำเนินการเสร็จแล้ว
       .col.s12.m5

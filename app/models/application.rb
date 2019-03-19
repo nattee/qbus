@@ -83,6 +83,16 @@ class Application < ApplicationRecord
     categories.map{|x| [Application.category_enum_to_text(x.first), x.first]}
   end
 
+  def get_signup_attach_data
+    attachments.where(attachment_type: :signup).first.data
+  end
+  
+
+  def get_contract_attach_data
+    attachments.where(attachment_type: :signup).first.data
+  end
+
+
   #state manipulation
   def confirm_registration() self.confirmed_date = Time.zone.now; change_state(:confirmed)  end
   def reject_registration()  self.confirmed_date = Time.zone.now; change_state(:applying)  end
@@ -155,7 +165,7 @@ class Application < ApplicationRecord
   end
 
   def passed
-    return "ผ่าน 26 ไม่ผ่าน 1"
+    return "ผ่าน"
   end
 
   def change_state(new_state)

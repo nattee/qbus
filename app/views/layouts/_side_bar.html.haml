@@ -15,11 +15,6 @@
         %i.material-icons home
         %span.menu-title{"data-i18n" => ""} หน้าหลัก
     - if logged_in?
-      %li.bold
-        %span
-          สวัสดี คุณ
-          %a{:href => profile_path}
-            =@current_user.name
       %li.navigation-header
         %a.navigation-header-text ระบบงานหลัก
         %i.navigation-header-icon.material-icons more_horiz
@@ -46,14 +41,14 @@
         %a.waves-effect.waves-cyan{:href => applications_path}
           %i.material-icons content_paste
           %span.menu-title=t(:application, scope: 'activerecord.models')
-      %li.bold
-        %a.waves-effect.waves-cyan{:href => licensees_path}
-          %i.material-icons people
-          %span.menu-titlet=t(:licensee, scope: 'activerecord.models')
-      %li.bold
-        %a.waves-effect.waves-cyan{:href => routes_path}
-          %i.material-icons trending_up
-          %span.menu-title=t(:route, scope: 'activerecord.models')
+      /%li.bold
+      /  %a.waves-effect.waves-cyan{:href => licensees_path}
+      /    %i.material-icons people
+      /    %span.menu-titlet=t(:licensee, scope: 'activerecord.models')
+      /%li.bold
+      /  %a.waves-effect.waves-cyan{:href => routes_path}
+      /    %i.material-icons trending_up
+      /    %span.menu-title=t(:route, scope: 'activerecord.models')
       %li.bold
         %a.waves-effect.waves-cyan{:href => cars_path}
           %i.material-icons directions_car
@@ -70,14 +65,14 @@
         %a.waves-effect.waves-cyan{:href => criteria_groups_path}
           %i.material-icons spellcheck
           %span.menu-title=t(:criteria_group, scope: 'activerecord.models')
-      %li.bold
-        %a.waves-effect.waves-cyan{:href => evaluations_path}
-          %i.material-icons playlist_add_check
-          %span.menu-title=t(:evaluation, scope: 'activerecord.models')
-      %li.bold
-        %a.waves-effect.waves-cyan{:href => datafiles_path}
-          %i.material-icons storage
-          %span.menu-title=t(:datafile, scope: 'activerecord.models')
+      /%li.bold
+      /  %a.waves-effect.waves-cyan{:href => evaluations_path}
+      /    %i.material-icons playlist_add_check
+      /    %span.menu-title=t(:evaluation, scope: 'activerecord.models')
+      /%li.bold
+      /  %a.waves-effect.waves-cyan{:href => datafiles_path}
+      /    %i.material-icons storage
+      /    %span.menu-title=t(:datafile, scope: 'activerecord.models')
       %li.bold
         %a.waves-effect.waves-cyan{:href => logs_path}
           %i.material-icons library_books
