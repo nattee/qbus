@@ -48,9 +48,9 @@
           = link_to 'ยืนยันหลักฐาน', finish_add_evidences_application_path(@application), class: 'btn waves-effect waves-light', data: {confirm: 'เมื่อยืนยันแล้ว จะไม่สามารถแก้ไขเพิ่มเติมหลักฐานได้อีก ท่านจะยืนยันหรือไม่?'}
 .row
   .col.s12
-    .card
+    .card.teal.lighten-4
       .card-content
-        .row
-          .col.s12
-            %h4 รายการหลักฐาน
-            = render "process/evidence"
+        .card-title
+          %h4 รายการหลักฐาน
+      .card-content.teal.lighten-5
+        = render "process/evidence"

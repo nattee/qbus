@@ -84,12 +84,12 @@ class Application < ApplicationRecord
   end
 
   def get_signup_attach_data
-    attachments.where(attachment_type: :signup).first.data
+    attachments.where(attachment_type: :signup).first.try(:data)
   end
   
 
   def get_contract_attach_data
-    attachments.where(attachment_type: :signup).first.data
+    attachments.where(attachment_type: :signup).first.try(:data)
   end
 
 
