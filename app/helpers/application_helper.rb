@@ -11,7 +11,7 @@ module ApplicationHelper
     success: 'green-text',
     error: 'red-text',
     alert: 'orange-text',
-    notice: 'black-text',
+    notice: 'light-blue-text darken-3',
   }
   def flash_class(flash_type)
     FLASH_MSG_CLASS.fetch(flash_type.to_sym, flash_type.to_s)

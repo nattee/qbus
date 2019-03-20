@@ -1,44 +1,49 @@
 .row
-  .col.s12
-    .card
+  .col.s12.m4.push-m8
+    .card.gradient-45deg-light-green-amber
       .card-content
-        .row
-          .col.s12.m4.push-m8
-            .card
-              .card-content
-                ให้พิจารณาผลการประเมินของใบสมัคร จากรายละเอียด้านล่างนี้ โดยเฉพาะในหัวข้อผลการประเมิน หลังจากนั้นให้บันทึกผลการตัดสินโดยกรอกข้อมูลในฟอร์ม "การบันทึกผล" แล้วกดปุ่ม "ยืนยัน" เพื่อบันทึกข้อมูล
-          .col.s12.m8.pull-m4
-            .card-title
-              %h4 การบันทึกผลการตัดสิน
-            %h5 บันทึกผลการตัดสิน
-            = form_with url: process_award_path(@application), local: true do |f|
-              .row
-                .col.s12
-                  %label
-                    = radio_button_tag :result, 'ok'
-                    %span ตัดสินให้ตราสัญลักษณ์
-              .section
-              .row
-                .col.s12
-                  %label
-                    = radio_button_tag :result, 'no'
-                    %span ตัดสินไม่ให้ตรา
-              .row
-                .input-field.col.s12
-                  = f.text_area :award_remark, class: 'materialize-textarea'
-              %button.btn.waves-effect.waves-light ยืนยันการตัดสินผล
-              /= link_to 'ย้อนกลับ', process_awards_path, class: 'waves-effect waves-light orange btn'
+        .card-title
+          %h6 วิธีใช้งาน
+        ให้พิจารณาผลการประเมินของใบสมัคร จากรายละเอียด้านล่างนี้ โดยเฉพาะในหัวข้อผลการประเมิน หลังจากนั้นให้บันทึกผลการตัดสินโดยกรอกข้อมูลในฟอร์ม "การบันทึกผล" แล้วกดปุ่ม "ยืนยัน" เพื่อบันทึกข้อมูล
+  .col.s12.m8.pull-m4
+    = form_with url: process_award_path(@application), local: true do |f|
+      .card
+        .card-content
+          .card-title
+            %h4 การบันทึกผลการตัดสิน
+          %h5 บันทึกผลการตัดสิน
+          .row
+            .col.s12
+              %label
+                = radio_button_tag :result, 'ok'
+                %span ตัดสินให้ตราสัญลักษณ์
+          .section
+          .row
+            .col.s12
+              %label
+                = radio_button_tag :result, 'no'
+                %span ตัดสินไม่ให้ตรา
+          .row
+            .input-field.col.s12
+              = f.text_area :award_remark, class: 'materialize-textarea'
+        .card-action
+          %button.btn.waves-effect.waves-light{data: {confirm: 'ต้องการยืนยันการตัดสินผลหรือไม่ เมื่อยืนยันแล้วจะไม่สามารถแก้ไขได้อีก' }} ยืนยันการตัดสินผล
+          /= link_to 'ย้อนกลับ', process_awards_path, class: 'waves-effect waves-light orange btn'
+.row
+  .col.s12
     .card.indigo.lighten-3
+      .card-content
+        %h5 ข้อมูลใบสมัคร
       .card-tabs
         %ul.tabs.tabs-fixed-width.tabs-transparent.grey-text
-          %li.tab.col.m3
+          %li.tab
             %a{href: '#tab_app'}ข้อมูลใบสมัคร
-          %li.tab.col.m3
+          %li.tab
             %a{href: '#tab_evidence'}หลักฐาน
-          %li.tab.col.m3
+          %li.tab
             %a{href: '#tab_eval'}การประเมิน
           - unless @application.category3?
-            %li.tab.col.m3
+            %li.tab
               %a{href: '#tab_car'}ข้อมูลรถ
       #tab_eval
         .card-content.indigo.lighten-5
@@ -51,27 +56,44 @@
                 .col.s12
                   %h5= last_cg.name
               .row
-                .col.s4
+                .col.s7
                   = t(:name, scope: 'activerecord.attributes.criterium')
-                .col.s2
+                .col.s2.center
                   ผลการประเมิน
-                .col.s4
+                .col.s3
                   คำอธิบายผลการประเมิน
-                .col.s2
             .row
               = simple_form_for ev, remote: true do |f|
-                .col.s4
+                .col.s7
                   = "#{ev.criterium.number}. #{ev.criterium.name}"
-                .col.s2
-                  - if rand(1..2) == 1
+                  %br
+                  .row
+                    .col.s2
+                    .col.s7.strong หลักฐานที่แนบมาด้วย
+                    .col.s3
+                  - ev.criterium.evidences.each do |evid|
+                    .row
+                      .col.s2
+                      .col.s7
+                        = evid.name
+                      .col.s3
+                        - att = @application.attachments.where(evidence: evid)
+                        - if att.count > 0
+                          = link_to rails_blob_path(att.first.data, disposition: "attachment") do
+                            %i.material-icons.small insert_drive_file
+                            = t(:download)
+                        - else
+                          %span.red-text - ไม่ได้แนบ -
+                  %br
+                .col.s2.center
+                  - if ev.result?
                     %i.material-icons check
-                  - else
+                  - elsif not ev.result?
                     %i.material-icons block
-                .col.s4
+                  - else
+                .col.s3
                   .input-field
                     = f.text_field :description
-                .col.s2
-                  = link_to 'ดูหลักฐาน', {}, class: 'btn cyan'
       #tab_evidence
         .card-content.indigo.lighten-5
           %h4 รายการหลักฐาน
@@ -83,10 +105,9 @@
               .col.s12
                 %h5 ข้อมูลใบสมัคร
                 = render partial: "applications/application"
-      #tab_route.col.s12
-        - unless @application.category3?
-          .card-content.purple.lighten-5
-            #tab_car.col.s12
-              = render partial: "applications/cars"
+      - unless @application.category3?
+        #tab_car
+          .card-content.indigo.lighten-5
+            = render partial: "applications/cars"
 
 

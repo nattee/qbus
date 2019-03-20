@@ -5,7 +5,7 @@ th:
   edit: แก้ไข
   list: รายการ
   confirm_delete: ยืนยันการลบ?
-  download: ดาวโหลด
+  download: ดาวน์โหลด
   register: ลงทะเบียน
   # BEGIN session login form
   remember_me: จดจำผู้ใช้งาน

@@ -54,7 +54,7 @@
                     %td= app.route_start
                     %td= app.route_destination
                     %td= l(app.created_at, format: '%d %b %Y')
-                    %td= app.state
+                    %td= app.state_text
                     %td= l(app.evaluated_date, format: '%d %b %Y')
                     %td= app.evaluation_result
                     %td= link_to 'แก้ไขผลประเมิน', process_evaluation_path(app.id), class: 'waves-effect waves-light green btn'

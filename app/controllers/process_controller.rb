@@ -79,6 +79,7 @@ class ProcessController < ApplicationController
       ev.description = params.require(:description)[ev.id.to_s]
       ev.save
     end
+    redirect_to process_evaluation_path(@application), notice: 'บันทึกผลการประเมินเรียบร้อย'
   end
 
   def evaluation_finish

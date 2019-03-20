@@ -13,10 +13,14 @@
       = @application.state_text
     .section
       %h6 สำเนาสัญญาหน้าแรก
-      %a ดาว์นโหลด
+      = link_to rails_blob_path(@application.get_contract_attach_data, disposition: "attachment") do
+        %i.material-icons.small insert_drive_file
+        = t(:download)
     .section
       %h6 หนังสือยืนยันการเข้าร่วมโครงการ
-      %a ดาว์นโหลด
+      = link_to rails_blob_path(@application.get_signup_attach_data, disposition: "attachment") do
+        %i.material-icons.small insert_drive_file
+        = t(:download)
   .col.s12.m4
     .card-title
       %h5 ข้อมูลผู้ประกอบการ

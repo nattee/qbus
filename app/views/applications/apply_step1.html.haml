@@ -48,8 +48,8 @@
                   .col.s12.m6
                     %h6 สัญญาการเดินรถ
                     .input-field.file-field
-                      .btn.green
-                        %span File
+                      .btn-small.green
+                        %span เลือกไฟล์
                         = file_field_tag 'attachment[contract_data]'
                       .file-path-wrapper
                         = text_field_tag 'attachment[contract_file_name]', nil, class: 'file-path validate'
@@ -62,8 +62,8 @@
                   .col.s12.m6
                     %h6 เอกสารยืนยันการเข้าร่วมโครงการ
                     .input-field.file-field
-                      .btn.green
-                        %span File
+                      .btn-small.green
+                        %span เลือกไฟล์
                         = file_field_tag 'attachment[signup_data]'
                       .file-path-wrapper
                         = text_field_tag 'attachment[signup_file_name]', nil, class: 'file-path validate'

@@ -4,7 +4,7 @@ class Attachment < ApplicationRecord
 
   has_one_attached :data
   belongs_to :application
-  belongs_to :criterium_attachment, optional: true
+  belongs_to :evidence, optional: true
 
   def self.attachment_type_enum_to_text(enum)
     Attachment.enum_to_st(:attachment_type,enum)

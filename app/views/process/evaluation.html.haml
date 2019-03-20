@@ -2,8 +2,10 @@
   .col.s12
     .row
       .col.s12.m4.push-m8
-        .card
+        .card.gradient-45deg-light-green-amber
           .card-content
+            .card-title
+              %h6 วิธีใช้งาน
             ให้ผู้ประเมินพิจารณาหลักฐานสำหรับเกณฑ์ในหัวข้อต่าง ๆ ด้านล่างนี้และบันทึกผลการประเมินในแต่ละหัวข้อ เมื่อบันทึกเสร็จแล้วให้กดปุ่ม "บันทึก" ด้านล่างสุด
             .section
             ในกรณีที่หลักฐานไม่เพียงพอต่อการประเมิน ผู้ประเมินสามารถร้องขอให้ส่งหลักฐานใหม่ได้ โดยการบันทึกข้อความและกดปุ่มในช่อง "ขอหลักฐานเพิ่มเติม" ด้านซ้าย
@@ -59,16 +61,34 @@
                   .col.s12
                     %h5= last_cg.name
                 .row
-                  .col.s4.strong
+                  .col.s7.strong
                     = t(:name, scope: 'activerecord.attributes.criterium')
                   .col.s2.strong
                     ผลการประเมิน
-                  .col.s4.strong
+                  .col.s3.strong
                     คำอธิบายผลการประเมิน
-                  .col.s2.strong
               .row
-                .col.s4
+                .col.s7
                   = "#{ev.criterium.number}. #{ev.criterium.name}"
+                  %br
+                  .row
+                    .col.s2
+                    .col.s7.strong หลักฐานที่แนบมาด้วย
+                    .col.s3
+                  - ev.criterium.evidences.each do |evid|
+                    .row
+                      .col.s2
+                      .col.s7
+                        = evid.name
+                      .col.s3
+                        - att = @application.attachments.where(evidence: evid)
+                        - if att.count > 0
+                          = link_to rails_blob_path(att.first.data, disposition: "attachment") do
+                            %i.material-icons.small insert_drive_file
+                            = t(:download)
+                        - else
+                          %span.red-text - ไม่ได้แนบ -
+                  %br
                 .col.s2
                   %label
                     = radio_button_tag "result[#{ev.id}]", 'ok', ev.result == true
@@ -76,11 +96,9 @@
                   %label
                     = radio_button_tag "result[#{ev.id}]", 'no', ev.result == false
                     %span ไม่ผ่าน
-                .col.s4
+                .col.s3
                   .input-field
                     = f.text_field "description[#{ev.id}]", value: ev.description, class: 'materialize-textarea'
-                .col.s2
-                  /= f.submit 'บันทึก', class: 'btn'
           .card-action.orange.lighten-5
             %button.btn.waves-effect.waves-light{value:  :submit} บันทึก
         #tab_evidence
