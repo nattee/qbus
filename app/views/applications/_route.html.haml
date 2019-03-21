@@ -12,8 +12,8 @@
         %h6= t(@application.category)
   .col.s6
     %p
-      %h6= t(:car_count, scope: 'activerecord.attributes.application')
+      %h6= 'จำนวนรถที่มีอยู่จริง (คัน)'
       = @application.car_count || "ไม่ระบุ"
     %p
-      %h6= t(:trip_count, scope: 'activerecord.attributes.application')
+      %h6= 'จำนวนเที่ยวเดินรถจริงเฉลี่ยต่อวัน (เที่ยว)'
       = @application.trip_count || "ไม่ระบุ"
