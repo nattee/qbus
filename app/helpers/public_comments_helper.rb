@@ -1,0 +1,2 @@
+module PublicCommentsHelper
+end
