@@ -29,11 +29,11 @@
       %li.bold
         %a.waves-effect.waves-cyan{:href => process_evaluations_path}
           %i.material-icons check
-          %span.menu-title{"data-i18n" => ""} ประเมิน
+          %span.menu-title{"data-i18n" => ""} ประเมินผล
       %li.bold
         %a.waves-effect.waves-cyan{:href => process_awards_path}
           %i.material-icons import_contacts
-          %span.menu-title{"data-i18n" => ""} ตัดสินรางวัล
+          %span.menu-title{"data-i18n" => ""} ยืนยันผลการประเมิน
       %li.navigation-header
         %a.navigation-header-text จัดการข้อมูล
         %i.navigation-header-icon.material-icons more_horiz
@@ -49,22 +49,22 @@
       /  %a.waves-effect.waves-cyan{:href => routes_path}
       /    %i.material-icons trending_up
       /    %span.menu-title=t(:route, scope: 'activerecord.models')
-      %li.bold
-        %a.waves-effect.waves-cyan{:href => cars_path}
-          %i.material-icons directions_car
-          %span.menu-title=t(:car, scope: 'activerecord.models')
-      %li.bold
-        %a.waves-effect.waves-cyan{:href => violations_path}
-          %i.material-icons warning
-          %span.menu-title=t(:violation, scope: 'activerecord.models')
-      %li.bold
-        %a.waves-effect.waves-cyan{:href => criteria_path}
-          %i.material-icons check_box
-          %span.menu-title=t(:criterium, scope: 'activerecord.models')
-      %li.bold
-        %a.waves-effect.waves-cyan{:href => criteria_groups_path}
-          %i.material-icons spellcheck
-          %span.menu-title=t(:criteria_group, scope: 'activerecord.models')
+      /%li.bold
+      /  %a.waves-effect.waves-cyan{:href => cars_path}
+      /    %i.material-icons directions_car
+      /    %span.menu-title=t(:car, scope: 'activerecord.models')
+      /%li.bold
+      /  %a.waves-effect.waves-cyan{:href => violations_path}
+      /    %i.material-icons warning
+      /    %span.menu-title=t(:violation, scope: 'activerecord.models')
+      /%li.bold
+      /  %a.waves-effect.waves-cyan{:href => criteria_path}
+      /    %i.material-icons check_box
+      /    %span.menu-title=t(:criterium, scope: 'activerecord.models')
+      /%li.bold
+      /  %a.waves-effect.waves-cyan{:href => criteria_groups_path}
+      /    %i.material-icons spellcheck
+      /    %span.menu-title=t(:criteria_group, scope: 'activerecord.models')
       /%li.bold
       /  %a.waves-effect.waves-cyan{:href => evaluations_path}
       /    %i.material-icons playlist_add_check
@@ -73,10 +73,10 @@
       /  %a.waves-effect.waves-cyan{:href => datafiles_path}
       /    %i.material-icons storage
       /    %span.menu-title=t(:datafile, scope: 'activerecord.models')
-      %li.bold
-        %a.waves-effect.waves-cyan{:href => logs_path}
-          %i.material-icons library_books
-          %span.menu-title=t(:log, scope: 'activerecord.models')
+      /%li.bold
+      /  %a.waves-effect.waves-cyan{:href => logs_path}
+      /    %i.material-icons library_books
+      /    %span.menu-title=t(:log, scope: 'activerecord.models')
       %li.bold
         %a.waves-effect.waves-cyan{:href => users_path}
           %i.material-icons face

@@ -9,7 +9,9 @@
           - @applications.each do |application|
             %li.collection-item.avatar
               %i.material-icons.circle content_paste
-              %span.strong.title #{application.licensee.name} (#{application.route.start} - #{application.route.destination})
+              %span.strong.title #{application.licensee.name}
+              %br 
+              %span.strong.title (#{application.route_start} - #{application.route_destination})
               %p=application.try(:user).try(:name)
               .secondary-content
                 %a{:href => application_path(application)}

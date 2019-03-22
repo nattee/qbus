@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
         # TODO: remove those two line when sending email is working properly
         @user.activate
         log_in @user
-        format.html { redirect_to root_url, notice: 'Please check your email to activate your account.' }
+        format.html { redirect_to root_url, notice: 'ลงทะเบียนเรียบร้อย' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :register }
@@ -48,7 +48,7 @@ class SessionsController < ApplicationController
       if user.activated?
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        redirect_to process_dashboard_path, notice: 'User was successfully login.'
+        redirect_to process_dashboard_path, notice: 'เข้า่สู่ระบบเรียบร้อย'
       else
         message  = "Account not activated. "
         message += "Check your email for the activation link."

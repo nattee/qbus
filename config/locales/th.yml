@@ -23,9 +23,9 @@ th:
         password: รหัสผ่านย่อย
   qbus:
     application:
-      category1: ประจำทาง หมวด 2
-      category2: ประจำทาง หมวด 3
-      category3: ไม่ประจำทาง
+      category1: รถโดยสารประจำทาง หมวด 2
+      category2: รถโดยสารประจำทาง หมวด 3
+      category3: รถโดยสารไม่ประจำทาง
 
 
 
