@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_18_135742) do
+ActiveRecord::Schema.define(version: 2019_03_22_070630) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -173,6 +173,24 @@ ActiveRecord::Schema.define(version: 2019_03_18_135742) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["application_id"], name: "index_logs_on_application_id"
+  end
+
+  create_table "public_comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
+    t.string "route_no"
+    t.bigint "route_id"
+    t.string "car_plate"
+    t.bigint "car_id"
+    t.string "licensee_name"
+    t.bigint "licensee_id"
+    t.text "comment"
+    t.string "commenter"
+    t.string "commenter_contact"
+    t.string "commenter_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["car_id"], name: "index_public_comments_on_car_id"
+    t.index ["licensee_id"], name: "index_public_comments_on_licensee_id"
+    t.index ["route_id"], name: "index_public_comments_on_route_id"
   end
 
   create_table "routes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

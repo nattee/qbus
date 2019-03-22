@@ -1,0 +1,10 @@
+= form_for @public_comment do |f|
+  - if @public_comment.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@public_comment.errors.count, "error")} prohibited this public_comment from being saved:"
+      %ul
+        - @public_comment.errors.full_messages.each do |message|
+          %li= message
+
+  .actions
+    = f.submit 'Save'

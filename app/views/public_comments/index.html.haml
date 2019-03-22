@@ -1,0 +1,19 @@
+%h1 Listing public_comments
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @public_comments.each do |public_comment|
+      %tr
+        %td= link_to 'Show', public_comment
+        %td= link_to 'Edit', edit_public_comment_path(public_comment)
+        %td= link_to 'Destroy', public_comment, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Public comment', new_public_comment_path
