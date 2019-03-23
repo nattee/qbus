@@ -10,7 +10,7 @@
       =l( @application.created_at, format: "%d %B %Y")
     .section
       %h6 สถานะ
-      = @application.state_text
+      = state_full(@application)
     .section
       %h6 สำเนาสัญญาหน้าแรก
       - if (@application.get_contract_attach_data)
