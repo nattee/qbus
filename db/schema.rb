@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_22_070630) do
+ActiveRecord::Schema.define(version: 2019_03_23_023132) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -59,6 +59,8 @@ ActiveRecord::Schema.define(version: 2019_03_22_070630) do
     t.text "register_result"
     t.text "evaluation_result"
     t.string "license_no"
+    t.date "license_expire"
+    t.string "contact_email"
     t.index ["appointment_user_id"], name: "index_applications_on_appointment_user_id"
     t.index ["licensee_id"], name: "index_applications_on_licensee_id"
     t.index ["route_id"], name: "index_applications_on_route_id"
@@ -159,12 +161,12 @@ ActiveRecord::Schema.define(version: 2019_03_22_070630) do
   create_table "licensees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name"
     t.string "license_no"
-    t.date "license_expire"
     t.string "car_count"
     t.string "contact"
     t.string "contact_tel"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "contact_email"
   end
 
   create_table "logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
