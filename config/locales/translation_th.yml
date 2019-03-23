@@ -54,6 +54,8 @@ th:
         trip_count: จำนวนเที่ยวต่อวัน
         register_result: ผลตรวจใบสมัคร
         license_no: เลขที่ใบอนุญาต
+        license_expire: วันที่สิ้นสุดใบอนุญาต
+        contact_email: อีเมล์ผู้ประสานงาน
 
 
       attachment:
@@ -109,7 +111,8 @@ th:
       licensee:
         contact: ชื่อ-สกุล ผู้ประสานงาน  #g
         contact_tel: หมายเลขโทรศัพท์ผู้ประสานงาน  #g
-        license_expire: ใบอนุญาตหมดอายุ  #g
+        contact_email: อีเมล์ผู้ประสานงาน
+        # license_expire: ใบอนุญาตหมดอายุ  #g
         license_no: หมายเลขใบอนุญาต  #g
         name: ชื่อผู้ประกอบการ  #g
         car_count: จำนวนรถที่มีอยู่จริง ณ วันที่ขอ
