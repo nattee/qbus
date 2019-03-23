@@ -52,13 +52,18 @@ class Application < ApplicationRecord
     Application.state_enum_to_text(state)
   end
 
+  def route_no
+    return "-" if category3? or route == nil
+    return route.route_no
+  end
+
   def route_start
     return 'ไม่ประจำทาง' if category3? or route == nil
     return route.start
   end
 
   def route_destination
-    return '-' if category3? or route == nil
+    return '' if category3? or route == nil
     return route.destination
   end
 

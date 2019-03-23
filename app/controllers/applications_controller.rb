@@ -197,7 +197,7 @@ class ApplicationsController < ApplicationController
     end
 
     def route_params
-      params.require(:route).permit(:start, :destination)
+      params.require(:route).permit(:start, :destination, :route_no)
     end
 
     def licensee_params

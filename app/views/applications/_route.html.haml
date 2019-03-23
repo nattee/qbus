@@ -2,11 +2,14 @@
   .col.s6
     - unless @application.category3?
       %p
+        %h6= t(:route_no, scope: 'activerecord.attributes.route')
+        = @application.route_no
+      %p
         %h6= t(:start, scope: 'activerecord.attributes.route')
-        = @application.route.start
+        = @application.route_start
       %p
         %h6= t(:destination, scope: 'activerecord.attributes.route')
-        = @application.route.destination
+        = @application.route_destination
     - else
       %p
         %h6= t(@application.category)

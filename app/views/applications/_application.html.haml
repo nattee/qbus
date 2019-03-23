@@ -46,6 +46,9 @@
     .card-title
       %h5 ข้อมูลเส้นทาง
     .section
+      %h6= t(:route_no, scope: 'activerecord.attributes.route')
+      = @application.route_no
+    .section
       %h6= t(:start, scope: 'activerecord.attributes.route')
       = @application.route_start
     .section
