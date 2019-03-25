@@ -11,6 +11,7 @@ th:
       evaluation: แบบประเมิน
       licensee: ผู้ประกอบการ  #g
       log: ข้อมูลบันทึก
+      public_comment: ความคิดเห็นจากประชาชน
       route: เส้นทาง  #g
       user: ผู้ใช้งาน  #g
       violation: ข้อมูลการฝ่าฝืน
@@ -117,6 +118,18 @@ th:
       log:
         application: ใบสมัคร
         description: รายละเอียด
+
+      public_comment:
+        route_no: หมายเลขเส้นทาง
+        route: เส้นทาง
+        car_plate: ทะเบียนรถ
+        car: รถ
+        licensee_name: ชื่อผู้ประกอบการ
+        licensee: ผู้ประกอบการ
+        comment: ความคิดเห็น
+        commenter_name: ชื่อผู้ออกความคิดเห็น
+        commenter_contact: ข้อมูลสำหรับติดต่อผู้ออกความคิดเห็น
+        commenter_address: ที่อยู่ผู้ออกความคิดเห็น
 
       route:
         destination: ปลายทาง  #g

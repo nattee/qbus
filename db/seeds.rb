@@ -9,20 +9,21 @@
 # purge ActiveStorage data
 ActiveStorage::Attachment.all.each { |attachment| attachment.purge }
 
-Evaluation.destroy_all;
-Attachment.destroy_all;
-Car.destroy_all;
-Application.destroy_all;
-Violation.destroy_all;
-Datafile.destroy_all;
-Route.destroy_all;
-Licensee.destroy_all;
-User.destroy_all;
-CriteriumAttachment.destroy_all;
-Criterium.destroy_all;
-CriteriaGroup.destroy_all;
-Evidence.destroy_all;
-CriteriumEvidence.destroy_all;
+Evaluation.destroy_all
+Attachment.destroy_all
+Car.destroy_all
+Application.destroy_all
+Violation.destroy_all
+Datafile.destroy_all
+Route.destroy_all
+Licensee.destroy_all
+User.destroy_all
+CriteriumAttachment.destroy_all
+Criterium.destroy_all
+CriteriaGroup.destroy_all
+Evidence.destroy_all
+CriteriumEvidence.destroy_all
+PublicComment.destroy_all
 
 User.create(id: 1, name: 'test1@gmail.com', email: 'test1@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 1, verifier: 1, surveyor: 0})
 User.create(id: 2, name: 'test2@gmail.com', email: 'test2@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 0, verifier: 0, surveyor: 1})
@@ -30,8 +31,8 @@ User.create(id: 2, name: 'test2@gmail.com', email: 'test2@gmail.com', password_d
 Licensee.create(id: 1, name: 'ผู้ประกอบการหนึ่ง', license_no: 'หมายเลขผู้ประกอบการหนึ่ง', license_expire: 5.year.from_now, car_count: '100', contact: 'เจ้านายผู้ประกบอการ', contact_tel: '0123456789')
 Licensee.create(id: 2, name: 'ผู้ประกอบการสอง', license_no: 'หมายเลขผู้ประกอบการสอง', license_expire: 5.year.from_now, car_count: '10', contact: 'ลูกน้องผู้ประกบอการ', contact_tel: '0987654321')
 
-Route.create(id: 1, name: 'เส้นทางที่หนึ่ง', start: 'ป้ายแรก', destination: 'ป้ายสุดท้าย', car_count: 10, route_type: 'รถเมล์')
-Route.create(id: 2, name: 'เส้นทางที่สอง', start: 'ป้ายแรกแรก', destination: 'ป้ายท้ายท้าย', car_count: 10, route_type: 'รถสองแถว')
+Route.create(id: 1, name: 'เส้นทางที่หนึ่ง', start: 'ป้ายแรก', destination: 'ป้ายสุดท้าย', car_count: 10, route_type: 'รถเมล์', route_no: 'no1')
+Route.create(id: 2, name: 'เส้นทางที่สอง', start: 'ป้ายแรกแรก', destination: 'ป้ายท้ายท้าย', car_count: 10, route_type: 'รถสองแถว', route_no: 'no2')
 
 Datafile.create(id: 1, name: 'ไฟล์ข้อมูลหนึ่ง', month_year: 1.year.ago, user: User.first() )
 Datafile.create(id: 2, name: 'ไฟล์ข้อมูลสอง', month_year: 1.month.ago, user: User.last() )
@@ -208,9 +209,9 @@ CriteriumEvidence.create(id: 39, criterium_id:30, evidence_id:39)
 # CriteriumAttachment.create(id: 19, name: 'รายงานการประชุมประจำปี', description: 'รายงานการประชุมประจำปี', required: true, criterium_id: 7)
 # CriteriumAttachment.create(id: 20, name: 'รายละเอียดการเข้าร่วมกิจกรรม', description: 'รายละเอียดการเข้าร่วมกิจกรรม', required: true, criterium_id: 7)
 # CriteriumAttachment.create(id: 21, name: 'รายละเอียดสถานที่ประกอบการ', description: 'รายละเอียดสถานที่ประกอบการ', required: true, criterium_id: 8)
-# 
-# 
-# 
+#
+#
+#
 # CriteriumAttachment.create(id: 22, name: 'ขั้นตอนกระบวนการโดยสาร', description: 'ขั้นตอนกระบวนการโดยสาร', required: true, criterium_id: 10)
 # CriteriumAttachment.create(id: 23, name: 'ผังกระบวนการปฏิบัติงาน', description: 'ผังกระบวนการปฏิบัติงาน', required: true, criterium_id: 10)
 # CriteriumAttachment.create(id: 24, name: 'สมุดพนักงาน/สมุดประจำรถ', description: 'สมุดพนักงาน/สมุดประจำรถ', required: true, criterium_id: 11)
@@ -231,9 +232,9 @@ CriteriumEvidence.create(id: 39, criterium_id:30, evidence_id:39)
 # CriteriumAttachment.create(id: 39, name: 'เอกสารประกอบการประชุม', description: 'เอกสารประกอบการประชุม', required: true, criterium_id: 18)
 # CriteriumAttachment.create(id: 40, name: 'การตอบสนองการรับข้อร้องเรียน', description: 'การตอบสนองการรับข้อร้องเรียน', required: true, criterium_id: 19)
 # CriteriumAttachment.create(id: 41, name: 'การรับข้อเสนอแนะ/ข้อร้องเรียน', description: 'การรับข้อเสนอแนะ/ข้อร้องเรียน', required: true, criterium_id: 20)
-# 
-# 
-# 
+#
+#
+#
 # CriteriumAttachment.create(id: 42, name: 'ใบแสดงการตรวจสอบอุปกรณ์', description: 'ใบแสดงการตรวจสอบอุปกรณ์', required: true, criterium_id: 21)
 # CriteriumAttachment.create(id: 43, name: 'ระเบียบการบำรุงรักษายานพาหนะ', description: 'ระเบียบการบำรุงรักษายานพาหนะ', required: true, criterium_id: 22)
 # CriteriumAttachment.create(id: 44, name: 'ตารางการซ่อมบำรุง', description: 'ตารางการซ่อมบำรุง', required: true, criterium_id: 22)
@@ -248,9 +249,9 @@ CriteriumEvidence.create(id: 39, criterium_id:30, evidence_id:39)
 # CriteriumAttachment.create(id: 53, name: 'นโยบายองค์กร', description: 'นโยบายองค์กร', required: true, criterium_id: 27)
 # CriteriumAttachment.create(id: 54, name: 'แนวทางการควบคุม', description: 'แนวทางการควบคุม', required: true, criterium_id: 27)
 # CriteriumAttachment.create(id: 55, name: 'กฎระเบียบการทำงาน', description: 'กฎระเบียบการทำงาน', required: true, criterium_id: 27)
-# 
-# 
-# 
+#
+#
+#
 # CriteriumAttachment.create(id: 56, name: 'ระเบียบการสมัครงาน', description: 'ระเบียบการสมัครงาน', required: true, criterium_id: 28)
 # CriteriumAttachment.create(id: 57, name: 'ระเบียบการรับสมัครงาน', description: 'ระเบียบการรับสมัครงาน', required: true, criterium_id: 29)
 # CriteriumAttachment.create(id: 58, name: 'วิธีปฏิบัติทดสอบความสามารถ', description: 'วิธีปฏิบัติทดสอบความสามารถ', required: true, criterium_id: 29)
@@ -267,9 +268,9 @@ CriteriumEvidence.create(id: 39, criterium_id:30, evidence_id:39)
 # CriteriumAttachment.create(id: 69, name: 'หลักฐานการดำเนินการ', description: 'หลักฐานการดำเนินการ', required: true, criterium_id: 33)
 # CriteriumAttachment.create(id: 70, name: 'หลักฐานการมอบรางวัล', description: 'หลักฐานการมอบรางวัล', required: true, criterium_id: 33)
 # CriteriumAttachment.create(id: 71, name: 'ใบรายงานการตรวจสุขภาพ', description: 'ใบรายงานการตรวจสุขภาพ', required: true, criterium_id: 34)
-# 
-# 
-# 
+#
+#
+#
 # CriteriumAttachment.create(id: 72, name: 'คู่มือการจัดการเหตุฉุกเฉิน', description: 'คู่มือการจัดการเหตุฉุกเฉิน', required: true, criterium_id: 35)
 # CriteriumAttachment.create(id: 73, name: 'คู่มือประจำรถทุกคัน', description: 'คู่มือประจำรถทุกคัน', required: true, criterium_id: 35)
 # CriteriumAttachment.create(id: 74, name: 'รายงานการบันทึกอุบัติเหตุ', description: 'รายงานการบันทึกอุบัติเหตุ', required: true, criterium_id: 36)
@@ -277,17 +278,17 @@ CriteriumEvidence.create(id: 39, criterium_id:30, evidence_id:39)
 # CriteriumAttachment.create(id: 76, name: 'ระเบียบการจัดฝึกอบรม', description: 'ระเบียบการจัดฝึกอบรม', required: true, criterium_id: 38)
 # CriteriumAttachment.create(id: 77, name: 'รายงานการฝึกอบรม', description: 'รายงานการฝึกอบรม', required: true, criterium_id: 38)
 # CriteriumAttachment.create(id: 78, name: 'แผนการดำเนินการ', description: 'แผนการดำเนินการ', required: true, criterium_id: 39)
-# 
-# 
+#
+#
 # CriteriumAttachment.create(id: 79, name: 'รายละเอียดการติดตามรถ', description: 'รายละเอียดการติดตามรถ', required: true, criterium_id: 41)
 # CriteriumAttachment.create(id: 80, name: 'นโยบายองค์กร', description: 'นโยบายองค์กร', required: true, criterium_id: 42)
 # CriteriumAttachment.create(id: 81, name: 'แนวทางการควบคุม', description: 'แนวทางการควบคุม', required: true, criterium_id: 42)
 # CriteriumAttachment.create(id: 82, name: 'กฎระเบียบการทำงาน', description: 'กฎระเบียบการทำงาน', required: true, criterium_id: 42)
 # CriteriumAttachment.create(id: 83, name: 'หลักฐานบันทึกการเกิดอุบัติเหตุ', description: 'หลักฐานบันทึกการเกิดอุบัติเหตุ', required: true, criterium_id: 43)
 # CriteriumAttachment.create(id: 84, name: 'หลักฐานบันทึกการเกิดอุบัติเหตุ', description: 'หลักฐานบันทึกการเกิดอุบัติเหตุ', required: true, criterium_id: 44)
-# 
-# 
-# 
+#
+#
+#
 # CriteriumAttachment.create(id: 85, name: 'คู่มือปฏิบัติงานขนส่ง', description: 'คู่มือปฏิบัติงานขนส่ง', required: true, criterium_id: 45)
 # CriteriumAttachment.create(id: 86, name: 'รายการสถานที่จุดพักรถที่กำหนด', description: 'รายการสถานที่จุดพักรถที่กำหนด', required: true, criterium_id: 45)
 # CriteriumAttachment.create(id: 87, name: 'ตารางการตรวจสุขภาพพนักงาน', description: 'ตารางการตรวจสุขภาพพนักงาน', required: true, criterium_id: 46)

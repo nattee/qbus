@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :criteria_groups
   resources :violations
   resources :logs
+  resources :public_comments
+  get 'add_comment', to: 'public_comments#new'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'static_pages#home'
   get 'static_pages/test1'
