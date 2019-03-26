@@ -3,6 +3,11 @@ class PublicComment < ApplicationRecord
   belongs_to :car, optional: true
   belongs_to :licensee, optional: true
 
+  validates :comment, presence: true
+  validates :commenter_name, presence: true
+  validates :commenter_contact, presence: true
+  validates :commenter_address, presence: true
+
   before_validation :update_references
 
   def to_label

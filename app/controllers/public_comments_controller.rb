@@ -15,16 +15,10 @@ class PublicCommentsController < ApplicationController
   # GET /public_comments/new
   def new
     @public_comment = PublicComment.new
-    @routes = Route.all
-    @cars = Car.all
-    @licensees = Licensee.all
   end
 
   # GET /public_comments/1/edit
   def edit
-    @routes = Route.all
-    @cars = Car.all
-    @licensees = Licensee.all
   end
 
   # POST /public_comments

@@ -7,7 +7,7 @@
           %i.material-icons.prefix help
           = f.input_field :route_no, list: 'route_list'
           %datalist{id: 'route_list'}
-            - @routes.each do |route|
+            - Route.all.each do |route|
               %option{value: route.route_no}
           = f.label :route_no
           = f.full_error :route_no
@@ -15,7 +15,7 @@
           %i.material-icons.prefix help
           = f.input_field :car_plate, list: 'car_list'
           %datalist{id: 'car_list'}
-            - @cars.each do |car|
+            - Car.all.each do |car|
               %option{value: car.plate}
           = f.label :car_plate
           = f.full_error :car_plate
@@ -23,7 +23,7 @@
           %i.material-icons.prefix help
           = f.input_field :licensee_name, list: 'licensee_list'
           %datalist{id: 'licensee_list'}
-            - @licensees.each do |licensee|
+            - Licensee.all.each do |licensee|
               %option{value: licensee.name}
           = f.label :licensee_name
           = f.full_error :licensee_name
