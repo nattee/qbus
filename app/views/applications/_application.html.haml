@@ -10,29 +10,28 @@
       =l( @application.created_at, format: "%d %B %Y")
     .section
       %h6 สถานะ
-      = @application.state_text
+      = state_full(@application)
+    .section
+      %h6 ใบอนุญาตประกอบการขนส่ง
+      = download_link @application.get_attachment(:license)
     .section
       %h6 สำเนาสัญญาหน้าแรก
-      - if (@application.get_contract_attach_data)
-        = link_to rails_blob_path(@application.get_contract_attach_data, disposition: "attachment") do
-          %i.material-icons.small insert_drive_file
-          = t(:download)
-      - else
-        %span.red-text - ไม่ได้แนบ -
+      = download_link @application.get_attachment(:contract)
     .section
       %h6 หนังสือยืนยันการเข้าร่วมโครงการ
-      - if (@application.get_signup_attach_data)
-        = link_to rails_blob_path(@application.get_signup_attach_data, disposition: "attachment") do
-          %i.material-icons.small insert_drive_file
-          = t(:download)
-      - else
-        %span.red-text - ไม่ได้แนบ -
+      = download_link @application.get_attachment(:signup)
   .col.s12.m4
     .card-title
       %h5 ข้อมูลผู้ประกอบการ
     .section
       %h6= t(:name, scope: 'activerecord.attributes.licensee')
       = @application.licensee.name || "-"
+    .section
+      %h6= t(:license_no, scope: 'activerecord.attributes.application')
+      = @application.license_no || "-"
+    .section
+      %h6= t(:license_expire, scope: 'activerecord.attributes.application')
+      = l(@application.license_expire, format: '%d %B %y') if @application.license_expire
     .section
       %h6= t(:category, scope: 'activerecord.attributes.application')
       = @application.category_text
@@ -42,9 +41,15 @@
     .section
       %h6= t(:contact_tel, scope: 'activerecord.attributes.application')
       = @application.contact_tel || "-"
+    .section
+      %h6= t(:contact_email, scope: 'activerecord.attributes.application')
+      = @application.contact_email || "-"
   .col.s12.m4
     .card-title
       %h5 ข้อมูลเส้นทาง
+    .section
+      %h6= t(:route_no, scope: 'activerecord.attributes.route')
+      = @application.route_no
     .section
       %h6= t(:start, scope: 'activerecord.attributes.route')
       = @application.route_start

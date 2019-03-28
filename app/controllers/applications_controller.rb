@@ -51,6 +51,8 @@ class ApplicationsController < ApplicationController
   def post_step1
     #routes and licensee data
     @application.update(application_params)
+    @application.save
+
     unless @application.category3?
       @route = Route.new(route_params)
       @route.save
@@ -60,14 +62,23 @@ class ApplicationsController < ApplicationController
     @licensee = Licensee.new(licensee_params)
     @application.licensee = @licensee
 
-    if !@application.attach_contract_data(attachment_contract_signup_params)
-      redirect_to apply_step1_application_path(@application), flash: {error: 'กรุณาใส่ข้อมูลหน้าแรกใบอนุญาต'}
-      return
-    end
-    if !@application.attach_signup_data(attachment_contract_signup_params)
-      redirect_to apply_step1_application_path(@application), flash: {error: 'กรุณาแนบไฟล์หนังสือยืนยันเข้าร่วมโครงการ'}
-      return
-    end
+
+    redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบใบอนุญาตประกอบการขนส่ง'}) and return unless @application.attach_data(:license, attachment_contract_signup_params)
+    redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบสัญญาหน้าแรก'}) and return unless @application.attach_data(:contract, attachment_contract_signup_params)
+    redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบหนังสือยืนยันเข้าร่วมโครงการ'}) and return unless @application.attach_data(:signup, attachment_contract_signup_params)
+
+    #if !@application.attach_license_data(attachment_contract_signup_params)
+    #  redirect_to apply_step1_application_path(@application), flash: {error: 'กรุณาแนบใบอนุญาตประกอบการขนส่ง'}
+    #  return
+    #end
+    #if !@application.attach_contract_data(attachment_contract_signup_params)
+    #  redirect_to apply_step1_application_path(@application), flash: {error: 'กรุณาใส่ข้อมูลหน้าแรกใบอนุญาต'}
+    #  return
+    #end
+    #if !@application.attach_signup_data(attachment_contract_signup_params)
+    #  redirect_to apply_step1_application_path(@application), flash: {error: 'กรุณาแนบไฟล์หนังสือยืนยันเข้าร่วมโครงการ'}
+    #  return
+    #end
 
     if @application.save
       if @application.category3?
@@ -193,11 +204,11 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(:number, :user, :state, :licensee, :route, :category, :appointment_date, :appointment_remark, :appointment_user, :evaluation_finish_date, :award_date, :award, :award_remark, :contact, :contact_tel, :confirmed_date, :awarded_date,:evaluated_date, :submitted_date, :car_count, :trip_count, :license_no)
+      params.require(:application).permit(:number, :user, :state, :licensee, :route, :category, :appointment_date, :appointment_remark, :appointment_user, :evaluation_finish_date, :award_date, :award, :award_remark, :contact, :contact_tel, :confirmed_date, :awarded_date,:evaluated_date, :submitted_date, :car_count, :trip_count, :license_no, :license_expire, :contact_email)
     end
 
     def route_params
-      params.require(:route).permit(:start, :destination)
+      params.require(:route).permit(:start, :destination, :route_no)
     end
 
     def licensee_params
@@ -205,7 +216,7 @@ class ApplicationsController < ApplicationController
     end
 
     def attachment_contract_signup_params
-      params.require(:attachment).permit(:contract_data, :contract_file_name, :signup_data, :signup_file_name)
+      params.require(:attachment).permit(:contract_data, :contract_file_name, :signup_data, :signup_file_name, :license_data, :license_file_name)
     end
 
     def attachment_params

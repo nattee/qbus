@@ -25,7 +25,7 @@
                       %td= app.route_start
                       %td= app.route_destination
                       %td= l(app.created_at, format: '%d %b %Y')
-                      %td.light-blue-text= app.state_text
+                      %td= state_full(app)
                       %td.strong
                         = link_to 'แก้ไข', apply_step1_application_path(app)
                         /= link_to 'แก้ไข', apply_step1_application_path(app), class: 'button waves-effect waves-light blue darken-2 btn'
@@ -51,7 +51,7 @@
                       %td= app.route_start
                       %td= app.route_destination
                       %td= l(app.created_at, format: '%d %b %Y')
-                      %td.orange-text= app.state_text
+                      %td= state_full(app)
                       %td.strong
                         = link_to 'ส่งหลักฐาน', add_evidences_application_path(app)
             - else
@@ -77,7 +77,7 @@
                       %td= app.route_start
                       %td= app.route_destination
                       %td= l(app.created_at, format: '%d %b %Y')
-                      %td= app.state_text
+                      %td= state_full(app)
             - else
               ไม่มีใบสมัครรอการตรวจสอบ
 

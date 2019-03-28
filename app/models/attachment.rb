@@ -1,6 +1,6 @@
 class Attachment < ApplicationRecord
 
-  enum attachment_type: [:criterium_evidence, :contract, :signup, :announcement]
+  enum attachment_type: [:criterium_evidence, :contract, :signup, :license, :announcement]
 
   has_one_attached :data
   belongs_to :application, optional: true

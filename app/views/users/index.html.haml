@@ -5,22 +5,25 @@
         .card-title.white-text
           %h1= t(:list) + t(:user, scope: 'activerecord.models')
       .card-content
-        %ul.collection
-          - @users.each do |user|
-            %li.collection-item.avatar
-              %i.material-icons.circle face
+        - @users.each do |user|
+          .row
+            .col.s1
+              %i.material-icons{style: 'font-size: 3rem;'} face
+            .col.s8
               %span.title="#{user.name}"
               %p
                 ="#{t(:email, scope: 'activerecord.attributes.user')} #{user.email}"
                 %br
                 ="#{t(:activated, scope: 'activerecord.attributes.user')} #{user.activated}"
-              .secondary-content
-                %a{:href => user_path(user)}
-                  %i.material-icons pageview
-                %a{:href => edit_user_path(user)}
-                  %i.material-icons edit
-                %a{"href" => user_path(user), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
-                  %i.material-icons delete
+              .divider
+            .col.s3
+              %a{:href => user_path(user)}
+                %i.material-icons pageview
+              %a{:href => edit_user_path(user)}
+                %i.material-icons edit
+              %a{"href" => user_path(user), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                %i.material-icons delete
+              .divider
       .card-action
         = link_to t(:new), new_user_path
         = link_to t(:register), register_path

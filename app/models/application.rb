@@ -52,13 +52,18 @@ class Application < ApplicationRecord
     Application.state_enum_to_text(state)
   end
 
+  def route_no
+    return "-" if category3? or route == nil
+    return route.route_no
+  end
+
   def route_start
     return 'ไม่ประจำทาง' if category3? or route == nil
     return route.start
   end
 
   def route_destination
-    return '-' if category3? or route == nil
+    return '' if category3? or route == nil
     return route.destination
   end
 
@@ -83,13 +88,8 @@ class Application < ApplicationRecord
     categories.map{|x| [Application.category_enum_to_text(x.first), x.first]}
   end
 
-  def get_signup_attach_data
-    attachments.where(attachment_type: :signup).first.try(:data)
-  end
-  
-
-  def get_contract_attach_data
-    attachments.where(attachment_type: :signup).first.try(:data)
+  def get_attachment(type)
+    attachments.where(attachment_type: type).first
   end
 
 
@@ -130,6 +130,22 @@ class Application < ApplicationRecord
     #CriteriumAttachment.where.not(id: Attachment.select(:criterium_attachment_id).where(application: self)).each do |cri|
     #  attachments << Attachment.new(criterium_attachment_id: cri.id, attachment_type: :criterium_evidence)
     #end
+  end
+
+  def attach_data(attachment_type, params)
+    att = attachments.where(attachment_type: attachment_type).first
+    filename_param = "#{attachment_type.to_s}_file_name"
+    data_param = "#{attachment_type.to_s}_data"
+    if att
+      att.data.attach(params[data_param])
+      att.filename = params[filename_param]
+      att.save
+    else
+      att = Attachment.new({attachment_type: attachment_type, filename: params[filename_param]})
+      att.data.attach(params[data_param])
+      attachments << att
+    end
+    return save && att.data.attached?
   end
 
   def attach_signup_data(signup_params)
