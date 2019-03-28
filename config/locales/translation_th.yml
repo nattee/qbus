@@ -1,6 +1,7 @@
 th:
   activerecord:
     models:
+      announcement: ประชาสัมพันธ์
       application: ใบสมัคร
       attachment: ไฟล์แนบ
       car: รถ
@@ -17,6 +18,13 @@ th:
       violation: ข้อมูลการฝ่าฝืน
 
     attributes:
+      announcement:
+        title: ชื่อเรื่อง
+        description: รายละเอียด
+        published: เผยแพร่
+        user: ผู้เขียน
+        attachment: ไฟล์แนบ
+
       application:
         number: หมายเลขใบสมัคร  #g
         user: ผู้สมัคร  #g
@@ -56,7 +64,6 @@ th:
         register_result: ผลตรวจใบสมัคร
         license_no: เลขที่ใบอนุญาต
 
-
       attachment:
         filename: ชื่อไฟล์  #g
         data: ข้อมูลของไฟล์  #g
@@ -67,6 +74,7 @@ th:
           criterium_evidence: หลักฐานสำหรับการประเมิน
           contract: สัญญาการเดินรถ
           signup: เอกสารยืนยันการเข้าร่วมโครงการ
+          announcement: ไฟล์ประชาสัมพันธ์
 
       car:
         plate: เลขทะเบียน  #g

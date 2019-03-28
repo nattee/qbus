@@ -24,6 +24,7 @@ class AnnouncementsController < ApplicationController
   # POST /announcements
   # POST /announcements.json
   def create
+    puts announcement_params
     @announcement = Announcement.new(announcement_params)
 
     respond_to do |format|
@@ -69,6 +70,10 @@ class AnnouncementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def announcement_params
-      params.fetch(:announcement, {})
+      params.require(:announcement).permit(:title, :description, :published, :user_id)
+    end
+
+    def attachment_params
+      params.require(:attachment).permit(:data, :filename)
     end
 end

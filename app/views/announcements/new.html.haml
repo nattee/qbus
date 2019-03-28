@@ -1,5 +1,8 @@
-%h1 New announcement
-
-= render 'form'
-
-= link_to 'Back', announcements_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          %h3= t(:new) + t(:announcement, scope: 'activerecord.models')
+      .card-content
+        = render partial: 'form', locals: {back_link: announcements_path}
