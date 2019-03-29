@@ -1,6 +1,6 @@
 class ApplicationsController < ApplicationController
   before_action :set_application, only: [:show, :edit, :update, :destroy,
-                                         :apply_step1, :apply_step2, :apply_step3,
+                                         :apply_step1, :apply_step2, :apply_step3,:fail_self_evaluation,
                                          :post_step1,:post_step2,:post_step3,
                                          :add_evidences,:add_attachment,:finish_add_evidences,
                                          :add_car, :remove_car
@@ -35,7 +35,7 @@ class ApplicationsController < ApplicationController
   end
 
   def apply_step3
-
+    @application.add_missing_evaluation
   end
 
   def post_apply
@@ -104,11 +104,28 @@ class ApplicationsController < ApplicationController
   end
 
   def post_step3
-    @application.state = :registered
-    if @application.save
-      redirect_to process_dashboard_path , notice: 'สร้างใบสมัครเรียบร้อย'
+    has_no = false
+    @application.self_evaluations.each do |ev|
+      if params.require(:result)[ev.id.to_s] == 'ok'
+        ev.result = true
+      elsif params.require(:result)[ev.id.to_s] == 'no'
+        ev.result = false
+        has_no = true
+      else
+        has_no = true
+      end
+      ev.save
+    end
+
+    if has_no
+      redirect_to fail_self_evaluation_application_path(@application)
     else
-      redirect_to apply_applications_path
+      @application.state = :registered
+      if @application.save
+        redirect_to process_dashboard_path , notice: 'สร้างใบสมัครเรียบร้อย'
+      else
+        redirect_to apply_applications_path
+      end
     end
 
   end
