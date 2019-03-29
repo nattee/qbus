@@ -1,0 +1,16 @@
+.row
+  .col.s12.m4.push-m8
+    .card.gradient-45deg-light-green-amber
+      .card-content
+        %p{style: 'padding-bottom: 1rem;'}
+          ผู้ใช้บริการรถโดยสายสาธารณะสามารถให้ข้อคิดเห็นแนะนำติชมต่อรถต่าง ๆ ที่ใช้งานได้ โดยกรอกข้อมูลในแบบฟอร์มนี้ และกดปุ่ม "ส่งความคิดเห็น" เมื่อกรอกข้อมเรียบร้อยแล้ว
+        %p{style: 'padding-bottom: 1rem;'}
+          กรุณาระบุชื่อ - ที่อยู่ และหมายเลขโทรศัพท์สำหรับติดต่อกลับ
+
+  .col.s12.m8.pull-m4
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          %h4.white-text= t(:new) + t(:public_comment, scope: 'activerecord.models')
+      .card-content
+        = render partial: 'form', locals: {back_link: root_path}

@@ -12,7 +12,6 @@
         %br
         %br
         %br
-        %br
       = link_to 'สมัครเข้าร่วมโครงการ', apply_applications_path, class: 'btn orange'
   .carousel-item.purple.white-text{href: "#two!"}
     %h2.white-text ข่าวประชาสัมพันธ์ 1
@@ -51,8 +50,8 @@
       .col.s12.m4
         .card.border-radius-6
           .card-content.center
-            %h4 ยินดีต้อนรับ
-            %h4 เข้าสู่ระบบ
+            %h5 ยินดีต้อนรับ
+            %h5 เข้าสู่ระบบ
           .card-action.center
             = link_to 'ไปยังหน้าหลัก', process_dashboard_path, class: 'btn border-round col s12 orange waves-effect waves-light'
             %br
@@ -61,7 +60,7 @@
       .card
         .card-content
           .card-title
-            %h4 เอกสารที่เกี่ยวข้อง
+            %h5 เอกสารที่เกี่ยวข้อง
           .row
             .col.s4.center
               %a{href: 'asdf'}
@@ -79,9 +78,18 @@
                 %i.material-icons.medium question_answer
                 %br
                 คำถามพบบ่อย
+      .card
+        .card-content
+          .card-title
+            %h5 ส่งข้อคิดเห็นหรือเรื่องร้องเรียน
+          ผู้ใช้บริการรถโดยสารสาธารณะ สามารถให้ช้อคิดเห็นหรือ ส่งเรื่องร้องเรียนด้านการให้บริการได้
+        .card-content
+          .center
+            = link_to 'ส่งข้อคิดเห็น', add_comment_path, class: 'btn border-round orange waves-effect waves-light'
+.row.deep-purple.lighten-3
+  .col.s12
 
-            .col.s4.center
-            .col.s4
+
 
 
 :javascript
