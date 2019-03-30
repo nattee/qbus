@@ -17,6 +17,10 @@ class PublicCommentsController < ApplicationController
     @public_comment = PublicComment.new
   end
 
+  def add
+    @public_comment = PublicComment.new
+  end
+
   # GET /public_comments/1/edit
   def edit
   end

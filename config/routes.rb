@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :logs
   resources :public_comments
   resources :announcements
-  get 'add_comment', to: 'public_comments#new'
+  get 'add_comment', to: 'public_comments#add'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'static_pages#home'
   get 'static_pages/test1'

@@ -26,6 +26,7 @@ class AnnouncementsController < ApplicationController
   def create
     puts announcement_params
     @announcement = Announcement.new(announcement_params)
+    @announcement.attach_file(attachment_params)
 
     respond_to do |format|
       if @announcement.save
@@ -41,6 +42,7 @@ class AnnouncementsController < ApplicationController
   # PATCH/PUT /announcements/1
   # PATCH/PUT /announcements/1.json
   def update
+    @announcement.attach_file(attachment_params)
     respond_to do |format|
       if @announcement.update(announcement_params)
         format.html { redirect_to @announcement, notice: 'Announcement was successfully updated.' }
@@ -74,6 +76,6 @@ class AnnouncementsController < ApplicationController
     end
 
     def attachment_params
-      params.require(:attachment).permit(:data, :filename)
+      params.require(:attachment).permit(:data, :file_name)
     end
 end
