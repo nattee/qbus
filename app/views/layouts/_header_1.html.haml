@@ -17,10 +17,10 @@
             %a.waves-effect.waves-block.waves-light.search-button{:href => "javascript:void(0);"}
               %i.material-icons search
           %li
-            %a.waves-effect.waves-block.waves-light.notification-button{"data-target" => "notifications-dropdown", :href => "javascript:void(0);"}
-              %i.material-icons
-                notifications_none
-                %small.notification-badge 5
+            /%a.waves-effect.waves-block.waves-light.notification-button{"data-target" => "notifications-dropdown", :href => "javascript:void(0);"}
+            /  %i.material-icons
+            /    notifications_none
+            /    %small.notification-badge 5
           - if logged_in?
             %li
               %a.waves-effect.waves-block.waves-light.profile-button{"data-target" => "profile-dropdown", :href => "javascript:void(0);"}
@@ -52,44 +52,50 @@
         /      %i.flag-icon.flag-icon-de
         /      German
         / notifications-dropdown
-        %ul#notifications-dropdown.dropdown-content
-          %li
-            %h6
-              NOTIFICATIONS
-              %span.new.badge 5
-          %li.divider
-          %li
-            %a.grey-text.text-darken-2{:href => "#!"}
-              %span.material-icons.icon-bg-circle.cyan.small add_shopping_cart
-              A new order has been placed!
-            %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 2 hours ago
-          %li
-            %a.grey-text.text-darken-2{:href => "#!"}
-              %span.material-icons.icon-bg-circle.red.small stars
-              Completed the task
-            %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 3 days ago
-          %li
-            %a.grey-text.text-darken-2{:href => "#!"}
-              %span.material-icons.icon-bg-circle.teal.small settings
-              Settings updated
-            %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 4 days ago
-          %li
-            %a.grey-text.text-darken-2{:href => "#!"}
-              %span.material-icons.icon-bg-circle.deep-orange.small today
-              Director meeting started
-            %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 6 days ago
-          %li
-            %a.grey-text.text-darken-2{:href => "#!"}
-              %span.material-icons.icon-bg-circle.amber.small trending_up
-              Generate monthly report
-            %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 1 week ago
+
+
+
+        / notification dropdown
+        /%ul#notifications-dropdown.dropdown-content
+        /  %li
+        /    %h6
+        /      NOTIFICATIONS
+        /      %span.new.badge 5
+        /  %li.divider
+        /  %li
+        /    %a.grey-text.text-darken-2{:href => "#!"}
+        /      %span.material-icons.icon-bg-circle.cyan.small add_shopping_cart
+        /      A new order has been placed!
+        /    %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 2 hours ago
+        /  %li
+        /    %a.grey-text.text-darken-2{:href => "#!"}
+        /      %span.material-icons.icon-bg-circle.red.small stars
+        /      Completed the task
+        /    %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 3 days ago
+        /  %li
+        /    %a.grey-text.text-darken-2{:href => "#!"}
+        /      %span.material-icons.icon-bg-circle.teal.small settings
+        /      Settings updated
+        /    %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 4 days ago
+        /  %li
+        /    %a.grey-text.text-darken-2{:href => "#!"}
+        /      %span.material-icons.icon-bg-circle.deep-orange.small today
+        /      Director meeting started
+        /    %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 6 days ago
+        /  %li
+        /    %a.grey-text.text-darken-2{:href => "#!"}
+        /      %span.material-icons.icon-bg-circle.amber.small trending_up
+        /      Generate monthly report
+        /    %time.media-meta{:datetime => "2015-06-12T20:50:48+08:00"} 1 week ago
+
+
         / profile-dropdown
         - if logged_in?
           %ul#profile-dropdown.dropdown-content
             %li
               %a.grey-text.text-darken-1{:href => profile_path}
                 %i.material-icons portrait
-                Profile
+                ข้อมูลผู้ใช้
             / %li
             /   %a.grey-text.text-darken-1{:href => "app-chat.html"}
             /     %i.material-icons chat_bubble_outline
@@ -106,7 +112,7 @@
             %li
               %a.grey-text.text-darken-1{"href" => logout_path, "data-method" => "delete"}
                 %i.material-icons keyboard_tab
-                Logout
+                ออกจากระบบ
       /%nav.display-none.search-sm
       /  .nav-wrapper
       /    %form

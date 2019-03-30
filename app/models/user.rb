@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
   has_secure_password
 
-  store :roles, accessors: [ :admin, :verifier, :surveyor ], coder: JSON
+  store :roles, accessors: [ :admin, :verifier, :surveyor, :committee, :licensee, :evaluator], coder: JSON
 
   # Returns the hash digest of the given string.
   def User.digest(string)
@@ -54,6 +54,18 @@ class User < ApplicationRecord
     digest = send("#{attribute}_digest")
     return false if digest.nil?
     BCrypt::Password.new(digest).is_password?(token)
+  end
+
+  #roles
+  def is_admin?
+    return admin != '0'
+  end
+  def has_role(role)
+    return false unless roles[role]
+    return is_admin? || roles[role] != '0'
+  end
+  def is_official?
+    return has_role(:committee) || has_role(:surveyor) || has_role(:evaluator) || has_role(:verifier)
   end
 
   private
