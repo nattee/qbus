@@ -2,10 +2,10 @@
   - @publishes.each do |announcement|
     .col.s4
       .card
-        .card-image{style: 'height: 240px; background-color: silver;'}
+        .card-image{style: 'height: 240px; background-color: white;'}
           - if announcement.attachment&.data&.representable?
             = image_tag rails_representation_url(announcement.attachment.data.representation(resize: '320x240'))
-          %span.card-title{style: 'background-color: silver; font-weight: bold;'}
+          %span.card-title{style: 'background-color: gray; font-weight: bold;'}
             = announcement.title
         .card-content
           = raw announcement.description

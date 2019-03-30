@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :logs
   resources :public_comments
   resources :announcements
-  get 'publish', to: 'announcements#publish'
+  get 'public_announcement', to: 'announcements#publish'
   get 'add_comment', to: 'public_comments#add_comment'
   post 'add_comment', to: 'public_comments#add_comment_post'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -5,6 +5,9 @@ class Announcement < ApplicationRecord
   scope :publishes, -> { where(published: true) }
 
   def attach_file(attachment_params)
+    if attachment_params['data'] == nil
+      return false
+    end
     file = Attachment.find_by(announcement_id: self.id, attachment_type: :announcement)
     if (file == nil)
       file = Attachment.new({attachment_type: :announcement, filename: attachment_params['file_name']})

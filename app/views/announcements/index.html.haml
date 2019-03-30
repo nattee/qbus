@@ -11,7 +11,7 @@
               %i.material-icons.circle announcement
               %span.title=announcement.title
               %p=announcement.user&.name
-              %p=t(:published, scope: 'activerecord.attributes.announcement') + announcement.published
+              %p=announcement.published ? 'เผยแพร่แล้ว' : 'ยังไม่เผยแพร่'
               .secondary-content
                 %a{:href => announcement_path(announcement)}
                   %i.material-icons pageview
