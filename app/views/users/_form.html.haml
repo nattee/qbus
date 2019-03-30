@@ -45,6 +45,10 @@
               = f.input_field :admin, as: :boolean
               %span= t(:admin, scope: 'activerecord.attributes.user')
           %p
+            = f.label :licensee  do
+              = f.input_field :licensee, as: :boolean
+              %span= t(:licensee, scope: 'activerecord.attributes.user')
+          %p
             = f.label :verifier  do
               = f.input_field :verifier, as: :boolean
               %span= t(:verifier, scope: 'activerecord.attributes.user')
@@ -52,6 +56,14 @@
             = f.label :surveyor  do
               = f.input_field :surveyor, as: :boolean
               %span= t(:surveyor, scope: 'activerecord.attributes.user')
+          %p
+            = f.label :evaluator  do
+              = f.input_field :evaluator, as: :boolean
+              %span= t(:evaluator, scope: 'activerecord.attributes.user')
+          %p
+            = f.label :committee  do
+              = f.input_field :committee, as: :boolean
+              %span= t(:committee, scope: 'activerecord.attributes.user')
       /.row
       /  .input-field.col.s12
       /    %i.material-icons.prefix face

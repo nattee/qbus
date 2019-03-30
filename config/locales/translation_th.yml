@@ -163,7 +163,10 @@ th:
         password_confirmation: ทวนรหัสผ่าน
         roles: บทบาท  #g
         admin: ผู้ดูแลระบบ
+        licensee: ผู้ประกอบการ
         verifier: เจ้าหน้าที่ตรวจสอบใบสมัคร
-        surveyor: เจ้าหน้าที่ประเมิน
+        surveyor: เจ้าหน้าที่ตรวจสอบ
+        evaluator: เจ้าหน้าที่ประเมินผล
+        committee: กรรมการตัดสินรางวัล       
         activated: เปิดการใช้บัญชี
         activated_at: เปิดการใช้บัญชี เมื่อวันที่
