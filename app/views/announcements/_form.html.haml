@@ -1,4 +1,4 @@
-= simple_form_for(@announcement) do |f|
+= simple_form_for(@announcement, html: { multipart: true }) do |f|
   = f.error_notification
   .row
     .col.s12

@@ -21,6 +21,10 @@ class AnnouncementsController < ApplicationController
   def edit
   end
 
+  def publish
+    @publishes = Announcement.publishes
+  end
+
   # POST /announcements
   # POST /announcements.json
   def create
