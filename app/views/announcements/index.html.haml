@@ -1,0 +1,23 @@
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          %h1= t(:list) + t(:announcement, scope: 'activerecord.models')
+      .card-content
+        %ul.collection
+          - @announcements.each do |announcement|
+            %li.collection-item.avatar
+              %i.material-icons.circle announcement
+              %span.title=announcement.title
+              %p=announcement.user&.name
+              %p=announcement.published ? 'เผยแพร่แล้ว' : 'ยังไม่เผยแพร่'
+              .secondary-content
+                %a{:href => announcement_path(announcement)}
+                  %i.material-icons pageview
+                %a{:href => edit_announcement_path(announcement)}
+                  %i.material-icons edit
+                %a{"href" => announcement_path(announcement), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                  %i.material-icons delete
+      .card-action
+        = link_to t(:new), new_announcement_path

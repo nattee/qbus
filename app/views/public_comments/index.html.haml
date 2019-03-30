@@ -1,19 +1,27 @@
-%h1 Listing public_comments
-
-%table
-  %thead
-    %tr
-      %th
-      %th
-      %th
-
-  %tbody
-    - @public_comments.each do |public_comment|
-      %tr
-        %td= link_to 'Show', public_comment
-        %td= link_to 'Edit', edit_public_comment_path(public_comment)
-        %td= link_to 'Destroy', public_comment, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Public comment', new_public_comment_path
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          %h1= t(:list) + t(:public_comment, scope: 'activerecord.models')
+      .card-content
+        %ul.collection
+          - @public_comments.each do |public_comment|
+            %li.collection-item.avatar
+              %i.material-icons.circle comment
+              %span.title="#{public_comment.to_label}"
+              %p
+                ="#{t(:route_no, scope: 'activerecord.attributes.public_comment')} #{public_comment.route_no}"
+                %br
+                ="#{t(:car_plate, scope: 'activerecord.attributes.public_comment')} #{public_comment.car_plate}"
+                %br
+                ="#{t(:licensee_name, scope: 'activerecord.attributes.public_comment')} #{public_comment.licensee_name}"
+              .secondary-content
+                %a{:href => public_comment_path(public_comment)}
+                  %i.material-icons pageview
+                %a{:href => edit_public_comment_path(public_comment)}
+                  %i.material-icons edit
+                %a{"href" => public_comment_path(public_comment), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                  %i.material-icons delete
+      .card-action
+        = link_to t(:new), new_public_comment_path

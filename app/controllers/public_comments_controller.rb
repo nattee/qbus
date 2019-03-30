@@ -17,6 +17,21 @@ class PublicCommentsController < ApplicationController
     @public_comment = PublicComment.new
   end
 
+  def add_comment
+    @public_comment = PublicComment.new
+  end
+
+  def add_comment_post
+    puts public_comment_params
+    @public_comment = PublicComment.new(public_comment_params)
+
+    if @public_comment.save
+      redirect_to root_path, notice: 'Public comment was successfully created.'
+    else
+      render :add_comment
+    end
+  end
+
   # GET /public_comments/1/edit
   def edit
   end
@@ -24,6 +39,7 @@ class PublicCommentsController < ApplicationController
   # POST /public_comments
   # POST /public_comments.json
   def create
+    puts public_comment_params
     @public_comment = PublicComment.new(public_comment_params)
 
     respond_to do |format|
@@ -69,6 +85,6 @@ class PublicCommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def public_comment_params
-      params.fetch(:public_comment, {})
+      params.require(:public_comment).permit(:route_no, :route_id, :car_plate, :car_id, :licensee_name, :licensee_id, :comment, :commenter_name, :commenter_contact, :commenter_address)
     end
 end

@@ -1,6 +1,7 @@
 th:
   activerecord:
     models:
+      announcement: ประชาสัมพันธ์
       application: ใบสมัคร
       attachment: ไฟล์แนบ
       car: รถ
@@ -11,11 +12,19 @@ th:
       evaluation: แบบประเมิน
       licensee: ผู้ประกอบการ  #g
       log: ข้อมูลบันทึก
+      public_comment: ความคิดเห็นจากประชาชน
       route: เส้นทาง  #g
       user: ผู้ใช้งาน  #g
       violation: ข้อมูลการฝ่าฝืน
 
     attributes:
+      announcement:
+        title: ชื่อเรื่อง
+        description: รายละเอียด
+        published: เผยแพร่
+        user: ผู้เขียน
+        attachment: ไฟล์แนบ
+
       application:
         number: หมายเลขใบสมัคร  #g
         user: ผู้สมัคร  #g
@@ -57,7 +66,6 @@ th:
         license_expire: วันที่สิ้นสุดใบอนุญาต
         contact_email: อีเมล์ผู้ประสานงาน
 
-
       attachment:
         filename: ชื่อไฟล์  #g
         data: ข้อมูลของไฟล์  #g
@@ -68,6 +76,7 @@ th:
           criterium_evidence: หลักฐานสำหรับการประเมิน
           contract: สัญญาการเดินรถ
           signup: เอกสารยืนยันการเข้าร่วมโครงการ
+          announcement: ไฟล์ประชาสัมพันธ์
 
       car:
         plate: เลขทะเบียน  #g
@@ -121,6 +130,18 @@ th:
         application: ใบสมัคร
         description: รายละเอียด
 
+      public_comment:
+        route_no: หมายเลขเส้นทาง
+        route: เส้นทาง
+        car_plate: ทะเบียนรถ
+        car: รถ
+        licensee_name: ชื่อผู้ประกอบการ
+        licensee: ผู้ประกอบการ
+        comment: ความคิดเห็น
+        commenter_name: ชื่อผู้ออกความคิดเห็น
+        commenter_contact: ข้อมูลสำหรับติดต่อผู้ออกความคิดเห็น
+        commenter_address: ที่อยู่ผู้ออกความคิดเห็น
+
       route:
         destination: ปลายทาง  #g
         name: ชื่อเส้นทาง  #g
@@ -142,7 +163,10 @@ th:
         password_confirmation: ทวนรหัสผ่าน
         roles: บทบาท  #g
         admin: ผู้ดูแลระบบ
+        licensee: ผู้ประกอบการ
         verifier: เจ้าหน้าที่ตรวจสอบใบสมัคร
-        surveyor: เจ้าหน้าที่ประเมิน
+        surveyor: เจ้าหน้าที่ตรวจสอบ
+        evaluator: เจ้าหน้าที่ประเมินผล
+        committee: กรรมการตัดสินรางวัล       
         activated: เปิดการใช้บัญชี
         activated_at: เปิดการใช้บัญชี เมื่อวันที่

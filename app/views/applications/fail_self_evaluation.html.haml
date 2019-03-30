@@ -1,0 +1,17 @@
+.row
+  .col.s12
+    .card
+      .card-content
+        .card-title
+          %h3 สมัครเข้าร่วมโครงการ Q-BUS
+        .row
+          .col.s12.m3
+            = render "current_apply_step"
+          .col.s12.m9
+            %h4 ไม่ผ่านการประเมินตนเอง
+
+            คำอธิบายกรณีไม่ผ่านการประเมินตนเอง
+
+            %br
+            = link_to 'ย้อนกลับ', apply_step3_application_path(@application), class: "btn waves-light left"
+

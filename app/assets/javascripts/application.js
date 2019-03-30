@@ -11,21 +11,23 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= re quire jquery
+//= /require jquery
 //= require activestorage
-//= re quire turbolinks
+//= /require turbolinks
 //= require materialize-admin/vendors.min
 //= /require materialize-admin/materialize
 //= /require materialize-admin/scripts/form-elements
 //= /require materialize-admin/vendor/noUiSlider/nouislider
-//= /require materialize-admin/vendor/data-tables/js/jquery.dataTables.min.js
-//= /require materialize-admin/vendor/data-tables/extensions/responsive/js/dataTables.responsive.min.js
-//= /require materialize-admin/vendor/data-tables/js/dataTables.select.min.js
+//= require materialize-admin/vendor/data-tables/js/jquery.dataTables.min.js
+//= require materialize-admin/vendor/data-tables/extensions/responsive/js/dataTables.responsive.min.js
+//= require materialize-admin/vendor/data-tables/js/dataTables.select.min.js
 //
 //= require materialize-admin/plugins
 //= /require materialize-admin/custom/custom-script
 //= /require datatables
 //= require init
+//= require jquery.validate
+//= /require jquery.validate.localization/messages_th
 //= /require_tree .
 //
 

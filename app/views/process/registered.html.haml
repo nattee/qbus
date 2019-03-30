@@ -9,7 +9,7 @@
     .card
       .card-content
         %h4 ตรวจใบสมัคร
-        = form_with url: confirm_process_register_path(@application), local: true do |f|
+        = form_with url: confirm_process_register_path(@application), id: 'form-register', local: true do |f|
           .row
             .col.s12
               %label
@@ -21,7 +21,11 @@
               %label
                 = f.radio_button :result, 'no'
                 %span ใบสมัครไม่ถูกต้อง
-          .section
+          .div#error-text{style: 'display: none;'}
+            %ul
+              %li
+                %label กรุณาเลือกผลการตรวจสอบ
+            qwerqwer
           .row
             .input-field.col.s12
               = f.text_area :register_result, {value: @application.register_result, class: 'materialize-textarea'}
@@ -36,3 +40,16 @@
     .card
       .card-content
         = render partial: 'applications/application'
+
+:javascript
+  var container = $('#error-text');
+  $("#form-register").validate({
+    rules: {
+      result: {
+        required: true
+      }
+    },
+    errorContainer: $('#error-text'),
+    errorLabelContainer: $('ul',container),
+    wrapper: 'li'
+  });

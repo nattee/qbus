@@ -92,6 +92,14 @@ class Application < ApplicationRecord
     attachments.where(attachment_type: type).first
   end
 
+  def self_evaluations
+    if category3?
+      return evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id = 8")
+    else
+      return evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id >= 7")
+    end
+  end
+
 
   #state manipulation
   def confirm_registration() self.confirmed_date = Time.zone.now; change_state(:confirmed)  end

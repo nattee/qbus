@@ -1,0 +1,29 @@
+.row
+  .col.s6.offset-s3
+    .card
+      .card-content.deep-purple
+        .card-title.white-text
+          =t(:announcement, scope: 'activerecord.models')
+          =@announcement.id
+      .card-content
+        .section
+          %h6= t(:title, scope: 'activerecord.attributes.announcement')
+          = @announcement.title
+        .section
+          %h6= t(:description, scope: 'activerecord.attributes.announcement')
+          = @announcement.description
+        .section
+          %h6= t(:user, scope: 'activerecord.attributes.announcement')
+          = @announcement.user&.name
+        .section
+          %h6= t(:published, scope: 'activerecord.attributes.announcement')
+          = @announcement.published
+        .section
+          %h6= t(:attachment, scope: 'activerecord.attributes.announcement')
+          - if @announcement.attachment&.data&.attached? == true
+            = link_to t(:download), rails_blob_path(@announcement.attachment.data, disposition: "attachment")
+          - else
+            %span [no data]
+      .card-action
+        = link_to t(:edit), edit_announcement_path(@announcement)
+        = link_to t(:back), announcements_path

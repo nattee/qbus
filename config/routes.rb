@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   resources :criteria_groups
   resources :violations
   resources :logs
+  resources :public_comments
+  resources :announcements
+  get 'public_announcement', to: 'announcements#publish'
+  get 'add_comment', to: 'public_comments#add_comment'
+  post 'add_comment', to: 'public_comments#add_comment_post'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'static_pages#home'
   get 'static_pages/test1'
@@ -29,6 +34,7 @@ Rails.application.routes.draw do
       get 'apply_step1'
       get 'apply_step2'
       get 'apply_step3'
+      get 'fail_self_evaluation'
       post 'apply_step1', to: 'applications#post_step1'
       post 'apply_step2', to: 'applications#post_step2'
       post 'apply_step3', to: 'applications#post_step3'

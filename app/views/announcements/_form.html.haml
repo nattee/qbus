@@ -1,0 +1,39 @@
+= simple_form_for(@announcement, html: { multipart: true }) do |f|
+  = f.error_notification
+  .row
+    .col.s12
+      .row
+        .input-field.col.s12
+          %i.material-icons.prefix help
+          = f.input_field :title
+          = f.label :title
+          = f.full_error :title
+        .input-field.col.s12
+          %i.material-icons.prefix help
+          = f.input_field :description, class: 'materialize-textarea', style: 'height: 300px;'
+          = f.label :description
+          = f.full_error :description
+      .row
+        .input-field.col.s12
+          %p
+            = f.label :published do
+              = f.input_field :published, as: :boolean
+              %span= "#{t :published, scope: 'activerecord.attributes.announcement'}"
+      .row
+        .input-field.col.s12
+          %i.material-icons.prefix help
+          = f.input_field :user_id, data: {contrainwidth: 'false'}, collection: User.all, label_method: :name, value_method: :id
+          = f.label :user
+          = f.full_error :user
+      .row
+        .col.s12
+          = f.label :attachment
+          .input-field.file-field
+            .btn-small.green
+              %span เลือกไฟล์
+              = file_field_tag 'attachment[data]'
+            .file-path-wrapper
+              = text_field_tag 'attachment[file_name]', nil, class: 'file-path validate'
+  = f.button :submit, class: "btn waves-light left"
+- if back_link
+  = link_to t(:cancel), back_link, style: "margin-left: 2em", class: "btn white black-text waves-black waves-effect"
