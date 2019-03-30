@@ -1,4 +1,4 @@
-= simple_form_for(@public_comment) do |f|
+= simple_form_for(@public_comment, url: form_url,  method: form_method) do |f|
   = f.error_notification
   .row
     .col.s12

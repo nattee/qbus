@@ -17,8 +17,19 @@ class PublicCommentsController < ApplicationController
     @public_comment = PublicComment.new
   end
 
-  def add
+  def add_comment
     @public_comment = PublicComment.new
+  end
+
+  def add_comment_post
+    puts public_comment_params
+    @public_comment = PublicComment.new(public_comment_params)
+
+    if @public_comment.save
+      redirect_to root_path, notice: 'Public comment was successfully created.'
+    else
+      render :add_comment
+    end
   end
 
   # GET /public_comments/1/edit

@@ -5,4 +5,4 @@
         .card-title.white-text
           %h1= t(:new) + t(:public_comment, scope: 'activerecord.models')
       .card-content
-        = render partial: 'form', locals: {back_link: public_comments_path}
+        = render partial: 'form', locals: {back_link: public_comments_path, form_url: public_comments_path, form_method: :post}
