@@ -57,6 +57,7 @@ gem 'rails-i18n'
 gem 'i18n_generators'
 
 gem 'rails-controller-testing'
+gem 'jquery-validation-rails'
 # ------------------------ end --------------------------
 
 group :development, :test do

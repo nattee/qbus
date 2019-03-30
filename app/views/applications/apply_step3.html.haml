@@ -17,107 +17,18 @@
                   %th{style: "width: 15%;"} ใช่
                   %th{style: "width: 15%;"} ไม่ใช่
                 %tbody
-                  %tr
-                    %td เดินรถตามเส้นทางตามที่กำหนดในใบอนุญาตประกอบการเดินรถ
-                    %td
-                      %label
-                        = radio_button_tag :self1, true
-                        %span
-                    %td
-                      %label
-                        = radio_button_tag :self1, false
-                        %span
-                  %tr
-                    %td จำนวนรถที่มีอยู่จริง ตรงตามเงื่อนไขจำนวนรถขั้นต่ำ-ขั้นสูง
-                    %td
-                      %label
-                        = radio_button_tag :self2, true
-                        %span
-                    %td
-                      %label
-                        = radio_button_tag :self2, false
-                        %span
-                  %tr
-                    %td จำนวนเที่ยวเดินรถจริงเฉลี่ยต่อวัน ไม่น้อยกว่าจำนวนเที่ยวการเดินรถขั้นต่ำ
-                    %td
-                      %label
-                        = radio_button_tag :self3, true
-                        %span
-                    %td
-                      %label
-                        = radio_button_tag :self3, false
-                        %span
-                  %tr
-                    %td เก็บค่าโดยสารตามอัตราที่กำหนด
-                    %td
-                      %label
-                        = radio_button_tag :self4, true
-                        %span
-                    %td
-                      %label
-                        = radio_button_tag :self4, false
-                        %span
-                  %tr
-                    %td เวลาเดินรถตรงตามที่กำหนดในใบอนุญาตประกอบการขนส่ง
-                    %td
-                      %label
-                        = radio_button_tag :self5, true
-                        %span
-                    %td
-                      %label
-                        = radio_button_tag :self5, false
-                        %span
-                  %tr
-                    %td กำหนดจุดพักรถและที่พักสำหรับพนักงานขับรถระหว่างเส้นทางขนส่งอย่างเหมาะสม
-                    %td
-                      %label
-                        = radio_button_tag :self6, true
-                        %span
-                    %td
-                      %label
-                        = radio_button_tag :self6, false
-                        %span
-                  %tr
-                    %td มีแผนการตรวจสภาพและบำรุงรักษา และดำเนินการอย่างเหมาะสม อย่างน้อยปีละ 2 ครั้ง
-                    %td
-                      %label
-                        = radio_button_tag :self7, true
-                        %span
-                    %td
-                      %label
-                        = radio_button_tag :self7, false
-                        %span
-                  %tr
-                    %td มีการชำระภาษีรถทุกคัน
-                    %td
-                      %label
-                        = radio_button_tag :self8, true
-                        %span
-                    %td
-                      %label
-                        = radio_button_tag :self8, false
-                        %span
-                  %tr
-                    %td มีการติดตั้ง GPS และเชื่อมต่อข้อมูลกับกรมการขนส่งทางบกทุกคัน
-                    %td
-                      %label
-                        = radio_button_tag :self9, true
-                        %span
-                    %td
-                      %label
-                        = radio_button_tag :self9, false
-                        %span
-                  %tr
-                    %td มีการตรวจความพร้อมของพนักงานขับรถก่อนปฏิบัติงานทุกครั้ง (เช่น ระดับแอลกอฮอล์และสารเสพติด)
-                    %td
-                      %label
-                        = radio_button_tag :self10, true
-                        %span
-                    %td
-                      %label
-                        = radio_button_tag :self10, false
-                        %span
-              %br
+                  - @application.self_evaluations.each do |ev|
+                    %tr
+                      %td= "#{ev.criterium.name}"
+                      %td
+                        %label
+                          = radio_button_tag "result[#{ev.id}]", 'ok', ev.result == true
+                          %span ใช่
+                      %td
+                        %label
+                          = radio_button_tag "result[#{ev.id}]", 'no', ev.result == false
+                          %span ไม่ใช่
               = hidden_field_tag 'application[stage]', 'step3'
+              %br
               = f.button :submit, 'ยืนยันใบสมัคร', class: "btn waves-light left"
 

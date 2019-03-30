@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       get 'apply_step1'
       get 'apply_step2'
       get 'apply_step3'
+      get 'fail_self_evaluation'
       post 'apply_step1', to: 'applications#post_step1'
       post 'apply_step2', to: 'applications#post_step2'
       post 'apply_step3', to: 'applications#post_step3'

@@ -11,9 +11,9 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= re quire jquery
+//= /require jquery
 //= require activestorage
-//= re quire turbolinks
+//= /require turbolinks
 //= require materialize-admin/vendors.min
 //= /require materialize-admin/materialize
 //= /require materialize-admin/scripts/form-elements
@@ -26,6 +26,8 @@
 //= /require materialize-admin/custom/custom-script
 //= /require datatables
 //= require init
+//= require jquery.validate
+//= /require jquery.validate.localization/messages_th
 //= /require_tree .
 //
 
