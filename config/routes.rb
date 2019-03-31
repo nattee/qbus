@@ -9,8 +9,12 @@ Rails.application.routes.draw do
   resources :violations
   resources :logs
   resources :public_comments
-  resources :announcements
-  get 'public_announcement', to: 'announcements#publish'
+  resources :announcements do
+    member do
+      get 'publish'
+    end
+  end
+  get 'public_announcement', to: 'announcements#lists'
   get 'add_comment', to: 'public_comments#add_comment'
   post 'add_comment', to: 'public_comments#add_comment_post'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

@@ -1,0 +1,37 @@
+.row
+  .col.s12
+    %table.display#main-data-table
+      %thead
+        %tr
+          %th
+            id
+          %th
+            t(:route_no, scope: 'activerecord.attributes.public_comment')
+          %th
+            t(:car_plate, scope: 'activerecord.attributes.public_comment')
+          %th
+            t(:licensee_name, scope: 'activerecord.attributes.public_comment')
+          %th
+            created_date
+      %tbody
+        - @public_comments.each do |public_comment|
+          %tr
+            %td
+              =public_comment.id
+            %td
+              =public_comment.route_no
+            %td
+              =public_comment.car_plate
+            %td
+              =public_comment.licensee_name
+            %td
+              =public_comment.created_at
+:coffee
+  $ ->
+    $('#main-data-table').DataTable({
+      "responsive": true,
+      "lengthMenu": [
+        [10, 25, 50, -1],
+        [10, 25, 50, "All"]
+      ]
+    })

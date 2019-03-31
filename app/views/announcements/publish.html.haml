@@ -1,14 +1,20 @@
 .row
-  - @publishes.each do |announcement|
-    .col.s4
-      .card
-        .card-image{style: 'height: 240px; background-color: white;'}
-          - if announcement.attachment&.data&.representable?
-            = image_tag rails_representation_url(announcement.attachment.data.representation(resize: '320x240'))
-          %span.card-title{style: 'background-color: gray; font-weight: bold;'}
-            = announcement.title
-        .card-content
-          = raw announcement.description
-        .card-action
-          %a{:href => announcement_path(announcement)}
-            continue reading
+  .col.s12
+    .card
+      .card-image{style: 'background-color: white; min-height:240px;'}
+        - if @announcement.attachment&.data&.attached?
+          = image_tag rails_blob_url(@announcement.attachment.data)
+        %span.card-title{style: 'background-color: gray; font-weight: bold;'}
+          = @announcement.title
+      .card-content
+        %div
+          = raw @announcement.description
+        %br
+        %br
+        %p{style: 'text-align: right;'}
+          = 'ผู้เขียน: ' + (@announcement.user&.name || '<ไม่ระบุตัวตน>')
+        %p{style: 'text-align: right;'}
+          = 'สร้างเมื่อ: ' + @announcement.created_at.to_s
+      .card-action
+        %a{:href => public_announcement_path}
+          ย้อนกลับ
