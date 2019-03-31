@@ -10,6 +10,33 @@ class PublicComment < ApplicationRecord
 
   before_validation :update_references
 
+  def self.by_application(application_id)
+    comments = PublicComment.none
+
+    curApp = Application.find(application_id)
+    if (curApp == nil)
+      return comments
+    end
+
+    rid = curApp.route_id
+    lid = curApp.licensee_id
+    cids = curApp.cars&.pluck(:id)
+
+    if (rid != nil)
+      comments = comments.or(PublicComment.where(route_id: rid))
+    end
+
+    if (lid != nil)
+      comments = comments.or(PublicComment.where(licensee_id: lid))
+    end
+
+    if (!cids.empty?)
+      comments = comments.or(PublicComment.where(car_id: cids))
+    end
+
+    return comments
+  end
+
   def to_label
     "[#{self.updated_at}] #{self.commenter_name}"
   end

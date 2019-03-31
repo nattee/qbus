@@ -1,5 +1,5 @@
 class AnnouncementsController < ApplicationController
-  before_action :set_announcement, only: [:show, :edit, :update, :destroy]
+  before_action :set_announcement, only: [:show, :edit, :update, :destroy, :publish]
 
   # GET /announcements
   # GET /announcements.json
@@ -21,8 +21,11 @@ class AnnouncementsController < ApplicationController
   def edit
   end
 
-  def publish
+  def lists
     @publishes = Announcement.publishes
+  end
+
+  def publish
   end
 
   # POST /announcements

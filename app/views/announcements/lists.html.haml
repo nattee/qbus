@@ -1,0 +1,14 @@
+.row
+  - @publishes.each do |announcement|
+    .col.s4
+      .card
+        .card-image{style: 'height: 240px; background-color: white;'}
+          - if announcement.attachment&.data&.representable?
+            = image_tag rails_representation_url(announcement.attachment.data.representation(resize: '320x240'))
+          %span.card-title{style: 'background-color: gray; font-weight: bold;'}
+            = announcement.title
+        .card-content{style: 'height: 6em; overflow: hidden'}
+          = raw announcement.description
+        .card-action
+          %a{:href => publish_announcement_path(announcement)}
+            อ่านต่อ
