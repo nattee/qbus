@@ -1,3 +1,7 @@
-#main
-  = render 'layouts/flash'
-  = yield
+- if @current_user&.is_official?
+  #main
+- else
+  #main{style: 'padding-right: 250px;'}
+
+    = render 'layouts/flash'
+    = yield

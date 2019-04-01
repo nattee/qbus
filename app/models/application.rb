@@ -100,7 +100,6 @@ class Application < ApplicationRecord
     end
   end
 
-
   #state manipulation
   def confirm_registration() self.confirmed_date = Time.zone.now; change_state(:confirmed)  end
   def reject_registration()  self.confirmed_date = Time.zone.now; change_state(:applying)  end
@@ -184,6 +183,7 @@ class Application < ApplicationRecord
     return save && contract.data.attached?
   end
 
+
   def total_score
     return '85/100'
   end
@@ -195,6 +195,18 @@ class Application < ApplicationRecord
   def change_state(new_state)
     self.state = new_state
     self.save
+  end
+
+  def self.extend(original)
+    app = original.dup
+    original.attachments.where.not(evidence_id: nil).each do |att|
+      new_att = att.dup
+      new_att.save
+      #SHALLOW COPY, must change to deep copy of the file later
+      app.attachments << new_att
+    end
+    app.save
+    return app
   end
 
 end

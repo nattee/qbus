@@ -127,7 +127,6 @@ class ApplicationsController < ApplicationController
         redirect_to apply_applications_path
       end
     end
-
   end
 
   def add_car
@@ -167,6 +166,10 @@ class ApplicationsController < ApplicationController
   def submit
     @application.submit_for_approve
     redirect_to process_dashboard_path, notice: 'Application is submitted'
+  end
+
+  def extend
+
   end
 
   # GET /applications/1/edit

@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     end
     collection do
       get 'apply'
+      get 'extend'
       post 'apply', to: 'applications#post_apply'
       get 'dashboard'
     end

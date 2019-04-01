@@ -12,7 +12,7 @@
         %br
         %br
         %br
-      = link_to 'สมัครเข้าร่วมโครงการ', apply_applications_path, class: 'btn orange'
+      = link_to 'สมัครเข้าร่วมโครงการ', apply_applications_path, class: 'btn green border-round'
   .carousel-item.purple.white-text{href: "#two!"}
     %h2.white-text ข่าวประชาสัมพันธ์ 1
   .carousel-item.purple.white-text{href: "#three!"}
@@ -54,6 +54,12 @@
             %h5 เข้าสู่ระบบ
           .card-action.center
             = link_to 'ไปยังหน้าหลัก', process_dashboard_path, class: 'btn border-round col s12 orange waves-effect waves-light'
+            %br
+            %br
+            = link_to 'สมัครเข้าร่วมโครงการ', apply_applications_path, class: 'btn border-round col s12 green waves-effect waves-light'
+            %br
+            %br
+            = link_to 'ต่ออายุ', extend_applications_path, class: 'btn border-round col s12 green darken-1 waves-effect waves-light'
             %br
             %br
     .col.s12.m8
