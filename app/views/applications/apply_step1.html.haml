@@ -13,12 +13,13 @@
               .section
                 %h5 ข้อมูลผู้ประกอบการ
                 .row
-                  .input-field.col.s6
-                    = text_field_tag 'licensee[name]', @application.try(:licensee).try(:name)
-                    = f.label 'licensee[name]', t(:name , scope: 'activerecord.attributes.licensee')
+                  .col.s6
+                    .input-field
+                      = text_field_tag 'licensee[name]', @application.try(:licensee).try(:name)
+                      = label_tag 'licensee[name]', t(:name , scope: 'activerecord.attributes.licensee')
                   - if @application.category3?
-                    .row
-                      .input-field.col.s6
+                    .col.s6
+                      .input-field
                         = f.input_field :license_no, placeholder: 'กท. 1xx/25yy'
                         = f.label :license_no
                     /    = f.error :license_no
@@ -31,7 +32,7 @@
                   .col.s4
                     .input-field
                       = f.input_field :contact_tel
-                      = f.label :contact_tel
+                      = f.label :contact_tel, 'โทรศัพท์'
                   .col.s4
                     .input-field
                       = f.input_field :contact_email
@@ -136,7 +137,7 @@
                         = f.label :trip_count, 'จำนวนเที่ยวเดินรถจริงเฉลี่ยต่อวัน (เที่ยว)'
 
               = hidden_field_tag 'application[stage]', 'step1'
-              = f.button :submit, 'ไปยังขั้นตอนต่อไป', class: "btn waves-effect waves-light left"
+              %button.btn.waves-effect.waves-light ไปยังขั้นตอนต่อไป
 
 
 
