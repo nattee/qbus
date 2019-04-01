@@ -3,7 +3,8 @@ class ApplicationsController < ApplicationController
                                          :apply_step1, :apply_step2, :apply_step3,:fail_self_evaluation,
                                          :post_step1,:post_step2,:post_step3,
                                          :add_evidences,:add_attachment,:finish_add_evidences,
-                                         :add_car, :remove_car
+                                         :add_car, :remove_car,
+                                         :extend_from,
                                         ]
 
   # GET /applications
@@ -169,7 +170,12 @@ class ApplicationsController < ApplicationController
   end
 
   def extend
+    @apps = Application.finished
+  end
 
+  def extend_from
+    app = Application.extend(@application)
+    redirect_to apply_step1_application_path(app)
   end
 
   # GET /applications/1/edit

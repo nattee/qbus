@@ -10,7 +10,6 @@ $(document).ready ->
   #$(".sidenav").sidenav()
   #$('.dropdown-button').dropdown()
   #$('select').material_select()
-  #$('.dataTable').DataTable()
   $('.modal').modal()
   $('select').formSelect()
   $('.datepicker').datepicker( {
@@ -53,5 +52,6 @@ $(document).ready ->
   $('.card-alert .close').click ->
     $(this).closest('.card-alert').fadeOut('slow')
 
+  $('.dataTable').DataTable()
   console.log "load init on ready or turbolinks:load"
   return

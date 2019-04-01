@@ -5,3 +5,25 @@
         .card-title
           %h4 ต่ออายุใบสมัคร
         เลือกใบสมัครที่ต้องการต่ออายุจากรายการใบสมัครด้านล่างนี้ แล้วกดปุ่ม "ต่ออายุ" เพื่อทำการสร้างใบสมัครสำหรับการต่ออายุโดยใช้ข้อมูลเดิมที่ได้กรอกไว้แล้ว
+      .card-content
+        %table.dataTable
+          %thead
+            %th หมายเลขใบสมัคร
+            %th= t(:name, scope: 'activerecord.attributes.licensee')
+            %th= t(:start, scope: 'activerecord.attributes.route')
+            %th= t(:destination, scope: 'activerecord.attributes.route')
+            %th วันที่ยื่นใบสมัคร
+            %th วันที่หมดอายุ
+            %th
+          %tbody
+            - @apps.each do |app|
+              %tr
+                %td= app.id
+                %td= app.licensee&.name
+                %td= app.route_start
+                %td= app.route_destination
+                %td= l(app.created_at, format: '%d %b %y')
+                %td
+                  = l(app.awarded_date + 1.year, format: '%d %b %y') if app.awarded_date
+                %td
+                  = link_to 'ต่ออายุ', extend_from_application_path(app), class: 'btn green waves-effect waves-light'

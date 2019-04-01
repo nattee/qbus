@@ -49,6 +49,7 @@ Rails.application.routes.draw do
       get 'add_evidences'
       post 'add_attachment'
       get 'finish_add_evidences'
+      get 'extend_from'
     end
     collection do
       get 'apply'

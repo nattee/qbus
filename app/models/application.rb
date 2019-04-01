@@ -202,9 +202,17 @@ class Application < ApplicationRecord
     original.attachments.where.not(evidence_id: nil).each do |att|
       new_att = att.dup
       new_att.save
+      #copy attachment
       #SHALLOW COPY, must change to deep copy of the file later
       app.attachments << new_att
     end
+
+    #link car (must no deep copy)
+    app.cars = original.cars
+
+    #evaluation? no!!! we need them to do self evaluation again
+
+    app.state = :applying
     app.save
     return app
   end
