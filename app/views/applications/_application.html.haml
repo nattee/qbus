@@ -47,19 +47,25 @@
   .col.s12.m4
     .card-title
       %h5 ข้อมูลเส้นทาง
-    .section
-      %h6= t(:route_no, scope: 'activerecord.attributes.route')
-      = @application.route_no
-    .section
-      %h6= t(:start, scope: 'activerecord.attributes.route')
-      = @application.route_start
-    .section
-      %h6= t(:destination, scope: 'activerecord.attributes.route')
-      = @application.route_destination
-    .section
-      %h6= t(:car_count, scope: 'activerecord.attributes.application')
-      = @application.car_count
-    .section
-      %h6= t(:trip_count, scope: 'activerecord.attributes.application')
-      = @application.trip_count
+    - unless @application.category3?
+      .section
+        %h6= t(:route_no, scope: 'activerecord.attributes.route')
+        = @application.route_no
+      .section
+        %h6= t(:start, scope: 'activerecord.attributes.route')
+        = @application.route_start
+      .section
+        %h6= t(:destination, scope: 'activerecord.attributes.route')
+        = @application.route_destination
+      .section
+        %h6= t(:car_count, scope: 'activerecord.attributes.application')
+        = @application.car_count
+      .section
+        %h6= t(:trip_count, scope: 'activerecord.attributes.application')
+        = @application.trip_count
+    - else
+      .section
+        %h6= t(:service_area, scope: 'activerecord.attributes.application')
+        = @application.service_area
+
 

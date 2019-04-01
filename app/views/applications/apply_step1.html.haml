@@ -88,7 +88,13 @@
               .section
                 %h5 ข้อมูลเส้นทาง
                 - if @application.category3?
-                  %h6 ไม่ประจำทาง
+                  %h6 หมวดการเดินรถแบบไม่ประจำทาง
+                  กรุณาระบุพื้นที่ให้บริการ
+                  .row
+                    .col.s6
+                      .input-field
+                        = f.input_field :service_area
+                        = f.label :service_area
                 - else
                   .row
                     .col.s6

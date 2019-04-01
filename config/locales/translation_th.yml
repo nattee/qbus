@@ -65,6 +65,7 @@ th:
         license_no: เลขที่ใบอนุญาต
         license_expire: วันที่สิ้นสุดใบอนุญาต
         contact_email: อีเมล์ผู้ประสานงาน
+        service_area: พื้นที่ให้บริการ
 
       attachment:
         filename: ชื่อไฟล์  #g
