@@ -22,7 +22,7 @@ th:
       # not in active record
       session:
         email: อีเมล์
-        password: รหัสผ่านย่อย
+        password: รหัสผ่าน
   qbus:
     application:
       category1: รถโดยสารประจำทาง หมวด 2
