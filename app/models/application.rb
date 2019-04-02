@@ -39,6 +39,8 @@ class Application < ApplicationRecord
   scope :finished, -> {where(state: :awarded) }
   scope :latest_awarded, -> {where(state: :awarded).where('awarded_date >= ?',30.days.ago) }
 
+  scope :won_award, -> {where(state: :awarded).where(award_won: true) }
+
   def to_label
     "#{self.number} - #{self.state_text}"
   end
@@ -53,18 +55,31 @@ class Application < ApplicationRecord
   end
 
   def route_no
-    return "-" if category3? or route == nil
+    return 'ไม่ประจำทาง' if category3? or route == nil
     return route.route_no
   end
 
   def route_start
-    return 'ไม่ประจำทาง' if category3? or route == nil
+    return '' if category3? or route == nil
     return route.start
   end
 
   def route_destination
     return '' if category3? or route == nil
     return route.destination
+  end
+
+  def route_info
+    return '-' if category3? or route == nil
+    return "#{route.start} - #{route.destination}"
+  end
+
+  def total_score
+    return 80
+  end
+
+  def safety_score
+    return 10
   end
 
   def appoint_date
@@ -183,10 +198,6 @@ class Application < ApplicationRecord
     return save && contract.data.attached?
   end
 
-
-  def total_score
-    return '85/100'
-  end
 
   def passed
     return "ผ่าน"

@@ -89,6 +89,9 @@
       /    = f.text_field :body, class:"datepicker"
       /    = f.label :birthday
   = f.button :submit, class: "btn waves-light left"
+  - if @as_profile
+    = hidden_field_tag :from_profile, true
+  
 - if back_link
   = link_to t(:cancel), back_link, style: "margin-left: 2em", class: "btn-flat white dlp-purple-text strong waves-black waves-effect"
 

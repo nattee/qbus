@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'report/award'
   resources :cars
   resources :routes
   resources :licensees
