@@ -9,7 +9,7 @@
         ผู้ใช้สามารถพิมพ์ชื่อผู้ประกอบการขนส่ง, เลขสาย, ต้นทาง หรือ ปลายทางเพื่อค้นหาผู้ได้รับรางวัลได้
       .card-content
         .dataTables_wrapper
-          %table#table.dataTable
+          %table#table.dataTable.display
             %thead
               %th= t(:name, scope: 'activerecord.attributes.licensee')
               %th= t(:route_no, scope: 'activerecord.attributes.route')

@@ -101,8 +101,10 @@ class ProcessController < ApplicationController
   def award_post
     if params[:result] == 'ok'
       @application.award = 'ได้รับตราสัญลักษณ์'
+      @application.award_won = true
     elsif params[:result] == 'no'
       @application.award = 'ไม่ได้รับตราสัญลักษณ์'
+      @application.award_won = false
       @application.award_remark = params[:award_remark]
     else
     end

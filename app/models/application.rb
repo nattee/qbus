@@ -134,6 +134,13 @@ class Application < ApplicationRecord
     change_state(:evaluated)
   end
 
+  def confirm_award(result, remark)
+    self.award_won = result
+    self.award_remark = remark
+    set_award
+  end
+
+
   def sorted_attachments
     return attachments.where(attachment_type: :criterium_evidence).includes(:criterium_attachment => [:criterium => :criteria_group]).order('criteria_groups.id, criteria.number')
   end
