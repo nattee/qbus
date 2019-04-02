@@ -4,6 +4,7 @@ th:
   new: เพิ่ม
   edit: แก้ไข
   list: รายการ
+  logout: ออกจากระบบ
   confirm_delete: ยืนยันการลบ?
   download: ดาวน์โหลด
   register: ลงทะเบียน
