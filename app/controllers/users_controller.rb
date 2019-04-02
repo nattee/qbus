@@ -19,6 +19,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @as_profile = true if params[:profile]
   end
 
   # POST /users

@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get 'static_pages/test1'
 
   resources :users
+  get 'users/:id/edit/:profile', to: 'users#edit', as: 'profile_edit_user'
+
 
   resources :account_activations, only: [:edit]
 

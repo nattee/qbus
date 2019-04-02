@@ -14,6 +14,13 @@ th:
   # END session login form
   updated_at: แก้ไขครั้งล่าสุด เมื่อ
   created_at: สร้างเมื่อ
+  helpers:
+    select:
+      prompt: โปรดเลือก
+    submit:
+      create: สร้าง%{model}
+      submit: บันทึก%{model}
+      update: แก้ไข%{model}
   simple_form:
     error_notification:
       default_message: กรุณาตรวจสอบข้อผิดพลาดด้านล่างนี้่
