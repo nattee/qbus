@@ -75,11 +75,32 @@ class Application < ApplicationRecord
   end
 
   def total_score
-    return 80
+    sum = 0.0
+    evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id <= 6").each do |ev|
+      sum += ev.result * ev.criterium.weight
+    end
+    return sum.to_i
   end
 
   def safety_score
-    return 10
+    sum = 0.0
+    evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id in (5,6)").each do |ev|
+      sum += ev.result * ev.criterium.weight
+    end
+    return sum.to_i
+  end
+
+  def fail_visit?
+    return false
+  end
+
+  def passed
+    a = total_score
+    b = safety_score
+    if (a < 80) or (b < 25) or (fail_visit?)
+      return "ไม่ผ่าน"
+    end
+    return "ผ่าน"
   end
 
   def appoint_date
@@ -114,6 +135,7 @@ class Application < ApplicationRecord
       return evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id >= 7")
     end
   end
+
 
   #state manipulation
   def confirm_registration() self.confirmed_date = Time.zone.now; change_state(:confirmed)  end
@@ -206,9 +228,6 @@ class Application < ApplicationRecord
   end
 
 
-  def passed
-    return "ผ่าน"
-  end
 
   def change_state(new_state)
     self.state = new_state

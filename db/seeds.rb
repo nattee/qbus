@@ -112,8 +112,10 @@ Criterium.create(id: 43, number: 4, name: 'มีการตรวจควา�
 Criterium.create(id: 44, number: 5, name: 'กำหนดจุดพักรถและที่พักสำหรับพนักงานขับรถระหว่างเส้นทางขนส่งอย่างเหมาะสม', criteria_group_id: 8,weight: 0)
 
 
-Evaluation.create(id: 1, application: Application.first(), evaluator: 'ผู้ตรวรการ', evaluation_date: 1.month.ago, result: true, description: 'ผ่าน', criterium: Criterium.first())
-Evaluation.create(id: 2, application: Application.last(), evaluator: 'ผู้คุม', evaluation_date: 1.year.ago, result: false, description: 'ไม่ผ่าน', criterium: Criterium.last())
+Evaluation.create(application: Application.first(), evaluator: User.first(), evaluation_date: 1.month.ago, result: 1, description: 'ผ่าน', criterium: Criterium.first())
+Evaluation.create(application: Application.last(), evaluator: User.first(), evaluation_date: 1.year.ago, result: 0, description: 'ไม่ผ่าน', criterium: Criterium.last())
+Evaluation.create(application: Application.first(), evaluator: User.first(), evaluation_date: 1.month.ago, result: 1, description: 'ผ่าน', criterium_id: 29)
+Evaluation.create(application: Application.first(), evaluator: User.first(), evaluation_date: 1.month.ago, result: 1, description: 'ผ่าน', criterium_id: 25)
 
 #
 #--- evidence ----------

@@ -1,9 +1,16 @@
 .row
   .col.s12
+    .card.gradient-45deg-light-green-amber
+      .card-content
+        .card-title
+          %h5 การบันทึกผลการให้ตราสัญลักษณ์
+        %p ให้พิจารณาผลการประเมินของใบสมัคร โดยให้กดปุ่ม "ตัดสินผล" เพื่อดูข้อมูลใบสมัครโดยละเอียดและทำการบันทึกผลการตัดสิน
+        %br
+        %p ระบบจะแนะนำผลการให้รางวัล โดยคำนวณจากเกณฑ์คือ คะแนนต้องไม่น้อยกว่า 80 และ คะแนนความปลอดภัยต้องไม่น้อยกว่า 25 โดยที่ต้องผ่านการประเมินตนเองทั้งหมดและผ่านการตรวจหน้างา่นทุกรายการ
     .card
       .card-content
         .row
-          .col.s12.m9
+          .col.s12
             %h4 ใบสมัครรอการตัดสินผล
             %table
               %thead
@@ -11,8 +18,9 @@
                 %th= t(:start, scope: 'activerecord.attributes.route')
                 %th= t(:destination, scope: 'activerecord.attributes.route')
                 %th วันที่ยื่นใบสมัคร
-                %th คะแนนรวม
-                %th สรุปผล
+                %th.right-align คะแนนรวม
+                %th.right-align คะแนนความปลอดภัย
+                %th แนะนำผล
                 %th
               %tbody
                 - @to_be_awarded.each do |app|
@@ -21,13 +29,10 @@
                     %td= app.route_start
                     %td= app.route_destination
                     %td= l(app.created_at, format: '%d %b %y')
-                    %td= app.total_score
+                    %td.right-align= app.total_score
+                    %td.right-align= app.safety_score
                     %td= app.passed
                     %td= link_to 'ตัดสินผล', process_award_path(app.id), class: 'waves-effect waves-light green btn'
-          .col.s12.m3
-            %h4 การบันทึกผลการให้ตราสัญลักษณ์
-            .section
-              %p ให้พิจารณาผลการประเมินของใบสมัคร โดยให้กดปุ่ม "ดูข้อมูล" เพื่อดูข้อมูลใบสมัครโดยละเอียดและทำการบันทึกผลการตัดสิน
     .card
       .card-content
         .row
