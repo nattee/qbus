@@ -52,7 +52,7 @@
         #tab_eval
           .card-content.orange.lighten-5
             - last_cg = nil
-            - @application.evaluations.joins(:criterium => :criteria_group).order('criteria_groups.id, criteria.number').each do |ev|
+            - @application.evaluation_main.each do |ev|
               - if ev.criterium.criteria_group != last_cg
                 - if last_cg != nil
                   .divider
@@ -91,11 +91,16 @@
                   %br
                 .col.s2
                   %label
-                    = radio_button_tag "result[#{ev.id}]", 'ok', ev.result == true
-                    %span ผ่าน
+                    = radio_button_tag "result[#{ev.id}]", 1, ev.result == 1
+                    %span 100%
+                  %br
                   %label
-                    = radio_button_tag "result[#{ev.id}]", 'no', ev.result == false
-                    %span ไม่ผ่าน
+                    = radio_button_tag "result[#{ev.id}]", 0.5, ev.result == 0.5
+                    %span 50%
+                  %br
+                  %label
+                    = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
+                    %span 0%
                 .col.s3
                   .input-field
                     = f.text_field "description[#{ev.id}]", value: ev.description, class: 'materialize-textarea'

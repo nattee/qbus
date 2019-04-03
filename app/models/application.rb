@@ -77,17 +77,25 @@ class Application < ApplicationRecord
   def total_score
     sum = 0.0
     evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id <= 6").each do |ev|
-      sum += ev.result * ev.criterium.weight
+      sum += (ev.result || 0) * ev.criterium.weight
     end
     return sum.to_i
+  end
+
+  def total_score_text
+    "#{total_score}/100"
   end
 
   def safety_score
     sum = 0.0
     evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id in (5,6)").each do |ev|
-      sum += ev.result * ev.criterium.weight
+      sum += (ev.result || 0) * ev.criterium.weight
     end
     return sum.to_i
+  end
+
+  def safety_score_text
+    "#{safety_score}/30"
   end
 
   def fail_visit?
@@ -181,6 +189,10 @@ class Application < ApplicationRecord
     #CriteriumAttachment.where.not(id: Attachment.select(:criterium_attachment_id).where(application: self)).each do |cri|
     #  attachments << Attachment.new(criterium_attachment_id: cri.id, attachment_type: :criterium_evidence)
     #end
+  end
+
+  def evaluation_main
+    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id <= 6').order('criteria_groups.id, criteria.number')
   end
 
   def attach_data(attachment_type, params)

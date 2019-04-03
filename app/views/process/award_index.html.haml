@@ -29,8 +29,8 @@
                     %td= app.route_start
                     %td= app.route_destination
                     %td= l(app.created_at, format: '%d %b %y')
-                    %td.right-align= app.total_score
-                    %td.right-align= app.safety_score
+                    %td.right-align= "#{app.total_score}/100"
+                    %td.right-align= "#{app.safety_score}/30"
                     %td= app.passed
                     %td= link_to 'ตัดสินผล', process_award_path(app.id), class: 'waves-effect waves-light green btn'
     .card

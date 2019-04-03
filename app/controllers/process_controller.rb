@@ -68,13 +68,14 @@ class ProcessController < ApplicationController
   def evaluation_post
     #save evaluations
     @application.evaluations.each do |ev|
-      if params.require(:result)[ev.id.to_s] == 'ok'
-        ev.result = true
-        ev.description = params.require(:description)[ev.id.to_s]
-      elsif params.require(:result)[ev.id.to_s] == 'ok'
-        ev.result = false
-        ev.description = params.require(:description)[ev.id.to_s]
+      if params.require(:result)[ev.id.to_s] == '1'
+        ev.result = 1
+      elsif params.require(:result)[ev.id.to_s] == '0.5'
+        ev.result = 0.5
+      else
+        ev.result = 0
       end
+      ev.description = params.require(:description)[ev.id.to_s]
       ev.save
     end
     redirect_to process_evaluation_path(@application), notice: 'บันทึกผลการประเมินเรียบร้อย'

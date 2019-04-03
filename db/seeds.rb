@@ -116,6 +116,7 @@ Evaluation.create(application: Application.first(), evaluator: User.first(), eva
 Evaluation.create(application: Application.last(), evaluator: User.first(), evaluation_date: 1.year.ago, result: 0, description: 'ไม่ผ่าน', criterium: Criterium.last())
 Evaluation.create(application: Application.first(), evaluator: User.first(), evaluation_date: 1.month.ago, result: 1, description: 'ผ่าน', criterium_id: 29)
 Evaluation.create(application: Application.first(), evaluator: User.first(), evaluation_date: 1.month.ago, result: 1, description: 'ผ่าน', criterium_id: 25)
+Evaluation.create(application: Application.first(), evaluator: User.first(), evaluation_date: 1.month.ago, result: 0.5, description: 'ผ่าน', criterium_id: 11)
 
 #
 #--- evidence ----------
