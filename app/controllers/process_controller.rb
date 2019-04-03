@@ -1,6 +1,6 @@
 class ProcessController < ApplicationController
   before_action :set_application, only: [ :register_post, :registered, :registered_post,
-                                          :appointment_post, :appointed,
+                                          :appointment_post, :appointed, :appointment_visit, :appointment_visit_post,
                                           :evaluation, :evaluation_post, :evaluation_finish, :evaluation_reject,
                                           :award, :award_post,
                                         ]
@@ -56,6 +56,30 @@ class ProcessController < ApplicationController
     redirect_to process_appointments_path
   end
 
+  def appointment_visit
+
+  end
+
+  def appointment_visit_post
+    #save car evaluation
+
+    #save evaluations
+    @application.evaluations.each do |ev|
+      if params.require(:result)[ev.id.to_s] == '1'
+        ev.result = 1
+      elsif params.require(:result)[ev.id.to_s] == '0.5'
+        ev.result = 0.5
+      elsif params.require(:result)[ev.id.to_s] == '0'
+        ev.result = 0
+      end
+      ev.description = params.require(:description)[ev.id.to_s]
+      ev.save
+    end
+
+    #save comment
+    redirect_to process_appointments_path(@application), notice: 'บันทึกผลการตรวจหน้างานเรียบร้อย'
+  end
+
   def evaluation_index
     @to_be_evaluated = Application.to_be_evaluated
     @latest_evaluated = Application.latest_evaluated
@@ -72,7 +96,7 @@ class ProcessController < ApplicationController
         ev.result = 1
       elsif params.require(:result)[ev.id.to_s] == '0.5'
         ev.result = 0.5
-      else
+      elsif params.require(:result)[ev.id.to_s] == '0'
         ev.result = 0
       end
       ev.description = params.require(:description)[ev.id.to_s]

@@ -73,6 +73,8 @@ Rails.application.routes.draw do
 
   get  'process/appointments',    to: 'process#appointment_index'
   get  'process/appointment_form'
+  get  'process/appointment/visit/:id', to: 'process#appointment_visit', as: 'appointment_visit'
+  post 'process/appointment/visit/:id', to: 'process#appointment_visit_post'
   post 'process/appointment',     to: 'process#appointment_post', as: 'appoint_process_appointment'
   get  'process/appointed/:id',   to: 'process#appointed', as: 'process_appointed'
 

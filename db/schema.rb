@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_03_120121) do
+ActiveRecord::Schema.define(version: 2019_04_03_165538) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -75,6 +75,28 @@ ActiveRecord::Schema.define(version: 2019_04_03_120121) do
     t.boolean "award_won"
     t.datetime "visited_date"
     t.boolean "visited"
+    t.text "visit_problem"
+    t.text "visit_problem_cause"
+    t.text "visit_tax_accrued"
+    t.text "visit_tax_89"
+    t.text "visit_result"
+    t.text "visit_comment"
+    t.string "visit_car1_chassis"
+    t.string "visit_car1_tire"
+    t.string "visit_car1_light"
+    t.string "visit_car1_windshield"
+    t.string "visit_car2_chassis"
+    t.string "visit_car2_tire"
+    t.string "visit_car2_light"
+    t.string "visit_car2_windshield"
+    t.string "visit_car3_chassis"
+    t.string "visit_car3_tire"
+    t.string "visit_car3_light"
+    t.string "visit_car3_windshield"
+    t.string "visit_car4_chassis"
+    t.string "visit_car4_tire"
+    t.string "visit_car4_light"
+    t.string "visit_car4_windshield"
     t.index ["appointment_user_id"], name: "index_applications_on_appointment_user_id"
     t.index ["licensee_id"], name: "index_applications_on_licensee_id"
     t.index ["route_id"], name: "index_applications_on_route_id"
