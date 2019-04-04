@@ -1,0 +1,138 @@
+.row
+  .col.s12
+    .row
+      .col.s12
+        .card.gradient-45deg-light-green-amber
+          .card-content
+            .card-title
+              %h6 วิธีใช้งาน
+            ให้ผู้ประเมินพิจารณาหลักฐานสำหรับเกณฑ์ในหัวข้อต่าง ๆ ด้านล่างนี้และบันทึกผลการประเมินในแต่ละหัวข้อ เมื่อบันทึกเสร็จแล้วให้กดปุ่ม "บันทึก" ด้านล่างสุด
+            .section
+            ในกรณีที่หลักฐานไม่เพียงพอต่อการประเมิน ผู้ประเมินสามารถร้องขอให้ส่งหลักฐานใหม่ได้ โดยการบันทึกข้อความและกดปุ่มในช่อง "ขอหลักฐานเพิ่มเติม" ด้านซ้าย
+            .section
+            หลังจากประเมินข้อมูลทั้งหมดแล้ว ให้ยืนยันผลการประเมิน โดยกดปุ่ม "ยืนยันผลการประเมิน"
+    .row
+      .col.s12
+        .card.brown.lighten-2
+          .card-content
+            %h5 ข้อมูลใบสมัคร
+          .card-tabs
+            %ul.tabs.tabs-fixed-width.tabs-transparent
+              %li.tab
+                %a{href: '#tab_visit'}ผลการตรวจหน้างาน
+              %li.tab
+                %a{href: '#tab_app'}ข้อมูลใบสมัคร
+              %li.tab
+                %a{href: '#tab_evidence'}หลักฐาน
+              %li.tab
+                %a{href: '#tab_car'}ข้อมูลรถ
+          #tab_visit
+            = form_with url: process_evaluation_path(@application), local: true do |f|
+              / section 2
+              .card-content.brown.lighten-5
+                .card-title
+                  %h5 ส่วนที่ 2: เงื่อนไขการเดินรถ
+                .row
+                  .col.s7.strong
+                    เงื่อนไขการตรวจสอบ
+                  .col.s5.strong
+                    ผลการตรวจหน้างาน
+                - @application.evaluation_visit_sec2.each do |ev|
+                  .row
+                    .col.s7
+                      = "#{ev.criterium.number}. #{ev.criterium.name}"
+                    .col.s5
+                      %label
+                        = radio_button_tag "result[#{ev.id}]", 1, ev.result == 1
+                        %span ใช่
+                      %label
+                        = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
+                        %span ไม่ใช่
+                .row
+                  .col.s12.m4
+                    %p ในกรณีที่มีข้อใดข้อหนึ่งตอบว่าไม่ใช่ ขอให้ระบุสภาพของปัญหาและสาเหตุของปัญหา
+                  .col.s12.m4
+                    .input-field
+                      = f.text_field :visit_problem, value: @application.visit_problem, class: 'materialize-textarea'
+                      = f.label :visit_problem, t(:visit_problem, scope: 'activerecord.attributes.application')
+                    %p ตัวอย่างสภาพปัญหา เช่น จำนวนรถสูง/ต่ำกว่าเงื่อนไขการเดินรถ, จำนวนเที่ยวรถสูง/ต่ำกว่าเงื่อนไขการเดินรถ, เดินรถไม่ถึงปลายทาง, ไม่เดินรถตามเส้นทางที่กำหนด, ไม่เก็บค่าโดยสารตามอัตราที่กำหนด
+                  .col.s12.m4
+                    .input-field
+                      = f.text_field :visit_problem_cause, value: @application.visit_problem_cause, class: 'materialize-textarea'
+                      = f.label :visit_problem_cause, t(:visit_problem_cause, scope: 'activerecord.attributes.application')
+                    %p ตัวอย่างสาเหตุของปัญหา เช่น ประชาชนต้องการ/ไม่ต้องการใช้บริการ เนื่องจาก ..., ผู้ประกอบการขนส่งไม่มีความตั้งใจในการให้บริการ, ไม่สามารถควบคุมรถร่วมบริการได้, ปัญหาสภาพทางอยู่ในระหว่างการก่อสร้าง/ชำรุด
+              .card-content.brown.lighten-5
+                .card-title
+                  %h5 ส่วนที่ 3 ข้อมูลการจดทะเบียนและชำระภาษีรถ (ตรวจสอบจาก ขส.บ.11)
+                .row
+                  .col.s7.strong
+                    เงื่อนไขการตรวจสอบ
+                  .col.s5.strong
+                    ผลการตรวจหน้างาน
+                - @application.evaluation_visit_sec3.each do |ev|
+                  .row
+                    .col.s7
+                      = "#{ev.criterium.number}. #{ev.criterium.name}"
+                    .col.s5
+                      %label
+                        = radio_button_tag "result[#{ev.id}]", 1, ev.result == 1
+                        %span ใช่
+                      %label
+                        = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
+                        %span ไม่ใช่
+                .row
+                  .col.s12.m4
+                    %p ในกรณีที่ไม่ได้ชำระภาษีทุกคันขอให้ระบุข้อมูลต่อไปนี้
+                  .col.s12.m4
+                    .input-field
+                      = f.text_field :visit_tax_accrued, value: @application.visit_tax_accrued
+                      = f.label :visit_tax_accrued, 'จำนวนรถที่ค้างชำระภาษี (คัน)'
+                  .col.s12.m4
+                    .input-field
+                      = f.text_field :visit_tax_89, value: @application.visit_tax_89
+                      = f.label :visit_tax_89, 'แจ้งหยุดใช้รถตามมาตรา 89 (คัน)'
+              .card-content.brown.lighten-5
+                .card-title
+                  %h5 ส่วนที่ 4 ข้อมูลเกี่ยวกับรถโดยสาร
+                .row
+                  .col.s7.strong
+                    เงื่อนไขการตรวจสอบ
+                  .col.s5.strong
+                    ผลการตรวจหน้างาน
+                - @application.evaluation_visit_sec4.each do |ev|
+                  .row
+                    .col.s7
+                      = "#{ev.criterium.number}. #{ev.criterium.name}"
+                    .col.s5
+                      %label
+                        = radio_button_tag "result[#{ev.id}]", 1, ev.result == 1
+                        %span ใช่
+                      %label
+                        = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
+                        %span ไม่ใช่
+                .row
+                  .col.s12.m4
+                    %p ในกรณีที่ไม่ได้ชำระภาษีทุกคันขอให้ระบุข้อมูลต่อไปนี้
+                  .col.s12.m4
+                    .input-field
+                      = f.text_field :visit_tax_accrued, value: @application.visit_tax_accrued
+                      = f.label :visit_tax_accrued, 'จำนวนรถที่ค้างชำระภาษี (คัน)'
+                  .col.s12.m4
+                    .input-field
+                      = f.text_field :visit_tax_89, value: @application.visit_tax_89
+                      = f.label :visit_tax_89, 'แจ้งหยุดใช้รถตามมาตรา 89 (คัน)'
+              .card-action.brown.lighten-5
+                %button.btn.waves-effect.waves-light{value:  :submit} บันทึก
+          #tab_evidence
+            .card-content.brown.lighten-5
+              %h4 รายการหลักฐาน
+              = render "evidence"
+          #tab_app
+            .card-content.brown.lighten-5
+              = render partial: "applications/application"
+          #tab_route
+            .card-content.brown.lighten-5
+          - unless @application.category3?
+            #tab_car
+              .card-content.brown.lighten-5
+                = render partial: "applications/cars"

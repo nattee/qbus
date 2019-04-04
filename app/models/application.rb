@@ -195,6 +195,14 @@ class Application < ApplicationRecord
     evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id <= 6').order('criteria_groups.id, criteria.number')
   end
 
+  def evaluation_visit_sec2
+    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9').order('criteria.id')
+  end
+
+  def evaluation_visit_sec3
+    evaluations.joins(:criterium => :criteria_group).where('criteria.id = 50').order('criteria.id')
+  end
+
   def attach_data(attachment_type, params)
     att = attachments.where(attachment_type: attachment_type).first
     filename_param = "#{attachment_type.to_s}_file_name"
