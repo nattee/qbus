@@ -12,6 +12,10 @@ class PublicCommentsController < ApplicationController
   def show
   end
 
+  def application
+    @public_comments = PublicComment.by_application(params[:application_id])
+  end
+
   # GET /public_comments/new
   def new
     @public_comment = PublicComment.new

@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   resources :criteria_groups
   resources :violations
   resources :logs
-  resources :public_comments
+  resources :public_comments do
+    collection do
+      get 'application/:application_id', to: 'public_comments#application'
+    end
+  end
   resources :announcements do
     member do
       get 'publish'
