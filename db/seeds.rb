@@ -55,9 +55,10 @@ CriteriaGroup.create(id: 5, name: 'ข้อกำหนดด้านควา
 CriteriaGroup.create(id: 6, name: 'ข้อกำหนดด้านความปลอดภัย (วัดจากผลการดำเนินงาน)',group_weight: 22)
 CriteriaGroup.create(id: 7, name: 'การประเมินตนเอง (สำหรับรถประจำทาง)',group_weight: 0)
 CriteriaGroup.create(id: 8, name: 'การประเมินตนเอง',group_weight: 0)
+CriteriaGroup.create(id: 9, name: 'การตรวจหน้างาน',group_weight: 0)
 
 #
-# ------------------ Criteria
+# ------------------ Criteria ---------------------------------------
 #
 Criterium.create(id: 1, number: 1, name: 'มีโครงสร้างการบริหารงานที่ชัดเจน', criteria_group_id: 1,weight: 3.75)
 Criterium.create(id: 2, number: 2, name: 'มีการกำหนดนโยบายและวิสัยทัศน์ ด้านการควบคุมการใช้สารเสพติดและแอลกอฮอล์อย่างชัดเจน', criteria_group_id: 1,weight: 3.75)
@@ -111,7 +112,20 @@ Criterium.create(id: 42, number: 3, name: 'มีการติดตั้ง 
 Criterium.create(id: 43, number: 4, name: 'มีการตรวจความพร้อมของพนักงานขับรถก่อนปฏิบัติงานทุกครั้ง (เช่น ระดับแอลกอฮอล์และสารเสพติด)', criteria_group_id: 8,weight: 0)
 Criterium.create(id: 44, number: 5, name: 'กำหนดจุดพักรถและที่พักสำหรับพนักงานขับรถระหว่างเส้นทางขนส่งอย่างเหมาะสม', criteria_group_id: 8,weight: 0)
 
+Criterium.create(id: 45, number: 1, name: 'เดินรถตามเส้นทางตามที่กำหนดในใบอนุญาตประกอบการเดินรถ', criteria_group_id: 9,weight: 0)
+Criterium.create(id: 46, number: 2, name: 'จำนวนรถที่มีอยู่จริง ตรงตามเงื่อนไขจำนวนรถขั้นต่ำ-ขั้นสูง', criteria_group_id: 9,weight: 0)
+Criterium.create(id: 47, number: 3, name: 'จำนวนเที่ยวเดินรถจริงเฉลี่ยต่อวัน ไม่น้อยกว่าจำนวนเที่ยวการเดินรถขั้นต่ำ', criteria_group_id: 9,weight: 0)
+Criterium.create(id: 48, number: 4, name: 'เวลาเดินรถเที่ยวแรก-เที่ยวสุดท้ายตรงตามที่กำหนดในใบอนุญาตประกอบการขนส่ง', criteria_group_id: 9,weight: 0)
+Criterium.create(id: 49, number: 5, name: 'เก็บค่าโดยสารตามอัตราที่กำหนด', criteria_group_id: 9,weight: 0)
+Criterium.create(id: 50, number: 6, name: 'มีการชำระภาษีรถทุกคัน', criteria_group_id: 9,weight: 0)
+Criterium.create(id: 51, number: 7, name: 'มีการติดตั้ง GPS และเชื่อมต่อข้อมูลกับกรมการขนส่งทางบกทุกคัน', criteria_group_id: 9,weight: 0)
+Criterium.create(id: 52, number: 8, name: 'สถานที่เก็บ ซ่อม และบำรุงรักษารถโดยสาร มีความเหมาะสมและเพียงพอ', criteria_group_id: 9,weight: 0)
+Criterium.create(id: 53, number: 9, name: 'มีการตรวจความพร้อมของพนักงานขับรถก่อนปฏิบัติงานทุกครั้ง (เช่น ระดับแอลกอฮอล์และสารเสพติด)', criteria_group_id: 9,weight: 0)
+Criterium.create(id: 54, number: 10, name: 'กำหนดจุดพักรถและที่พักสำหรับพนักงานขับรถระหว่างเส้นทางขนส่งอย่างเหมาะสม', criteria_group_id: 9,weight: 0)
 
+#
+# --- example evaluation
+#
 Evaluation.create(application: Application.first(), evaluator: User.first(), evaluation_date: 1.month.ago, result: 1, description: 'ผ่าน', criterium: Criterium.first())
 Evaluation.create(application: Application.last(), evaluator: User.first(), evaluation_date: 1.year.ago, result: 0, description: 'ไม่ผ่าน', criterium: Criterium.last())
 Evaluation.create(application: Application.first(), evaluator: User.first(), evaluation_date: 1.month.ago, result: 1, description: 'ผ่าน', criterium_id: 29)
