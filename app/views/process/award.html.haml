@@ -57,6 +57,8 @@
           %li.tab
             %a{href: '#tab_eval'}การประเมิน
           %li.tab
+            %a{href: '#tab_visit'}การตรวจหน้างาน
+          %li.tab
             %a{href: '#tab_evidence'}หลักฐาน
           %li.tab
             %a{href: '#tab_car'}ข้อมูลรถ
@@ -127,6 +129,10 @@
         .card-content.indigo.lighten-5
           %h4 รายการหลักฐาน
           = render "evidence"
+      #tab_visit
+        .card-content.indigo.lighten-5
+          %h4 ข้อมูลการตรวจประะเมินหน้างาน
+          = render "visit"
       #tab_app
         .card-content.indigo.lighten-5
           .section

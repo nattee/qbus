@@ -7,7 +7,7 @@
             .card-title
               %h6 วิธีใช้งาน
             %p{style: 'width: 60%'}
-              ให้กรอกผลการประเมินหน้างานตามแบบฟอร์ม "แบบสำรวจข้อมูลผู้ประกอบการขนส่ง" หลังจากบันทึกข้อมูลทั้งหมดแล้ว ให้ยืนยันผลการประเมิน โดยกดปุ่ม "บันทึก"
+              ให้กรอกผลการประเมินหน้างานตามแบบฟอร์ม "แบบสำรวจข้อมูลผู้ประกอบการขนส่ง" โดยระหว่างการกรอกสามารถกดปุ่ม "บันทึก" เพื่อบันทึกผลการกรอกข้อมูลไว้กอนได้ หลังจากบันทึกข้อมูลทั้งหมดแล้ว ให้ยืนยันผลการประเมิน โดยกดปุ่ม "ยืนยัน"
     .row
       .col.s12
         .card.brown.lighten-2
@@ -24,7 +24,7 @@
               %li.tab
                 %a{href: '#tab_car'}ข้อมูลรถ
           #tab_visit
-            = simple_form_for @application, url: appointment_visit_path(@application), local: true do |f|
+            = simple_form_for @application, url: appointment_visit_path(@application), local: true, method: :post do |f|
               / section a
               .card-content.brown.lighten-5
                 .card-title
@@ -34,7 +34,7 @@
                   /  วันที่ตรวจหน้างาน
                   .col.s6
                     .input-field
-                      = f.text_field :visited_date, class: 'datepicker'
+                      = f.text_field :visited_date, value: @application.visited_date.to_date, class: 'datepicker'
                       = f.label :visited_date, t(:visited_date, scope: 'activerecord.attributes.application')
                 .row
                   /.col.s6
@@ -162,126 +162,17 @@
                         %th ระบบไฟหน้า ไฟเลี้ยว ไฟเบรก
                         %th กระจกหน้ารถ ที่ปัดน้ำฝน
                       %tbody
-                        %tr
-                          %td ม. 1
-                          %td
-                            %label
-                              = radio_button_tag :visit_car1_chassis, 1, @application.visit_car1_chassis == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car1_chassis, 0, @application.visit_car1_chassis == 0
-                              %span ควรปรับปรุง
-                          %td
-                            %label
-                              = radio_button_tag :visit_car1_tire, 1, @application.visit_car1_tire == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car1_tire, 0, @application.visit_car1_tire == 0
-                              %span ควรปรับปรุง
-                          %td
-                            %label
-                              = radio_button_tag :visit_car1_light, 1, @application.visit_car1_light == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car1_light, 0, @application.visit_car1_light == 0
-                              %span ควรปรับปรุง
-                          %td
-                            %label
-                              = radio_button_tag :visit_car1_windshield, 1,@application.visit_car1_windshield == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car1_windshield, 0,@application.visit_car1_windshield == 0
-                              %span ควรปรับปรุง
-                        %tr
-                          %td ม. 2
-                          %td
-                            %label
-                              = radio_button_tag :visit_car2_chassis, 1, @application.visit_car2_chassis == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car2_chassis, 0, @application.visit_car2_chassis == 0
-                              %span ควรปรับปรุง
-                          %td
-                            %label
-                              = radio_button_tag :visit_car2_tire, 1, @application.visit_car2_tire == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car2_tire, 0, @application.visit_car2_tire == 0
-                              %span ควรปรับปรุง
-                          %td
-                            %label
-                              = radio_button_tag :visit_car2_light, 1, @application.visit_car2_light == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car2_light, 0, @application.visit_car2_light == 0
-                              %span ควรปรับปรุง
-                          %td
-                            %label
-                              = radio_button_tag :visit_car2_windshield, 1,@application.visit_car2_windshield == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car2_windshield, 0,@application.visit_car2_windshield == 0
-                              %span ควรปรับปรุง
-                        %tr
-                          %td ม. 3
-                          %td
-                            %label
-                              = radio_button_tag :visit_car3_chassis, 1, @application.visit_car3_chassis == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car3_chassis, 0, @application.visit_car3_chassis == 0
-                              %span ควรปรับปรุง
-                          %td
-                            %label
-                              = radio_button_tag :visit_car3_tire, 1, @application.visit_car3_tire == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car3_tire, 0, @application.visit_car3_tire == 0
-                              %span ควรปรับปรุง
-                          %td
-                            %label
-                              = radio_button_tag :visit_car3_light, 1, @application.visit_car3_light == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car3_light, 0, @application.visit_car3_light == 0
-                              %span ควรปรับปรุง
-                          %td
-                            %label
-                              = radio_button_tag :visit_car3_windshield, 1,@application.visit_car3_windshield == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car3_windshield, 0,@application.visit_car3_windshield == 0
-                              %span ควรปรับปรุง
-                        %tr
-                          %td ม. 4
-                          %td
-                            %label
-                              = radio_button_tag :visit_car4_chassis, 1, @application.visit_car4_chassis == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car4_chassis, 0, @application.visit_car4_chassis == 0
-                              %span ควรปรับปรุง
-                          %td
-                            %label
-                              = radio_button_tag :visit_car4_tire, 1, @application.visit_car4_tire == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car4_tire, 0, @application.visit_car4_tire == 0
-                              %span ควรปรับปรุง
-                          %td
-                            %label
-                              = radio_button_tag :visit_car4_light, 1, @application.visit_car4_light == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car4_light, 0, @application.visit_car4_light == 0
-                              %span ควรปรับปรุง
-                          %td
-                            %label
-                              = radio_button_tag :visit_car4_windshield, 1,@application.visit_car4_windshield == 1
-                              %span ดี
-                            %label
-                              = radio_button_tag :visit_car4_windshield, 0,@application.visit_car4_windshield == 0
-                              %span ควรปรับปรุง
+                        - (1..4).each do |m|
+                          %tr
+                            %td ม. #{m}
+                            - ['chassis','tire','light','windshield'].each do |t|
+                              %td
+                                %label
+                                  = f.radio_button "visit_car#{m}_#{t}", 1
+                                  %span ดี
+                                %label
+                                  = f.radio_button "visit_car#{m}_#{t}", 0
+                                  %span ควรปรับปรุง
               .card-content.brown.lighten-5
                 .card-title
                   %h5 ส่วนที่ 5 การเตรียมความพร้อมเพื่อให้บริการ
@@ -311,15 +202,15 @@
                     คุณภาพการให้บริการโดยรวมของการประกอบการขนส่งในเส้นทางที่สำรวจ
                   .col.s5
                     %label
-                      = radio_button_tag :visit_result, "ดี", @application.visit_result == 'ดี'
+                      = f.radio_button :visit_result, "ดี"
                       %span ดี
                     %br
                     %label
-                      = radio_button_tag :visit_result, "ปานกลาง", @application.visit_result == "ปานกลาง"
+                      = f.radio_button :visit_result, "ปานกลาง"
                       %span ปานกลาง
                     %br
                     %label
-                      = radio_button_tag :visit_result, "ควรปรับปรุง", @application.visit_result == "ควรปรับปรุง"
+                      = f.radio_button :visit_result, "ควรปรับปรุง"
                       %span ควรปรับปรุง
                 .row
                   .col.s12.m6
@@ -327,7 +218,8 @@
                       = f.text_area :visit_comment, value: @application.visit_comment, class: 'materialize-textarea'
                       = f.label :visit_comment, 'โปรดระบุความเห็นและข้อเสนอแนะอื่น ๆ'
               .card-action.brown.lighten-5
-                %button.btn.waves-effect.waves-light{value:  :submit} บันทึก
+                %button.btn.waves-effect.waves-light{value:  :submit, type: :submit} บันทึก
+                %button.btn.waves-effect.waves-light.gradient-45deg-green-teal{value:  :confirm, name: :confirm, type: :submit, data: {confirm: 'เมื่อยืนยันแล้วจะไม่สามารถแก้ไขการประเมินได้อีก ยืนยันหรือไม่'}} ยืนยันผลการตรวจหน้างาน
           #tab_evidence
             .card-content.brown.lighten-5
               %h4 รายการหลักฐาน

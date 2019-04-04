@@ -36,6 +36,11 @@ th:
       category1: รถโดยสารประจำทาง หมวด 2
       category2: รถโดยสารประจำทาง หมวด 3
       category3: รถโดยสารไม่ประจำทาง
-
-
-
+  time:
+    am: ก่อนเที่ยง
+    formats:
+      default: "%a %d %b %Y %H:%M:%S %z"
+      long: "%d %B %Y %H:%M น."
+      short: "%d %b %H:%M น."
+      short_date: "%d %B %Y"
+    pm: หลังเที่ยง

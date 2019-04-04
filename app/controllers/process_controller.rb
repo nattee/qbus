@@ -61,23 +61,33 @@ class ProcessController < ApplicationController
   end
 
   def appointment_visit_post
-    #save car evaluation
+    #save applications param
+    @application.update(application_visit_params)
 
     #save evaluations
+    ev_result = application_evaluation_params
     @application.evaluations.each do |ev|
-      if params.require(:result)[ev.id.to_s] == '1'
+      if ev_result[ev.id.to_s] == '1'
         ev.result = 1
-      elsif params.require(:result)[ev.id.to_s] == '0.5'
+      elsif ev_result[ev.id.to_s] == '0.5'
         ev.result = 0.5
-      elsif params.require(:result)[ev.id.to_s] == '0'
+      elsif ev_result[ev.id.to_s] == '0'
         ev.result = 0
       end
-      ev.description = params.require(:description)[ev.id.to_s]
       ev.save
     end
 
-    #save comment
-    redirect_to process_appointments_path(@application), notice: 'บันทึกผลการตรวจหน้างานเรียบร้อย'
+    if params[:confirm]
+      @application.visited = true
+    end
+
+    @application.save
+
+    if params[:confirm]
+      redirect_to process_appointments_path(@application), notice: 'ยืนยันผลการตรวจหน้างานเรียบร้อย'
+    else
+      redirect_to appointment_visit_path(@application), notice: 'บันทึกผลการตรวจหน้างานเรียบร้อย'
+    end
   end
 
   def evaluation_index
@@ -91,12 +101,13 @@ class ProcessController < ApplicationController
 
   def evaluation_post
     #save evaluations
-    @application.evaluations.each do |ev|
-      if params.require(:result)[ev.id.to_s] == '1'
+    ev_result = application_evaluation_params
+    @application.evaluation_main.each do |ev|
+      if ev_result[ev.id.to_s] == '1'
         ev.result = 1
-      elsif params.require(:result)[ev.id.to_s] == '0.5'
+      elsif ev_result[ev.id.to_s] == '0.5'
         ev.result = 0.5
-      elsif params.require(:result)[ev.id.to_s] == '0'
+      elsif ev_result[ev.id.to_s] == '0'
         ev.result = 0
       end
       ev.description = params.require(:description)[ev.id.to_s]
@@ -140,5 +151,19 @@ class ProcessController < ApplicationController
   private
     def set_application
       @application = Application.find(params[:id])
+    end
+
+    def application_visit_params
+      params.require(:application).permit(:visited_date, :visitor, :visitor_tel, :visitor_email, :visitor_position,
+                                          :visit_comment, :visit_problem, :visit_problem_cause, :visit_result, :visit_tax_89, :visit_tax_accrued,
+                                          :visit_car1_chassis,:visit_car1_light,:visit_car1_tire,:visit_car1_windshield,
+                                          :visit_car2_chassis,:visit_car2_light,:visit_car2_tire,:visit_car2_windshield,
+                                          :visit_car3_chassis,:visit_car3_light,:visit_car3_tire,:visit_car3_windshield,
+                                          :visit_car4_chassis,:visit_car4_light,:visit_car4_tire,:visit_car4_windshield)
+
+    end
+
+    def application_evaluation_params
+      params.fetch(:result, {})
     end
 end

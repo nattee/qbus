@@ -43,6 +43,8 @@
             %li.tab
               %a{href: '#tab_eval'}การประเมิน
             %li.tab
+              %a{href: '#tab_visit'}การตรวจหน้่างาน
+            %li.tab
               %a{href: '#tab_app'}ข้อมูลใบสมัคร
             %li.tab
               %a{href: '#tab_evidence'}หลักฐาน
@@ -110,6 +112,10 @@
           .card-content.orange.lighten-5
             %h4 รายการหลักฐาน
             = render "evidence"
+        #tab_visit
+          .card-content.orange.lighten-5
+            %h4 ข้อมูลการตรวจประะเมินหน้างาน
+            = render "visit"
         #tab_app
           .card-content.orange.lighten-5
             = render partial: "applications/application"
