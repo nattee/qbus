@@ -196,11 +196,19 @@ class Application < ApplicationRecord
   end
 
   def evaluation_visit_sec2
-    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9').order('criteria.id')
+    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9').order('criteria.id').limit(5)
   end
 
   def evaluation_visit_sec3
     evaluations.joins(:criterium => :criteria_group).where('criteria.id = 50').order('criteria.id')
+  end
+
+  def evaluation_visit_sec4
+    evaluations.joins(:criterium => :criteria_group).where('criteria.id = 51').order('criteria.id')
+  end
+
+  def evaluation_visit_sec5
+    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9 and criteria.id > 51').order('criteria.id')
   end
 
   def attach_data(attachment_type, params)

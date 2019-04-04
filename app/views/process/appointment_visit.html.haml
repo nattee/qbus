@@ -48,6 +48,7 @@
                       %label
                         = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
                         %span ไม่ใช่
+                %br
                 .row
                   .col.s12.m4
                     %p ในกรณีที่มีข้อใดข้อหนึ่งตอบว่าไม่ใช่ ขอให้ระบุสภาพของปัญหาและสาเหตุของปัญหา
@@ -80,6 +81,7 @@
                       %label
                         = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
                         %span ไม่ใช่
+                %br
                 .row
                   .col.s12.m4
                     %p ในกรณีที่ไม่ได้ชำระภาษีทุกคันขอให้ระบุข้อมูลต่อไปนี้
@@ -110,17 +112,139 @@
                       %label
                         = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
                         %span ไม่ใช่
+                %br
+                .card-title
+                  %h6 พิจารณาแยกตามมาตรฐานรถ
                 .row
-                  .col.s12.m4
-                    %p ในกรณีที่ไม่ได้ชำระภาษีทุกคันขอให้ระบุข้อมูลต่อไปนี้
-                  .col.s12.m4
-                    .input-field
-                      = f.text_field :visit_tax_accrued, value: @application.visit_tax_accrued
-                      = f.label :visit_tax_accrued, 'จำนวนรถที่ค้างชำระภาษี (คัน)'
-                  .col.s12.m4
-                    .input-field
-                      = f.text_field :visit_tax_89, value: @application.visit_tax_89
-                      = f.label :visit_tax_89, 'แจ้งหยุดใช้รถตามมาตรา 89 (คัน)'
+                  .col.s12
+                    %table
+                      %thead
+                        %th มาตรฐานรถ
+                        %th สภาพตัวถัง
+                        %th สภาพยาง
+                        %th ระบบไฟหน้า ไฟเลี้ยว ไฟเบรก
+                        %th กระจกหน้ารถ ที่ปัดน้ำฝน
+                      %tbody
+                        %tr
+                          %td ม. 1
+                          %td
+                            %label
+                              = radio_button_tag :visit_car1_chassis, 1, @application.visit_car1_chassis == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car1_chassis, 0, @application.visit_car1_chassis == 0
+                              %span ควรปรับปรุง
+                          %td
+                            %label
+                              = radio_button_tag :visit_car1_tire, 1, @application.visit_car1_tire == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car1_tire, 0, @application.visit_car1_tire == 0
+                              %span ควรปรับปรุง
+                          %td
+                            %label
+                              = radio_button_tag :visit_car1_light, 1, @application.visit_car1_light == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car1_light, 0, @application.visit_car1_light == 0
+                              %span ควรปรับปรุง
+                          %td
+                            %label
+                              = radio_button_tag :visit_car1_windshield, 1,@application.visit_car1_windshield == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car1_windshield, 0,@application.visit_car1_windshield == 0
+                              %span ควรปรับปรุง
+                        %tr
+                          %td ม. 2
+                          %td
+                            %label
+                              = radio_button_tag :visit_car2_chassis, 1, @application.visit_car2_chassis == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car2_chassis, 0, @application.visit_car2_chassis == 0
+                              %span ควรปรับปรุง
+                          %td
+                            %label
+                              = radio_button_tag :visit_car2_tire, 1, @application.visit_car2_tire == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car2_tire, 0, @application.visit_car2_tire == 0
+                              %span ควรปรับปรุง
+                          %td
+                            %label
+                              = radio_button_tag :visit_car2_light, 1, @application.visit_car2_light == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car2_light, 0, @application.visit_car2_light == 0
+                              %span ควรปรับปรุง
+                          %td
+                            %label
+                              = radio_button_tag :visit_car2_windshield, 1,@application.visit_car2_windshield == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car2_windshield, 0,@application.visit_car2_windshield == 0
+                              %span ควรปรับปรุง
+                        %tr
+                          %td ม. 3
+                          %td
+                            %label
+                              = radio_button_tag :visit_car3_chassis, 1, @application.visit_car3_chassis == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car3_chassis, 0, @application.visit_car3_chassis == 0
+                              %span ควรปรับปรุง
+                          %td
+                            %label
+                              = radio_button_tag :visit_car3_tire, 1, @application.visit_car3_tire == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car3_tire, 0, @application.visit_car3_tire == 0
+                              %span ควรปรับปรุง
+                          %td
+                            %label
+                              = radio_button_tag :visit_car3_light, 1, @application.visit_car3_light == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car3_light, 0, @application.visit_car3_light == 0
+                              %span ควรปรับปรุง
+                          %td
+                            %label
+                              = radio_button_tag :visit_car3_windshield, 1,@application.visit_car3_windshield == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car3_windshield, 0,@application.visit_car3_windshield == 0
+                              %span ควรปรับปรุง
+                        %tr
+                          %td ม. 4
+                          %td
+                            %label
+                              = radio_button_tag :visit_car4_chassis, 1, @application.visit_car4_chassis == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car4_chassis, 0, @application.visit_car4_chassis == 0
+                              %span ควรปรับปรุง
+                          %td
+                            %label
+                              = radio_button_tag :visit_car4_tire, 1, @application.visit_car4_tire == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car4_tire, 0, @application.visit_car4_tire == 0
+                              %span ควรปรับปรุง
+                          %td
+                            %label
+                              = radio_button_tag :visit_car4_light, 1, @application.visit_car4_light == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car4_light, 0, @application.visit_car4_light == 0
+                              %span ควรปรับปรุง
+                          %td
+                            %label
+                              = radio_button_tag :visit_car4_windshield, 1,@application.visit_car4_windshield == 1
+                              %span ดี
+                            %label
+                              = radio_button_tag :visit_car4_windshield, 0,@application.visit_car4_windshield == 0
+                              %span ควรปรับปรุง
               .card-action.brown.lighten-5
                 %button.btn.waves-effect.waves-light{value:  :submit} บันทึก
           #tab_evidence
