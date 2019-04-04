@@ -6,16 +6,13 @@
           .card-content
             .card-title
               %h6 วิธีใช้งาน
-            ให้ผู้ประเมินพิจารณาหลักฐานสำหรับเกณฑ์ในหัวข้อต่าง ๆ ด้านล่างนี้และบันทึกผลการประเมินในแต่ละหัวข้อ เมื่อบันทึกเสร็จแล้วให้กดปุ่ม "บันทึก" ด้านล่างสุด
-            .section
-            ในกรณีที่หลักฐานไม่เพียงพอต่อการประเมิน ผู้ประเมินสามารถร้องขอให้ส่งหลักฐานใหม่ได้ โดยการบันทึกข้อความและกดปุ่มในช่อง "ขอหลักฐานเพิ่มเติม" ด้านซ้าย
-            .section
-            หลังจากประเมินข้อมูลทั้งหมดแล้ว ให้ยืนยันผลการประเมิน โดยกดปุ่ม "ยืนยันผลการประเมิน"
+            %p{style: 'width: 60%'}
+              ให้กรอกผลการประเมินหน้างานตามแบบฟอร์ม "แบบสำรวจข้อมูลผู้ประกอบการขนส่ง" หลังจากบันทึกข้อมูลทั้งหมดแล้ว ให้ยืนยันผลการประเมิน โดยกดปุ่ม "บันทึก"
     .row
       .col.s12
         .card.brown.lighten-2
           .card-content
-            %h5 ข้อมูลใบสมัคร
+            %h4 การบันทึกผลการตรวจหน้างาน
           .card-tabs
             %ul.tabs.tabs-fixed-width.tabs-transparent
               %li.tab
@@ -27,7 +24,47 @@
               %li.tab
                 %a{href: '#tab_car'}ข้อมูลรถ
           #tab_visit
-            = form_with url: process_evaluation_path(@application), local: true do |f|
+            = simple_form_for @application, url: appointment_visit_path(@application), local: true do |f|
+              / section a
+              .card-content.brown.lighten-5
+                .card-title
+                  %h5 ข้อมูลการตรวจประะเมินหน้างาน
+                .row
+                  /.col.s6
+                  /  วันที่ตรวจหน้างาน
+                  .col.s6
+                    .input-field
+                      = f.text_field :visited_date, class: 'datepicker'
+                      = f.label :visited_date, t(:visited_date, scope: 'activerecord.attributes.application')
+                .row
+                  /.col.s6
+                  /  ชื่อ-นามสกุล ผู้ตรวจประเมิน
+                  .col.s6
+                    .input-field
+                      = f.input_field :visitor
+                      = f.label :visitor, t(:visitor, scope: 'activerecord.attributes.application')
+                .row
+                  /.col.s6
+                  /  ตำแหน่ง ผู้ตรวจประเมิน
+                  .col.s6
+                    .input-field
+                      = f.input_field :visitor_position
+                      = f.label :visitor_position, t(:visitor_position, scope: 'activerecord.attributes.application')
+                .row
+                  /.col.s6
+                  /  เบอร์โทรศัทพ์ ผู้ตรวจประเมิน
+                  .col.s6
+                    .input-field
+                      = f.input_field :visitor_tel
+                      = f.label :visitor_tel, t(:visitor_tel, scope: 'activerecord.attributes.application')
+                .row
+                  /.col.s6
+                  /  อีเมล์ ผู้ตรวจประเมิน
+                  .col.s6
+                    .input-field
+                      = f.input_field :visitor_email
+                      = f.label :visitor_email, t(:visitor_email, scope: 'activerecord.attributes.application')
+
               / section 2
               .card-content.brown.lighten-5
                 .card-title
@@ -54,12 +91,12 @@
                     %p ในกรณีที่มีข้อใดข้อหนึ่งตอบว่าไม่ใช่ ขอให้ระบุสภาพของปัญหาและสาเหตุของปัญหา
                   .col.s12.m4
                     .input-field
-                      = f.text_field :visit_problem, value: @application.visit_problem, class: 'materialize-textarea'
+                      = f.text_area :visit_problem, value: @application.visit_problem, class: 'materialize-textarea'
                       = f.label :visit_problem, t(:visit_problem, scope: 'activerecord.attributes.application')
                     %p ตัวอย่างสภาพปัญหา เช่น จำนวนรถสูง/ต่ำกว่าเงื่อนไขการเดินรถ, จำนวนเที่ยวรถสูง/ต่ำกว่าเงื่อนไขการเดินรถ, เดินรถไม่ถึงปลายทาง, ไม่เดินรถตามเส้นทางที่กำหนด, ไม่เก็บค่าโดยสารตามอัตราที่กำหนด
                   .col.s12.m4
                     .input-field
-                      = f.text_field :visit_problem_cause, value: @application.visit_problem_cause, class: 'materialize-textarea'
+                      = f.text_area :visit_problem_cause, value: @application.visit_problem_cause, class: 'materialize-textarea'
                       = f.label :visit_problem_cause, t(:visit_problem_cause, scope: 'activerecord.attributes.application')
                     %p ตัวอย่างสาเหตุของปัญหา เช่น ประชาชนต้องการ/ไม่ต้องการใช้บริการ เนื่องจาก ..., ผู้ประกอบการขนส่งไม่มีความตั้งใจในการให้บริการ, ไม่สามารถควบคุมรถร่วมบริการได้, ปัญหาสภาพทางอยู่ในระหว่างการก่อสร้าง/ชำรุด
               .card-content.brown.lighten-5
@@ -112,7 +149,7 @@
                       %label
                         = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
                         %span ไม่ใช่
-                %br
+              .card-content.brown.lighten-5
                 .card-title
                   %h6 พิจารณาแยกตามมาตรฐานรถ
                 .row
@@ -245,6 +282,50 @@
                             %label
                               = radio_button_tag :visit_car4_windshield, 0,@application.visit_car4_windshield == 0
                               %span ควรปรับปรุง
+              .card-content.brown.lighten-5
+                .card-title
+                  %h5 ส่วนที่ 5 การเตรียมความพร้อมเพื่อให้บริการ
+                .row
+                  .col.s7.strong
+                    เงื่อนไขการตรวจสอบ
+                  .col.s5.strong
+                    ผลการตรวจหน้างาน
+                .row
+                  .col.s12
+                - @application.evaluation_visit_sec5.each do |ev|
+                  .row
+                    .col.s7
+                      = "#{ev.criterium.number}. #{ev.criterium.name}"
+                    .col.s5
+                      %label
+                        = radio_button_tag "result[#{ev.id}]", 1, ev.result == 1
+                        %span ใช่
+                      %label
+                        = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
+                        %span ไม่ใช่
+              .card-content.brown.lighten-5
+                .card-title
+                  %h5 ส่วนที่ 6 ความเห็นของเจ้าหน้าที่ตรวจประเมิน
+                .row
+                  .col.s7
+                    คุณภาพการให้บริการโดยรวมของการประกอบการขนส่งในเส้นทางที่สำรวจ
+                  .col.s5
+                    %label
+                      = radio_button_tag :visit_result, "ดี", @application.visit_result == 'ดี'
+                      %span ดี
+                    %br
+                    %label
+                      = radio_button_tag :visit_result, "ปานกลาง", @application.visit_result == "ปานกลาง"
+                      %span ปานกลาง
+                    %br
+                    %label
+                      = radio_button_tag :visit_result, "ควรปรับปรุง", @application.visit_result == "ควรปรับปรุง"
+                      %span ควรปรับปรุง
+                .row
+                  .col.s12.m6
+                    .input-field
+                      = f.text_area :visit_comment, value: @application.visit_comment, class: 'materialize-textarea'
+                      = f.label :visit_comment, 'โปรดระบุความเห็นและข้อเสนอแนะอื่น ๆ'
               .card-action.brown.lighten-5
                 %button.btn.waves-effect.waves-light{value:  :submit} บันทึก
           #tab_evidence

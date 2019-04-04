@@ -71,6 +71,10 @@ th:
         service_area: พื้นที่ให้บริการ
         visit_problem: สภาพปัญหา
         visit_problem_cause: สาเหตุของปัญหา
+        visitor: ผู้ตรวจประเมินหน้างาน
+        visitor_position: ตำแหน่งผู้ตรวจประเมิน
+        visitor_email: อีเมล์ผู้ตรวจประเมิน
+        visitor_tel: เบอร์โทรศัพท์ผู้ตรวจประเมิน
 
 
       attachment:
