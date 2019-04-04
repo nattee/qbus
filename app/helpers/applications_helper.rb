@@ -30,7 +30,7 @@ module ApplicationsHelper
     when 'submitted'
       text_color = 'lime-green-text'
     when 'evaluated'
-      text_color = 'yellow-text'
+      text_color = 'brown-text'
     when 'awarded'
       text_color = 'black-text'
     end

@@ -39,6 +39,8 @@ class Application < ApplicationRecord
   scope :finished, -> {where(state: :awarded) }
   scope :latest_awarded, -> {where(state: :awarded).where('awarded_date >= ?',30.days.ago) }
 
+  scope :won_award, -> {where(state: :awarded).where(award_won: true) }
+
   def to_label
     "#{self.number} - #{self.state_text}"
   end
@@ -53,18 +55,60 @@ class Application < ApplicationRecord
   end
 
   def route_no
-    return "-" if category3? or route == nil
+    return 'ไม่ประจำทาง' if category3? or route == nil
     return route.route_no
   end
 
   def route_start
-    return 'ไม่ประจำทาง' if category3? or route == nil
+    return '' if category3? or route == nil
     return route.start
   end
 
   def route_destination
     return '' if category3? or route == nil
     return route.destination
+  end
+
+  def route_info
+    return '-' if category3? or route == nil
+    return "#{route.start} - #{route.destination}"
+  end
+
+  def total_score
+    sum = 0.0
+    evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id <= 6").each do |ev|
+      sum += (ev.result || 0) * ev.criterium.weight
+    end
+    return sum.to_i
+  end
+
+  def total_score_text
+    "#{total_score}/100"
+  end
+
+  def safety_score
+    sum = 0.0
+    evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id in (5,6)").each do |ev|
+      sum += (ev.result || 0) * ev.criterium.weight
+    end
+    return sum.to_i
+  end
+
+  def safety_score_text
+    "#{safety_score}/30"
+  end
+
+  def fail_visit?
+    return false
+  end
+
+  def passed
+    a = total_score
+    b = safety_score
+    if (a < 80) or (b < 25) or (fail_visit?)
+      return "ไม่ผ่าน"
+    end
+    return "ผ่าน"
   end
 
   def appoint_date
@@ -120,6 +164,13 @@ class Application < ApplicationRecord
     change_state(:evaluated)
   end
 
+  def confirm_award(result, remark)
+    self.award_won = result
+    self.award_remark = remark
+    set_award
+  end
+
+
   def sorted_attachments
     return attachments.where(attachment_type: :criterium_evidence).includes(:criterium_attachment => [:criterium => :criteria_group]).order('criteria_groups.id, criteria.number')
   end
@@ -138,6 +189,10 @@ class Application < ApplicationRecord
     #CriteriumAttachment.where.not(id: Attachment.select(:criterium_attachment_id).where(application: self)).each do |cri|
     #  attachments << Attachment.new(criterium_attachment_id: cri.id, attachment_type: :criterium_evidence)
     #end
+  end
+
+  def evaluation_main
+    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id <= 6').order('criteria_groups.id, criteria.number')
   end
 
   def attach_data(attachment_type, params)
@@ -184,17 +239,31 @@ class Application < ApplicationRecord
     return save && contract.data.attached?
   end
 
-  def total_score
-    return '85/100'
-  end
 
-  def passed
-    return "ผ่าน"
-  end
 
   def change_state(new_state)
     self.state = new_state
     self.save
+  end
+
+  def self.extend(original)
+    app = original.dup
+    original.attachments.where.not(evidence_id: nil).each do |att|
+      new_att = att.dup
+      new_att.save
+      #copy attachment
+      #SHALLOW COPY, must change to deep copy of the file later
+      app.attachments << new_att
+    end
+
+    #link car (must no deep copy)
+    app.cars = original.cars
+
+    #evaluation? no!!! we need them to do self evaluation again
+
+    app.state = :applying
+    app.save
+    return app
   end
 
 end

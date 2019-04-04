@@ -58,14 +58,21 @@ class User < ApplicationRecord
 
   #roles
   def is_admin?
-    return admin != '0'
+    return roles[:admin].to_s == '1'
   end
+
   def has_role(role)
+    return true if is_admin?
     return false unless roles[role]
-    return is_admin? || roles[role] != '0'
+    return roles[role].to_s == '1'
   end
+
   def is_official?
     return has_role(:committee) || has_role(:surveyor) || has_role(:evaluator) || has_role(:verifier)
+  end
+  
+  def role_array
+    roles.to_hash.map { |k,v| I18n.t(k, scope: 'activerecord.attributes.user') }
   end
 
   private

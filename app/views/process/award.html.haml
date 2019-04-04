@@ -11,21 +11,37 @@
         .card-content
           .card-title
             %h4 การบันทึกผลการตัดสิน
-          %h5 บันทึกผลการตัดสิน
           .row
-            .col.s12
-              %label
-                = radio_button_tag :result, 'ok'
-                %span ตัดสินให้ตราสัญลักษณ์
-          .section
-          .row
-            .col.s12
-              %label
-                = radio_button_tag :result, 'no'
-                %span ตัดสินไม่ให้ตรา
-          .row
-            .input-field.col.s12
-              = f.text_area :award_remark, class: 'materialize-textarea'
+            .col.s6
+              %h5 บันทึกผลการตัดสิน
+              .row
+                .col.s12
+                  %label
+                    = radio_button_tag :result, 'ok'
+                    %span ตัดสินให้ตราสัญลักษณ์  Q-BUS
+              .section
+              .row
+                .col.s12
+                  %label
+                    = radio_button_tag :result, 'no'
+                    %span ตัดสินไม่ให้รางวัล Q-BUS
+              .row
+                .input-field.col.s12
+                  = f.text_area :award_remark, class: 'materialize-textarea'
+                  = f.label :award_remark, 'คำอธิบายผลการตัดสิน'
+            .col.s6
+              .card-title
+                %h5 สรุปผลการประเมิน
+              .row
+                .col.s10
+                  คะแนนรวม
+                .col.s2.right-align
+                  = @application.total_score_text
+              .row
+                .col.s10
+                  คะแนนความปลอดภัย
+                .col.s2.right-align
+                  = @application.safety_score_text
         .card-action
           %button.btn.waves-effect.waves-light{data: {confirm: 'ต้องการยืนยันการตัดสินผลหรือไม่ เมื่อยืนยันแล้วจะไม่สามารถแก้ไขได้อีก' }} ยืนยันการตัดสินผล
           /= link_to 'ย้อนกลับ', process_awards_path, class: 'waves-effect waves-light orange btn'
@@ -39,13 +55,25 @@
           %li.tab
             %a{href: '#tab_app'}ข้อมูลใบสมัคร
           %li.tab
+            %a{href: '#tab_eval'}การประเมิน
+          %li.tab
             %a{href: '#tab_evidence'}หลักฐาน
           %li.tab
-            %a{href: '#tab_eval'}การประเมิน
-          - unless @application.category3?
-            %li.tab
-              %a{href: '#tab_car'}ข้อมูลรถ
+            %a{href: '#tab_car'}ข้อมูลรถ
       #tab_eval
+        .card-content.indigo.lighten-4
+          .card-title
+            %h5 สรุปผลการประเมิน
+          .row
+            .col.s4
+              คะแนนรวม
+            .col.s1.right-align
+              = @application.total_score_text
+          .row
+            .col.s4
+              คะแนนความปลอดภัย
+            .col.s1.right-align
+              = @application.safety_score_text
         .card-content.indigo.lighten-5
           - last_cg = nil
           - @application.evaluations.joins(:criterium => :criteria_group).order('criteria_groups.id, criteria.number').each do |ev|
@@ -93,7 +121,8 @@
                   - else
                 .col.s3
                   .input-field
-                    = f.text_field :description
+                    /= f.text_field :description
+                    = ev.description
       #tab_evidence
         .card-content.indigo.lighten-5
           %h4 รายการหลักฐาน

@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
   # GET /profile
   def profile
     if logged_in?
-      redirect_to @current_user
+      render 'users/profile'
     else
       redirect_to root_url
     end

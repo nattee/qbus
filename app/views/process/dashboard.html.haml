@@ -95,6 +95,7 @@
                     %th วันที่ยื่นใบสมัคร
                     %th วันที่ตัดสินผล
                     %th ผลการตัดสิน
+                    %th
                   %tbody
                     - @finished.each do |app|
                       %tr
@@ -106,6 +107,8 @@
                         %td
                           %span.green-text
                             = app.award
+                        %td
+                          = link_to 'ต่ออายุ', extend_from_application_path(app), class: 'btn green waves-effect waves-light'
               - else
                 ไม่มีใบสมัครที่ดำเนินการเสร็จแล้ว
     - if @current_user.is_official?

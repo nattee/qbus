@@ -7,11 +7,12 @@
         .row
           .col.s12.m3
             = render "current_apply_step"
-          .col.s12.m9
-            %h4 ไม่ผ่านการประเมินตนเอง
+          .col.s12.m6
+            .card-panel.gradient-45deg-red-pink.white-text
+              %h4 ไม่ผ่านการประเมินตนเอง
 
-            คำอธิบายกรณีไม่ผ่านการประเมินตนเอง
-
+              ในการกำหนดการได้รับการรับรองมาตรฐานรถโดยสารสาธารณะ Q-Bus ผู้ที่ต้องการขอการรับรองจากโครงการจำเป็นต้องมีคุณสมบัติขั้นพื้นฐานตามกฏหมายบังคับของการให้บริการการเดินรถโดยสารสาธารณะ ซึ่งหากผู้สมัครไม่สามารถผ่านการประเมินขั้นพื้นฐาน จะส่งผลให้ไม่มีสิทธิในการขอการรับรองมาตรฐานรถโดยสารสาธารณะ Q-Bus ได้
             %br
-            = link_to 'ย้อนกลับ', apply_step3_application_path(@application), class: "btn waves-light left"
+            %br
+            = link_to 'ย้อนกลับ', apply_step3_application_path(@application), class: "btn waves-light left gradient-45deg-purple-deep-purple"
 

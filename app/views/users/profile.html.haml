@@ -4,26 +4,25 @@
       .card-content.deep-purple
         .card-title.white-text
           =t(:user, scope: 'activerecord.models')
-          =@user.id
+          =@current_user.id
       .card-content
         .section
           %h6= t(:name, scope: 'activerecord.attributes.user')
-          = @user.name
+          = @current_user.name
         .section
           %h6= t(:email, scope: 'activerecord.attributes.user')
-          = @user.email
+          = @current_user.email
         .section
           %h6= t(:activated, scope: 'activerecord.attributes.user')
-          = @user.activated
+          = @current_user.activated
         .section
           %h6= t(:activated_at, scope: 'activerecord.attributes.user')
-          = l(@user.activated_at, format: '%d %B %Y')
+          = l(@current_user.activated_at, format: '%d %B %Y')
         .section
           %h6 สิทธิ์ในการใช้งาน
           %p
             %ul
-              - @user.role_array.each do |r|
+              - @current_user.role_array.each do |r|
                 %li= r
       .card-action
-        = link_to t(:edit), edit_user_path(@user)
-        = link_to t(:back), users_path
+        = link_to t(:edit), profile_edit_user_path(@current_user,'profile')

@@ -1,6 +1,6 @@
 class ProcessController < ApplicationController
   before_action :set_application, only: [ :register_post, :registered, :registered_post,
-                                          :appointment_post, :appointed,
+                                          :appointment_post, :appointed, :appointment_visit, :appointment_visit_post,
                                           :evaluation, :evaluation_post, :evaluation_finish, :evaluation_reject,
                                           :award, :award_post,
                                         ]
@@ -56,6 +56,30 @@ class ProcessController < ApplicationController
     redirect_to process_appointments_path
   end
 
+  def appointment_visit
+
+  end
+
+  def appointment_visit_post
+    #save car evaluation
+
+    #save evaluations
+    @application.evaluations.each do |ev|
+      if params.require(:result)[ev.id.to_s] == '1'
+        ev.result = 1
+      elsif params.require(:result)[ev.id.to_s] == '0.5'
+        ev.result = 0.5
+      elsif params.require(:result)[ev.id.to_s] == '0'
+        ev.result = 0
+      end
+      ev.description = params.require(:description)[ev.id.to_s]
+      ev.save
+    end
+
+    #save comment
+    redirect_to process_appointments_path(@application), notice: 'บันทึกผลการตรวจหน้างานเรียบร้อย'
+  end
+
   def evaluation_index
     @to_be_evaluated = Application.to_be_evaluated
     @latest_evaluated = Application.latest_evaluated
@@ -68,13 +92,14 @@ class ProcessController < ApplicationController
   def evaluation_post
     #save evaluations
     @application.evaluations.each do |ev|
-      if params.require(:result)[ev.id.to_s] == 'ok'
-        ev.result = true
-        ev.description = params.require(:description)[ev.id.to_s]
-      elsif params.require(:result)[ev.id.to_s] == 'ok'
-        ev.result = false
-        ev.description = params.require(:description)[ev.id.to_s]
+      if params.require(:result)[ev.id.to_s] == '1'
+        ev.result = 1
+      elsif params.require(:result)[ev.id.to_s] == '0.5'
+        ev.result = 0.5
+      elsif params.require(:result)[ev.id.to_s] == '0'
+        ev.result = 0
       end
+      ev.description = params.require(:description)[ev.id.to_s]
       ev.save
     end
     redirect_to process_evaluation_path(@application), notice: 'บันทึกผลการประเมินเรียบร้อย'
@@ -101,8 +126,10 @@ class ProcessController < ApplicationController
   def award_post
     if params[:result] == 'ok'
       @application.award = 'ได้รับตราสัญลักษณ์'
+      @application.award_won = true
     elsif params[:result] == 'no'
       @application.award = 'ไม่ได้รับตราสัญลักษณ์'
+      @application.award_won = false
       @application.award_remark = params[:award_remark]
     else
     end

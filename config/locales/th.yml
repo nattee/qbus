@@ -4,6 +4,7 @@ th:
   new: เพิ่ม
   edit: แก้ไข
   list: รายการ
+  logout: ออกจากระบบ
   confirm_delete: ยืนยันการลบ?
   download: ดาวน์โหลด
   register: ลงทะเบียน
@@ -13,6 +14,13 @@ th:
   # END session login form
   updated_at: แก้ไขครั้งล่าสุด เมื่อ
   created_at: สร้างเมื่อ
+  helpers:
+    select:
+      prompt: โปรดเลือก
+    submit:
+      create: สร้าง%{model}
+      submit: บันทึก%{model}
+      update: แก้ไข%{model}
   simple_form:
     error_notification:
       default_message: กรุณาตรวจสอบข้อผิดพลาดด้านล่างนี้่
@@ -22,7 +30,7 @@ th:
       # not in active record
       session:
         email: อีเมล์
-        password: รหัสผ่านย่อย
+        password: รหัสผ่าน
   qbus:
     application:
       category1: รถโดยสารประจำทาง หมวด 2

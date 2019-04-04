@@ -10,7 +10,6 @@ $(document).ready ->
   #$(".sidenav").sidenav()
   #$('.dropdown-button').dropdown()
   #$('select').material_select()
-  #$('.dataTable').DataTable()
   $('.modal').modal()
   $('select').formSelect()
   $('.datepicker').datepicker( {
@@ -40,6 +39,26 @@ $(document).ready ->
   #    .addClass("material-icons")
   #    .html("arrow_drop_down")
 
+
+  window.dataTableDefaultOption = (variable) ->
+    {
+      'lengthChange': false,
+      'language': {
+        'lengthMenu': 'แสดง _MENU_ รายการ',
+        'zeroRecords': 'ไม่มีรายการที่ตรงกับการค้นหา',
+        'info': 'แสดงรายการที่ _START_ ถึง _END_ จากทั้งหมด _TOTAL_ รายการ',
+        'infoEmpty': 'แสดงรายการที่ 0 ถึง 0 จากทั้งหมด 0 รายการ',
+        'infoFiltered': '(กรองมาจากรายการทั้งหมด _MAX_ รายการ)',
+        'search': 'ค้นหา',
+        'paginate': {
+          "first": 'หน้าแรก',
+          "last": 'หน้าสุดท้าย',
+          "next": 'ถัดไป',
+          "previous": 'ก่อนหน้า'
+        }
+      }
+    }
+
   $('textarea').trigger('autoresize')
   $('span.help-text').each ->
     $value = $(this)[0].innerHTML
@@ -52,6 +71,9 @@ $(document).ready ->
   #closing alert
   $('.card-alert .close').click ->
     $(this).closest('.card-alert').fadeOut('slow')
+
+  #$('.dataTable').DataTable()
+  #should be called directly in each page because of different options
 
   console.log "load init on ready or turbolinks:load"
   return

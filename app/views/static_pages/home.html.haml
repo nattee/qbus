@@ -11,8 +11,7 @@
         %br
         %br
         %br
-        %br
-      = link_to 'สมัครเข้าร่วมโครงการ', apply_applications_path, class: 'btn orange'
+      = link_to 'สมัครเข้าร่วมโครงการ', apply_applications_path, class: 'btn gradient-45deg-deep-orange-orange border-round'
   .carousel-item.purple.white-text{href: "#two!"}
     %h2.white-text ข่าวประชาสัมพันธ์ 1
   .carousel-item.purple.white-text{href: "#three!"}
@@ -35,10 +34,10 @@
                 .input-field.col.s12
                   %i.material-icons.prefix lock_outline
                   = f.input_field :password
-                  = f.label :password
+                  = f.label :password, 'รหัสผ่าน'
               .row
                 .input-field.col.s12
-                  = f.submit 'เข้าสู่ระบบ', class: 'btn border-round col s12'
+                  = f.submit 'เข้าสู่ระบบ', class: 'btn border-round col s12 gradient-45deg-purple-deep-purple'
               .row
                 .input-field.col.s6
                   %p.margin.medium-small
@@ -53,10 +52,36 @@
             %h5 ยินดีต้อนรับ
             %h5 เข้าสู่ระบบ
           .card-action.center
-            = link_to 'ไปยังหน้าหลัก', process_dashboard_path, class: 'btn border-round col s12 orange waves-effect waves-light'
+            = link_to 'ไปยังหน้าหลัก', process_dashboard_path, class: 'btn border-round col s12 gradient-45deg-deep-orange-orange waves-effect waves-light'
+            %br
+            %br
+            = link_to 'สมัครเข้าร่วมโครงการ', apply_applications_path, class: 'btn border-round col s12 gradient-45deg-green-teal waves-effect waves-light'
+            %br
+            %br
+            = link_to 'ต่ออายุ', extend_applications_path, class: 'btn border-round col s12 gradient-45deg-green-teal darken-1 waves-effect waves-light'
             %br
             %br
     .col.s12.m8
+      .row
+        .col.s12.m6
+          .card.small
+            .card-content
+              .card-title
+                %h5 ส่งข้อคิดเห็นหรือเรื่องร้องเรียน
+              ผู้ใช้บริการรถโดยสารสาธารณะ สามารถให้ช้อคิดเห็นหรือ ส่งเรื่องร้องเรียนด้านการให้บริการได้
+            .card-action
+              .center
+                = link_to 'ส่งข้อคิดเห็น', add_comment_path, class: 'btn border-round gradient-45deg-deep-orange-orange waves-effect waves-light'
+        .col.s12.m6
+          .card.small
+            .card-content
+              .card-title
+                %h5 ตรวจสอบรายชื่อผู้ได้รับรางวัล
+              ผู้ใช้บริการรถโดยสารสาธารณะ สามารถตรวจสอบรายชื่อผู้ประกอบการหรือเส้นทางที่ได้รับรางวัลได้
+            .card-action
+              .center
+                = link_to 'ตรวจสอบผู้ได้รับรางวัล', report_award_path, class: 'btn border-round gradient-45deg-deep-orange-orange waves-effect waves-light'
+        
       .card
         .card-content
           .card-title
@@ -64,28 +89,29 @@
           .row
             .col.s4.center
               %a{href: 'asdf'}
-                %i.material-icons.medium library_books
+                %i.material-icons{style: 'font-size: 3rem;'} library_books
                 %br
                 คู่มือการใช้งาน
 
             .col.s4.center
-              %a
-                %i.material-icons.medium list_alt
+              %a{href: 'asdf'}
+                %i.material-icons{style: 'font-size: 3rem;'} list
                 %br
-                แบบฟอร์ม
+                แบบการตรวจประเมินหน้างาน
             .col.s4.center
               %a
-                %i.material-icons.medium question_answer
+                %i.material-icons{style: 'font-size: 3rem;'} question_answer
                 %br
                 คำถามพบบ่อย
-      .card
-        .card-content
-          .card-title
-            %h5 ส่งข้อคิดเห็นหรือเรื่องร้องเรียน
-          ผู้ใช้บริการรถโดยสารสาธารณะ สามารถให้ช้อคิดเห็นหรือ ส่งเรื่องร้องเรียนด้านการให้บริการได้
-        .card-content
-          .center
-            = link_to 'ส่งข้อคิดเห็น', add_comment_path, class: 'btn border-round orange waves-effect waves-light'
+          .row
+            .col.s4.center
+              %a{href: 'asdf'}
+                %i.material-icons{style: 'font-size: 3rem;'} done_all
+                %br
+                แบบยืนยันการเข้าร่วมโครงการ
+            .col.s4.center
+            .col.s4.center
+
 .row.deep-purple.lighten-3
   .col.s12
 

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'report/award'
   resources :cars
   resources :routes
   resources :licensees
@@ -22,6 +23,8 @@ Rails.application.routes.draw do
   get 'static_pages/test1'
 
   resources :users
+  get 'users/:id/edit/:profile', to: 'users#edit', as: 'profile_edit_user'
+
 
   resources :account_activations, only: [:edit]
 
@@ -49,9 +52,11 @@ Rails.application.routes.draw do
       get 'add_evidences'
       post 'add_attachment'
       get 'finish_add_evidences'
+      get 'extend_from'
     end
     collection do
       get 'apply'
+      get 'extend'
       post 'apply', to: 'applications#post_apply'
       get 'dashboard'
     end
@@ -68,6 +73,8 @@ Rails.application.routes.draw do
 
   get  'process/appointments',    to: 'process#appointment_index'
   get  'process/appointment_form'
+  get  'process/appointment/visit/:id', to: 'process#appointment_visit', as: 'appointment_visit'
+  post 'process/appointment/visit/:id', to: 'process#appointment_visit_post'
   post 'process/appointment',     to: 'process#appointment_post', as: 'appoint_process_appointment'
   get  'process/appointed/:id',   to: 'process#appointed', as: 'process_appointed'
 

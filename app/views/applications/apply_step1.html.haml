@@ -13,12 +13,13 @@
               .section
                 %h5 ข้อมูลผู้ประกอบการ
                 .row
-                  .input-field.col.s6
-                    = text_field_tag 'licensee[name]', @application.try(:licensee).try(:name)
-                    = f.label 'licensee[name]', t(:name , scope: 'activerecord.attributes.licensee')
+                  .col.s6
+                    .input-field
+                      = text_field_tag 'licensee[name]', @application.try(:licensee).try(:name)
+                      = label_tag 'licensee[name]', t(:name , scope: 'activerecord.attributes.licensee')
                   - if @application.category3?
-                    .row
-                      .input-field.col.s6
+                    .col.s6
+                      .input-field
                         = f.input_field :license_no, placeholder: 'กท. 1xx/25yy'
                         = f.label :license_no
                     /    = f.error :license_no
@@ -31,7 +32,7 @@
                   .col.s4
                     .input-field
                       = f.input_field :contact_tel
-                      = f.label :contact_tel
+                      = f.label :contact_tel, 'โทรศัพท์'
                   .col.s4
                     .input-field
                       = f.input_field :contact_email
@@ -56,7 +57,7 @@
                       
                   .col.s12.m4
                 .row
-                  .col.s12.m6
+                  .col.s12.m8
                     %h6 ใบอนุญาตประกอบการขนส่ง
                     .input-field.file-field
                       .btn-small.green
@@ -64,8 +65,10 @@
                         = file_field_tag 'attachment[license_data]'
                       .file-path-wrapper
                         = text_field_tag 'attachment[license_file_name]', nil, class: 'file-path validate'
+                  .col.s12.m4{style: 'padding-top: 70px;'}
+                    = download_link @application.get_attachment(:license), nil_text: nil
                 .row
-                  .col.s12.m6
+                  .col.s12.m8
                     %h6 สัญญาการเดินรถ
                     .input-field.file-field
                       .btn-small.green
@@ -73,8 +76,10 @@
                         = file_field_tag 'attachment[contract_data]'
                       .file-path-wrapper
                         = text_field_tag 'attachment[contract_file_name]', nil, class: 'file-path validate'
+                  .col.s12.m4{style: 'padding-top: 70px;'}
+                    = download_link @application.get_attachment(:contract), nil_text: nil
                 .row
-                  .col.s12.m6
+                  .col.s12.m8
                     %h6 หนังสือยืนยันการเข้าร่วมโครงการ
                     .input-field.file-field
                       .btn-small.green
@@ -82,13 +87,21 @@
                         = file_field_tag 'attachment[signup_data]'
                       .file-path-wrapper
                         = text_field_tag 'attachment[signup_file_name]', nil, class: 'file-path validate'
+                  .col.s12.m4{style: 'padding-top: 70px;'}
+                    = download_link @application.get_attachment(:signup), nil_text: nil
 
 
               .divider
               .section
                 %h5 ข้อมูลเส้นทาง
                 - if @application.category3?
-                  %h6 ไม่ประจำทาง
+                  %h6 หมวดการเดินรถแบบไม่ประจำทาง
+                  กรุณาระบุพื้นที่ให้บริการ
+                  .row
+                    .col.s6
+                      .input-field
+                        = f.input_field :service_area
+                        = f.label :service_area
                 - else
                   .row
                     .col.s6
@@ -124,7 +137,7 @@
                         = f.label :trip_count, 'จำนวนเที่ยวเดินรถจริงเฉลี่ยต่อวัน (เที่ยว)'
 
               = hidden_field_tag 'application[stage]', 'step1'
-              = f.button :submit, 'ไปยังขั้นตอนต่อไป', class: "btn waves-light left"
+              %button.btn.waves-effect.waves-light ไปยังขั้นตอนต่อไป
 
 
 

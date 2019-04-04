@@ -48,6 +48,7 @@ th:
         appointment_user: ผู้ทำการนัด  #g
         award: ผลการให้รางวัล  #g
         award_remark: คำอธิบายการให้รางวัล  #g
+        award_won: ได้รับรางวัล
         contact: ชื่อ-สกุล ผู้ประสานงาน  #g
         contact_short: ผู้ประสานงาน
         contact_tel: หมายเลขโทรศัพท์ผู้ประสานงาน  #g
@@ -59,12 +60,15 @@ th:
         evaluated_date: วันที่สิ้นสุดการประเมิน  #g
         evaluation_result: คำอธิบายผลการประเมิน
         awarded_date: วันที่ตัดสินผลรางวัล  #g
+        visited: เข้าตรวจหน้างาน
+        visited_date: วันที่เข้าตรวจหน้างาน
         car_count: จำนวนรถในเส้นทาง
         trip_count: จำนวนเที่ยวต่อวัน
         register_result: ผลตรวจใบสมัคร
         license_no: เลขที่ใบอนุญาต
         license_expire: วันที่สิ้นสุดใบอนุญาต
         contact_email: อีเมล์ผู้ประสานงาน
+        service_area: พื้นที่ให้บริการ
 
       attachment:
         filename: ชื่อไฟล์  #g
@@ -95,7 +99,7 @@ th:
         name: ชื่อข้อกำหนด แบบสั้น  #g
         description: คำอธิบายข้อกำหนด แบบยาว  #g
         approach: แนวทางการตรวจประเมิน  #g
-        weight: น้ำหนักคะแนนในกลุ่ม  #g
+        weight: คะแนน  #g
         criteria_group: ประเภทข้อกำหนด  #g
 
       criterium_attachment:
