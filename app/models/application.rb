@@ -140,7 +140,7 @@ class Application < ApplicationRecord
     if category3?
       return evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id = 8")
     else
-      return evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id >= 7")
+      return evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id in (7,8)")
     end
   end
 

@@ -11,8 +11,8 @@
                 %th= t(:start, scope: 'activerecord.attributes.route')
                 %th= t(:destination, scope: 'activerecord.attributes.route')
                 %th วันที่ยื่นใบสมัคร
-                %th= t(:contact, scope: 'activerecord.attributes.application')
-                %th= t(:contact_tel, scope: 'activerecord.attributes.application')
+                %th ผู้ประสานงาน
+                %th โทรศัพท์
                 %th
               %tbody
                 - @to_be_appointed.each do |app|
@@ -42,8 +42,8 @@
                 %th= t(:start, scope: 'activerecord.attributes.route')
                 %th= t(:destination, scope: 'activerecord.attributes.route')
                 %th วันที่ยื่นใบสมัคร
-                %th= t(:contact, scope: 'activerecord.attributes.application')
-                %th= t(:contact_tel, scope: 'activerecord.attributes.application')
+                %th ผู้ประสานงาน
+                %th โทรศัพท์
                 %th= t(:appointment_date, scope: 'activerecord.attributes.application')
                 %th= t(:appointment_remark, scope: 'activerecord.attributes.application')
                 %th
@@ -60,6 +60,8 @@
                     %td= app.appointment_remark
                     %td
                       %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date, remark: app.appointment_remark}} แก้ไขนัดหมาย
+                    %td
+                      %a.btn.waves-effect.waves-light.modal-trigger{href: appointment_visit_path(app)} บันทึกผลตรวจหน้างาน
 
 
 /modal

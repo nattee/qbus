@@ -34,7 +34,7 @@
                   /  วันที่ตรวจหน้างาน
                   .col.s6
                     .input-field
-                      = f.text_field :visited_date, value: @application.visited_date.to_date, class: 'datepicker'
+                      = f.text_field :visited_date, value: @application.visited_date&.to_date, class: 'datepicker'
                       = f.label :visited_date, t(:visited_date, scope: 'activerecord.attributes.application')
                 .row
                   /.col.s6

@@ -39,4 +39,10 @@ module ApplicationsHelper
     b = progress_bar(app)
     return a+b
   end
+
+  def tri_word(value, yes_value, no_value, nil_value)
+    return nil_value if value.nil?
+    return no_value if value.to_s == '0'
+    return yes_value
+  end
 end

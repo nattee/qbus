@@ -1,6 +1,6 @@
 .section
   %h6= t(:visited_date, scope: 'activerecord.attributes.application')
-  = l(@application.visited_date, format: :short_date)
+  = l(@application.visited_date, format: :short_date, default: '- ยังไม่ได้ตรวจหน้างาน -')
 .section
   %h6= t(:visitor, scope: 'activerecord.attributes.application')
   = @application.visitor
@@ -28,8 +28,8 @@
     .col.s7
       = "#{ev.criterium.number}. #{ev.criterium.name}"
     .col.s5
-      = ev.result == 1 ? 'ใช่ ' :  'ไม่ใช่'
-%br
+      = tri_word ev.result,'ใช่', 'ไม่ใช่', 'ยังไม่ได้ตรวจ'
+%b
 .row
   .col.s12.m6
     %h6=t(:visit_problem, scope: 'activerecord.attributes.application')
@@ -52,7 +52,7 @@
     .col.s7
       = "#{ev.criterium.number}. #{ev.criterium.name}"
     .col.s5
-      = ev.result == 1 ? 'ใช่ ' :  'ไม่ใช่'
+      = tri_word ev.result,'ใช่', 'ไม่ใช่', 'ยังไม่ได้ตรวจ'
 %br
 .row
   .col.s12.m6
@@ -76,7 +76,7 @@
     .col.s7
       = "#{ev.criterium.number}. #{ev.criterium.name}"
     .col.s5
-      = ev.result == 1 ? 'ใช่ ' :  'ไม่ใช่'
+      = tri_word ev.result,'ใช่', 'ไม่ใช่', 'ยังไม่ได้ตรวจ'
 .section
 .card-title
   %h6 พิจารณาแยกตามมาตรฐานรถ
@@ -95,7 +95,7 @@
             %td ม. #{m}
             - ['chassis','tire','light','windshield'].each do |t|
               %td
-                = @application.send("visit_car#{m}_#{t}") == '1' ? 'ดี' : 'ควรปรับปรุง'
+                = tri_word @application.send("visit_car#{m}_#{t}") ,'ดี', 'ควรปรับปรุง', 'ยังไม่ได้ตรวจ'
 / section 5
 .section
 .card-title
@@ -112,7 +112,7 @@
     .col.s7
       = "#{ev.criterium.number}. #{ev.criterium.name}"
     .col.s5
-      = ev.result == 1 ? 'ใช่ ' :  'ไม่ใช่'
+      = tri_word ev.result,'ใช่', 'ไม่ใช่', 'ยังไม่ได้ตรวจ'
 / section 6
 .section
 .card-title
