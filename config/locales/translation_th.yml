@@ -33,8 +33,8 @@ th:
           applying: กำลังสมัคร
           registered: รอตรวจใบสมัคร
           confirmed: รอหลักฐานประกอบการประเมิน
-          submitted: รอการตรวจหลักฐาน
-          evaluated: หลักฐานครบ รอการตัดสินผล
+          submitted: รอการตรวจประเมิน
+          evaluated: ประเมินผลแล้ว
           awarded: ตัดสินผลแล้ว
         licensee: ผู้ประกอบการ  #g
         route: เส้นทาง  #g

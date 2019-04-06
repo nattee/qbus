@@ -2,14 +2,18 @@
   .col.s12
     %table
       %thead
+        %th= t :province, scope: 'activerecord.attributes.car'
         %th= t :plate, scope: 'activerecord.attributes.car'
+        %th= t :brand, scope: 'activerecord.attributes.car'
         -# %th= t :chassis, scope: 'activerecord.attributes.car'
         %th= t :car_type, scope: 'activerecord.attributes.car'
         %th
       %tbody
         - @application.cars.each do |car|
           %tr
+            %td= car.province
             %td= car.plate
+            %td= car.brand
             -# %td= car.chassis
             %td= car.car_type
             %td

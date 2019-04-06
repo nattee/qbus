@@ -178,7 +178,7 @@ class Application < ApplicationRecord
   end
 
   def evaluated_count
-    evaluations.where.not(result: nil).count
+    evaluation_main.where.not(result: nil).count
   end
 
   def add_missing_evaluation

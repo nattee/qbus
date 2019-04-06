@@ -1,23 +1,25 @@
-- last_cg = last_name = nil
+- cgroups = CriteriaGroup.need_evidence unless cgroups
 %table
   %thead
-    %th ชื่อ
+    %th ชื่อหลักฐาน
     %th วัน/เวลา ยื่นเอการ
     %th
   %tbody
-    - Evidence.all.each do |ev|
-      %tr
-        %td= ev.name
-        - att = @application.attachments.where(evidence: ev)
-        %td
-          - if att.count > 0
-            = l(ev.created_at,format: :long)
-          - else
-            %span.red-text - ยังไม่ได้แนบ -
-        %td
-          - if att.count > 0
-            = link_to rails_blob_path(att.first.data, disposition: "attachment") do
-              %i.material-icons.small insert_drive_file
-              = t(:download)
+    - cgroups.each do |cg|
+      - cg.criterium.each do |ci|
+        - ci.evidences.each do |ev|
+          %tr
+            %td= ev.name
+            - att = @application.attachments.where(evidence: ev)
+            %td
+              - if att.count > 0
+                = l(ev.created_at,format: :long)
+              - else
+                %span.red-text - ยังไม่ได้แนบ -
+            %td
+              - if att.count > 0
+                = link_to rails_blob_path(att.first.data, disposition: "attachment") do
+                  %i.material-icons.small insert_drive_file
+                  = t(:download)
 
 

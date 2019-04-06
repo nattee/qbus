@@ -119,12 +119,20 @@ class ProcessController < ApplicationController
       ev.description = params.require(:description)[ev.id.to_s]
       ev.save
     end
-    redirect_to process_evaluation_path(@application), notice: 'บันทึกผลการประเมินเรียบร้อย'
+
+    if params[:confirm]
+      if @application.evaluated_count < Criterium.need_evaluation.count
+        redirect_to process_evaluation_path(@application), flash: {error: 'ยังประเมินไม่ครบทุกหัวข้อ'}
+      else
+        @application.evaluation_finish
+        redirect_to process_evaluations_path, notice: 'ยืนยันผลการประเมินเรียบร้อย'
+      end
+    else
+      redirect_to process_evaluation_path(@application), notice: 'บันทึกผลการประเมินเรียบร้อย'
+    end
   end
 
   def evaluation_finish
-    @application.evaluation_finish
-    redirect_to process_evaluations_path
   end
 
   def evaluation_reject

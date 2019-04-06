@@ -24,8 +24,8 @@
                     %td= l(app.created_at, format: '%d %b %y')
                     %td= app.appoint_date
                     %td= app.appointment_remark
-                    %td= "#{app.evaluated_count}/#{Criterium.count}"
-                    %td= link_to 'ประเมิน', process_evaluation_path(app.id), class: 'waves-effect waves-light green btn'
+                    %td= "#{app.evaluated_count}/#{Criterium.need_evaluation.count}"
+                    %td= link_to 'ประเมิน', process_evaluation_path(app.id), class: 'waves-effect waves-light gradient-45deg-deep-orange-orange btn'
           .col.s12.m3
             %h4 การกรอกผลการประเมิน
             .section
@@ -57,6 +57,6 @@
                     %td= app.state_text
                     %td= l(app.evaluated_date, format: '%d %b %Y')
                     %td= app.evaluation_result
-                    %td= link_to 'แก้ไขผลประเมิน', process_evaluation_path(app.id), class: 'waves-effect waves-light green btn'
+                    %td= link_to 'แก้ไขผลประเมิน', process_evaluation_path(app.id), class: 'waves-effect waves-light gradient-45deg-deep-orange-orange btn'
 
 
