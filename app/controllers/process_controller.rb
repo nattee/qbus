@@ -1,5 +1,5 @@
 class ProcessController < ApplicationController
-  before_action :set_application, only: [ :register_post, :registered, :registered_post,
+  before_action :set_application, only: [ :registered, :registered_post,
                                           :appointment_post, :appointed, :appointment_visit, :appointment_visit_post,
                                           :evaluation, :evaluation_post, :evaluation_finish, :evaluation_reject,
                                           :award, :award_post,

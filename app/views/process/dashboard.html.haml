@@ -26,7 +26,12 @@
                         %td= app.route_start
                         %td= app.route_destination
                         %td= l(app.created_at, format: '%d %b %Y')
-                        %td= state_full(app)
+                        %td
+                          = state_full(app)
+                          - if app.confirmed_date
+                            %p.red-text.tooltipped{data: {tooltip: app.register_result, position: 'bottom'}}
+                              %i.material-icons.left error
+                              ใบสมัครไม่ถูกต้อง
                         %td.strong
                           = link_to 'แก้ไข', apply_step1_application_path(app)
                           /= link_to 'แก้ไข', apply_step1_application_path(app), class: 'button waves-effect waves-light blue darken-2 btn'

@@ -63,23 +63,20 @@ class ApplicationsController < ApplicationController
     @licensee = Licensee.new(licensee_params)
     @application.licensee = @licensee
 
+    att_param = attachment_contract_signup_params
+    [:license,:contract,:signup].each do |att_sym|
+      if att_param["#{att_sym.to_s}_data".to_sym]
+        next if @application.attach_data(att_sym, att_param)
+      else
+        next if @application.get_attachment(att_sym)
+      end
+      redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบเอกสารให้ครบถ้วน'}) and return
+    end
 
-    redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบใบอนุญาตประกอบการขนส่ง'}) and return unless @application.attach_data(:license, attachment_contract_signup_params)
-    redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบสัญญาหน้าแรก'}) and return unless @application.attach_data(:contract, attachment_contract_signup_params)
-    redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบหนังสือยืนยันเข้าร่วมโครงการ'}) and return unless @application.attach_data(:signup, attachment_contract_signup_params)
+    # redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบใบอนุญาตประกอบการขนส่ง'}) and return unless @application.attach_data(:license, attachment_contract_signup_params)
+    # redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบสัญญาหน้าแรก'}) and return unless @application.attach_data(:contract, attachment_contract_signup_params)
+    # redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบหนังสือยืนยันเข้าร่วมโครงการ'}) and return unless @application.attach_data(:signup, attachment_contract_signup_params)
 
-    #if !@application.attach_license_data(attachment_contract_signup_params)
-    #  redirect_to apply_step1_application_path(@application), flash: {error: 'กรุณาแนบใบอนุญาตประกอบการขนส่ง'}
-    #  return
-    #end
-    #if !@application.attach_contract_data(attachment_contract_signup_params)
-    #  redirect_to apply_step1_application_path(@application), flash: {error: 'กรุณาใส่ข้อมูลหน้าแรกใบอนุญาต'}
-    #  return
-    #end
-    #if !@application.attach_signup_data(attachment_contract_signup_params)
-    #  redirect_to apply_step1_application_path(@application), flash: {error: 'กรุณาแนบไฟล์หนังสือยืนยันเข้าร่วมโครงการ'}
-    #  return
-    #end
 
     if @application.save
       if @application.category3?
