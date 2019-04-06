@@ -72,7 +72,7 @@ class User < ApplicationRecord
   end
   
   def role_array
-    roles.to_hash.map { |k,v| I18n.t(k, scope: 'activerecord.attributes.user') }
+    roles.to_hash.select{ |k,v| v.to_s == '1'}.keys.map { |k| I18n.t(k, scope: 'activerecord.attributes.user') }
   end
 
   private

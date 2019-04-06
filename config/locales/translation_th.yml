@@ -96,6 +96,9 @@ th:
         car_type: มาตราฐานรถ  #g
         last_accident: วันที่ล่าสุดทีเ่กิดอุบัติเหตุร้ายแรง  #g
         last_accident_desc: คำอธิบายการเกิดอุบัติเหตุครั้งล่าสุด  #g
+        province: จังหวัด
+        brand: ยี่ห้อรถ
+        side_number: เลขข้างรถ
 
       criteria_group:
         name: ชื่อประเภทของข้อกำหนด  #g

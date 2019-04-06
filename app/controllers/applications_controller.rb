@@ -106,11 +106,12 @@ class ApplicationsController < ApplicationController
 
   def post_step3
     has_no = false
+    ev_result = application_evaluation_params
     @application.self_evaluations.each do |ev|
-      if params.require(:result)[ev.id.to_s] == 'ok'
-        ev.result = true
-      elsif params.require(:result)[ev.id.to_s] == 'no'
-        ev.result = false
+      if ev_result[ev.id.to_s] == 'ok'
+        ev.result = 1
+      elsif ev_result[ev.id.to_s] == 'no'
+        ev.result = 0
         has_no = true
       else
         has_no = true
@@ -131,7 +132,7 @@ class ApplicationsController < ApplicationController
   end
 
   def add_car
-    car = Car.new(plate: params[:plate], chassis: params[:chassis], car_type: params[:car_type])
+    car = Car.new(plate: params[:plate], car_type: params[:car_type], province: params[:province], brand: params[:brand])
     @application.cars << car
     redirect_to apply_step2_application_path(@application)
   end
@@ -248,6 +249,10 @@ class ApplicationsController < ApplicationController
 
     def attachment_params
       params.require(:attachment).permit(:evidence_id, :data, :filename)
+    end
+
+    def application_evaluation_params
+      params.fetch(:result, {})
     end
 
 end

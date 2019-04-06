@@ -26,7 +26,7 @@ CriteriumEvidence.destroy_all
 PublicComment.destroy_all
 
 User.create(id: 1, name: 'สมศักดิ์ (ดูแลระบบ)', email: 'test1@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 1, verifier: 1, surveyor: 0})
-User.create(id: 2, name: 'สมปอง (เจ้าหน้าที่)', email: 'test2@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 0, verifier: 0, surveyor: 1, committee: 1})
+User.create(id: 2, name: 'สมปอง (เจ้าหน้าที่)', email: 'test2@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 0, verifier: 1, surveyor: 1, committee: 1, evaluator: 1})
 User.create(id: 3, name: 'คุณสมชาย (ผู้ประกอบการ)', email: 'test3@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 0, licensee: 1})
 
 Licensee.create(id: 1, name: 'ผู้ประกอบการหนึ่ง', contact: 'เจ้านายผู้ประกบอการ', contact_tel: '0123456789')

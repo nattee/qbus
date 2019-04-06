@@ -15,24 +15,48 @@
             .divider
             .section
               %h5 รถที่ให้บริการในเส้นทาง
-              จำนวน #{@application.cars.count} คัน
+              .card-panel.gradient-45deg-light-green-amber
+                ให้ผู้ประกอบการกรอกข้อมูลรถต่าง ๆ ที่ใช้ในใบสมัครนี้ตามเอกสาร ขส. บ. 11
+                %br
+                ผู้ประกอบการสามารถแนบไฟล์เอกสาร ขส. บ. 11 แทนการกรอกข้อมูลด้านล่างได้เช่นกัน
               %table.dataTables
                 %thead
+                  %th= t :province, scope: 'activerecord.attributes.car'
                   %th= t :plate, scope: 'activerecord.attributes.car'
-                  %th= t :chassis, scope: 'activerecord.attributes.car'
+                  %th= t :brand, scope: 'activerecord.attributes.car'
                   %th= t :car_type, scope: 'activerecord.attributes.car'
                   %th
                 %tbody
                   - @application.cars.each do |car|
                     %tr
+                      %td= car.province
                       %td= car.plate
-                      %td= car.chassis
+                      %td= car.brand
                       %td= car.car_type
                       %td= link_to 'ลบ', remove_car_application_path(@application.id, car.id), {rel: :nofollow, method: :delete, confirm: t(:confirm_delete)}
-
-              %br
-              %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'add-car'}} เพิ่มรถ
+              มีการกรอกข้อมูลทั้งหมดจำนวน #{@application.cars.count} คัน
+        .section
+        .row
+          .col.s12.m3
+          .col.s12.m4
+            %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'add-car'}} เพิ่มรถ
+        .section
+        .row
+          .col.s12.m3
+          .col.s12.m6
+            %h6 เอกสาร ขส. บ. 11
+            .input-field.file-field
+              .btn-small.green
+                %span เลือกไฟล์
+                = file_field_tag 'attachment[b11_data]'
+              .file-path-wrapper
+                = text_field_tag 'attachment[b11_file_name]', nil, class: 'file-path validate'
+          .col.s12.m3{style: 'padding-top: 70px;'}
+            = download_link @application.get_attachment(:b11), nil_text: nil
             %br
+        .row
+          .col.s12.m3
+          .col.s12.m4
             = simple_form_for(@application, url: apply_step2_application_path(@application), method: 'post') do |f|
               = hidden_field_tag 'application[stage]', 'step2'
               %button{class: 'btn waves-effect waves-light'} ไปยังขั้นตอนต่อไป
@@ -46,11 +70,14 @@
       เพิ่มข้อมูลรถสำหรับเส้นทาง #{@application.route_start}-#{@application.route_destination}
       กรุณาพิมพ์ข้อมูลรถแล้วกดปุ่ม บันทึก
       .input-field
+        = f.text_field :province
+        = f.label t :province, scope: 'activerecord.attributes.car'
+      .input-field
         = f.text_field :plate
         = f.label t :plate, scope: 'activerecord.attributes.car'
       .input-field
-        = f.text_field :chassis
-        = f.label t :chassis, scope: 'activerecord.attributes.car'
+        = f.text_field :brand
+        = f.label t :brand, scope: 'activerecord.attributes.car'
       .input-field
         = f.text_field :car_type
         = f.label t :car_type, scope: 'activerecord.attributes.car'

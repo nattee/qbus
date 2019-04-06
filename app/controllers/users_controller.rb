@@ -48,6 +48,7 @@ class UsersController < ApplicationController
       else
         target = user_path(@user)
       end
+      @user.roles.clear
       if @user.update(user_params)
         format.html { redirect_to target, notice: 'แก้ไขข้อมูลผู้ใช้เรียบร้อย' }
         format.json { render :show, status: :ok, location: @user }
@@ -76,6 +77,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :activated, :password, :password_confirmation, :admin, :verifier, :surveyor)
+      params.require(:user).permit(:name, :email, :activated, :password, :password_confirmation, :admin, :verifier, :surveyor, :evaluator, :committee, :licensee)
     end
 end

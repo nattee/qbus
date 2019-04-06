@@ -22,7 +22,7 @@
                   %tbody
                     - @applying.each do |app|
                       %tr
-                        %td= app.licensee.name
+                        %td= app.licensee&.name
                         %td= app.route_start
                         %td= app.route_destination
                         %td= l(app.created_at, format: '%d %b %Y')
@@ -48,7 +48,7 @@
                   %tbody
                     - @need_evidences.each do |app|
                       %tr
-                        %td= app.licensee.name
+                        %td= app.licensee&.name
                         %td= app.route_start
                         %td= app.route_destination
                         %td= l(app.created_at, format: '%d %b %Y')
@@ -74,7 +74,7 @@
                   %tbody
                     - @to_be_done.each do |app|
                       %tr
-                        %td= app.licensee.name
+                        %td= app.licensee&.name
                         %td= app.route_start
                         %td= app.route_destination
                         %td= l(app.created_at, format: '%d %b %Y')
@@ -99,7 +99,7 @@
                   %tbody
                     - @finished.each do |app|
                       %tr
-                        %td= app.licensee.name
+                        %td= app.licensee&.name
                         %td= app.route_start
                         %td= app.route_destination
                         %td= l(app.created_at, format: '%d %b %Y')

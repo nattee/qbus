@@ -14,9 +14,9 @@ class Application < ApplicationRecord
   belongs_to :licensee, optional: true
   belongs_to :user, optional: true
   belongs_to :appointment_user, :class_name => :User, :foreign_key => "appointment_user_id", optional: true
-  has_many :evaluations
-  has_many :attachments
-  has_many :cars
+  has_many :evaluations, dependent: :destroy
+  has_many :attachments, dependent: :destroy
+  has_many :cars, dependent: :destroy
 
   #scope
   #for user
