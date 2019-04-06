@@ -26,6 +26,11 @@
                   = f.label :name
                   = f.full_error :name
                 .input-field.col.s12
+                  %i.material-icons.prefix phone
+                  = f.input_field :tel
+                  = f.label :tel
+                  = f.full_error :tel
+                .input-field.col.s12
                   %i.material-icons.prefix email
                   = f.input_field :email
                   = f.label :email
@@ -43,7 +48,7 @@
                   = f.input_field :password_confirmation
                   = f.label :password_confirmation
                   = f.full_error :password_confirmation
-          = f.button :submit, class: "btn waves-light left"
-          = link_to t(:cancel), users_path, style: "margin-left: 2em", class: "btn white black-text waves-black waves-effect"
+          %button.btn.waves-effect.waves-light.gradient-45deg-purple-deep-purple สมัครใช้งาน
+          = link_to t(:cancel), root_path, style: "margin-left: 2em", class: "btn-flat dlp-purple-text waves-black waves-effect"
 %p
 

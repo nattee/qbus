@@ -100,9 +100,6 @@ class Application < ApplicationRecord
     "#{safety_score}/30"
   end
 
-  def fail_visit?
-    return false
-  end
 
   def passed
     a = total_score
@@ -111,6 +108,19 @@ class Application < ApplicationRecord
       return "ไม่ผ่าน"
     end
     return "ผ่าน"
+  end
+
+  def visit_evaluation_fail_count
+    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9').where(result: [0,nil]).count
+  end
+
+  def fail_visit?
+    return visit_evaluation_fail_count > 0
+  end
+
+  def visit_summary_text
+    return 'ไม่่ผ่าน' if visit_evaluation_fail_count > 0
+    return 'ผ่าน'
   end
 
   def appoint_date

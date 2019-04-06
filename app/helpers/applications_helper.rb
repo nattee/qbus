@@ -45,4 +45,14 @@ module ApplicationsHelper
     return no_value if value.to_s == '0'
     return yes_value
   end
+
+  def final_award_text(app)
+    if app.award_won.nil?
+      'ยังไม่ได้ตัดสินผล'
+    elsif app.award_won
+      tag.span 'ได้มาตรฐาน Q-BUS', class: 'green-text'
+    else
+      tag.span 'ไม่ได้มาตรฐาน', class: 'red-text'
+    end
+  end
 end

@@ -18,13 +18,13 @@
                 .col.s12
                   %label
                     = radio_button_tag :result, 'ok'
-                    %span ตัดสินให้ตราสัญลักษณ์  Q-BUS
+                    %span ตัดสินให้ได้มาตรฐาน  Q-BUS
               .section
               .row
                 .col.s12
                   %label
                     = radio_button_tag :result, 'no'
-                    %span ตัดสินไม่ให้รางวัล Q-BUS
+                    %span ไม่ได้มาตรฐาน
               .row
                 .input-field.col.s12
                   = f.text_area :award_remark, class: 'materialize-textarea'
@@ -33,17 +33,28 @@
               .card-title
                 %h5 สรุปผลการประเมิน
               .row
-                .col.s10
+                .col.s8.strong
                   คะแนนรวม
-                .col.s2.right-align
+                .col.s4.right-align
                   = @application.total_score_text
               .row
-                .col.s10
+                .col.s8.strong
                   คะแนนความปลอดภัย
-                .col.s2.right-align
+                .col.s4.right-align
                   = @application.safety_score_text
+              .row
+                .col.s8.strong
+                  การตรวจหน้างาน
+                .col.s4.right-align
+                  = @application.visit_summary_text
+              .section
+              .row
+                .col.s8.strong
+                  ผลที่ควรจะได้
+                .col.s4.right-align
+                  = @application.passed
         .card-action
-          %button.btn.waves-effect.waves-light{data: {confirm: 'ต้องการยืนยันการตัดสินผลหรือไม่ เมื่อยืนยันแล้วจะไม่สามารถแก้ไขได้อีก' }} ยืนยันการตัดสินผล
+          %button.btn.gradient-45deg-purple-deep-purple.waves-effect.waves-light{data: {confirm: 'ต้องการยืนยันการตัดสินผลหรือไม่ เมื่อยืนยันแล้วจะไม่สามารถแก้ไขได้อีก' }} ยืนยันการตัดสินผล
           /= link_to 'ย้อนกลับ', process_awards_path, class: 'waves-effect waves-light orange btn'
 .row
   .col.s12

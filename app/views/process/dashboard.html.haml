@@ -109,11 +109,10 @@
                         %td= app.route_destination
                         %td= l(app.created_at, format: '%d %b %Y')
                         %td= l(app.awarded_date, format: '%d %b %Y')
+                        %td= final_award_text(app)
                         %td
-                          %span.green-text
-                            = app.award
-                        %td
-                          = link_to 'ต่ออายุ', extend_from_application_path(app), class: 'btn green waves-effect waves-light'
+                          - if app.award_won
+                            = link_to 'ต่ออายุ', extend_from_application_path(app), class: 'btn green waves-effect waves-light'
               - else
                 ไม่มีใบสมัครที่ดำเนินการเสร็จแล้ว
     - if @current_user.is_official?
@@ -132,7 +131,7 @@
                   .col.s8
                     มีใบสมัครจำนวน #{@to_be_confirmed.count} ใบที่รอการตรวจสอบ
                   .col.s4.right-align
-                    = link_to 'ตรวจสอบ', process_registers_path, class: 'btn btn-small'
+                    = link_to 'ตรวจสอบ', process_registers_path, class: 'btn btn-small gradient-45deg-deep-orange-orange'
             - if @current_user.has_role(:surveyor)
               .divider
               .card-content
@@ -144,7 +143,7 @@
                     %br
                     มีใบสมัครจำนวน #{@to_be_visited.count} ใบที่รอการตรวจหน้างาน
                   .col.s4.right-align
-                    = link_to 'นัดหมาย', process_appointments_path, class: 'btn btn-small'
+                    = link_to 'นัดหมาย', process_appointments_path, class: 'btn btn-small gradient-45deg-deep-orange-orange'
             - if @current_user.has_role(:evaluator)
               .divider
               .card-content
@@ -154,7 +153,7 @@
                   .col.s8
                     มีใบสมัครจำนวน #{@to_be_evaluated.count} ใบที่รอการประเมิน
                   .col.s4.right-align
-                    = link_to 'ประเมิน', process_evaluations_path, class: 'btn'
+                    = link_to 'ประเมิน', process_evaluations_path, class: 'btn btn-small gradient-45deg-deep-orange-orange'
             - if @current_user.has_role(:committee)
               .divider
               .card-content
@@ -164,4 +163,4 @@
                   .col.s8
                     มีใบสมัครจำนวน #{@to_be_awarded.count} ใบที่รอการตัดสินผลตราสัญลักษณ์ Q-BUS
                   .col.s4.right-align
-                    = link_to 'ตัดสินผล', process_awards_path, class: 'btn'
+                    = link_to 'ตัดสินผล', process_awards_path, class: 'btn gradient-45deg-deep-orange-orange btn-small'
