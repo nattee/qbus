@@ -28,9 +28,10 @@ class Application < ApplicationRecord
   scope :latest_confirmed, -> { where(state: [:confirmed,:applying]).where('confirmed_date >= ?',30.days.ago) }
 
 
-  scope :to_be_appointed, -> { where(state: [:confirmed, :submitted], appointment_date: nil).where.not(visited: true) }
+  scope :to_be_appointed, -> { where(state: [:confirmed, :submitted], appointment_date: nil).where(visited: [false,nil]) }
   scope :to_be_appointed_filled, -> { where(state: [:confirmed, :submitted]).where.not(appointment_date: !nil) }
-  scope :to_be_visited, -> { where(state: [:confirmed, :submitted]).where.not(appointment_date: !nil).where.not(visited: true) }
+  scope :to_be_visited, -> { where(state: [:confirmed, :submitted]).where(visited: [false,nil]) }
+  scope :latest_visited, -> {where('visited_confirm_date >= ?',30.days.ago) }
 
   scope :to_be_evaluated, -> { where(state: :submitted) }
   scope :to_be_evaluated_filled, -> { where(state: :submitted).where(id:1999) }

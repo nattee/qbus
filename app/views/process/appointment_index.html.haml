@@ -20,7 +20,7 @@
                     %td= app.licensee.name
                     %td= app.route_start
                     %td= app.route_destination
-                    %td= l(app.created_at, format: '%d %b %y')
+                    %td= l(app.created_at, format: :short_date, default: nil)
                     %td= app.contact
                     %td= app.contact_tel
                     %td
@@ -35,7 +35,7 @@
       .card-content
         .row
           .col.s12
-            %h4 ใบสมัครที่นัดหมายแล้ว และรอการตรวจหน้างาน
+            %h4 ใบสมัครที่รอการตรวจหน้างาน
             %table
               %thead
                 %th= t(:name, scope: 'activerecord.attributes.licensee')
@@ -53,16 +53,45 @@
                     %td= app.licensee.name
                     %td= app.route_start
                     %td= app.route_destination
-                    %td= l(app.created_at, format: '%d %b %Y')
+                    %td= l(app.created_at, format: :short_date, default: nil)
                     %td= app.contact
                     %td= app.contact_tel
-                    %td= l(app.appointment_date, format: '%d %b %Y')
+                    %td= l(app.appointment_date, format: :short_date, default: nil)
                     %td= app.appointment_remark
                     %td
                       %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date, remark: app.appointment_remark}} แก้ไขนัดหมาย
                     %td
                       %a.btn.waves-effect.waves-light.modal-trigger{href: appointment_visit_path(app)} บันทึกผลตรวจหน้างาน
 
+    .card
+      .card-content
+        .row
+          .col.s12
+            %h4 ใบสมัครที่ได้รับการตรวจหน้างานแล้ว (ภายใน 30 วันที่ผ่านมา)
+            %table
+              %thead
+                %th= t(:name, scope: 'activerecord.attributes.licensee')
+                %th= t(:start, scope: 'activerecord.attributes.route')
+                %th= t(:destination, scope: 'activerecord.attributes.route')
+                %th วันที่ยื่นใบสมัคร
+                %th ผู้ประสานงาน
+                %th โทรศัพท์
+                %th= t(:visited_date, scope: 'activerecord.attributes.application')
+                %th= t(:visited_confirm_date, scope: 'activerecord.attributes.application')
+                %th
+              %tbody
+                - @latest_visited.each do |app|
+                  %tr
+                    %td= app.licensee.name
+                    %td= app.route_start
+                    %td= app.route_destination
+                    %td= l(app.created_at, format: :short_date, default: nil)
+                    %td= app.contact
+                    %td= app.contact_tel
+                    %td= l(app.visited_date, format: :short_date, default: nil)
+                    %td= l(app.visited_confirm_date, format: :short_date, default: nil)
+                    %td
+                      %a.btn.waves-effect.waves-light.modal-trigger{href: appointment_visit_path(app)} แก้ไขผลตรวจหน้างาน
 
 /modal
 #appoint.modal{style: 'width: 60% !important;'}
@@ -75,12 +104,12 @@
         .input-field.col.s6
           %i.material-icons.prefix today
           = f.text_field :appointment_date, class: 'datepicker'
-          = f.label t(:appointment_date, scope: 'activerecord.attributes.application')
+          = f.label :appointment_date, t(:appointment_date, scope: 'activerecord.attributes.application')
       .row
         .input-field.col.s6
           %i.material-icons.prefix face
           = f.text_area :appointment_remark, class: 'materialize-textarea', rows: 4, style: 'height: 200px;'
-          = f.label t(:appointment_remark, scope: 'activerecord.attributes.application')
+          = f.label :appointment_remark, t(:appointment_remark, scope: 'activerecord.attributes.application')
       = hidden_field_tag :id, 1, id: 'application_id'
       %br
       %br

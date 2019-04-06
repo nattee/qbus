@@ -54,6 +54,8 @@ th:
         contact_tel: หมายเลขโทรศัพท์ผู้ประสานงาน  #g
         contact_tel_short: โทรศัพท์  #g
         confirmed_date: วันที่ตรวจใบสมัคร
+        confirm_result: ผลตรวจใบสมัคร
+        confirm_comment: คำอธิบายผลตรวจใบสมัคร
         registered_date: วันที่ยื่นใบสมัคร
         submitted_date: วันที่ยืนยันหลักฐาน
         approved_date: วันที่อนุมัติ  #g
@@ -62,9 +64,9 @@ th:
         awarded_date: วันที่ตัดสินผลรางวัล  #g
         visited: เข้าตรวจหน้างาน
         visited_date: วันที่เข้าตรวจหน้างาน
+        visited_confirm_date: วันที่ยืนยันผลการตรวจหน้างาน
         car_count: จำนวนรถในเส้นทาง
         trip_count: จำนวนเที่ยวต่อวัน
-        register_result: ผลตรวจใบสมัคร
         license_no: เลขที่ใบอนุญาต
         license_expire: วันที่สิ้นสุดใบอนุญาต
         contact_email: อีเมล์ผู้ประสานงาน

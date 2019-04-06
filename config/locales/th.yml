@@ -42,5 +42,5 @@ th:
       default: "%a %d %b %Y %H:%M:%S %z"
       long: "%d %B %Y %H:%M น."
       short: "%d %b %H:%M น."
-      short_date: "%d %B %Y"
+      short_date: "%d %b %Y"
     pm: หลังเที่ยง

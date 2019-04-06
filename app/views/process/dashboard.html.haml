@@ -28,8 +28,8 @@
                         %td= l(app.created_at, format: '%d %b %Y')
                         %td
                           = state_full(app)
-                          - if app.confirmed_date
-                            %p.red-text.tooltipped{data: {tooltip: app.register_result, position: 'bottom'}}
+                          - if app.confirmed_result == false
+                            %p.red-text.tooltipped{data: {tooltip: app.confirm_comment, position: 'bottom'}}
                               %i.material-icons.left error
                               ใบสมัครไม่ถูกต้อง
                         %td.strong

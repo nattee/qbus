@@ -27,10 +27,12 @@ class ProcessController < ApplicationController
 
   def registered_post
     if params[:result] == 'ok'
-      @application.register_result = 'ใบสมัครถูกต้อง'
+      @application.confirm_result = true
+      @application.confirm_comment = 'ใบสมัครถูกต้อง'
       @application.confirm_registration
     elsif params[:result] == 'no'
-      @application.register_result = "ใบสมัครไม่ถูกต้อง #{params[:register_result]}"
+      @application.confirm_result = false
+      @application.confirm_comment = "ใบสมัครไม่ถูกต้อง #{params[:register_result]}"
       @application.reject_registration
     else
     end
@@ -45,6 +47,7 @@ class ProcessController < ApplicationController
     @to_be_appointed = Application.to_be_appointed
     @to_be_appointed_filled = Application.to_be_appointed_filled
     @to_be_visited = Application.to_be_visited
+    @latest_visited = Application.latest_visited
   end
 
   def appointment_post
@@ -81,6 +84,7 @@ class ProcessController < ApplicationController
 
     if params[:confirm]
       @application.visited = true
+      @application.visited_confirm_date = Time.zone.now
     end
 
     @application.save
