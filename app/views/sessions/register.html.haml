@@ -21,6 +21,11 @@
             .col.s12
               .row
                 .input-field.col.s12
+                  %i.material-icons.prefix person
+                  = f.input_field :name
+                  = f.label :name
+                  = f.full_error :name
+                .input-field.col.s12
                   %i.material-icons.prefix email
                   = f.input_field :email
                   = f.label :email

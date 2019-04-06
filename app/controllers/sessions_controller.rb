@@ -7,9 +7,9 @@ class SessionsController < ApplicationController
 
   # POST /register
   def register_post
-    register_params = params.require(:user).permit(:email, :password, :password_confirmation)
+    register_params = params.require(:user).permit(:name, :email, :password, :password_confirmation)
     @user = User.new(register_params)
-    @user.name = @user.email
+    @user.licensee=1
 
     respond_to do |format|
       if @user.save
@@ -48,14 +48,14 @@ class SessionsController < ApplicationController
       if user.activated?
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        redirect_to process_dashboard_path, notice: 'เข้า่สู่ระบบเรียบร้อย'
+        redirect_to root_url, notice: 'เข้า่สู่ระบบเรียบร้อย'
       else
         message  = "Account not activated. "
         message += "Check your email for the activation link."
         redirect_to root_url, notice: message
       end
     else
-      redirect_to login_url, notice: 'invalid username or password'
+      redirect_to login_url, notice: 'อีเมล์หรือรหัสผ่านไม่ถูกต้อง'
     end
   end
 

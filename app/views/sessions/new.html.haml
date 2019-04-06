@@ -34,6 +34,6 @@
                       = f.input_field :remember_me, as: :boolean
                       %span= t(:remember_me)
 
-          = f.submit t(:session_login_submit), class: "btn waves-light left"
-          = link_to t(:cancel), root_path, style: "margin-left: 2em", class: "btn white black-text waves-black waves-effect"
+          %button{ class: "btn waves-light waves-effect left gradient-45deg-purple-deep-purple white-text"}= t(:session_login_submit)
+          = link_to t(:cancel), root_path, style: "margin-left: 2em", class: "strong btn-flat white black-text waves-black waves-effect"
 %p

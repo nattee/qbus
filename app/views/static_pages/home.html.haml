@@ -41,7 +41,7 @@
               .row
                 .input-field.col.s6
                   %p.margin.medium-small
-                    = link_to 'ลงทะเบียน', register_path
+                    = link_to 'สมัครใช้งาน', register_path
                 .input-field.col.s6
                   %p.margin.right-align.medium-small
                     = link_to 'ลืมรหัสผ่าน', register_path
@@ -50,7 +50,7 @@
         .card.border-radius-6
           .card-content.center
             %h5 ยินดีต้อนรับ
-            %h5 เข้าสู่ระบบ
+            %h5 คุณ #{@current_user.name}
           .card-action.center
             = link_to 'ไปยังหน้าหลัก', process_dashboard_path, class: 'btn border-round col s12 gradient-45deg-deep-orange-orange waves-effect waves-light'
             %br
