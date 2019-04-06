@@ -35,7 +35,7 @@
       .card-content
         .row
           .col.s12
-            %h4 ใบสมัครที่นัดหมายแล้ว
+            %h4 ใบสมัครที่นัดหมายแล้ว และรอการตรวจหน้างาน
             %table
               %thead
                 %th= t(:name, scope: 'activerecord.attributes.licensee')
@@ -48,7 +48,7 @@
                 %th= t(:appointment_remark, scope: 'activerecord.attributes.application')
                 %th
               %tbody
-                - @to_be_appointed_filled.each do |app|
+                - @to_be_visited.each do |app|
                   %tr
                     %td= app.licensee.name
                     %td= app.route_start

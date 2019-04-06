@@ -132,10 +132,12 @@
               .divider
               .card-content
                 .card-title
-                  %h6 ระบบงานนัดหมาย
+                  %h6 ระบบงานนัดหมาย และ ตรวจหน้างาน
                 .row
                   .col.s8
                     มีใบสมัครจำนวน #{@to_be_appointed.count} ใบที่รอการนัดหมาย
+                    %br
+                    มีใบสมัครจำนวน #{@to_be_visited.count} ใบที่รอการตรวจหน้างาน
                   .col.s4.right-align
                     = link_to 'นัดหมาย', process_appointments_path, class: 'btn btn-small'
             - if @current_user.has_role(:evaluator)

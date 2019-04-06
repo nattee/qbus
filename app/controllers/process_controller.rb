@@ -12,6 +12,7 @@ class ProcessController < ApplicationController
     @to_be_confirmed = Application.to_be_confirmed
     @to_be_appointed = Application.to_be_appointed
     @to_be_appointed_filled = Application.to_be_appointed_filled
+    @to_be_visited = Application.to_be_visited
     @to_be_evaluated = Application.to_be_evaluated
     @to_be_awarded = Application.to_be_awarded
 
@@ -43,6 +44,7 @@ class ProcessController < ApplicationController
   def appointment_index
     @to_be_appointed = Application.to_be_appointed
     @to_be_appointed_filled = Application.to_be_appointed_filled
+    @to_be_visited = Application.to_be_visited
   end
 
   def appointment_post
