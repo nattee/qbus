@@ -17,6 +17,7 @@
   .carousel-item.purple.white-text{href: "#three!"}
     %h2.white-text ข่าวประชาสัมพันธ์ 2
 .container{style: 'width: 70% !important;'}
+  = render 'layouts/flash'
   .row
     - if !logged_in?
       .col.s12.m4

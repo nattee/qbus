@@ -94,12 +94,13 @@
                 ใบสมัครต่อไปนี้ดำเนินการเสร็จสิ้นแล้ว สามารถตรวจดูผลการดำเนินการได้ด้านล่างนี้
                 %table
                   %thead
-                    %th= t(:name, scope: 'activerecord.attributes.licensee')
+                    %th ผู้ประกอบการ
                     %th= t(:route_no, scope: 'activerecord.attributes.application')
                     %th= t(:route_info, scope: 'activerecord.attributes.application')
-                    %th วันที่ยื่นใบสมัคร
-                    %th วันที่ตัดสินผล
+                    %th ยื่นใบสมัคร
+                    %th ตัดสินผล
                     %th ผลการตัดสิน
+                    %th หมดอายุ
                     %th
                   %tbody
                     - @finished.each do |app|
@@ -107,12 +108,14 @@
                         %td= app.licensee&.name
                         %td= app.route_no
                         %td= app.route_info
-                        %td= l(app.created_at, format: '%d %b %Y')
-                        %td= l(app.awarded_date, format: '%d %b %Y')
+                        %td= l(app.created_at, format: :short_date, default: nil)
+                        %td= l(app.awarded_date, format: :short_date, default: nil)
                         %td= final_award_text(app)
+                        %td= l(app.award_expire_date, format: :short_date, default: nil)
                         %td
                           - if app.award_won
-                            = link_to 'ต่ออายุ', extend_from_application_path(app), class: 'btn green waves-effect waves-light'
+                            / = link_to 'ต่ออายุ', extend_from_application_path(app), class: 'btn green waves-effect waves-light'
+                            %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'extend-app',url: extend_from_application_url(app)}} ต่ออายุ
               - else
                 ไม่มีใบสมัครที่ดำเนินการเสร็จแล้ว
     - if @current_user.is_official?
@@ -164,3 +167,5 @@
                     มีใบสมัครจำนวน #{@to_be_awarded.count} ใบที่รอการตัดสินผลตราสัญลักษณ์ Q-BUS
                   .col.s4.right-align
                     = link_to 'ตัดสินผล', process_awards_path, class: 'btn gradient-45deg-deep-orange-orange btn-small'
+
+= render "applications/extend_modal"

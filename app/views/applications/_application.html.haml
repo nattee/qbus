@@ -11,6 +11,8 @@
     .section
       %h6 สถานะ
       = state_full(@application)
+    - if @application.awarded?
+      = final_award_text(@application)
     .section
       %h6 ใบอนุญาตประกอบการขนส่ง
       = download_link @application.get_attachment(:license)

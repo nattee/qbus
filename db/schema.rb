@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_06_163334) do
+ActiveRecord::Schema.define(version: 2019_04_07_082454) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -103,7 +103,11 @@ ActiveRecord::Schema.define(version: 2019_04_06_163334) do
     t.datetime "visited_confirm_date"
     t.boolean "confirm_result"
     t.string "confirm_comment"
+    t.datetime "award_expire_date"
+    t.boolean "extend", default: false
+    t.bigint "extend_app_id"
     t.index ["appointment_user_id"], name: "index_applications_on_appointment_user_id"
+    t.index ["extend_app_id"], name: "index_applications_on_extend_app_id"
     t.index ["licensee_id"], name: "index_applications_on_licensee_id"
     t.index ["route_id"], name: "index_applications_on_route_id"
     t.index ["user_id"], name: "index_applications_on_user_id"

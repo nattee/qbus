@@ -158,6 +158,7 @@ class ProcessController < ApplicationController
     if params[:result] == 'ok'
       @application.award = 'ได้รับตราสัญลักษณ์'
       @application.award_won = true
+      @application.award_expire_date = Time.zone.now + 3.year
     elsif params[:result] == 'no'
       @application.award = 'ไม่ได้รับตราสัญลักษณ์'
       @application.award_won = false

@@ -19,7 +19,7 @@
                   %td= public_comment.route_no
                   %td= public_comment.car_plate
                   %td= public_comment.licensee_name
-                  %td= public_comment.created_at
+                  %td= l(public_comment.created_at, format: :short_date, default: nil)
                   %td.right-align
                     %a{:href => public_comment_path(public_comment)}
                       %i.material-icons pageview

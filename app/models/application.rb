@@ -14,6 +14,7 @@ class Application < ApplicationRecord
   belongs_to :licensee, optional: true
   belongs_to :user, optional: true
   belongs_to :appointment_user, :class_name => :User, :foreign_key => "appointment_user_id", optional: true
+  belongs_to :extend_app, class_name: :Application, optional: true
   has_many :evaluations, dependent: :destroy
   has_many :attachments, dependent: :destroy
   has_many :cars, dependent: :destroy
@@ -300,19 +301,24 @@ class Application < ApplicationRecord
 
   def self.extend(original)
     app = original.dup
+
+    #copy attachment
     original.attachments.where.not(evidence_id: nil).each do |att|
       new_att = att.dup
       new_att.save
+
       #copy attachment
       #SHALLOW COPY, must change to deep copy of the file later
       app.attachments << new_att
     end
 
+    app.extend = true
+    app.extend_app = original
+
     #link car (must no deep copy)
     app.cars = original.cars
 
     #evaluation? no!!! we need them to do self evaluation again
-
     app.state = :applying
     app.save
     return app

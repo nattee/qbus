@@ -9,6 +9,9 @@
             = render "current_apply_step"
           .col.s12.m9
             %h4 กรอกข้อมูลรถ
+            - if @application.extend
+              .card-panel.light-blue.lighten-4
+                ใบสมัครต่ออายุมาจากใบสมัครหมายเลข #{@application.extend_app&.id_text}
             .section
               %h5 ข้อมูลเส้นทาง
               = render "route"

@@ -1,5 +1,5 @@
 class ApplicationsController < ApplicationController
-  before_action :set_application, only: [:show, :edit, :update, :destroy,
+  before_action :set_application, only: [:show, :edit, :update, :destroy, :show_full,
                                          :apply_step1, :apply_step2, :apply_step3,:fail_self_evaluation,
                                          :post_step1,:post_step2,:post_step3,
                                          :add_evidences,:add_attachment,:finish_add_evidences,
