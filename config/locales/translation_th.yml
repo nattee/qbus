@@ -91,8 +91,10 @@ th:
         attachment_type: ประเภทไฟล์
         attachment_types:
           criterium_evidence: หลักฐานสำหรับการประเมิน
+          license: ใบอนุญาตประกอบการเดินรถ
           contract: สัญญาการเดินรถ
           signup: เอกสารยืนยันการเข้าร่วมโครงการ
+          b11: แบบ ขส.บ.11
           announcement: ไฟล์ประชาสัมพันธ์
 
       car:

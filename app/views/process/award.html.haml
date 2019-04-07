@@ -74,19 +74,6 @@
           %li.tab
             %a{href: '#tab_car'}ข้อมูลรถ
       #tab_eval
-        .card-content.indigo.lighten-4
-          .card-title
-            %h5 สรุปผลการประเมิน
-          .row
-            .col.s4
-              คะแนนรวม
-            .col.s1.right-align
-              = @application.total_score_text
-          .row
-            .col.s4
-              คะแนนความปลอดภัย
-            .col.s1.right-align
-              = @application.safety_score_text
         .card-content.indigo.lighten-5
           - last_cg = nil
           - @application.evaluations.joins(:criterium => :criteria_group).order('criteria_groups.id, criteria.number').each do |ev|
@@ -104,10 +91,10 @@
                 .col.s3
                   คำอธิบายผลการประเมิน
             .row
-              = simple_form_for ev, remote: true do |f|
-                .col.s7
-                  = "#{ev.criterium.number}. #{ev.criterium.name}"
-                  %br
+              .col.s7
+                = "#{ev.criterium.number}. #{ev.criterium.name}"
+                %br
+                - if ev.is_main_evaluation?
                   .row
                     .col.s2
                     .col.s7.strong หลักฐานที่แนบมาด้วย
@@ -126,16 +113,20 @@
                         - else
                           %span.red-text - ไม่ได้แนบ -
                   %br
-                .col.s2.center
-                  - if ev.result?
-                    %i.material-icons check
-                  - elsif not ev.result?
-                    %i.material-icons block
-                  - else
-                .col.s3
-                  .input-field
-                    /= f.text_field :description
-                    = ev.description
+              .col.s2.center
+                - if ev.result == 1
+                  %i.material-icons.left check
+                  100%
+                - elsif ev.result == 0
+                  %i.material-icons.left block
+                  0%
+                - else
+                  %i.material-icons.left remove
+                  50%
+              .col.s3
+                .input-field
+                  /= f.text_field :description
+                  = ev.description
       #tab_evidence
         .card-content.indigo.lighten-5
           %h4 รายการหลักฐาน
@@ -151,9 +142,8 @@
               .col.s12
                 %h5 ข้อมูลใบสมัคร
                 = render partial: "applications/application"
-      - unless @application.category3?
-        #tab_car
-          .card-content.indigo.lighten-5
-            = render partial: "applications/cars"
+      #tab_car
+        .card-content.indigo.lighten-5
+          = render partial: "applications/cars"
 
 

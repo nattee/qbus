@@ -83,8 +83,14 @@ class ProcessController < ApplicationController
     end
 
     if params[:confirm]
-      @application.visited = true
-      @application.visited_confirm_date = Time.zone.now
+      if @application.evaluation_visit_all_evaluated
+        @application.visited = true
+        @application.visited_confirm_date = Time.zone.now
+      else
+        @application.save
+        redirect_to appointment_visit_path(@application), flash: {notice: 'บันทึกผลการตรวจหน้างานเรียบร้อย', error: 'ไม่สามารถยืนยันการตรวจหน้างานได้ เนื่องจากยังประเมินไม่ครบทุกรายการ' }
+        return
+      end
     end
 
     @application.save

@@ -114,8 +114,15 @@ class Application < ApplicationRecord
     return "ผ่าน"
   end
 
+  #
+  # visit tasks
+  #
   def visit_evaluation_fail_count
-    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9').where(result: [0,nil]).count
+    evaluation_visit.where(result: [0,nil]).count
+  end
+
+  def evaluation_visit_all_evaluated
+    evaluation_visit.where(result: [nil]).count == 0
   end
 
   def fail_visit?
@@ -152,13 +159,6 @@ class Application < ApplicationRecord
     attachments.where(attachment_type: type).first
   end
 
-  def self_evaluations
-    if category3?
-      return evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id = 8")
-    else
-      return evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id in (7,8)")
-    end
-  end
 
 
   #state manipulation
@@ -186,6 +186,13 @@ class Application < ApplicationRecord
     set_award
   end
 
+  def use_licensee(licensee)
+    self.licensee = licensee
+    self.contact = licensee.contact if self.contact.blank?
+    self.contact_tel = licensee.contact_tel if self.contact_tel.blank?
+    self.contact_email = licensee.contact_email if self.contact_email.blank?
+  end
+
 
   def sorted_attachments
     return attachments.where(attachment_type: :criterium_evidence).includes(:criterium_attachment => [:criterium => :criteria_group]).order('criteria_groups.id, criteria.number')
@@ -209,6 +216,19 @@ class Application < ApplicationRecord
 
   def evaluation_main
     evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id <= 6').order('criteria_groups.id, criteria.number')
+  end
+
+  #return self evaluations
+  def self_evaluations
+    if category3?
+      return evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id = 8")
+    else
+      return evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id in (7,8)")
+    end
+  end
+
+  def evaluation_visit
+    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9')
   end
 
   def evaluation_visit_sec2

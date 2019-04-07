@@ -1,6 +1,6 @@
 .section
   %h6= t(:visited_date, scope: 'activerecord.attributes.application')
-  = l(@application.visited_date, format: :short_date, default: '- ยังไม่ได้ตรวจหน้างาน -')
+  = l(@application.visited_date, format: :short_date, default: '- ไม่ได้ระบุ -')
 .section
   %h6= t(:visitor, scope: 'activerecord.attributes.application')
   = @application.visitor

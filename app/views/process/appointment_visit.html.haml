@@ -229,7 +229,6 @@
               = render partial: "applications/application"
           #tab_route
             .card-content.brown.lighten-5
-          - unless @application.category3?
-            #tab_car
-              .card-content.brown.lighten-5
-                = render partial: "applications/cars"
+          #tab_car
+            .card-content.brown.lighten-5
+              = render partial: "applications/cars"

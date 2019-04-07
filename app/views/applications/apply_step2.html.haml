@@ -41,23 +41,23 @@
           .col.s12.m4
             %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'add-car'}} เพิ่มรถ
         .section
-        .row
-          .col.s12.m3
-          .col.s12.m6
-            %h6 เอกสาร ขส. บ. 11
-            .input-field.file-field
-              .btn-small.green
-                %span เลือกไฟล์
-                = file_field_tag 'attachment[b11_data]'
-              .file-path-wrapper
-                = text_field_tag 'attachment[b11_file_name]', nil, class: 'file-path validate'
-          .col.s12.m3{style: 'padding-top: 70px;'}
-            = download_link @application.get_attachment(:b11), nil_text: nil
-            %br
-        .row
-          .col.s12.m3
-          .col.s12.m4
-            = simple_form_for(@application, url: apply_step2_application_path(@application), method: 'post') do |f|
+        = simple_form_for(@application, url: apply_step2_application_path(@application), method: 'post', html: { multipart: true }) do |f|
+          .row
+            .col.s12.m3
+            .col.s12.m6
+              %h6 เอกสาร ขส. บ. 11
+              .input-field.file-field
+                .btn-small.green
+                  %span เลือกไฟล์
+                  = file_field_tag 'attachment[b11_data]'
+                .file-path-wrapper
+                  = text_field_tag 'attachment[b11_file_name]', nil, class: 'file-path validate'
+            .col.s12.m3{style: 'padding-top: 70px;'}
+              = download_link @application.get_attachment(:b11), nil_text: nil
+              %br
+          .row
+            .col.s12.m3
+            .col.s12.m4
               = hidden_field_tag 'application[stage]', 'step2'
               %button{class: 'btn waves-effect waves-light'} ไปยังขั้นตอนต่อไป
 

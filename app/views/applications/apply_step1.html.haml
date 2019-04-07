@@ -15,15 +15,8 @@
                 .row
                   .col.s6
                     .input-field
-                      = text_field_tag 'licensee[name]', @application.try(:licensee).try(:name)
+                      = text_field_tag 'licensee[name]', @application.licensee&.name
                       = label_tag 'licensee[name]', t(:name , scope: 'activerecord.attributes.licensee')
-                  - if @application.category3?
-                    .col.s6
-                      .input-field
-                        = f.input_field :license_no, placeholder: 'กท. 1xx/25yy'
-                        = f.label :license_no
-                    /    = f.error :license_no
-                    /    /= f.label 'licensee[name]', t(:name , scope: 'activerecord.attributes.licensee')
                 .row
                   .col.s4
                     .input-field
@@ -94,8 +87,16 @@
               .divider
               .section
                 %h5 ข้อมูลเส้นทาง
+                .row
+                  .col.s6
+                    .input-field
+                      = f.input_field :license_no, placeholder: 'กท. 1xx/25yy'
+                      = f.label :license_no
+                  .col.s6
+                    .input-field
+                      = f.text_field :license_expire, class: 'datepicker'
+                      = f.label :license_expire
                 - if @application.category3?
-                  %h6 หมวดการเดินรถแบบไม่ประจำทาง
                   กรุณาระบุพื้นที่ให้บริการ
                   .row
                     .col.s6
@@ -106,25 +107,16 @@
                   .row
                     .col.s6
                       .input-field
-                        = f.input_field :license_no, placeholder: 'กท. 1xx/25yy'
-                        = f.label :license_no
-                    .col.s6
-                      .input-field
-                        = f.text_field :license_expire, class: 'datepicker'
-                        = f.label :license_expire
-                  .row
-                    .col.s6
-                      .input-field
-                        = text_field_tag 'route[route_no]', @application.try(:route).try(:route_no)
+                        = text_field_tag 'route[route_no]', @application.route&.route_no
                         = label_tag 'route[route_no]', t(:route_no, scope: 'activerecord.attributes.route')
                   .row
                     .col.s6
                       .input-field
-                        = text_field_tag 'route[start]', @application.try(:route).try(:start)
+                        = text_field_tag 'route[start]', @application.route&.start
                         = label_tag 'route[start]', t(:start, scope: 'activerecord.attributes.route')
                     .col.s6
                       .input-field
-                        = text_field_tag 'route[destination]', @application.try(:route).try(:destination)
+                        = text_field_tag 'route[destination]', @application.route&.destination
                         = label_tag 'route[destination]', t(:destination, scope: 'activerecord.attributes.route')
                   .row
                     .col.s6

@@ -29,8 +29,8 @@ User.create(id: 1, name: 'สมศักดิ์ (ดูแลระบบ)', 
 User.create(id: 2, name: 'สมปอง (เจ้าหน้าที่)', email: 'test2@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 0, verifier: 1, surveyor: 1, committee: 1, evaluator: 1})
 User.create(id: 3, name: 'คุณสมชาย (ผู้ประกอบการ)', email: 'test3@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 0, licensee: 1})
 
-Licensee.create(id: 1, name: 'ผู้ประกอบการหนึ่ง', contact: 'เจ้านายผู้ประกบอการ', contact_tel: '0123456789')
-Licensee.create(id: 2, name: 'ผู้ประกอบการสอง', contact: 'ลูกน้องผู้ประกบอการ', contact_tel: '0987654321')
+Licensee.create(id: 1, name: 'ผู้ประกอบการหนึ่ง', contact: 'สมหญิง', contact_tel: '0123456789')
+Licensee.create(id: 2, name: 'ผู้ประกอบการสอง', contact: 'สมชาย', contact_tel: '0987654321')
 
 Route.create(id: 1, start: 'เชียงใหม่', destination: 'กรุงเทพ', car_count: 10, route_type: 'รถเมล์', route_no: 'no1')
 Route.create(id: 2, start: 'กรุงเทพ', destination: 'ชลบุรี', car_count: 10, route_type: 'รถสองแถว', route_no: 'no2')
