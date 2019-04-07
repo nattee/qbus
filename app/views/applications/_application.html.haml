@@ -31,7 +31,7 @@
       = @application.license_no || "-"
     .section
       %h6= t(:license_expire, scope: 'activerecord.attributes.application')
-      = l(@application.license_expire, format: '%d %B %y') if @application.license_expire
+      = l(@application.license_expire, format: '%d %B %y', default: nil)
     .section
       %h6= t(:category, scope: 'activerecord.attributes.application')
       = @application.category_text

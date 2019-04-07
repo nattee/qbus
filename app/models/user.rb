@@ -75,6 +75,14 @@ class User < ApplicationRecord
     roles.to_hash.select{ |k,v| v.to_s == '1'}.keys.map { |k| I18n.t(k, scope: 'activerecord.attributes.user') }
   end
 
+  def role_summary
+    st = []
+    st << 'ผู้ดูแลระบบ' if is_admin?
+    st << 'เจ้าหน้าที่' if is_official?
+    st << 'ผู้ประกอบการ' if has_role(:licensee)
+    return st.join ', '
+  end
+
   private
 
     # Converts email to all lower-case.

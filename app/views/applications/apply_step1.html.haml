@@ -110,8 +110,8 @@
                         = f.label :license_no
                     .col.s6
                       .input-field
-                        = text_field_tag 'route[license_expire]', @application.license_expire, class: 'datepicker'
-                        = label_tag 'route[license_expire]', t(:license_expire, scope: 'activerecord.attributes.application')
+                        = f.text_field :license_expire, class: 'datepicker'
+                        = f.label :license_expire
                   .row
                     .col.s6
                       .input-field

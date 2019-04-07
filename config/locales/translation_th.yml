@@ -26,6 +26,7 @@ th:
         attachment: ไฟล์แนบ
 
       application:
+        id: หมายเลขใบสมัคร
         number: หมายเลขใบสมัคร  #g
         user: ผู้สมัคร  #g
         state: สถานะใบสมัคร  #g
@@ -77,6 +78,9 @@ th:
         visitor_position: ตำแหน่งผู้ตรวจประเมิน
         visitor_email: อีเมล์ผู้ตรวจประเมิน
         visitor_tel: เบอร์โทรศัพท์ผู้ตรวจประเมิน
+        # too lazy to consolidate, there is no such field belows
+        route_info: เส้นทาง
+        route_no: สายที่
 
 
       attachment:
@@ -147,7 +151,7 @@ th:
         description: รายละเอียด
 
       public_comment:
-        route_no: หมายเลขเส้นทาง
+        route_no: หมายเลขสาย
         route: เส้นทาง
         car_plate: ทะเบียนรถ
         car: รถ

@@ -14,8 +14,8 @@
                 %table
                   %thead
                     %th= t(:name, scope: 'activerecord.attributes.licensee')
-                    %th= t(:start, scope: 'activerecord.attributes.route')
-                    %th= t(:destination, scope: 'activerecord.attributes.route')
+                    %th= t(:route_no, scope: 'activerecord.attributes.application')
+                    %th= t(:route_info, scope: 'activerecord.attributes.application')
                     %th วันที่ยื่นใบสมัคร
                     %th= t(:state, scope: 'activerecord.attributes.application')
                     %th
@@ -23,12 +23,12 @@
                     - @applying.each do |app|
                       %tr
                         %td= app.licensee&.name
-                        %td= app.route_start
-                        %td= app.route_destination
+                        %td= app.route_no
+                        %td= app.route_info
                         %td= l(app.created_at, format: '%d %b %Y')
                         %td
                           = state_full(app)
-                          - if app.confirmed_result == false
+                          - if app.confirm_result == false
                             %p.red-text.tooltipped{data: {tooltip: app.confirm_comment, position: 'bottom'}}
                               %i.material-icons.left error
                               ใบสมัครไม่ถูกต้อง
@@ -45,8 +45,8 @@
                 %table
                   %thead
                     %th= t(:name, scope: 'activerecord.attributes.licensee')
-                    %th= t(:start, scope: 'activerecord.attributes.route')
-                    %th= t(:destination, scope: 'activerecord.attributes.route')
+                    %th= t(:route_no, scope: 'activerecord.attributes.application')
+                    %th= t(:route_info, scope: 'activerecord.attributes.application')
                     %th วันที่ยื่นใบสมัคร
                     %th= t(:state, scope: 'activerecord.attributes.application')
                     %th
@@ -54,8 +54,8 @@
                     - @need_evidences.each do |app|
                       %tr
                         %td= app.licensee&.name
-                        %td= app.route_start
-                        %td= app.route_destination
+                        %td= app.route_no
+                        %td= app.route_info
                         %td= l(app.created_at, format: '%d %b %Y')
                         %td= state_full(app)
                         %td.strong
@@ -72,16 +72,16 @@
                 %table
                   %thead
                     %th= t(:name, scope: 'activerecord.attributes.licensee')
-                    %th= t(:start, scope: 'activerecord.attributes.route')
-                    %th= t(:destination, scope: 'activerecord.attributes.route')
+                    %th= t(:route_no, scope: 'activerecord.attributes.application')
+                    %th= t(:route_info, scope: 'activerecord.attributes.application')
                     %th วันที่ยื่นใบสมัคร
                     %th= t(:state, scope: 'activerecord.attributes.application')
                   %tbody
                     - @to_be_done.each do |app|
                       %tr
                         %td= app.licensee&.name
-                        %td= app.route_start
-                        %td= app.route_destination
+                        %td= app.route_no
+                        %td= app.route_info
                         %td= l(app.created_at, format: '%d %b %Y')
                         %td= state_full(app)
               - else
@@ -95,8 +95,8 @@
                 %table
                   %thead
                     %th= t(:name, scope: 'activerecord.attributes.licensee')
-                    %th= t(:start, scope: 'activerecord.attributes.route')
-                    %th= t(:destination, scope: 'activerecord.attributes.route')
+                    %th= t(:route_no, scope: 'activerecord.attributes.application')
+                    %th= t(:route_info, scope: 'activerecord.attributes.application')
                     %th วันที่ยื่นใบสมัคร
                     %th วันที่ตัดสินผล
                     %th ผลการตัดสิน
@@ -105,8 +105,8 @@
                     - @finished.each do |app|
                       %tr
                         %td= app.licensee&.name
-                        %td= app.route_start
-                        %td= app.route_destination
+                        %td= app.route_no
+                        %td= app.route_info
                         %td= l(app.created_at, format: '%d %b %Y')
                         %td= l(app.awarded_date, format: '%d %b %Y')
                         %td= final_award_text(app)

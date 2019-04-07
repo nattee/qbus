@@ -47,6 +47,10 @@ class Application < ApplicationRecord
     "#{self.number} - #{self.state_text}"
   end
 
+  def id_text
+    return "%05d" % id
+  end
+
   #some getter
   def category_text
     Application.category_enum_to_text(category)
