@@ -304,11 +304,13 @@ class Application < ApplicationRecord
 
     #copy attachment
     original.attachments.where.not(evidence_id: nil).each do |att|
+      #copy attachment
       new_att = att.dup
+      new_att.data.attach io: StringIO.new(att.data.download),
+                          filename: att.data.filename,
+                          content_type: att.data.content_type
       new_att.save
 
-      #copy attachment
-      #SHALLOW COPY, must change to deep copy of the file later
       app.attachments << new_att
     end
 
@@ -319,8 +321,18 @@ class Application < ApplicationRecord
     app.cars = original.cars
 
     #evaluation? no!!! we need them to do self evaluation again
+    app.evaluations.delete_all
+    up_value = {}
+    (1..4).each do |m|
+      ['chassis','tire','light','windshield'].each do |t|
+        prop = "visit_car#{m}_#{t}"
+        up_value[prop.to_sym] = nil
+      end
+    end
+    app.update(up_value)
     app.state = :applying
     app.save
+    app.add_missing_evaluation
     return app
   end
 

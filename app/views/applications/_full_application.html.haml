@@ -74,9 +74,11 @@
             - elsif ev.result == 0
               %i.material-icons.left block
               0%
-            - else
+            - elsif ev.result == 0.5
               %i.material-icons.left remove
               50%
+            - else
+              = "- ยังไม่ได้ประเมิน -"
           .col.s3
             .input-field
               = ev.description
