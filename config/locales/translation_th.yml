@@ -181,6 +181,7 @@ th:
       user:
         email: อีเมล์  #g
         name: ชื่อ-สกุล  #g
+        tel: โทรศัพท์
         password: รหัสผ่าน  #g
         password_confirmation: ทวนรหัสผ่าน
         roles: บทบาท  #g
@@ -192,3 +193,4 @@ th:
         committee: กรรมการตัดสินรางวัล       
         activated: เปิดการใช้บัญชี
         activated_at: เปิดการใช้บัญชี เมื่อวันที่
+     

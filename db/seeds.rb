@@ -32,8 +32,8 @@ User.create(id: 3, name: 'คุณสมชาย (ผู้ประกอบ�
 Licensee.create(id: 1, name: 'ผู้ประกอบการหนึ่ง', contact: 'สมหญิง', contact_tel: '0123456789')
 Licensee.create(id: 2, name: 'ผู้ประกอบการสอง', contact: 'สมชาย', contact_tel: '0987654321')
 
-Route.create(id: 1, start: 'เชียงใหม่', destination: 'กรุงเทพ', car_count: 10, route_type: 'รถเมล์', route_no: 'no1')
-Route.create(id: 2, start: 'กรุงเทพ', destination: 'ชลบุรี', car_count: 10, route_type: 'รถสองแถว', route_no: 'no2')
+Route.create(id: 1, start: 'เชียงใหม่', destination: 'กรุงเทพ', car_count: 10, route_type: 'รถเมล์', route_no: '1')
+Route.create(id: 2, start: 'กรุงเทพ', destination: 'ชลบุรี', car_count: 10, route_type: 'รถสองแถว', route_no: '2')
 
 Datafile.create(id: 1, name: 'ไฟล์ข้อมูลหนึ่ง', month_year: 1.year.ago, user: User.first() )
 Datafile.create(id: 2, name: 'ไฟล์ข้อมูลสอง', month_year: 1.month.ago, user: User.last() )
