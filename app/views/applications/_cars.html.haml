@@ -1,16 +1,28 @@
 .row
   .col.s12
-    %table
-      %thead
-        %th= t :plate, scope: 'activerecord.attributes.car'
-        -# %th= t :chassis, scope: 'activerecord.attributes.car'
-        %th= t :car_type, scope: 'activerecord.attributes.car'
-        %th
-      %tbody
-        - @application.cars.each do |car|
-          %tr
-            %td= car.plate
-            -# %td= car.chassis
-            %td= car.car_type
-            %td
+    %h6 เอกสาร ขส.บ.11
+    - if @application.get_attachment(:b11)
+      = download_link @application.get_attachment(:b11), nil_text: nil
+    - else
+      ไม่มีการแนบ ขส.บ.11
+.row
+  .col.s12
+    .dataTables_wrapper
+      %table#car_table
+        %thead
+          %th= t :province, scope: 'activerecord.attributes.car'
+          %th= t :plate, scope: 'activerecord.attributes.car'
+          %th= t :brand, scope: 'activerecord.attributes.car'
+          -# %th= t :chassis, scope: 'activerecord.attributes.car'
+          %th= t :car_type, scope: 'activerecord.attributes.car'
+          %th
+        %tbody
+          - @application.cars.each do |car|
+            %tr
+              %td= car.province
+              %td= car.plate
+              %td= car.brand
+              -# %td= car.chassis
+              %td= car.car_type
+              %td
 

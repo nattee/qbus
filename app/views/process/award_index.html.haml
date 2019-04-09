@@ -32,12 +32,12 @@
                     %td.right-align= "#{app.total_score}/100"
                     %td.right-align= "#{app.safety_score}/30"
                     %td= app.passed
-                    %td= link_to 'ตัดสินผล', process_award_path(app.id), class: 'waves-effect waves-light green btn'
+                    %td= link_to 'ตัดสินผล', process_award_path(app.id), class: 'waves-effect waves-light btn gradient-45deg-deep-orange-orange'
     .card
       .card-content
         .row
           .col.s12
-            %h4 ใบสมัครล่าสุดที่ตัดสินผลแล้ว
+            %h4 ใบสมัครล่าสุดที่ตัดสินผลแล้ว (ภายใน 30 วันที่ผ่านมา)
             %table
               %thead
                 %th= t(:name, scope: 'activerecord.attributes.licensee')
@@ -45,7 +45,7 @@
                 %th= t(:destination, scope: 'activerecord.attributes.route')
                 %th วันที่ยื่นใบสมัคร
                 %th คะแนนรวม
-                %th จำนวนเกณฑ์ที่่ผ่าน
+                %th ผลการตัดสิน
                 %th
               %tbody
                 - @awarded_recent.each do |app|
@@ -55,7 +55,7 @@
                     %td= app.route_destination
                     %td= l(app.created_at, format: '%d %b %y')
                     %td= app.total_score
-                    %td= app.passed
-                    %td= link_to 'ตัดสินผล', process_award_path(app.id), class: 'waves-effect waves-light green btn'
+                    %td= final_award_text(app)
+                    %td= link_to 'แก้ไขผล', process_award_path(app.id), class: 'waves-effect waves-light btn gradient-45deg-deep-orange-orange'
 
 

@@ -47,6 +47,6 @@
           = f.input_field :commenter_address
           = f.label :commenter_address
           = f.full_error :commenter_address
-  = f.button :submit, class: "btn waves-light left"
+  %button.btn.waves-effect.waves-light.left.gradient-45deg-purple-deep-purple ส่งข้อคิดเห็น
 - if back_link
   = link_to t(:cancel), back_link, style: "margin-left: 2em", class: "btn-flat dlp-purple-text strong waves-black waves-effect"

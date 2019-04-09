@@ -1,0 +1,17 @@
+#extend-app.modal
+  .modal-content
+    %h4 ต่ออายุการได้มาตรฐาน Q-BUS
+    %p ผู้ประกอบการสามารถต่ออายุใบสมัครที่ได้รับมาตรฐาน Q-BUS ได้ โดยกระทำการเหมือนการสมัครใหม่ แต่ข้อมูลของใบสมัครจะได้รับการกรอกไว้แล้วโดยใช้ข้อมูลเดิมของใบสมัครที่ทำการต่ออายุ
+    %p อย่างไรก็ตาม ผู้ประกอบการจะต้องทำการแนบข้อมูลพื้นฐานใหม่อีกครั้ง ได้แก่ ใบอนุญาตประกอบการขนส่ง, หนังสือสัญญาเดินรถ และ หนังสือยืนยันเข้าร่วมโครงการ
+    %p ผู้ประกอบการจะต้องผ่านกระบวนการตรวจหน้างานเช่นเดียวกับการสมัครใหม่
+  .modal-footer
+    %a#extend_button.btn.waves-effect.waves-light.gradient-45deg-purple-deep-purple ต่ออายุ
+    %a.modal-close.waves-effect.wave-flat.btn-flat{href: "#!"} ยกเลิก
+
+
+:coffee
+  $ ->
+    $("button[data-url]").click (e) ->
+      e.preventDefault()
+      $("a#extend_button").attr("href", $(this).data("url"))
+

@@ -11,15 +11,14 @@
             ในกรณีที่หลักฐานไม่เพียงพอต่อการประเมิน ผู้ประเมินสามารถร้องขอให้ส่งหลักฐานใหม่ได้ โดยการบันทึกข้อความและกดปุ่มในช่อง "ขอหลักฐานเพิ่มเติม" ด้านซ้าย
             .section
             หลังจากประเมินข้อมูลทั้งหมดแล้ว ให้ยืนยันผลการประเมิน โดยกดปุ่ม "ยืนยันผลการประเมิน"
-      = form_with url: process_evaluation_finish_path(@application), local: true do |f|
-        .col.s12.m4.pull-m4
-          .card
-            .card-content
-              .card-title
-                %h4 ยืนยันการประเมินผล
-              กดปุ่ม "ยืนยัน" เมื่อทำการประเมินครบทุกหัวข้อแล้ว
-            .card-action
-              %button.btn.green.waves-effect.waves-light{value:  :submit} ยืนยันผลการประเมิน
+      .col.s12.m4.pull-m4
+        .card
+          .card-content
+            .card-title
+              %h4 ยืนยันการประเมินผล
+            กดปุ่ม "ยืนยัน" เมื่อทำการประเมินครบทุกหัวข้อแล้ว
+          .card-action
+            %button.btn.gradient-45deg-purple-deep-purple.waves-effect.waves-light{value:  :submit, onclick:'$("#confirm_button").click()'} ยืนยันผลการประเมิน
       = form_with url: process_evaluation_reject_path(@application), local: true do |f|
         .col.s12.m4.pull-m4
           .card
@@ -30,7 +29,7 @@
               .row
                 .input-field.col.s12
                   = f.label :evaluation_result, 'คำอธิบายกรณีหลักฐานไม่ครบ'
-                  = f.text_field :evaluation_result, class: 'materialize-textarea'
+                  = f.text_area :evaluation_result, class: 'materialize-textarea'
             .card-action
               %button.btn.red.waves-effect.waves-light{value:  :submit} ขอหลักฐาน
               /= link_to 'ย้อนกลับ', process_evaluations_path, class: 'waves-effect waves-light orange btn'
@@ -41,7 +40,9 @@
         .card-tabs
           %ul.tabs.tabs-fixed-width.tabs-transparent
             %li.tab
-              %a{href: '#tab_eval'}การประเมิน
+              %a.active{href: '#tab_eval'}การประเมิน
+            %li.tab
+              %a{href: '#tab_visit'}การตรวจหน้างาน
             %li.tab
               %a{href: '#tab_app'}ข้อมูลใบสมัคร
             %li.tab
@@ -49,6 +50,20 @@
             - #unless @application.category3?
             %li.tab
               %a{href: '#tab_car'}ข้อมูลรถ
+        #tab_evidence
+          .card-content.orange.lighten-5
+            %h4 รายการหลักฐาน
+            = render "evidence"
+        #tab_visit
+          .card-content.orange.lighten-5
+            %h4 ข้อมูลการตรวจประะเมินหน้างาน
+            = render "visit"
+        #tab_app
+          .card-content.orange.lighten-5
+            = render partial: "applications/application"
+        #tab_car
+          .card-content.orange.lighten-5
+            = render partial: "applications/cars"
         #tab_eval
           .card-content.orange.lighten-5
             - last_cg = nil
@@ -105,17 +120,5 @@
                   .input-field
                     = f.text_field "description[#{ev.id}]", value: ev.description, class: 'materialize-textarea'
           .card-action.orange.lighten-5
-            %button.btn.waves-effect.waves-light{value:  :submit} บันทึก
-        #tab_evidence
-          .card-content.orange.lighten-5
-            %h4 รายการหลักฐาน
-            = render "evidence"
-        #tab_app
-          .card-content.orange.lighten-5
-            = render partial: "applications/application"
-        #tab_route
-          .card-content.orange.lighten-5
-        - unless @application.category3?
-          #tab_car
-            .card-content.orange.lighten-5
-              = render partial: "applications/cars"
+            %button.btn.waves-effect.gradient-45deg-deep-orange-orange.waves-light{value:  :submit} บันทึก
+            %button#confirm_button.btn.gradient-45deg-purple-deep-purple.waves-effect.waves-light{name: :confirm, value:  :confirm,type: :submit, data: {confirm: 'เมื่อยืนยันแล้วจะไม่สามารถแก้ไขการประเมินได้อีก ยืนยันหรือไม่'}} ยืนยันผลการประเมิน

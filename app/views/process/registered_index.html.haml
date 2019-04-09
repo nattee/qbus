@@ -14,8 +14,8 @@
         %table
           %thead
             %th= t(:name, scope: 'activerecord.attributes.licensee')
-            %th= t(:start, scope: 'activerecord.attributes.route')
-            %th= t(:destination, scope: 'activerecord.attributes.route')
+            %th= t(:route_no, scope: 'activerecord.attributes.route')
+            %th= t(:route, scope: 'activerecord.attributes.application')
             %th วันที่ยื่นใบสมัคร
             %th= t(:contact_short, scope: 'activerecord.attributes.application')
             %th= t(:contact_tel_short, scope: 'activerecord.attributes.application')
@@ -24,13 +24,13 @@
             - @to_be_confirmed.each do |app|
               %tr
                 %td= app.licensee.name
-                %td= app.route_start
-                %td= app.route_destination
+                %td= app.route_no
+                %td= app.route_info
                 %td= l(app.created_at, format: '%d %b %y')
                 %td= app.contact
                 %td= app.contact_tel
                 %td
-                  = link_to 'ตรวจ', process_register_path(app), class: 'waves-effect waves-light btn-small'
+                  = link_to 'ตรวจ', process_register_path(app), class: 'waves-effect waves-light btn-small gradient-45deg-deep-orange-orange'
 .row
   .col.s12
     .card
@@ -41,26 +41,26 @@
             %table
               %thead
                 %th= t(:name, scope: 'activerecord.attributes.licensee')
-                %th= t(:start, scope: 'activerecord.attributes.route')
-                %th= t(:destination, scope: 'activerecord.attributes.route')
+                %th= t(:route_no, scope: 'activerecord.attributes.route')
+                %th= t(:route, scope: 'activerecord.attributes.application')
                 %th วันที่ยื่นใบสมัคร
                 %th= t(:contact_short, scope: 'activerecord.attributes.application')
                 %th= t(:contact_tel_short, scope: 'activerecord.attributes.application')
                 %th= t(:confirmed_date, scope: 'activerecord.attributes.application')
-                %th= t(:register_result, scope: 'activerecord.attributes.application')
+                %th= t(:confirm_comment, scope: 'activerecord.attributes.application')
                 %th
               %tbody
                 - @latest_confirmed.each do |app|
                   %tr
                     %td= app.licensee.name
-                    %td= app.route_start
-                    %td= app.route_destination
+                    %td= app.route_no
+                    %td= app.route_info
                     %td= l(app.created_at, format: '%d %b %Y')
                     %td= app.contact
                     %td= app.contact_tel
                     %td= l(app.confirmed_date, format: '%d %b %Y')
-                    %td= app.register_result
+                    %td= app.confirm_comment
                     %td
-                      = link_to 'แก้ไข', process_register_path(app), class: 'button waves-effect waves-light btn-small'
+                      = link_to 'แก้ไข', process_register_path(app), class: 'button waves-effect waves-light btn-small gradient-45deg-deep-orange-orange'
 
 

@@ -1,0 +1,128 @@
+.section
+  %h6= t(:visited_date, scope: 'activerecord.attributes.application')
+  = l(@application.visited_date, format: :short_date, default: '- ไม่ได้ระบุ -')
+.section
+  %h6= t(:visitor, scope: 'activerecord.attributes.application')
+  = @application.visitor
+.section
+  %h6= t(:visitor_position, scope: 'activerecord.attributes.application')
+  = @application.visitor_position
+.section
+  %h6= t(:visitor_tel, scope: 'activerecord.attributes.application')
+  = @application.visitor_tel
+.section
+  %h6= t(:visitor_email, scope: 'activerecord.attributes.application')
+  = @application.visitor_email
+
+/ section 2
+.section
+.card-title
+  %h5 ส่วนที่ 2: เงื่อนไขการเดินรถ
+.row
+  .col.s7.strong
+    เงื่อนไขการตรวจสอบ
+  .col.s5.strong
+    ผลการตรวจหน้างาน
+- @application.evaluation_visit_sec2.each do |ev|
+  .row
+    .col.s7
+      = "#{ev.criterium.number}. #{ev.criterium.name}"
+    .col.s5
+      = tri_word ev.result,'ใช่', 'ไม่ใช่', 'ยังไม่ได้ตรวจ'
+%b
+.row
+  .col.s12.m6
+    %h6=t(:visit_problem, scope: 'activerecord.attributes.application')
+    = @application.visit_problem
+  .col.s12.m6
+    %h6=t(:visit_problem_cause, scope: 'activerecord.attributes.application')
+    = @application.visit_problem_cause
+
+/ section 3
+.section
+.card-title
+  %h5 ส่วนที่ 3 ข้อมูลการจดทะเบียนและชำระภาษีรถ (ตรวจสอบจาก ขส.บ.11)
+.row
+  .col.s7.strong
+    เงื่อนไขการตรวจสอบ
+  .col.s5.strong
+    ผลการตรวจหน้างาน
+- @application.evaluation_visit_sec3.each do |ev|
+  .row
+    .col.s7
+      = "#{ev.criterium.number}. #{ev.criterium.name}"
+    .col.s5
+      = tri_word ev.result,'ใช่', 'ไม่ใช่', 'ยังไม่ได้ตรวจ'
+%br
+.row
+  .col.s12.m6
+    %h6 จำนวนรถที่ค้างชำระภาษี (คัน)
+    = @application.visit_tax_accrued
+  .col.s12.m6
+    %h6 แจ้งหยุดใช้รถตามมาตรา 89 (คัน)
+    = @application.visit_tax_89
+
+/ section 4
+.section
+.card-title
+  %h5 ส่วนที่ 4 ข้อมูลเกี่ยวกับรถโดยสาร
+.row
+  .col.s7.strong
+    เงื่อนไขการตรวจสอบ
+  .col.s5.strong
+    ผลการตรวจหน้างาน
+- @application.evaluation_visit_sec4.each do |ev|
+  .row
+    .col.s7
+      = "#{ev.criterium.number}. #{ev.criterium.name}"
+    .col.s5
+      = tri_word ev.result,'ใช่', 'ไม่ใช่', 'ยังไม่ได้ตรวจ'
+.section
+.card-title
+  %h6 พิจารณาแยกตามมาตรฐานรถ
+.row
+  .col.s12
+    %table
+      %thead
+        %th มาตรฐานรถ
+        %th สภาพตัวถัง
+        %th สภาพยาง
+        %th ระบบไฟหน้า ไฟเลี้ยว ไฟเบรก
+        %th กระจกหน้ารถ ที่ปัดน้ำฝน
+      %tbody
+        - (1..4).each do |m|
+          %tr
+            %td ม. #{m}
+            - ['chassis','tire','light','windshield'].each do |t|
+              %td
+                = tri_word @application.send("visit_car#{m}_#{t}") ,'ดี', 'ควรปรับปรุง', 'ยังไม่ได้ตรวจ'
+/ section 5
+.section
+.card-title
+  %h5 ส่วนที่ 5 การเตรียมความพร้อมเพื่อให้บริการ
+.row
+  .col.s7.strong
+    เงื่อนไขการตรวจสอบ
+  .col.s5.strong
+    ผลการตรวจหน้างาน
+.row
+  .col.s12
+- @application.evaluation_visit_sec5.each do |ev|
+  .row
+    .col.s7
+      = "#{ev.criterium.number}. #{ev.criterium.name}"
+    .col.s5
+      = tri_word ev.result,'ใช่', 'ไม่ใช่', 'ยังไม่ได้ตรวจ'
+/ section 6
+.section
+.card-title
+  %h5 ส่วนที่ 6 ความเห็นของเจ้าหน้าที่ตรวจประเมิน
+.row
+  .col.s7
+    คุณภาพการให้บริการโดยรวมของการประกอบการขนส่งในเส้นทางที่สำรวจ
+  .col.s5
+    = @application.visit_result
+.row
+  .col.s12.m6
+    %h6 ข้อคิดเห็นหรือข้อเสนอแนะของเจ้าหน้าที่
+    = @application.visit_comment

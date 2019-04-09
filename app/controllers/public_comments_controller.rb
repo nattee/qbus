@@ -30,7 +30,7 @@ class PublicCommentsController < ApplicationController
     @public_comment = PublicComment.new(public_comment_params)
 
     if @public_comment.save
-      redirect_to root_path, notice: 'Public comment was successfully created.'
+      redirect_to root_path, notice: 'ข้อคิดเห็นของท่านไ้ดรับการบันทึกเรียบร้อยแล้ว'
     else
       render :add_comment
     end

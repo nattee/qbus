@@ -11,12 +11,17 @@
     .section
       %h6 สถานะ
       = state_full(@application)
+    - if @application.awarded?
+      = final_award_text(@application)
     .section
       %h6 ใบอนุญาตประกอบการขนส่ง
       = download_link @application.get_attachment(:license)
     .section
       %h6 สำเนาสัญญาหน้าแรก
       = download_link @application.get_attachment(:contract)
+    .section
+      %h6 หนังสือยืนยันการเข้าร่วมโครงการ
+      = download_link @application.get_attachment(:signup)
     .section
       %h6 หนังสือยืนยันการเข้าร่วมโครงการ
       = download_link @application.get_attachment(:signup)
@@ -31,7 +36,7 @@
       = @application.license_no || "-"
     .section
       %h6= t(:license_expire, scope: 'activerecord.attributes.application')
-      = l(@application.license_expire, format: '%d %B %y') if @application.license_expire
+      = l(@application.license_expire, format: '%d %B %y', default: nil)
     .section
       %h6= t(:category, scope: 'activerecord.attributes.application')
       = @application.category_text
@@ -45,6 +50,9 @@
       %h6= t(:contact_email, scope: 'activerecord.attributes.application')
       = @application.contact_email || "-"
   .col.s12.m4
+    - if @application.extend
+      .card-panel.light-blue.lighten-4
+        ต่ออายุจากใบสมัครหมายเลข #{@application.extend_app&.id_text}
     .card-title
       %h5 ข้อมูลเส้นทาง
     - unless @application.category3?

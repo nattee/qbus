@@ -8,34 +8,30 @@
           .col.s12.m3
             = render "current_apply_step"
           .col.s12.m9
-            = simple_form_for(@application, url: apply_step1_application_path(@application), method: :post, html: { multipart: true }) do |f|
+            = simple_form_for(@application, url: apply_step1_application_path(@application), method: :post, html: { class: 'form_validate', multipart: true }) do |f|
               %h4 กรอกข้อมูลพื้นฐาน
+              - if @application.extend
+                .card-panel.light-blue.lighten-4
+                  ใบสมัครต่ออายุมาจากใบสมัครหมายเลข #{@application.extend_app&.id_text}
               .section
                 %h5 ข้อมูลผู้ประกอบการ
                 .row
                   .col.s6
                     .input-field
-                      = text_field_tag 'licensee[name]', @application.try(:licensee).try(:name)
+                      = text_field_tag 'licensee[name]', @application.licensee&.name, class: 'required'
                       = label_tag 'licensee[name]', t(:name , scope: 'activerecord.attributes.licensee')
-                  - if @application.category3?
-                    .col.s6
-                      .input-field
-                        = f.input_field :license_no, placeholder: 'กท. 1xx/25yy'
-                        = f.label :license_no
-                    /    = f.error :license_no
-                    /    /= f.label 'licensee[name]', t(:name , scope: 'activerecord.attributes.licensee')
                 .row
                   .col.s4
                     .input-field
-                      = f.input_field :contact
+                      = f.input_field :contact, class: 'required'
                       = f.label :contact
                   .col.s4
                     .input-field
-                      = f.input_field :contact_tel
+                      = f.input_field :contact_tel, class: 'required'
                       = f.label :contact_tel, 'โทรศัพท์'
                   .col.s4
                     .input-field
-                      = f.input_field :contact_email
+                      = f.input_field :contact_email, class: 'required'
                       = f.label :contact_email
                 .row
                   .col.s12
@@ -52,7 +48,7 @@
                       %li หน้าแรกของสัญญาการเดินรถ
                       %li
                         หนังสือยืนยันการเข้าร่วมโครงการ (สามารถดาวน์โหลดได้
-                        %a ที่นี่
+                        %a{href: '/form/หนังสือยืนยันการเข้าร่วม Q-Bus.docx'} ที่นี่
                         )
                       
                   .col.s12.m4
@@ -94,50 +90,47 @@
               .divider
               .section
                 %h5 ข้อมูลเส้นทาง
+                .row
+                  .col.s6
+                    .input-field
+                      = f.input_field :license_no, placeholder: 'กท. 1xx/25yy', class: 'required'
+                      = f.label :license_no
+                  .col.s6
+                    .input-field
+                      = f.text_field :license_expire, class: 'datepicker', class: 'required'
+                      = f.label :license_expire
                 - if @application.category3?
-                  %h6 หมวดการเดินรถแบบไม่ประจำทาง
                   กรุณาระบุพื้นที่ให้บริการ
                   .row
                     .col.s6
                       .input-field
-                        = f.input_field :service_area
+                        = f.input_field :service_area, class: 'required'
                         = f.label :service_area
                 - else
                   .row
                     .col.s6
                       .input-field
-                        = f.input_field :license_no, placeholder: 'กท. 1xx/25yy'
-                        = f.label :license_no
-                    .col.s6
-                      .input-field
-                        = text_field_tag 'route[license_expire]', @application.license_expire, class: 'datepicker'
-                        = label_tag 'route[license_expire]', t(:license_expire, scope: 'activerecord.attributes.application')
-                  .row
-                    .col.s6
-                      .input-field
-                        = text_field_tag 'route[route_no]', @application.try(:route).try(:route_no)
+                        = text_field_tag 'route[route_no]', @application.route&.route_no, class: 'required'
                         = label_tag 'route[route_no]', t(:route_no, scope: 'activerecord.attributes.route')
                   .row
                     .col.s6
                       .input-field
-                        = text_field_tag 'route[start]', @application.try(:route).try(:start)
+                        = text_field_tag 'route[start]', @application.route&.start, class: 'required'
                         = label_tag 'route[start]', t(:start, scope: 'activerecord.attributes.route')
                     .col.s6
                       .input-field
-                        = text_field_tag 'route[destination]', @application.try(:route).try(:destination)
+                        = text_field_tag 'route[destination]', @application.route&.destination, class: 'required'
                         = label_tag 'route[destination]', t(:destination, scope: 'activerecord.attributes.route')
                   .row
                     .col.s6
                       .input-field
-                        = f.input_field :car_count
+                        = f.input_field :car_count, class: 'required'
                         = f.label :car_count, 'จำนวนรถที่มีอยู่จริง (คัน)'
                     .col.s6
                       .input-field
-                        = f.input_field :trip_count
+                        = f.input_field :trip_count, class: 'required'
                         = f.label :trip_count, 'จำนวนเที่ยวเดินรถจริงเฉลี่ยต่อวัน (เที่ยว)'
 
               = hidden_field_tag 'application[stage]', 'step1'
               %button.btn.waves-effect.waves-light ไปยังขั้นตอนต่อไป
-
-
 

@@ -1,0 +1,84 @@
+.card
+  .card-content
+    %h5 ข้อมูลใบสมัคร
+  .card-tabs
+    %ul.tabs.tabs-fixed-width
+      %li.tab
+        %a.black-text.active{href: '#tab_app'}ข้อมูลใบสมัคร
+      %li.tab
+        %a.black-text{href: '#tab_eval'}การประเมิน
+      %li.tab
+        %a.black-text{href: '#tab_visit'}การตรวจหน้างาน
+      %li.tab
+        %a.black-text{href: '#tab_evidence'}หลักฐาน
+      %li.tab
+        %a.black-text{href: '#tab_car'}ข้อมูลรถ
+  #tab_evidence
+    .card-content
+      %h4 รายการหลักฐาน
+      = render partial: "process/evidence"
+  #tab_visit
+    .card-content
+      %h4 ข้อมูลการตรวจประะเมินหน้างาน
+      = render partial: "process/visit"
+  #tab_app
+    .card-content
+      = render partial: "applications/application"
+  #tab_car
+    .card-content
+      = render partial: "applications/cars"
+  #tab_eval
+    .card-content
+      - last_cg = nil
+      - @application.evaluations.joins(:criterium => :criteria_group).order('criteria_groups.id, criteria.number').each do |ev|
+        - if ev.criterium.criteria_group != last_cg
+          - last_cg = ev.criterium.criteria_group
+          .divider
+          .row
+            .col.s12
+              %h5= last_cg.name
+          .row
+            .col.s7
+              = t(:name, scope: 'activerecord.attributes.criterium')
+            .col.s2.center
+              ผลการประเมิน
+            .col.s3
+              คำอธิบายผลการประเมิน
+        .row
+          .col.s7
+            = "#{ev.criterium.number}. #{ev.criterium.name}"
+            %br
+            - if ev.is_main_evaluation?
+              .row
+                .col.s2
+                .col.s7.strong หลักฐานที่แนบมาด้วย
+                .col.s3
+              - ev.criterium.evidences.each do |evid|
+                .row
+                  .col.s2
+                  .col.s7
+                    = evid.name
+                  .col.s3
+                    - att = @application.attachments.where(evidence: evid)
+                    - if att.count > 0
+                      = link_to rails_blob_path(att.first.data, disposition: "attachment") do
+                        %i.material-icons.small insert_drive_file
+                        = t(:download)
+                    - else
+                      %span.red-text - ไม่ได้แนบ -
+              %br
+          .col.s2.center
+            - if ev.result == 1
+              %i.material-icons.left check
+              100%
+            - elsif ev.result == 0
+              %i.material-icons.left block
+              0%
+            - elsif ev.result == 0.5
+              %i.material-icons.left remove
+              50%
+            - else
+              = "- ยังไม่ได้ประเมิน -"
+          .col.s3
+            .input-field
+              = ev.description

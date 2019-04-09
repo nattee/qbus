@@ -1,5 +1,5 @@
 class ApplicationsController < ApplicationController
-  before_action :set_application, only: [:show, :edit, :update, :destroy,
+  before_action :set_application, only: [:show, :edit, :update, :destroy, :show_full,
                                          :apply_step1, :apply_step2, :apply_step3,:fail_self_evaluation,
                                          :post_step1,:post_step2,:post_step3,
                                          :add_evidences,:add_attachment,:finish_add_evidences,
@@ -52,41 +52,39 @@ class ApplicationsController < ApplicationController
   def post_step1
     #routes and licensee data
     @application.update(application_params)
-    @application.save
 
     unless @application.category3?
-      @route = Route.new(route_params)
-      @route.save
+      @route = Route.where(route_no: route_params[:route_no]).first
+      unless @route
+        @route = Route.new(route_params)
+        @route.save
+      end
       @application.route = @route
     end
 
-    @licensee = Licensee.new(licensee_params)
-    @application.licensee = @licensee
+    @licensee = Licensee.where(name: licensee_params[:name]).first
+    unless @licensee
+      @licensee = Licensee.create(licensee_params) unless @licensee
+      @licensee.update(contact: application_params[:contact],
+                       contact_tel: application_params[:contact_tel],
+                       contact_email: application_params[:contact_email])
+    end
 
+    @application.use_licensee(@licensee)
+    @application.save
 
-    redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบใบอนุญาตประกอบการขนส่ง'}) and return unless @application.attach_data(:license, attachment_contract_signup_params)
-    redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบสัญญาหน้าแรก'}) and return unless @application.attach_data(:contract, attachment_contract_signup_params)
-    redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบหนังสือยืนยันเข้าร่วมโครงการ'}) and return unless @application.attach_data(:signup, attachment_contract_signup_params)
-
-    #if !@application.attach_license_data(attachment_contract_signup_params)
-    #  redirect_to apply_step1_application_path(@application), flash: {error: 'กรุณาแนบใบอนุญาตประกอบการขนส่ง'}
-    #  return
-    #end
-    #if !@application.attach_contract_data(attachment_contract_signup_params)
-    #  redirect_to apply_step1_application_path(@application), flash: {error: 'กรุณาใส่ข้อมูลหน้าแรกใบอนุญาต'}
-    #  return
-    #end
-    #if !@application.attach_signup_data(attachment_contract_signup_params)
-    #  redirect_to apply_step1_application_path(@application), flash: {error: 'กรุณาแนบไฟล์หนังสือยืนยันเข้าร่วมโครงการ'}
-    #  return
-    #end
+    att_param = attachment_contract_signup_params
+    [:license,:contract,:signup].each do |att_sym|
+      if att_param["#{att_sym.to_s}_data".to_sym]
+        next if @application.attach_data(att_sym, att_param)
+      else
+        next if @application.get_attachment(att_sym)
+      end
+      redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบเอกสารให้ครบถ้วน'}) and return
+    end
 
     if @application.save
-      if @application.category3?
-        redirect_to apply_step3_application_path(@application)
-      else
-        redirect_to apply_step2_application_path(@application)
-      end
+      redirect_to apply_step2_application_path(@application)
     else
       redirect_to(apply_applications_path)
     end
@@ -97,6 +95,12 @@ class ApplicationsController < ApplicationController
   def post_step2
     #car data
 
+    #b11 attachment
+    att_param = attachment_contract_signup_params
+    if att_param[:b11_data]
+      @application.attach_data(:b11, att_param)
+    end
+
     if @application.save
       redirect_to apply_step3_application_path(@application)
     else
@@ -106,11 +110,12 @@ class ApplicationsController < ApplicationController
 
   def post_step3
     has_no = false
+    ev_result = application_evaluation_params
     @application.self_evaluations.each do |ev|
-      if params.require(:result)[ev.id.to_s] == 'ok'
-        ev.result = true
-      elsif params.require(:result)[ev.id.to_s] == 'no'
-        ev.result = false
+      if ev_result[ev.id.to_s] == 'ok'
+        ev.result = 1
+      elsif ev_result[ev.id.to_s] == 'no'
+        ev.result = 0
         has_no = true
       else
         has_no = true
@@ -131,7 +136,7 @@ class ApplicationsController < ApplicationController
   end
 
   def add_car
-    car = Car.new(plate: params[:plate], chassis: params[:chassis], car_type: params[:car_type])
+    car = Car.new(plate: params[:plate], car_type: params[:car_type], province: params[:province], brand: params[:brand])
     @application.cars << car
     redirect_to apply_step2_application_path(@application)
   end
@@ -225,6 +230,7 @@ class ApplicationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_application
+
       @application = Application.find(params[:id])
     end
 
@@ -242,11 +248,15 @@ class ApplicationsController < ApplicationController
     end
 
     def attachment_contract_signup_params
-      params.require(:attachment).permit(:contract_data, :contract_file_name, :signup_data, :signup_file_name, :license_data, :license_file_name)
+      params.require(:attachment).permit(:contract_data, :contract_file_name, :signup_data, :signup_file_name, :license_data, :license_file_name, :b11_data, :b11_file_name)
     end
 
     def attachment_params
       params.require(:attachment).permit(:evidence_id, :data, :filename)
+    end
+
+    def application_evaluation_params
+      params.fetch(:result, {})
     end
 
 end

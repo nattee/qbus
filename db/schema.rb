@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_03_165538) do
+ActiveRecord::Schema.define(version: 2019_04_07_082454) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -66,7 +66,6 @@ ActiveRecord::Schema.define(version: 2019_04_03_165538) do
     t.datetime "evaluated_date"
     t.integer "car_count"
     t.integer "trip_count"
-    t.text "register_result"
     t.text "evaluation_result"
     t.string "license_no"
     t.date "license_expire"
@@ -97,7 +96,18 @@ ActiveRecord::Schema.define(version: 2019_04_03_165538) do
     t.string "visit_car4_tire"
     t.string "visit_car4_light"
     t.string "visit_car4_windshield"
+    t.string "visitor"
+    t.string "visitor_position"
+    t.string "visitor_tel"
+    t.string "visitor_email"
+    t.datetime "visited_confirm_date"
+    t.boolean "confirm_result"
+    t.string "confirm_comment"
+    t.datetime "award_expire_date"
+    t.boolean "extend", default: false
+    t.bigint "extend_app_id"
     t.index ["appointment_user_id"], name: "index_applications_on_appointment_user_id"
+    t.index ["extend_app_id"], name: "index_applications_on_extend_app_id"
     t.index ["licensee_id"], name: "index_applications_on_licensee_id"
     t.index ["route_id"], name: "index_applications_on_route_id"
     t.index ["user_id"], name: "index_applications_on_user_id"
@@ -127,6 +137,9 @@ ActiveRecord::Schema.define(version: 2019_04_03_165538) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "application_id"
+    t.string "province"
+    t.string "brand"
+    t.string "side_number"
     t.index ["application_id"], name: "index_cars_on_application_id"
   end
 
@@ -255,6 +268,7 @@ ActiveRecord::Schema.define(version: 2019_04_03_165538) do
     t.string "activation_digest"
     t.boolean "activated", default: false
     t.datetime "activated_at"
+    t.string "tel"
   end
 
   create_table "violations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

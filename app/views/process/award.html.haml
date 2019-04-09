@@ -18,13 +18,13 @@
                 .col.s12
                   %label
                     = radio_button_tag :result, 'ok'
-                    %span ตัดสินให้ตราสัญลักษณ์  Q-BUS
+                    %span ตัดสินให้ได้มาตรฐาน  Q-BUS
               .section
               .row
                 .col.s12
                   %label
                     = radio_button_tag :result, 'no'
-                    %span ตัดสินไม่ให้รางวัล Q-BUS
+                    %span ไม่ได้มาตรฐาน
               .row
                 .input-field.col.s12
                   = f.text_area :award_remark, class: 'materialize-textarea'
@@ -33,17 +33,28 @@
               .card-title
                 %h5 สรุปผลการประเมิน
               .row
-                .col.s10
+                .col.s8.strong
                   คะแนนรวม
-                .col.s2.right-align
+                .col.s4.right-align
                   = @application.total_score_text
               .row
-                .col.s10
+                .col.s8.strong
                   คะแนนความปลอดภัย
-                .col.s2.right-align
+                .col.s4.right-align
                   = @application.safety_score_text
+              .row
+                .col.s8.strong
+                  การตรวจหน้างาน
+                .col.s4.right-align
+                  = @application.visit_summary_text
+              .section
+              .row
+                .col.s8.strong
+                  ผลที่ควรจะได้
+                .col.s4.right-align
+                  = @application.passed
         .card-action
-          %button.btn.waves-effect.waves-light{data: {confirm: 'ต้องการยืนยันการตัดสินผลหรือไม่ เมื่อยืนยันแล้วจะไม่สามารถแก้ไขได้อีก' }} ยืนยันการตัดสินผล
+          %button.btn.gradient-45deg-purple-deep-purple.waves-effect.waves-light{data: {confirm: 'ต้องการยืนยันการตัดสินผลหรือไม่ เมื่อยืนยันแล้วจะไม่สามารถแก้ไขได้อีก' }} ยืนยันการตัดสินผล
           /= link_to 'ย้อนกลับ', process_awards_path, class: 'waves-effect waves-light orange btn'
 .row
   .col.s12
@@ -53,27 +64,16 @@
       .card-tabs
         %ul.tabs.tabs-fixed-width.tabs-transparent.grey-text
           %li.tab
-            %a{href: '#tab_app'}ข้อมูลใบสมัคร
+            %a.active{href: '#tab_app'}ข้อมูลใบสมัคร
           %li.tab
             %a{href: '#tab_eval'}การประเมิน
+          %li.tab
+            %a{href: '#tab_visit'}การตรวจหน้างาน
           %li.tab
             %a{href: '#tab_evidence'}หลักฐาน
           %li.tab
             %a{href: '#tab_car'}ข้อมูลรถ
       #tab_eval
-        .card-content.indigo.lighten-4
-          .card-title
-            %h5 สรุปผลการประเมิน
-          .row
-            .col.s4
-              คะแนนรวม
-            .col.s1.right-align
-              = @application.total_score_text
-          .row
-            .col.s4
-              คะแนนความปลอดภัย
-            .col.s1.right-align
-              = @application.safety_score_text
         .card-content.indigo.lighten-5
           - last_cg = nil
           - @application.evaluations.joins(:criterium => :criteria_group).order('criteria_groups.id, criteria.number').each do |ev|
@@ -91,10 +91,10 @@
                 .col.s3
                   คำอธิบายผลการประเมิน
             .row
-              = simple_form_for ev, remote: true do |f|
-                .col.s7
-                  = "#{ev.criterium.number}. #{ev.criterium.name}"
-                  %br
+              .col.s7
+                = "#{ev.criterium.number}. #{ev.criterium.name}"
+                %br
+                - if ev.is_main_evaluation?
                   .row
                     .col.s2
                     .col.s7.strong หลักฐานที่แนบมาด้วย
@@ -113,20 +113,28 @@
                         - else
                           %span.red-text - ไม่ได้แนบ -
                   %br
-                .col.s2.center
-                  - if ev.result?
-                    %i.material-icons check
-                  - elsif not ev.result?
-                    %i.material-icons block
-                  - else
-                .col.s3
-                  .input-field
-                    /= f.text_field :description
-                    = ev.description
+              .col.s2.center
+                - if ev.result == 1
+                  %i.material-icons.left check
+                  100%
+                - elsif ev.result == 0
+                  %i.material-icons.left block
+                  0%
+                - else
+                  %i.material-icons.left remove
+                  50%
+              .col.s3
+                .input-field
+                  /= f.text_field :description
+                  = ev.description
       #tab_evidence
         .card-content.indigo.lighten-5
           %h4 รายการหลักฐาน
           = render "evidence"
+      #tab_visit
+        .card-content.indigo.lighten-5
+          %h4 ข้อมูลการตรวจประะเมินหน้างาน
+          = render "visit"
       #tab_app
         .card-content.indigo.lighten-5
           .section
@@ -134,9 +142,8 @@
               .col.s12
                 %h5 ข้อมูลใบสมัคร
                 = render partial: "applications/application"
-      - unless @application.category3?
-        #tab_car
-          .card-content.indigo.lighten-5
-            = render partial: "applications/cars"
+      #tab_car
+        .card-content.indigo.lighten-5
+          = render partial: "applications/cars"
 
 

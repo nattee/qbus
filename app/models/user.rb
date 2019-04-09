@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :appointed_applications, foreign_key: "appointment_user_id", class_name: "Application", :dependent => :nullify
 
   VALID_EMAIL_REGEX =/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :name, presence: true, length: { minimum: 10, maximum: 50 }
+  validates :name, presence: true, length: { minimum: 6, maximum: 50 }
   validates :email, presence: true, length: { maximum: 255 },
     format: {with: VALID_EMAIL_REGEX },
     uniqueness: {case_sensitive: false}
@@ -46,7 +46,7 @@ class User < ApplicationRecord
   end
 
   def send_activation_email
-    UserMailer.account_activation(self).deliver_now
+    #UserMailer.account_activation(self).deliver_now
   end
 
   # Returns true if the given token matches the digest.
@@ -72,7 +72,15 @@ class User < ApplicationRecord
   end
   
   def role_array
-    roles.to_hash.map { |k,v| I18n.t(k, scope: 'activerecord.attributes.user') }
+    roles.to_hash.select{ |k,v| v.to_s == '1'}.keys.map { |k| I18n.t(k, scope: 'activerecord.attributes.user') }
+  end
+
+  def role_summary
+    st = []
+    st << 'ผู้ดูแลระบบ' if is_admin?
+    st << 'เจ้าหน้าที่' if is_official?
+    st << 'ผู้ประกอบการ' if has_role(:licensee)
+    return st.join ', '
   end
 
   private

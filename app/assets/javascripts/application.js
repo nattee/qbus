@@ -27,7 +27,7 @@
 //= /require datatables
 //= require init
 //= require jquery.validate
-//= /require jquery.validate.localization/messages_th
+//= require jquery.validate.localization/messages_th
 //= /require_tree .
 //
 

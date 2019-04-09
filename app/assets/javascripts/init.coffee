@@ -74,6 +74,17 @@ $(document).ready ->
 
   #$('.dataTable').DataTable()
   #should be called directly in each page because of different options
+  
+  #validation
+  $('.form_validate').validate
+    errorElement: 'div'
+    errorPlacement: (error, element) ->
+      placement = $(element).data('error')
+      if placement
+        $(placement).append error
+      else
+        error.insertAfter element
+      return
 
   console.log "load init on ready or turbolinks:load"
   return

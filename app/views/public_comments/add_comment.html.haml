@@ -11,6 +11,6 @@
     .card
       .card-content.deep-purple
         .card-title.white-text
-          %h4.white-text= t(:new) + t(:public_comment, scope: 'activerecord.models')
+          %h4.white-text= 'ส่งข้อคิดเห็น'
       .card-content
         = render partial: 'form', locals: {back_link: root_path, form_url: add_comment_path, form_method: :post}

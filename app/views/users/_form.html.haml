@@ -10,6 +10,12 @@
           = f.full_error :name
       .row
         .input-field.col.s12
+          %i.material-icons.prefix phone
+          = f.input_field :tel
+          = f.label :tel
+          = f.full_error :tel
+      .row
+        .input-field.col.s12
           %i.material-icons.prefix email
           = f.input_field :email
           = f.label :email
