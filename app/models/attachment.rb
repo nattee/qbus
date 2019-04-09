@@ -15,4 +15,8 @@ class Attachment < ApplicationRecord
     attachment_types.map{|x| [Attachment.attachment_type_enum_to_text(x.first), x.first]}
   end
 
+  def attachment_type_text
+    Attachment.attachment_type_enum_to_text(attachment_type)
+  end
+
 end

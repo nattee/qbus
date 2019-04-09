@@ -8,9 +8,9 @@
         .dataTables_wrapper
           %table#table.dataTable.display
             %thead
-              %th หัวข้อ
-              %th ผู้เขียน
-              %th แสดง
+              %th= t(:title, scope: 'activerecord.attributes.announcement')
+              %th= t(:user, scope: 'activerecord.attributes.announcement')
+              %th= t(:published, scope: 'activerecord.attributes.announcement')
               %th
             %tbody
               - @announcements.each do |announcement|
