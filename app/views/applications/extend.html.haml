@@ -8,13 +8,14 @@
       .card-content
         %table.dataTable
           %thead
-            %th หมายเลขใบสมัคร
-            %th= t(:name, scope: 'activerecord.attributes.licensee')
-            %th= t(:start, scope: 'activerecord.attributes.route')
-            %th= t(:destination, scope: 'activerecord.attributes.route')
-            %th วันที่ยื่นใบสมัคร
-            %th วันที่หมดอายุ
-            %th
+            %tr
+              %th หมายเลขใบสมัคร
+              %th= t(:name, scope: 'activerecord.attributes.licensee')
+              %th= t(:start, scope: 'activerecord.attributes.route')
+              %th= t(:destination, scope: 'activerecord.attributes.route')
+              %th วันที่ยื่นใบสมัคร
+              %th วันที่หมดอายุ
+              %th
           %tbody
             - @apps.each do |app|
               %tr

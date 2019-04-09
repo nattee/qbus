@@ -7,13 +7,14 @@
             %h4 ใบสมัครที่ยังไม่ได้นัดหมาย
             %table
               %thead
-                %th= t(:name, scope: 'activerecord.attributes.licensee')
-                %th= t(:start, scope: 'activerecord.attributes.route')
-                %th= t(:destination, scope: 'activerecord.attributes.route')
-                %th วันที่ยื่นใบสมัคร
-                %th ผู้ประสานงาน
-                %th โทรศัพท์
-                %th
+                %tr
+                  %th= t(:name, scope: 'activerecord.attributes.licensee')
+                  %th= t(:start, scope: 'activerecord.attributes.route')
+                  %th= t(:destination, scope: 'activerecord.attributes.route')
+                  %th วันที่ยื่นใบสมัคร
+                  %th ผู้ประสานงาน
+                  %th โทรศัพท์
+                  %th
               %tbody
                 - @to_be_appointed.each do |app|
                   %tr
@@ -38,15 +39,16 @@
             %h4 ใบสมัครที่รอการตรวจหน้างาน
             %table
               %thead
-                %th= t(:name, scope: 'activerecord.attributes.licensee')
-                %th= t(:start, scope: 'activerecord.attributes.route')
-                %th= t(:destination, scope: 'activerecord.attributes.route')
-                %th วันที่ยื่นใบสมัคร
-                %th ผู้ประสานงาน
-                %th โทรศัพท์
-                %th= t(:appointment_date, scope: 'activerecord.attributes.application')
-                %th= t(:appointment_remark, scope: 'activerecord.attributes.application')
-                %th
+                %tr
+                  %th= t(:name, scope: 'activerecord.attributes.licensee')
+                  %th= t(:start, scope: 'activerecord.attributes.route')
+                  %th= t(:destination, scope: 'activerecord.attributes.route')
+                  %th วันที่ยื่นใบสมัคร
+                  %th ผู้ประสานงาน
+                  %th โทรศัพท์
+                  %th= t(:appointment_date, scope: 'activerecord.attributes.application')
+                  %th= t(:appointment_remark, scope: 'activerecord.attributes.application')
+                  %th
               %tbody
                 - @to_be_visited.each do |app|
                   %tr
@@ -70,15 +72,16 @@
             %h4 ใบสมัครที่ได้รับการตรวจหน้างานแล้ว (ภายใน 30 วันที่ผ่านมา)
             %table
               %thead
-                %th= t(:name, scope: 'activerecord.attributes.licensee')
-                %th= t(:start, scope: 'activerecord.attributes.route')
-                %th= t(:destination, scope: 'activerecord.attributes.route')
-                %th วันที่ยื่นใบสมัคร
-                %th ผู้ประสานงาน
-                %th โทรศัพท์
-                %th= t(:visited_date, scope: 'activerecord.attributes.application')
-                %th= t(:visited_confirm_date, scope: 'activerecord.attributes.application')
-                %th
+                %tr
+                  %th= t(:name, scope: 'activerecord.attributes.licensee')
+                  %th= t(:start, scope: 'activerecord.attributes.route')
+                  %th= t(:destination, scope: 'activerecord.attributes.route')
+                  %th วันที่ยื่นใบสมัคร
+                  %th ผู้ประสานงาน
+                  %th โทรศัพท์
+                  %th= t(:visited_date, scope: 'activerecord.attributes.application')
+                  %th= t(:visited_confirm_date, scope: 'activerecord.attributes.application')
+                  %th
               %tbody
                 - @latest_visited.each do |app|
                   %tr

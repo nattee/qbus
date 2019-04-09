@@ -13,12 +13,13 @@
               - if @applying.count > 0
                 %table
                   %thead
-                    %th= t(:name, scope: 'activerecord.attributes.licensee')
-                    %th= t(:route_no, scope: 'activerecord.attributes.application')
-                    %th= t(:route_info, scope: 'activerecord.attributes.application')
-                    %th วันที่ยื่นใบสมัคร
-                    %th= t(:state, scope: 'activerecord.attributes.application')
-                    %th
+                    %tr
+                      %th= t(:name, scope: 'activerecord.attributes.licensee')
+                      %th= t(:route_no, scope: 'activerecord.attributes.application')
+                      %th= t(:route_info, scope: 'activerecord.attributes.application')
+                      %th วันที่ยื่นใบสมัคร
+                      %th= t(:state, scope: 'activerecord.attributes.application')
+                      %th
                   %tbody
                     - @applying.each do |app|
                       %tr
@@ -44,12 +45,13 @@
               - if @need_evidences.count > 0
                 %table
                   %thead
-                    %th= t(:name, scope: 'activerecord.attributes.licensee')
-                    %th= t(:route_no, scope: 'activerecord.attributes.application')
-                    %th= t(:route_info, scope: 'activerecord.attributes.application')
-                    %th วันที่ยื่นใบสมัคร
-                    %th= t(:state, scope: 'activerecord.attributes.application')
-                    %th
+                    %tr
+                      %th= t(:name, scope: 'activerecord.attributes.licensee')
+                      %th= t(:route_no, scope: 'activerecord.attributes.application')
+                      %th= t(:route_info, scope: 'activerecord.attributes.application')
+                      %th วันที่ยื่นใบสมัคร
+                      %th= t(:state, scope: 'activerecord.attributes.application')
+                      %th
                   %tbody
                     - @need_evidences.each do |app|
                       %tr
@@ -71,11 +73,12 @@
                 ใบสมัครต่อไปนี้อยู่ระหว่างการตรวจสอบข้อมูลหรือหลักฐานต่าง ๆ โดยกรมการขนส่งทางบก ขอให้ผู้ใช้รอผล
                 %table
                   %thead
-                    %th= t(:name, scope: 'activerecord.attributes.licensee')
-                    %th= t(:route_no, scope: 'activerecord.attributes.application')
-                    %th= t(:route_info, scope: 'activerecord.attributes.application')
-                    %th วันที่ยื่นใบสมัคร
-                    %th= t(:state, scope: 'activerecord.attributes.application')
+                    %tr
+                      %th= t(:name, scope: 'activerecord.attributes.licensee')
+                      %th= t(:route_no, scope: 'activerecord.attributes.application')
+                      %th= t(:route_info, scope: 'activerecord.attributes.application')
+                      %th วันที่ยื่นใบสมัคร
+                      %th= t(:state, scope: 'activerecord.attributes.application')
                   %tbody
                     - @to_be_done.each do |app|
                       %tr
@@ -94,14 +97,15 @@
                 ใบสมัครต่อไปนี้ดำเนินการเสร็จสิ้นแล้ว สามารถตรวจดูผลการดำเนินการได้ด้านล่างนี้
                 %table
                   %thead
-                    %th ผู้ประกอบการ
-                    %th= t(:route_no, scope: 'activerecord.attributes.application')
-                    %th= t(:route_info, scope: 'activerecord.attributes.application')
-                    %th ยื่นใบสมัคร
-                    %th ตัดสินผล
-                    %th ผลการตัดสิน
-                    %th หมดอายุ
-                    %th
+                    %tr
+                      %th ผู้ประกอบการ
+                      %th= t(:route_no, scope: 'activerecord.attributes.application')
+                      %th= t(:route_info, scope: 'activerecord.attributes.application')
+                      %th ยื่นใบสมัคร
+                      %th ตัดสินผล
+                      %th ผลการตัดสิน
+                      %th หมดอายุ
+                      %th
                   %tbody
                     - @finished.each do |app|
                       %tr

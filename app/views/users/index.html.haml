@@ -8,10 +8,11 @@
         .dataTables_wrapper
           %table#table.dataTable.display
             %thead
-              %th= t(:name, scope: 'activerecord.attributes.user')
-              %th= t(:email, scope: 'activerecord.attributes.user')
-              %th= t(:roles, scope: 'activerecord.attributes.user')
-              %th
+              %tr
+                %th= t(:name, scope: 'activerecord.attributes.user')
+                %th= t(:email, scope: 'activerecord.attributes.user')
+                %th= t(:roles, scope: 'activerecord.attributes.user')
+                %th
             %tbody
               - @users.each do |user|
                 %tr

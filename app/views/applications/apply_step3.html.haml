@@ -23,9 +23,10 @@
             = simple_form_for(@application, url: apply_step3_application_path(@application), method: 'post') do |f|
               %table
                 %thead
-                  %th{style: "width: 70%;"} หัวข้อ
-                  %th{style: "width: 15%;"} ใช่
-                  %th{style: "width: 15%;"} ไม่ใช่
+                  %tr
+                    %th{style: "width: 70%;"} หัวข้อ
+                    %th{style: "width: 15%;"} ใช่
+                    %th{style: "width: 15%;"} ไม่ใช่
                 %tbody
                   - @application.self_evaluations.each do |ev|
                     %tr

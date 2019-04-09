@@ -8,10 +8,11 @@
         .dataTables_wrapper
           %table#table.dataTable.display
             %thead
-              %th= t(:plate, scope: 'activerecord.attributes.car')
-              %th= t(:chassis, scope: 'activerecord.attributes.car')
-              %th= t(:car_type, scope: 'activerecord.attributes.car')
-              %th
+              %tr
+                %th= t(:plate, scope: 'activerecord.attributes.car')
+                %th= t(:chassis, scope: 'activerecord.attributes.car')
+                %th= t(:car_type, scope: 'activerecord.attributes.car')
+                %th
             %tbody
               - @cars.each do |car|
                 %tr

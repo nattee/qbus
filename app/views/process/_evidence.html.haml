@@ -1,9 +1,10 @@
 - cgroups = CriteriaGroup.need_evidence unless cgroups
 %table
   %thead
-    %th ชื่อหลักฐาน
-    %th วัน/เวลา ยื่นเอการ
-    %th
+    %tr
+      %th ชื่อหลักฐาน
+      %th วัน/เวลา ยื่นเอการ
+      %th
   %tbody
     - cgroups.each do |cg|
       - cg.criterium.each do |ci|

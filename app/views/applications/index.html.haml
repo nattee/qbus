@@ -8,11 +8,12 @@
         .dataTables_wrapper
           %table#table.dataTable.display
             %thead
-              %th= t(:id, scope: 'activerecord.attributes.application')
-              %th= t(:name, scope: 'activerecord.attributes.licensee')
-              %th= t(:route_no, scope: 'activerecord.attributes.application')
-              %th= t(:route_info, scope: 'activerecord.attributes.application')
-              %th
+              %tr
+                %th= t(:id, scope: 'activerecord.attributes.application')
+                %th= t(:name, scope: 'activerecord.attributes.licensee')
+                %th= t(:route_no, scope: 'activerecord.attributes.application')
+                %th= t(:route_info, scope: 'activerecord.attributes.application')
+                %th
             %tbody
               - @applications.each do |application|
                 %tr

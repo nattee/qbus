@@ -10,12 +10,13 @@
     .dataTables_wrapper
       %table#car_table
         %thead
-          %th= t :province, scope: 'activerecord.attributes.car'
-          %th= t :plate, scope: 'activerecord.attributes.car'
-          %th= t :brand, scope: 'activerecord.attributes.car'
-          -# %th= t :chassis, scope: 'activerecord.attributes.car'
-          %th= t :car_type, scope: 'activerecord.attributes.car'
-          %th
+          %tr
+            %th= t :province, scope: 'activerecord.attributes.car'
+            %th= t :plate, scope: 'activerecord.attributes.car'
+            %th= t :brand, scope: 'activerecord.attributes.car'
+            -# %th= t :chassis, scope: 'activerecord.attributes.car'
+            %th= t :car_type, scope: 'activerecord.attributes.car'
+            %th
         %tbody
           - @application.cars.each do |car|
             %tr

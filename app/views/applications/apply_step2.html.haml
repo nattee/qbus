@@ -24,11 +24,12 @@
                 ผู้ประกอบการสามารถแนบไฟล์เอกสาร ขส. บ. 11 แทนการกรอกข้อมูลด้านล่างได้เช่นกัน
               %table.dataTables
                 %thead
-                  %th= t :province, scope: 'activerecord.attributes.car'
-                  %th= t :plate, scope: 'activerecord.attributes.car'
-                  %th= t :brand, scope: 'activerecord.attributes.car'
-                  %th= t :car_type, scope: 'activerecord.attributes.car'
-                  %th
+                  %tr
+                    %th= t :province, scope: 'activerecord.attributes.car'
+                    %th= t :plate, scope: 'activerecord.attributes.car'
+                    %th= t :brand, scope: 'activerecord.attributes.car'
+                    %th= t :car_type, scope: 'activerecord.attributes.car'
+                    %th
                 %tbody
                   - @application.cars.each do |car|
                     %tr
