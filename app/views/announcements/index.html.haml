@@ -8,10 +8,11 @@
         .dataTables_wrapper
           %table#table.dataTable.display
             %thead
-              %th= t(:title, scope: 'activerecord.attributes.announcement')
-              %th= t(:user, scope: 'activerecord.attributes.announcement')
-              %th= t(:published, scope: 'activerecord.attributes.announcement')
-              %th
+              %tr
+                %th= t(:title, scope: 'activerecord.attributes.announcement')
+                %th= t(:user, scope: 'activerecord.attributes.announcement')
+                %th= t(:published, scope: 'activerecord.attributes.announcement')
+                %th
             %tbody
               - @announcements.each do |announcement|
                 %tr
@@ -29,17 +30,16 @@
       .card-action
         = link_to t(:new), new_announcement_path, class: 'btn green waves-effect waves-light'
 
-:javascript
-  $(document).ready( function() {
+:coffee
+  $(document).ready ->
     $('#table').DataTable(
       $.extend(
         {
           'lengthChange': false,
           'columnDefs': [
-            {'orderable': false, 'targets':[2,3]}
+            {'orderable': false, 'targets':[2, 3]}
           ]
         },
         dataTableDefaultOption()
       )
-    );
-  });
+    )

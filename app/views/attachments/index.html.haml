@@ -8,23 +8,24 @@
         .dataTables_wrapper
           %table#table.dataTable.display
             %thead
-              %th= t(:filename, scope: 'activerecord.attributes.attachment')
-              %th= t(:attachment_type, scope: 'activerecord.attributes.attachment')
-              %th= t(:updated_at)
-              %th
-              %th
+              %tr
+                %th
+                  id
+                %th= t(:filename, scope: 'activerecord.attributes.attachment')
+                %th= t(:attachment_type, scope: 'activerecord.attributes.attachment')
+                %th
             %tbody
               - @attachments.each do |attachment|
                 %tr
+                  %td= attachment.id
                   %td= attachment.filename
                   %td= attachment.attachment_type_text
-                  %td= attachment.updated_at
-                  %td
-                    -if attachment.data.attached?
-                      = link_to t(:download), rails_blob_path(attachment.data, disposition: "attachment")
                   %td.right-align
                     %a{:href => attachment_path(attachment)}
                       %i.material-icons pageview
+                    -if attachment.data.attached?
+                      = link_to rails_blob_path(attachment.data, disposition: "attachment") do
+                        %i.material-icons file_download
                     %a{:href => edit_attachment_path(attachment)}
                       %i.material-icons edit
                     %a{"href" => attachment_path(attachment), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
@@ -32,17 +33,16 @@
       .card-action
         = link_to t(:new), new_attachment_path, class: 'btn green waves-effect waves-light'
 
-:javascript
-  $(document).ready( function() {
+:coffee
+  $(document).ready ->
     $('#table').DataTable(
       $.extend(
         {
           'lengthChange': false,
           'columnDefs': [
-            {'orderable': false, 'targets':[4,5]}
+            {'orderable': false, 'targets':[3]}
           ]
         },
         dataTableDefaultOption()
       )
-    );
-  });
+    )
