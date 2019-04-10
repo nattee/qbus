@@ -6,7 +6,7 @@
           %h6 วิธีใช้งาน
         ให้พิจารณาผลการประเมินของใบสมัคร จากรายละเอียด้านล่างนี้ โดยเฉพาะในหัวข้อผลการประเมิน หลังจากนั้นให้บันทึกผลการตัดสินโดยกรอกข้อมูลในฟอร์ม "การบันทึกผล" แล้วกดปุ่ม "ยืนยัน" เพื่อบันทึกข้อมูล
   .col.s12.m8.pull-m4
-    = form_with url: process_award_path(@application), local: true do |f|
+    = form_with url: process_award_path(@application), id: 'form-award', local: true do |f|
       .card
         .card-content
           .card-title
@@ -17,14 +17,17 @@
               .row
                 .col.s12
                   %label
-                    = radio_button_tag :result, 'ok'
+                    = radio_button_tag :result, 'ok', false, class: 'required'
                     %span ตัดสินให้ได้มาตรฐาน  Q-BUS
               .section
               .row
                 .col.s12
                   %label
-                    = radio_button_tag :result, 'no'
+                    = radio_button_tag :result, 'no', false, class: 'required'
                     %span ไม่ได้มาตรฐาน
+              .div.input-field#error-box{style: 'display: none;'}
+                %ul#error-list
+              .section
               .row
                 .input-field.col.s12
                   = f.text_area :award_remark, class: 'materialize-textarea'
@@ -147,3 +150,13 @@
           = render partial: "applications/cars"
 
 
+:javascript
+  $("#form-award").validate({
+    messages: {
+      result: 'โปรดระบุผลการตัดสิน'
+    },
+    errorContainer: '#error-box',
+    errorLabelContainer: '#error-list',
+    errorElement: 'div',
+    //wrapper: 'div'
+  });
