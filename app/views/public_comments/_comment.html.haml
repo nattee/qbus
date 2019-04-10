@@ -32,11 +32,17 @@
         = link_to t(:new), new_public_comment_path, class: 'btn green waves-effect waves-light'
 
 :coffee
-  $ ->
+  $(document).ready ->
     $('#table').DataTable(
       $.extend(
         {
-          "responsive": true,
+          'responsive': true,
+          'lengthChange': false,
+          'columnDefs': [
+            {'orderable': false, 'targets':-1},
+            {'responsivePriority': 1, 'targets': 0},
+            {'responsivePriority': 2, 'targets': -1}
+          ]
         },
         dataTableDefaultOption()
       )

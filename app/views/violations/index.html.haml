@@ -1,27 +1,47 @@
 .row
-  .col.s6.offset-s3
+  .col.s10.offset-s1
     .card
       .card-content.deep-purple
-        .card-title.white-text
-          %h1= t(:list) + t(:violation, scope: 'activerecord.models')
+        .card-title
+          %h4.white-text= t(:list) + t(:violation, scope: 'activerecord.models')
       .card-content
-        %ul.collection
-          - @violations.each do |violation|
-            %li.collection-item.avatar
-              %i.material-icons.circle warning
-              %span.title="#{violation.car.plate}"
-              %p
-                ="#{t(:count, scope: 'activerecord.attributes.violation')} #{violation.count}"
-                %br
-                ="#{t(:month_year, scope: 'activerecord.attributes.violation')} #{violation.month_year}"
-                %br
-                ="#{t(:datafile, scope: 'activerecord.attributes.violation')} #{violation.datafile.name}"
-              .secondary-content
-                %a{:href => violation_path(violation)}
-                  %i.material-icons pageview
-                %a{:href => edit_violation_path(violation)}
-                  %i.material-icons edit
-                %a{"href" => violation_path(violation), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
-                  %i.material-icons delete
+        .dataTables_wrapper
+          %table#table.dataTable.display
+            %thead
+              %tr
+                %th= t(:car, scope: 'activerecord.attributes.violation')
+                %th= t(:count, scope: 'activerecord.attributes.violation')
+                %th= t(:month_year, scope: 'activerecord.attributes.violation')
+                %th
+            %tbody
+              - @violations.each do |violation|
+                %tr
+                  %td= violation.car&.plate
+                  %td= violation.count
+                  %td= violation.month_year
+                  %td.right-align
+                    %a{:href => violation_path(violation)}
+                      %i.material-icons pageview
+                    %a{:href => edit_violation_path(violation)}
+                      %i.material-icons edit
+                    %a{"href" => violation_path(violation), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                      %i.material-icons delete
       .card-action
-        = link_to t(:new), new_violation_path
+        = link_to t(:new), new_violation_path, class: 'btn green waves-effect waves-light'
+
+:coffee
+  $(document).ready ->
+    $('#table').DataTable(
+      $.extend(
+        {
+          'responsive': true,
+          'lengthChange': false,
+          'columnDefs': [
+            {'orderable': false, 'targets': -1},
+            {'responsivePriority': 1, 'targets': 0},
+            {'responsivePriority': 2, 'targets': -1}
+          ]
+        },
+        dataTableDefaultOption()
+      )
+    )

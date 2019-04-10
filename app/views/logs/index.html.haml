@@ -1,23 +1,45 @@
 .row
-  .col.s6.offset-s3
+  .col.s10.offset-s1
     .card
       .card-content.deep-purple
-        .card-title.white-text
-          %h1= t(:list) + t(:log, scope: 'activerecord.models')
+        .card-title
+          %h4.white-text= t(:list) + t(:log, scope: 'activerecord.models')
       .card-content
-        %ul.collection
-          - @logs.each do |log|
-            %li.collection-item.avatar
-              %i.material-icons.circle library_books
-              %span.title="#{log.application.to_label}"
-              %p
-                ="#{t(:description, scope: 'activerecord.attributes.log')} #{log.description}"
-              .secondary-content
-                %a{:href => log_path(log)}
-                  %i.material-icons pageview
-                %a{:href => edit_log_path(log)}
-                  %i.material-icons edit
-                %a{"href" => log_path(log), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
-                  %i.material-icons delete
+        .dataTables_wrapper
+          %table#table.dataTable.display
+            %thead
+              %tr
+                %th= t(:application, scope: 'activerecord.attributes.log')
+                %th= t(:description, scope: 'activerecord.attributes.log')
+                %th
+            %tbody
+              - @logs.each do |log|
+                %tr
+                  %td= log.application&.to_label
+                  %td= log.description
+                  %td.right-align
+                    %a{:href => log_path(log)}
+                      %i.material-icons pageview
+                    %a{:href => edit_log_path(log)}
+                      %i.material-icons edit
+                    %a{"href" => log_path(log), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                      %i.material-icons delete
       .card-action
-        = link_to t(:new), new_log_path
+        = link_to t(:new), new_log_path, class: 'btn green waves-effect waves-light'
+
+:coffee
+  $(document).ready ->
+    $('#table').DataTable(
+      $.extend(
+        {
+          'responsive': true,
+          'lengthChange': false,
+          'columnDefs': [
+            {'orderable': false, 'targets': -1},
+            {'responsivePriority': 1, 'targets': 0},
+            {'responsivePriority': 2, 'targets': -1}
+          ]
+        },
+        dataTableDefaultOption()
+      )
+    )
