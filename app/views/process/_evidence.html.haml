@@ -21,6 +21,6 @@
               - if att.count > 0
                 = link_to rails_blob_path(att.first.data, disposition: "attachment") do
                   %i.material-icons.small insert_drive_file
-                  = t(:download)
+                  = att.first.data.filename
 
 

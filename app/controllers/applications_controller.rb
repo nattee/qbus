@@ -154,10 +154,17 @@ class ApplicationsController < ApplicationController
 
   #post
   def add_attachment
-    @attachment = Attachment.create(attachment_params)
+    unless attachment_params[:data]
+      redirect_to add_evidences_application_path(@application), flash: { error: "แนบหลักฐานไม่สำเร็จ ท่านไม่ได้เลือกไฟล์ที่ถูกต้อง"}
+      return
+    end
+    @attachment = @application.attachments.where(evidence: attachment_params[:evidence_id]).first
+    @attachment = Attachment.create(attachment_params) unless @attachment
+    @attachment.data.purge
     @attachment.data.attach(attachment_params[:data])
     @attachment.attachment_type = :criterium_evidence
     @attachment.save
+
     @application.attachments << @attachment
     @application.save
     redirect_to add_evidences_application_path(@application), notice: "แนบหลักฐาน #{@attachment.evidence.name} สำเร็จ"
