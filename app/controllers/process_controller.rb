@@ -28,11 +28,11 @@ class ProcessController < ApplicationController
   def registered_post
     if params[:result] == 'ok'
       @application.confirm_result = true
-      @application.confirm_comment = 'ใบสมัครถูกต้อง'
+      @application.confirm_comment = "ใบสมัครถูกต้อง"
       @application.confirm_registration
     elsif params[:result] == 'no'
       @application.confirm_result = false
-      @application.confirm_comment = "ใบสมัครไม่ถูกต้อง #{params[:register_result]}"
+      @application.confirm_comment = "#{params[:confirm_comment]}"
       @application.reject_registration
     else
     end
