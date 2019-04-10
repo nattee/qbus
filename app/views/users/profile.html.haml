@@ -12,9 +12,9 @@
         .section
           %h6= t(:email, scope: 'activerecord.attributes.user')
           = @current_user.email
-        .section
-          %h6= t(:activated, scope: 'activerecord.attributes.user')
-          = @current_user.activated
+        /.section
+        /  %h6= t(:activated, scope: 'activerecord.attributes.user')
+        /  = @current_user.activated
         .section
           %h6= t(:activated_at, scope: 'activerecord.attributes.user')
           = l(@current_user.activated_at, format: '%d %B %Y')
