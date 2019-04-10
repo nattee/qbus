@@ -56,8 +56,11 @@
                   = file_field_tag 'attachment[b11_data]'
                 .file-path-wrapper
                   = text_field_tag 'attachment[b11_file_name]', nil, class: 'file-path validate'
-            .col.s12.m3{style: 'padding-top: 70px;'}
-              = download_link @application.get_attachment(:b11), nil_text: nil
+            .col.s12.m3{style: 'font-size:0.8rem; padding-top: 20px;'}
+              - if @application.get_attachment(:b11)
+                อัพโหลดแล้วเมื่อ #{l(@application.get_attachment(:b11)&.data&.created_at, format: :short, default: nil)}
+                %br
+              = download_link @application.get_attachment(:b11), nil_text: nil, text: @application.get_attachment(:b11)&.data&.filename
               %br
           .row
             .col.s12.m3

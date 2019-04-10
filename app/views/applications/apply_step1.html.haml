@@ -61,8 +61,11 @@
                         = file_field_tag 'attachment[license_data]'
                       .file-path-wrapper
                         = text_field_tag 'attachment[license_file_name]', nil, class: 'file-path validate'
-                  .col.s12.m4{style: 'padding-top: 70px;'}
-                    = download_link @application.get_attachment(:license), nil_text: nil
+                  .col.s12.m4{style: 'font-size:0.8rem; padding-top: 20px;'}
+                    - if @application.get_attachment(:license)
+                      อัพโหลดแล้วเมื่อ #{l(@application.get_attachment(:license)&.data&.created_at, format: :short, default: nil)}
+                      %br
+                    = download_link @application.get_attachment(:license), nil_text: nil, text: @application.get_attachment(:license)&.data&.filename
                 .row
                   .col.s12.m8
                     %h6 สัญญาการเดินรถ
@@ -72,8 +75,11 @@
                         = file_field_tag 'attachment[contract_data]'
                       .file-path-wrapper
                         = text_field_tag 'attachment[contract_file_name]', nil, class: 'file-path validate'
-                  .col.s12.m4{style: 'padding-top: 70px;'}
-                    = download_link @application.get_attachment(:contract), nil_text: nil
+                  .col.s12.m4{style: 'font-size:0.8rem; padding-top: 20px;'}
+                    - if @application.get_attachment(:contract)
+                      อัพโหลดแล้วเมื่อ #{l(@application.get_attachment(:contract)&.data&.created_at, format: :short, default: nil)}
+                      %br
+                    = download_link @application.get_attachment(:contract), nil_text: nil, text: @application.get_attachment(:contract)&.data&.filename
                 .row
                   .col.s12.m8
                     %h6 หนังสือยืนยันการเข้าร่วมโครงการ
@@ -83,8 +89,11 @@
                         = file_field_tag 'attachment[signup_data]'
                       .file-path-wrapper
                         = text_field_tag 'attachment[signup_file_name]', nil, class: 'file-path validate'
-                  .col.s12.m4{style: 'padding-top: 70px;'}
-                    = download_link @application.get_attachment(:signup), nil_text: nil
+                  .col.s12.m4{style: 'font-size:0.8rem; padding-top: 20px;'}
+                    - if @application.get_attachment(:signup)
+                      อัพโหลดแล้วเมื่อ #{l(@application.get_attachment(:signup)&.data&.created_at, format: :short, default: nil)}
+                      %br
+                    = download_link @application.get_attachment(:signup), nil_text: nil, text: @application.get_attachment(:signup)&.data&.filename
 
 
               .divider
