@@ -8,11 +8,12 @@
         .dataTables_wrapper
           %table#table.dataTable.display
             %thead
-              %th= t(:route_no, scope: 'activerecord.attributes.public_comment')
-              %th= t(:car_plate, scope: 'activerecord.attributes.public_comment')
-              %th= t(:licensee_name, scope: 'activerecord.attributes.public_comment')
-              %th= t(:created_at)
-              %th
+              %tr
+                %th= t(:route_no, scope: 'activerecord.attributes.public_comment')
+                %th= t(:car_plate, scope: 'activerecord.attributes.public_comment')
+                %th= t(:licensee_name, scope: 'activerecord.attributes.public_comment')
+                %th= t(:created_at)
+                %th
             %tbody
               - @public_comments.each do |public_comment|
                 %tr
@@ -31,11 +32,17 @@
         = link_to t(:new), new_public_comment_path, class: 'btn green waves-effect waves-light'
 
 :coffee
-  $ ->
+  $(document).ready ->
     $('#table').DataTable(
       $.extend(
         {
-          "responsive": true,
+          'responsive': true,
+          'lengthChange': false,
+          'columnDefs': [
+            {'orderable': false, 'targets':-1},
+            {'responsivePriority': 1, 'targets': 0},
+            {'responsivePriority': 2, 'targets': -1}
+          ]
         },
         dataTableDefaultOption()
       )

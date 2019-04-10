@@ -11,10 +11,10 @@
           = @evaluation.application.to_label
         .section
           %h6= t(:criterium, scope: 'activerecord.attributes.evaluation')
-          = @evaluation.criterium.name
+          = @evaluation.criterium&.name
         .section
           %h6= t(:evaluator, scope: 'activerecord.attributes.evaluation')
-          = @evaluation.evaluator
+          = @evaluation.evaluator&.name
         .section
           %h6= t(:evaluation_date, scope: 'activerecord.attributes.evaluation')
           = @evaluation.evaluation_date

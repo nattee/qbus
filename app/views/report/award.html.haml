@@ -11,11 +11,12 @@
         .dataTables_wrapper
           %table#table.dataTable.display
             %thead
-              %th= t(:name, scope: 'activerecord.attributes.licensee')
-              %th= t(:route_no, scope: 'activerecord.attributes.route')
-              %th เส้นทาง
-              %th= t(:awarded_date, scope: 'activerecord.attributes.application')
-              %th คะแนนที่ได้
+              %tr
+                %th= t(:name, scope: 'activerecord.attributes.licensee')
+                %th= t(:route_no, scope: 'activerecord.attributes.route')
+                %th เส้นทาง
+                %th= t(:awarded_date, scope: 'activerecord.attributes.application')
+                %th คะแนนที่ได้
             %tbody
               - @apps.each do |app|
                 %tr

@@ -13,13 +13,14 @@
         %h4 ใบสมัครรอการตรวจสอบความถูกต้อง
         %table
           %thead
-            %th= t(:name, scope: 'activerecord.attributes.licensee')
-            %th= t(:route_no, scope: 'activerecord.attributes.route')
-            %th= t(:route, scope: 'activerecord.attributes.application')
-            %th วันที่ยื่นใบสมัคร
-            %th= t(:contact_short, scope: 'activerecord.attributes.application')
-            %th= t(:contact_tel_short, scope: 'activerecord.attributes.application')
-            %th
+            %tr
+              %th= t(:name, scope: 'activerecord.attributes.licensee')
+              %th= t(:route_no, scope: 'activerecord.attributes.route')
+              %th= t(:route, scope: 'activerecord.attributes.application')
+              %th วันที่ยื่นใบสมัคร
+              %th= t(:contact_short, scope: 'activerecord.attributes.application')
+              %th= t(:contact_tel_short, scope: 'activerecord.attributes.application')
+              %th
           %tbody
             - @to_be_confirmed.each do |app|
               %tr
@@ -40,15 +41,16 @@
             %h4 ใบสมัครที่ได้รับการตรวจสอบแล้ว (ภายใน 30 วันที่ผ่านมา)
             %table
               %thead
-                %th= t(:name, scope: 'activerecord.attributes.licensee')
-                %th= t(:route_no, scope: 'activerecord.attributes.route')
-                %th= t(:route, scope: 'activerecord.attributes.application')
-                %th วันที่ยื่นใบสมัคร
-                %th= t(:contact_short, scope: 'activerecord.attributes.application')
-                %th= t(:contact_tel_short, scope: 'activerecord.attributes.application')
-                %th= t(:confirmed_date, scope: 'activerecord.attributes.application')
-                %th= t(:confirm_comment, scope: 'activerecord.attributes.application')
-                %th
+                %tr
+                  %th= t(:name, scope: 'activerecord.attributes.licensee')
+                  %th= t(:route_no, scope: 'activerecord.attributes.route')
+                  %th= t(:route, scope: 'activerecord.attributes.application')
+                  %th วันที่ยื่นใบสมัคร
+                  %th= t(:contact_short, scope: 'activerecord.attributes.application')
+                  %th= t(:contact_tel_short, scope: 'activerecord.attributes.application')
+                  %th= t(:confirmed_date, scope: 'activerecord.attributes.application')
+                  %th= t(:confirm_comment, scope: 'activerecord.attributes.application')
+                  %th
               %tbody
                 - @latest_confirmed.each do |app|
                   %tr

@@ -7,14 +7,15 @@
             %h4 ใบสมัครรอข้อมูลการประเมิน
             %table
               %thead
-                %th= t(:name, scope: 'activerecord.attributes.licensee')
-                %th= t(:start, scope: 'activerecord.attributes.route')
-                %th= t(:destination, scope: 'activerecord.attributes.route')
-                %th วันที่ยื่นใบสมัคร
-                %th= t(:appointment_date, scope: 'activerecord.attributes.application')
-                %th= t(:appointment_remark, scope: 'activerecord.attributes.application')
-                %th กรอกแล้ว
-                %th
+                %tr
+                  %th= t(:name, scope: 'activerecord.attributes.licensee')
+                  %th= t(:start, scope: 'activerecord.attributes.route')
+                  %th= t(:destination, scope: 'activerecord.attributes.route')
+                  %th วันที่ยื่นใบสมัคร
+                  %th= t(:appointment_date, scope: 'activerecord.attributes.application')
+                  %th= t(:appointment_remark, scope: 'activerecord.attributes.application')
+                  %th กรอกแล้ว
+                  %th
               %tbody
                 - @to_be_evaluated.each do |app|
                   %tr
@@ -39,14 +40,15 @@
             %h5 ใบสมัครที่รับการประเมินล่าสุด (ภายใน 30 วันที่ผ่านมา)
             %table
               %thead
-                %th= t(:name, scope: 'activerecord.attributes.licensee')
-                %th= t(:start, scope: 'activerecord.attributes.route')
-                %th= t(:destination, scope: 'activerecord.attributes.route')
-                %th วันที่ยื่นใบสมัคร
-                %th= t(:state, scope: 'activerecord.attributes.application')
-                %th วันประเมิน
-                %th= t(:evaluation_result, scope: 'activerecord.attributes.application')
-                %th
+                %tr
+                  %th= t(:name, scope: 'activerecord.attributes.licensee')
+                  %th= t(:start, scope: 'activerecord.attributes.route')
+                  %th= t(:destination, scope: 'activerecord.attributes.route')
+                  %th วันที่ยื่นใบสมัคร
+                  %th= t(:state, scope: 'activerecord.attributes.application')
+                  %th วันประเมิน
+                  %th= t(:evaluation_result, scope: 'activerecord.attributes.application')
+                  %th
               %tbody
                 - @latest_evaluated.each do |app|
                   %tr

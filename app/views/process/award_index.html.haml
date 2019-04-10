@@ -14,14 +14,15 @@
             %h4 ใบสมัครรอการตัดสินผล
             %table
               %thead
-                %th= t(:name, scope: 'activerecord.attributes.licensee')
-                %th= t(:start, scope: 'activerecord.attributes.route')
-                %th= t(:destination, scope: 'activerecord.attributes.route')
-                %th วันที่ยื่นใบสมัคร
-                %th.right-align คะแนนรวม
-                %th.right-align คะแนนความปลอดภัย
-                %th แนะนำผล
-                %th
+                %tr
+                  %th= t(:name, scope: 'activerecord.attributes.licensee')
+                  %th= t(:start, scope: 'activerecord.attributes.route')
+                  %th= t(:destination, scope: 'activerecord.attributes.route')
+                  %th วันที่ยื่นใบสมัคร
+                  %th.right-align คะแนนรวม
+                  %th.right-align คะแนนความปลอดภัย
+                  %th แนะนำผล
+                  %th
               %tbody
                 - @to_be_awarded.each do |app|
                   %tr
@@ -40,13 +41,14 @@
             %h4 ใบสมัครล่าสุดที่ตัดสินผลแล้ว (ภายใน 30 วันที่ผ่านมา)
             %table
               %thead
-                %th= t(:name, scope: 'activerecord.attributes.licensee')
-                %th= t(:start, scope: 'activerecord.attributes.route')
-                %th= t(:destination, scope: 'activerecord.attributes.route')
-                %th วันที่ยื่นใบสมัคร
-                %th คะแนนรวม
-                %th ผลการตัดสิน
-                %th
+                %tr
+                  %th= t(:name, scope: 'activerecord.attributes.licensee')
+                  %th= t(:start, scope: 'activerecord.attributes.route')
+                  %th= t(:destination, scope: 'activerecord.attributes.route')
+                  %th วันที่ยื่นใบสมัคร
+                  %th คะแนนรวม
+                  %th ผลการตัดสิน
+                  %th
               %tbody
                 - @awarded_recent.each do |app|
                   %tr
