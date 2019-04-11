@@ -3,15 +3,15 @@
 one:
   name: licensee 1
   license_no: 12345
-  license_expire: <%= Time.zone.now %>
   car_count: 100
   contact: tester 1
   contact_tel: 0123456789
+  contact_email: licensee_one@example.com
 
 two:
   name: licensee 2
   license_no: 67890
-  license_expire: <%= Time.zone.now %>
   car_count: 50
   contact: tester 2
   contact_tel: 0987654321
+  contact_email: licensee_two@example.com

@@ -2,8 +2,12 @@
 
 one:
   filename: attachment 1
-  data:
+  application: one
+  evidence: one
+  attachment_type: 1
 
 two:
   filename: attachment 2
-  data:
+  application: two
+  evidence: two
+  attachment_type: 2

@@ -3,15 +3,21 @@
 one:
   plate: car plate 1
   chassis: car chassis 1
-  licensee: one
-  route: one
   last_accident: <%= Time.zone.now %>
   last_accident_desc: accident 1
+  car_type: bus
+  application: one
+  province: heaven
+  brand: creamy red
+  side_number: 1
 
 two:
   plate: car plate 2
   chassis: car chassis 2
-  licensee: two
-  route: two
   last_accident: <%= Time.zone.now %>
   last_accident_desc: accident 2
+  car_type: taxi
+  application: two
+  province: hell
+  brand: white blue
+  side_number: 2
