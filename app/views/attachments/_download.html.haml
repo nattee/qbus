@@ -1,3 +1,6 @@
 = link_to rails_blob_path(attachment.data, disposition: "attachment") do
   %i.material-icons.small insert_drive_file
-  = t(:download)
+  - if text
+    = text
+  - else
+    = t(:download)

@@ -25,25 +25,25 @@
         เมื่อแนบหลักฐานครบแล้ว ให้กดปุ่ม "ยืนยันหลักฐาน" ด้านล่างนี้
   .col.s12.m8.pull-m4
     .card
-      = simple_form_for @attachment, url: add_attachment_application_path(@application), method: :post , html: { multipart: true } do |f|
+      = simple_form_for @attachment, url: add_attachment_application_path(@application), method: :post , html: { class: 'form_validate', multipart: true } do |f|
         .card-content
           %h4 แนบหลักฐาน
           .row
             .input-field.col.s12
               - #= f.input_field :criterium_attachment_id, data: {constrainwidth: 'false'}, collection: @application.sorted_attachments.map {|x| ["(#{x.criterium_attachment.criterium.name}) #{x.criterium_attachment.name}",x.criterium_attachment_id] }
-              = f.input_field :evidence_id, data: {constrainwidth: 'false'}, collection: Evidence.all.each {|x| [x.name,x.id] }
+              = f.input_field :evidence_id, data: {constrainwidth: 'false'},  collection: Evidence.all.each {|x| [x.name,x.id] }, class: 'required'
               = f.label 'ประเภทหลักฐาน'
           .row
             .col.s12
               .input-field.file-field
-                .btn.gradient-45deg-deep-orange-orange
+                .btn.green
                   %span เลือกไฟล์
                   = f.file_field :data
                 .file-path-wrapper
                   = f.input_field :filename, class: 'file-path validate'
           .row
             .col.s12
-              = f.button :submit, 'ส่งไฟล์แนบ', class: "btn waves-light left gradient-45deg-deep-orange-orange"
+              = f.button :submit, 'ส่งไฟล์แนบ', class: "btn waves-light left green"
         .card-action
           = link_to 'ยืนยันหลักฐาน', finish_add_evidences_application_path(@application), class: 'btn waves-effect waves-light gradient-45deg-purple-deep-purple', data: {confirm: 'เมื่อยืนยันแล้ว จะไม่สามารถแก้ไขเพิ่มเติมหลักฐานได้อีก ท่านจะยืนยันหรือไม่?'}
 :css

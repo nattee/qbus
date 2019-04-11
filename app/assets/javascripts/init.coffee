@@ -74,8 +74,9 @@ $(document).ready ->
 
   #$('.dataTable').DataTable()
   #should be called directly in each page because of different options
-  
+
   #validation
+  # default validation
   $('.form_validate').validate
     errorElement: 'div'
     errorPlacement: (error, element) ->

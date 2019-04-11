@@ -154,10 +154,17 @@ class ApplicationsController < ApplicationController
 
   #post
   def add_attachment
-    @attachment = Attachment.create(attachment_params)
+    unless attachment_params[:data]
+      redirect_to add_evidences_application_path(@application), flash: { error: "แนบหลักฐานไม่สำเร็จ ท่านไม่ได้เลือกไฟล์ที่ถูกต้อง"}
+      return
+    end
+    @attachment = @application.attachments.where(evidence: attachment_params[:evidence_id]).first
+    @attachment = Attachment.create(attachment_params) unless @attachment
+    @attachment.data.purge
     @attachment.data.attach(attachment_params[:data])
     @attachment.attachment_type = :evidence
     @attachment.save
+
     @application.attachments << @attachment
     @application.save
     redirect_to add_evidences_application_path(@application), notice: "แนบหลักฐาน #{@attachment.evidence.name} สำเร็จ"
@@ -236,7 +243,7 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(:number, :user, :state, :licensee, :route, :category, :appointment_date, :appointment_remark, :appointment_user, :evaluation_finish_date, :award_date, :award, :award_remark, :contact, :contact_tel, :confirmed_date, :awarded_date,:evaluated_date, :submitted_date, :car_count, :trip_count, :license_no, :license_expire, :contact_email)
+      params.require(:application).permit(:number, :user, :state, :licensee, :route, :category, :appointment_date, :appointment_remark, :appointment_user, :evaluation_finish_date, :award_date, :award, :award_remark, :contact, :contact_tel, :confirmed_date, :awarded_date,:evaluated_date, :submitted_date, :car_count, :trip_count, :license_no, :license_expire, :contact_email, :service_area)
     end
 
     def route_params

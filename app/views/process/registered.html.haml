@@ -9,23 +9,20 @@
     .card
       .card-content
         %h4 ตรวจใบสมัคร
-        = form_with url: confirm_process_register_path(@application), id: 'form-register', local: true do |f|
+        = form_with url: confirm_process_register_path(@application), id: 'form-register', local: true  do |f|
           .row
             .col.s12
               %label
-                = f.radio_button :result, 'ok'
+                = f.radio_button :result, 'ok', class: 'required'
                 %span ใบสมัครถูกต้อง
           .section
           .row
             .col.s12
               %label
-                = f.radio_button :result, 'no'
+                = f.radio_button :result, 'no', class: 'required'
                 %span ใบสมัครไม่ถูกต้อง
-          .div#error-text{style: 'display: none;'}
-            %ul
-              %li
-                %label กรุณาเลือกผลการตรวจสอบ
-            qwerqwer
+          .div.input-field#error-box{style: 'display: none;'}
+            %ul#error-list
           .row
             .input-field.col.s12
               = f.text_area :confirm_comment, {value: @application.confirm_comment, class: 'materialize-textarea'}
@@ -33,7 +30,7 @@
           .section
           .row
             .col.s12
-              = f.button 'ยืนยันผลการประเมิน', class: 'waves-effect waves-light btn gradient-45deg-purple-deep-purple'
+              = f.button 'ยืนยันผลการตรวจ', class: 'waves-effect waves-light btn gradient-45deg-purple-deep-purple', data: {confirm: 'เมื่อยืนยันแล้วจะไม่สามารถแก้ไขผลการตรวจได้อีก ยืนยันหรือไม่'}
               - #= link_to 'ย้อนกลับ', process_registers_path, class: 'waves-effect waves-light orange btn'
 .row
   .col.s12
@@ -42,14 +39,12 @@
         = render partial: 'applications/application'
 
 :javascript
-  var container = $('#error-text');
   $("#form-register").validate({
-    rules: {
-      result: {
-        required: true
-      }
+    messages: {
+      result: 'โปรดระบุผลการตรวจ'
     },
-    errorContainer: $('#error-text'),
-    errorLabelContainer: $('ul',container),
-    wrapper: 'li'
+    errorContainer: '#error-box',
+    errorLabelContainer: '#error-list',
+    errorElement: 'div',
+    //wrapper: 'div'
   });

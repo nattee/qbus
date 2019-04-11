@@ -20,7 +20,7 @@
                   %td= user.email
                   %td= user.role_summary
                   %td.right-align
-                    %a{:href => route_path(route)}
+                    %a{:href => user_path(user)}
                       %i.material-icons pageview
                     %a{:href => edit_user_path(user)}
                       %i.material-icons edit

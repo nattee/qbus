@@ -49,7 +49,7 @@
                   %th= t(:contact_short, scope: 'activerecord.attributes.application')
                   %th= t(:contact_tel_short, scope: 'activerecord.attributes.application')
                   %th= t(:confirmed_date, scope: 'activerecord.attributes.application')
-                  %th= t(:confirm_comment, scope: 'activerecord.attributes.application')
+                  %th= t(:confirm_result, scope: 'activerecord.attributes.application')
                   %th
               %tbody
                 - @latest_confirmed.each do |app|
@@ -61,7 +61,14 @@
                     %td= app.contact
                     %td= app.contact_tel
                     %td= l(app.confirmed_date, format: '%d %b %Y')
-                    %td= app.confirm_comment
+                    %td
+                      - if app.confirm_result == true
+                        %span.green-text ใบสมัครถูกต้อง
+                      - elsif app.confirm_result == false
+                        %p.red-text.tooltipped{data: {tooltip: app.confirm_comment, position: 'bottom'}}
+                          %i.material-icons.left error
+                          ใบสมัครไม่ถูกต้อง
+                      
                     %td
                       = link_to 'แก้ไข', process_register_path(app), class: 'button waves-effect waves-light btn-small gradient-45deg-deep-orange-orange'
 
