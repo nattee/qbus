@@ -1,12 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   car: one
   count: 1
   month_year: <%= Time.zone.now %>
   datafile: one
 
 two:
+  id: 2
   car: two
   count: 1
   month_year: <%= Time.zone.now %>

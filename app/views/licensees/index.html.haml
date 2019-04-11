@@ -13,6 +13,7 @@
                 %th= t(:name, scope: 'activerecord.attributes.licensee')
                 %th= t(:contact, scope: 'activerecord.attributes.licensee')
                 %th= t(:contact_tel, scope: 'activerecord.attributes.licensee')
+                %th= t(:contact_email, scope: 'activerecord.attributes.licensee')
                 %th
             %tbody
               - @licensees.each do |licensee|
@@ -21,6 +22,7 @@
                   %td= licensee.name
                   %td= licensee.contact
                   %td= licensee.contact_tel
+                  %td= licensee.contact_email
                   %td.right-align
                     %a{:href => licensee_path(licensee)}
                       %i.material-icons pageview

@@ -18,6 +18,7 @@ class Application < ApplicationRecord
   has_many :evaluations, dependent: :destroy
   has_many :attachments, dependent: :destroy
   has_many :cars, dependent: :destroy
+  has_many :logs, dependent: :nullify
 
   #scope
   #for user

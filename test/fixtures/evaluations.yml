@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   application: one
   criterium: one
   evaluator: one
@@ -9,6 +10,7 @@ one:
   description: result passed
 
 two:
+  id: 2
   application: two
   criterium: two
   evaluator: two

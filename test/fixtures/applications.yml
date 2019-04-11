@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   number: application num 1
   user: one
   state: 1
@@ -62,6 +63,7 @@ one:
   extend: false
 
 two:
+  id: 2
   number: application num 2
   user: two
   state: 2

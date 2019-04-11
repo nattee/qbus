@@ -17,7 +17,7 @@ class LicenseesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create licensee" do
     assert_difference('Licensee.count') do
-      post licensees_url, params: { licensee: { car_count: @licensee.car_count, contact: @licensee.contact, contact_tel: @licensee.contact_tel, license_expire: @licensee.license_expire, license_no: @licensee.license_no, name: @licensee.name } }
+      post licensees_url, params: { licensee: { name: 'test new', license_no: 'test new no', car_count: 'test new car count', contact: 'test new contact', contact_tel: 'test new contact tel', contact_email: 'test new contact email' } }
     end
 
     assert_redirected_to licensee_url(Licensee.last)
@@ -34,7 +34,7 @@ class LicenseesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update licensee" do
-    patch licensee_url(@licensee), params: { licensee: { car_count: @licensee.car_count, contact: @licensee.contact, contact_tel: @licensee.contact_tel, license_expire: @licensee.license_expire, license_no: @licensee.license_no, name: @licensee.name } }
+    patch licensee_url(@licensee), params: { licensee: { id: 1, name: 'test edit', license_no: 'test edit no', car_count: 'test edit car count', contact: 'test edit contact', contact_tel: 'test edit contact tel', contact_email: 'test edit contact email' } }
     assert_redirected_to licensee_url(@licensee)
   end
 

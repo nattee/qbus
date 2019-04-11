@@ -17,7 +17,7 @@ class PublicCommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create public_comment" do
     assert_difference('PublicComment.count') do
-      post public_comments_url, params: { public_comment: {  } }
+      post public_comments_url, params: { public_comment: { route_no: 'a', car_plate: 'x', licensee_name: 'o', comment: 'abc', commenter_name: 'name', commenter_contact: 'contact', commenter_address: 'address' } }
     end
 
     assert_redirected_to public_comment_url(PublicComment.last)
@@ -34,7 +34,7 @@ class PublicCommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update public_comment" do
-    patch public_comment_url(@public_comment), params: { public_comment: {  } }
+    patch public_comment_url(@public_comment), params: { public_comment: { route_id: 2, car_id: 2, licensee_id: 2 } }
     assert_redirected_to public_comment_url(@public_comment)
   end
 

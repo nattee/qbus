@@ -3,6 +3,9 @@ class Announcement < ApplicationRecord
   has_one_attached :main_attachment
   has_many_attached :other_attachments
 
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :user, presence: true
   validates :main_attachment, content_type: Rails.configuration.attachment_content_type, size: { less_than: Rails.configuration.attachment_max_size}
   validates :other_attachments, content_type: Rails.configuration.attachment_content_type, size: { less_than: Rails.configuration.attachment_max_size}, limit: { max: Rails.configuration.attachment_max_file }
 

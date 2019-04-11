@@ -1,12 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   filename: attachment 1
   application: one
   evidence: one
   attachment_type: 1
 
 two:
+  id: 2
   filename: attachment 2
   application: two
   evidence: two

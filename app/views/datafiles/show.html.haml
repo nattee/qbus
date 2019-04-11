@@ -14,7 +14,7 @@
           = @datafile.month_year
         .section
           %h6= t(:user, scope: 'activerecord.attributes.datafile')
-          = @datafile.user.name
+          = @datafile.user&.name
       .card-action
         = link_to t(:edit), edit_datafile_path(@datafile)
         = link_to t(:back), datafiles_path

@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   plate: car plate 1
   chassis: car chassis 1
   last_accident: <%= Time.zone.now %>
@@ -12,6 +13,7 @@ one:
   side_number: 1
 
 two:
+  id: 2
   plate: car plate 2
   chassis: car chassis 2
   last_accident: <%= Time.zone.now %>

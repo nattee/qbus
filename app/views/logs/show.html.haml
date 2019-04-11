@@ -8,7 +8,7 @@
       .card-content
         .section
           %h6= t(:application, scope: 'activerecord.attributes.log')
-          = @log.application.to_label
+          = @log.application&.to_label
         .section
           %h6= t(:description, scope: 'activerecord.attributes.log')
           = @log.description

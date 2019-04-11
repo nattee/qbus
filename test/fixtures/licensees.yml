@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   name: licensee 1
   license_no: 12345
   car_count: 100
@@ -9,6 +10,7 @@ one:
   contact_email: licensee_one@example.com
 
 two:
+  id: 2
   name: licensee 2
   license_no: 67890
   car_count: 50

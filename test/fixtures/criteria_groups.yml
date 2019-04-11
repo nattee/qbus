@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   name: cg 1
   group_weight: 1
 
 two:
+  id: 2
   name: cg 2
   group_weight: 2
