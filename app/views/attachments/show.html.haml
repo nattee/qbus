@@ -13,14 +13,18 @@
           %h6= t(:attachment_type, scope: 'activerecord.attributes.attachment')
           = t(@attachment.attachment_type, scope: 'activerecord.attributes.attachment.attachment_types')
         .section
-          %h6= t(:criterium_attachment, scope: 'activerecord.attributes.attachment')
-          = @attachment.criterium_attachment&.name
+          %h6= t(:evidence, scope: 'activerecord.attributes.attachment')
+          = @attachment.evidence&.name
         .section
           %h6= t(:application, scope: 'activerecord.attributes.attachment')
           = @attachment.application.to_label
         .section
           %h6= t(:data, scope: 'activerecord.attributes.attachment')
-          = link_to t(:download), rails_blob_path(@attachment.data, disposition: "attachment")
+          - if @attachment.data&.attached?
+            = link_to t(:download), rails_blob_path(@attachment.data, disposition: "attachment")
+          - else
+            %span
+              [no data]
       .card-action
         = link_to t(:edit), edit_attachment_path(@attachment)
         = link_to t(:back), attachments_path

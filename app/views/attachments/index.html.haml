@@ -23,7 +23,7 @@
                   %td.right-align
                     %a{:href => attachment_path(attachment)}
                       %i.material-icons pageview
-                    -if attachment.data.attached?
+                    - if attachment.data&.attached?
                       = link_to rails_blob_path(attachment.data, disposition: "attachment") do
                         %i.material-icons file_download
                     %a{:href => edit_attachment_path(attachment)}

@@ -19,11 +19,24 @@
           %h6= t(:published, scope: 'activerecord.attributes.announcement')
           = @announcement.published
         .section
-          %h6= t(:attachment, scope: 'activerecord.attributes.announcement')
-          - if @announcement.attachment&.data&.attached? == true
-            = link_to t(:download), rails_blob_path(@announcement.attachment.data, disposition: "attachment")
-          - else
-            %span [no data]
+          %h6= t(:main_attachment, scope: 'activerecord.attributes.announcement')
+          - if @announcement.main_attachment&.attached? == true
+            %span
+              =@announcement.main_attachment.filename
+              %a{:href => rails_blob_path(@announcement.main_attachment, disposition: "attachment")}
+                %i.material-icons file_download
+              %a{:href => delete_main_attachment_announcement_path(@announcement), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                %i.material-icons delete
+        .section
+          %h6= t(:other_attachments, scope: 'activerecord.attributes.announcement')
+          - if @announcement.other_attachments&.attached? == true
+            - @announcement.other_attachments.each do |other_attachment|
+              %p
+                = other_attachment.filename
+                %a{:href => rails_blob_path(other_attachment, disposition: "attachment")}
+                  %i.material-icons file_download
+                %a{:href => delete_other_attachments_announcement_path(@announcement, other_attachment.id), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                  %i.material-icons delete
       .card-action
         = link_to t(:edit), edit_announcement_path(@announcement)
         = link_to t(:back), announcements_path

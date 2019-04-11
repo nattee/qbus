@@ -156,7 +156,7 @@ class ApplicationsController < ApplicationController
   def add_attachment
     @attachment = Attachment.create(attachment_params)
     @attachment.data.attach(attachment_params[:data])
-    @attachment.attachment_type = :criterium_evidence
+    @attachment.attachment_type = :evidence
     @attachment.save
     @application.attachments << @attachment
     @application.save

@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   resources :announcements do
     member do
       get 'publish'
+      delete 'main_attachment', to: 'announcements#delete_main_attachment', as: 'delete_main_attachment'
+      delete 'other_attachments/:attachment_id', to: 'announcements#delete_other_attachments', as: 'delete_other_attachments'
     end
   end
   get 'public_announcement', to: 'announcements#lists'

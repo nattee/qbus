@@ -9,6 +9,7 @@
 # purge ActiveStorage data
 ActiveStorage::Attachment.all.each { |attachment| attachment.purge }
 
+Announcement.destroy_all
 Evaluation.destroy_all
 Attachment.destroy_all
 Car.destroy_all
@@ -18,7 +19,6 @@ Datafile.destroy_all
 Route.destroy_all
 Licensee.destroy_all
 User.destroy_all
-CriteriumAttachment.destroy_all
 Criterium.destroy_all
 CriteriaGroup.destroy_all
 Evidence.destroy_all
@@ -241,6 +241,6 @@ Dir.glob(folder+'*').each do |fn|
   filename = File.basename(fn)
   a = filename[0...(filename.index('.'))].to_i
   puts "adding [#{fn}] to the first application"
-  att = Attachment.create(application: a1, attachment_type: :criterium_evidence, evidence_id: a)
+  att = Attachment.create(application: a1, attachment_type: :evidence, evidence_id: a)
   att.data.attach io: File.open(fn),filename: filename
 end
