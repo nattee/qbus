@@ -45,6 +45,12 @@
             .col.s12
               = f.button :submit, 'ส่งไฟล์แนบ', class: "btn waves-light left green"
         .card-action
+          ท่านได้ส่งเอกสารมาแล้ว 
+          %span.strong #{@missing[:present]}
+          เอกสาร จากที่ต้องการทั้งหมด
+          %span.strong #{@missing[:total]}
+          เอกสาร
+          .section
           = link_to 'ยืนยันหลักฐาน', finish_add_evidences_application_path(@application), class: 'btn waves-effect waves-light gradient-45deg-purple-deep-purple', data: {confirm: 'เมื่อยืนยันแล้ว จะไม่สามารถแก้ไขเพิ่มเติมหลักฐานได้อีก ท่านจะยืนยันหรือไม่?'}
 :css
   .tabs .tab a:hover {
@@ -78,8 +84,12 @@
           - last_cg = nil
           - CriteriaGroup.need_evidence.each do |cg|
             %li.tab.black-text
-              %a.black-text{href: "#tab_cg#{cg.id}"} #{cg.name_trim}
-            .indicator.black-text{style: "z-index:1"}
+              %a.black-text{href: "#tab_cg#{cg.id}"}
+                #{cg.name_trim}
+                - if @missing[cg.id][:ok]
+                  (หลักฐานครบ)
+                - else
+                  (#{@missing[cg.id][:present]}/#{@missing[cg.id][:total]})
       - CriteriaGroup.need_evidence.each do |cg|
         %div{ id: "tab_cg#{cg.id}"}
           .card-content.teal.lighten-5

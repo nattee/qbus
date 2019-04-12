@@ -160,6 +160,32 @@ class Application < ApplicationRecord
     attachments.where(attachment_type: type).first
   end
 
+  def count_missing_attachments
+    result = {has: [],total: 0, present: 0}
+    CriteriaGroup.need_evidence.each do |cg|
+      total = 0
+      present = 0
+      cg.criterium.each do |ci|
+        ci.evidences.each do |ev|
+          c =  attachments.where(evidence: ev).count
+          result[:has][ev.id] = true if c > 0
+          total += 1
+          present += c
+        end
+      end
+      result[:total] += total
+      result[:present] += present
+      result[cg.id] = {total: total, present: present}
+    end
+    #hard code for checking all evidence of cri 1.1
+    if result[:has][1] and result[:has][2] and result[:has][3]
+      result[:cri11ok] = true
+    else
+      result[:cri11ok] = false
+    end
+    return result
+  end
+
 
 
   #state manipulation

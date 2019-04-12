@@ -150,6 +150,7 @@ class ApplicationsController < ApplicationController
   def add_evidences
     @application.add_missing_attachments
     @attachment = Attachment.new
+    @missing = @application.count_missing_attachments
   end
 
   #post
