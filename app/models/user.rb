@@ -46,7 +46,7 @@ class User < ApplicationRecord
   end
 
   def send_activation_email
-    #UserMailer.account_activation(self).deliver_now
+    UserMailer.account_activation(self).deliver_now
   end
 
   # Returns true if the given token matches the digest.
@@ -70,7 +70,7 @@ class User < ApplicationRecord
   def is_official?
     return has_role(:committee) || has_role(:surveyor) || has_role(:evaluator) || has_role(:verifier)
   end
-  
+
   def role_array
     roles.to_hash.select{ |k,v| v.to_s == '1'}.keys.map { |k| I18n.t(k, scope: 'activerecord.attributes.user') }
   end
