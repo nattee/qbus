@@ -68,10 +68,10 @@
           .card-content.orange.lighten-5
             - last_cg = nil
             - @application.evaluation_main.each do |ev|
-              - if ev.criterium.criteria_group != last_cg
+              - if ev.criterium&.criteria_group != last_cg
                 - if last_cg != nil
                   .divider
-                - last_cg = ev.criterium.criteria_group
+                - last_cg = ev.criterium&.criteria_group
                 .row
                   .col.s12
                     %h5= last_cg.name
@@ -84,13 +84,13 @@
                     คำอธิบายผลการประเมิน
               .row
                 .col.s7
-                  = "#{ev.criterium.number}. #{ev.criterium.name}"
+                  = "#{ev.criterium&.number}. #{ev.criterium&.name}"
                   %br
                   .row
                     .col.s2
                     .col.s7.strong หลักฐานที่แนบมาด้วย
                     .col.s3
-                  - ev.criterium.evidences.each do |evid|
+                  - ev.criterium&.evidences.each do |evid|
                     .row
                       .col.s2
                       .col.s7

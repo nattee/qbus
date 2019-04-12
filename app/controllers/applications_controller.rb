@@ -148,7 +148,6 @@ class ApplicationsController < ApplicationController
 
   #attachment index
   def add_evidences
-    @application.add_missing_attachments
     @attachment = Attachment.new
   end
 

@@ -1,6 +1,6 @@
 .row
   .col.s12
-    - if @current_user.has_role(:licensee)
+    - if @current_user&.has_role(:licensee)
       .row
         .col.s12.m12
           .card
@@ -122,7 +122,7 @@
                             %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'extend-app',url: extend_from_application_url(app)}} ต่ออายุ
               - else
                 ไม่มีใบสมัครที่ดำเนินการเสร็จแล้ว
-    - if @current_user.is_official?
+    - if @current_user&.is_official?
       .row
         .col.s12.m12
           .card

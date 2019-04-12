@@ -19,7 +19,7 @@
               %tbody
                 - @to_be_evaluated.each do |app|
                   %tr
-                    %td= app.licensee.name
+                    %td= app.licensee&.name
                     %td= app.route_start
                     %td= app.route_destination
                     %td= l(app.created_at, format: '%d %b %y')
@@ -52,7 +52,7 @@
               %tbody
                 - @latest_evaluated.each do |app|
                   %tr
-                    %td= app.licensee.name
+                    %td= app.licensee&.name
                     %td= app.route_start
                     %td= app.route_destination
                     %td= l(app.created_at, format: '%d %b %Y')

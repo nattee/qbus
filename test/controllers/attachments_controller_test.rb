@@ -17,7 +17,7 @@ class AttachmentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create attachment" do
     assert_difference('Attachment.count') do
-      post attachments_url, params: { attachment: {  } }
+      post attachments_url, params: { attachment: { filename: 'new file', application_id: 1, attachment_type: 1, evidence_id: 1, data: fixture_file_upload(Rails.root.join('test', 'fixtures', 'files', 'test.png'), 'image/png') } }
     end
 
     assert_redirected_to attachment_url(Attachment.last)
@@ -34,7 +34,7 @@ class AttachmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update attachment" do
-    patch attachment_url(@attachment), params: { attachment: {  } }
+    patch attachment_url(@attachment), params: { attachment: { id: 1, filename: 'edit file', application_id: 2, attachment_type: 2, evidence_id: 2, data: fixture_file_upload(Rails.root.join('test', 'fixtures', 'files', 'test.png'), 'image/png') } }
     assert_redirected_to attachment_url(@attachment)
   end
 

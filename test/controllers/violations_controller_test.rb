@@ -17,8 +17,7 @@ class ViolationsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create violation" do
     assert_difference('Violation.count') do
-      new_violation = { count: 3, month_year: Time.zone.now }
-      post violations_url, params: { violation: new_violation }
+      post violations_url, params: { violation: { count: 3, month_year: Time.zone.now, datafile_id: 1, car_id: 1 } }
     end
 
     assert_redirected_to violation_url(Violation.last)
@@ -35,7 +34,7 @@ class ViolationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update violation" do
-    patch violation_url(@violation), params: { violation: { count: 5 } }
+    patch violation_url(@violation), params: { violation: { id: 1, count: 3, month_year: Time.zone.now, datafile_id: 2, car_id: 2 } }
     assert_redirected_to violation_url(@violation)
   end
 

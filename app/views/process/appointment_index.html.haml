@@ -18,7 +18,7 @@
               %tbody
                 - @to_be_appointed.each do |app|
                   %tr
-                    %td= app.licensee.name
+                    %td= app.licensee&.name
                     %td= app.route_start
                     %td= app.route_destination
                     %td= l(app.created_at, format: :short_date, default: nil)
@@ -52,7 +52,7 @@
               %tbody
                 - @to_be_visited.each do |app|
                   %tr
-                    %td= app.licensee.name
+                    %td= app.licensee&.name
                     %td= app.route_start
                     %td= app.route_destination
                     %td= l(app.created_at, format: :short_date, default: nil)
@@ -85,7 +85,7 @@
               %tbody
                 - @latest_visited.each do |app|
                   %tr
-                    %td= app.licensee.name
+                    %td= app.licensee&.name
                     %td= app.route_start
                     %td= app.route_destination
                     %td= l(app.created_at, format: :short_date, default: nil)

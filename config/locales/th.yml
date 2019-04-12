@@ -35,7 +35,7 @@ th:
   errors:
     messages:
       content_type_invalid: ไม่รองรับไฟล์ประเภทนี้
-      limit_out_of_range: มีขนาดใหญ่เกินไป
+      limit_out_of_range: มีจำนวนมากเกินไป
   qbus:
     application:
       category1: รถโดยสารประจำทาง หมวด 2

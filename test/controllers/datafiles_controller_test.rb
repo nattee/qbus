@@ -17,7 +17,7 @@ class DatafilesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create datafile" do
     assert_difference('Datafile.count') do
-      post datafiles_url, params: { datafile: {  } }
+      post datafiles_url, params: { datafile: { name: 'new name', month_year: 1.day.ago, user_id: 1 } }
     end
 
     assert_redirected_to datafile_url(Datafile.last)
@@ -34,7 +34,7 @@ class DatafilesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update datafile" do
-    patch datafile_url(@datafile), params: { datafile: {  } }
+    patch datafile_url(@datafile), params: { datafile: { id: 1, name: 'edit name', month_year: 1.week.ago, user_id: 2 } }
     assert_redirected_to datafile_url(@datafile)
   end
 
