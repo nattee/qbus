@@ -9,6 +9,8 @@ class SessionsController < ApplicationController
   def register_post
     register_params = params.require(:user).permit(:name, :email, :tel, :password, :password_confirmation)
     @user = User.new(register_params)
+    @user.licensee = 1
+
     respond_to do |format|
       if @user.save
         @user.send_activation_email

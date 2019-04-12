@@ -1,0 +1,28 @@
+
+.row
+  .col.s6.offset-s3
+    .container
+      .card-panel
+        %h3 ลืมรหัสผ่าน
+        %p#notice= notice
+        = simple_form_for(:password_reset, :url => password_resets_path, :method => :post) do |f|
+          - if f.error_notification
+            .row
+              .col.s12
+                .card-alert.card.gradient-45deg-red-pink
+                  .card-content.white-text
+                    %i.material-icons.prefix error
+                    = strip_tags(f.error_notification)
+                  %button.close.white-text{type: "button", data: {dismiss: 'alert'}, :area-label => 'Close'}
+                    %span{:area-hidden => 'true'} ×
+          .row
+            .col.s12
+              .row
+                .input-field.col.s12
+                  %i.material-icons.prefix email
+                  = f.input_field :email
+                  = f.label :email
+          .row
+            .input-field.col.s12
+              = f.submit 'รีเซ็ตรหัสผ่าน', class: 'btn border-round col s12 gradient-45deg-purple-deep-purple'
+%p

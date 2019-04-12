@@ -26,6 +26,5 @@ class UserRegisterTest < ActionDispatch::IntegrationTest
       } }
     end
     assert_redirected_to root_url
-    assert is_logged_in?
   end
 end

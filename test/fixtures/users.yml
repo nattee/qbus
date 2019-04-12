@@ -12,8 +12,8 @@ one:
 
 two:
   id: 2
-  name: test1@gmail.com
-  email: test1@gmail.com
+  name: test2@gmail.com
+  email: test2@gmail.com
   password_digest: <%= User.digest('testtest') %>
   activation_digest: <%= User.digest('testtest') %>
   roles: '{"admin": "0", "verifier": "0", "surveyor": "1"}'

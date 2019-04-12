@@ -1,0 +1,34 @@
+
+.row
+  .col.s6.offset-s3
+    .container
+      .card-panel
+        %h3 รีเซ็ตรหัสผ่าน
+        %p#notice= notice
+        = simple_form_for(@user, :url => password_reset_path(params[:id])) do |f|
+          - if f.error_notification
+            .row
+              .col.s12
+                .card-alert.card.gradient-45deg-red-pink
+                  .card-content.white-text
+                    %i.material-icons.prefix error
+                    = strip_tags(f.error_notification)
+                  %button.close.white-text{type: "button", data: {dismiss: 'alert'}, :area-label => 'Close'}
+                    %span{:area-hidden => 'true'} ×
+          = hidden_field_tag :email, @user.email
+          .row
+            .input-field.col.s12
+              %i.material-icons.prefix lock
+              = f.input_field :password
+              = f.label :password
+              = f.full_error :password
+          .row
+            .input-field.col.s12
+              %i.material-icons.prefix lock
+              = f.input_field :password_confirmation
+              = f.label :password_confirmation
+              = f.full_error :password_confirmation
+          .row
+            .input-field.col.s12
+              = f.submit 'เปลี่ยนรหัสผ่าน', class: 'btn border-round col s12 gradient-45deg-purple-deep-purple'
+%p
