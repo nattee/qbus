@@ -1,25 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  route_no: MyString
+  id: 1
+  route_no: route one
   route: one
-  car_plate: MyString
+  car_plate: plate one
   car: one
-  licensee_name: MyString
+  licensee_name: licensee one
   licensee: one
-  comment: MyText
-  commenter: MyString
-  commenter_contact: MyString
-  commenter_address: MyString
+  comment: comment one
+  commenter_name: commenter one
+  commenter_contact: commenter contact one
+  commenter_address: comment address one
 
 two:
-  route_no: MyString
+  id: 2
+  route_no: route two
   route: two
-  car_plate: MyString
+  car_plate: plate two
   car: two
-  licensee_name: MyString
+  licensee_name: licensee two
   licensee: two
-  comment: MyText
-  commenter: MyString
-  commenter_contact: MyString
-  commenter_address: MyString
+  comment: comment two
+  commenter_name: commenter two
+  commenter_contact: commenter contact two
+  commenter_address: commenter address two

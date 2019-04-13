@@ -1,23 +1,14 @@
 class Announcement < ApplicationRecord
   belongs_to :user
-  has_one :attachment
+  has_one_attached :main_attachment
+  has_many_attached :other_attachments
+
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :user, presence: true
+  validates :main_attachment, content_type: Rails.configuration.attachment_content_type, size: { less_than: Rails.configuration.attachment_max_size}
+  validates :other_attachments, content_type: Rails.configuration.attachment_content_type, size: { less_than: Rails.configuration.attachment_max_size}, limit: { max: Rails.configuration.attachment_max_file }
 
   scope :publishes, -> { where(published: true) }
 
-  def attach_file(attachment_params)
-    if attachment_params['data'] == nil
-      return false
-    end
-    file = Attachment.find_by(announcement_id: self.id, attachment_type: :announcement)
-    if (file == nil)
-      file = Attachment.new({attachment_type: :announcement, filename: attachment_params['file_name']})
-      file.data.attach(attachment_params['data'])
-      self.attachment = file
-    else
-      file.data.attach(attachment_params['data'])
-      file.filename = attachment_params['file_name']
-      file.save
-    end
-    return self.save && file.data.attached?
-  end
 end

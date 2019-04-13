@@ -13,9 +13,6 @@
           %h6= t(:license_no, scope: 'activerecord.attributes.licensee')
           = @licensee.license_no
         .section
-          %h6= t(:license_expire, scope: 'activerecord.attributes.licensee')
-          = @licensee.license_expire
-        .section
           %h6= t(:car_count, scope: 'activerecord.attributes.licensee')
           = @licensee.car_count
         .section
@@ -24,6 +21,9 @@
         .section
           %h6= t(:contact_tel, scope: 'activerecord.attributes.licensee')
           = @licensee.contact_tel
+        .section
+          %h6= t(:contact_email, scope: 'activerecord.attributes.licensee')
+          = @licensee.contact_email
       .card-action
         = link_to t(:edit), edit_licensee_path(@licensee)
         = link_to t(:back), licensees_path

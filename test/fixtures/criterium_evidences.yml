@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   criterium: one
   evidence: one
 
 two:
+  id: 2
   criterium: two
   evidence: two

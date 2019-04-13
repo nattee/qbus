@@ -1,27 +1,125 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   number: application num 1
   user: one
   state: 1
   licensee: one
   route: one
-  category: category 1
-  appointment_date: 2019-02-24 16:18:14
+  appointment_date: <%= Time.zone.now %>
   appointment_remark: appointment remark 1
   appointment_user: one
   award: false
   award_remark: no award
+  contact: contact one
+  contact_tel: contact tel one
+  category: 1
+  confirmed_date: <%= Time.zone.now %>
+  submitted_date: <%= Time.zone.now %>
+  approved_date: <%= Time.zone.now %>
+  awarded_date: <%= Time.zone.now %>
+  evaluated_date: <%= Time.zone.now %>
+  car_count: 100
+  trip_count: 1000
+  evaluation_result: false
+  license_no: 123456
+  license_expire: <%= Time.zone.now %>
+  contact_email: one@example.com
+  service_area: heaven
+  award_won: false
+  visited_date: <%= Time.zone.now %>
+  visited: false
+  visit_problem: never visit
+  visit_problem_cause: no visit
+  visit_tax_accrued: what is this?
+  visit_tax_89: what is that?
+  visit_result: never visit
+  visit_comment: not visit yet
+  visit_car1_chassis: chassis one one
+  visit_car1_tire: tire one one
+  visit_car1_light: light one one
+  visit_car1_windshield: windshield one one
+  visit_car2_chassis: chassis one two
+  visit_car2_tire: tire one two
+  visit_car2_light: light one two
+  visit_car2_windshield: windshield one two
+  visit_car3_chassis: chassis one three
+  visit_car3_tire: tire one three
+  visit_car3_light: light one three
+  visit_car3_windshield: windshield one three
+  visit_car4_chassis: chassis one four
+  visit_car4_tire: tire one four
+  visit_car4_light: light one four
+  visit_car4_windshield: windshield one four
+  visitor: visitor one
+  visitor_position: visitor position one
+  visitor_tel: visitor tel one
+  visitor_email: visitor_one@example.com
+  visited_confirm_date: <%= Time.zone.now %>
+  confirm_result: false
+  confirm_comment: not confirm yet
+  award_expire_date: <%= Time.zone.now %>
+  extend: false
 
 two:
+  id: 2
   number: application num 2
   user: two
   state: 2
   licensee: two
   route: two
-  category: category 2
   appointment_date: <%= Time.zone.now %>
   appointment_remark: appointment remark 2
   appointment_user: two
   award: true
   award_remark: awarded
+  contact: contact two
+  contact_tel: contact tel two
+  category: 2
+  confirmed_date: <%= Time.zone.now %>
+  submitted_date: <%= Time.zone.now %>
+  approved_date: <%= Time.zone.now %>
+  awarded_date: <%= Time.zone.now %>
+  evaluated_date: <%= Time.zone.now %>
+  car_count: 200
+  trip_count: 2000
+  evaluation_result: true
+  license_no: 654321
+  license_expire: <%= Time.zone.now %>
+  contact_email: one@example.com
+  service_area: hell
+  award_won: true
+  visited_date: <%= Time.zone.now %>
+  visited: true
+  visit_problem: no problem
+  visit_problem_cause: not existed
+  visit_tax_accrued: what are those?
+  visit_tax_89: what are these?
+  visit_result: no problem
+  visit_comment: no problem
+  visit_car1_chassis: chassis two one
+  visit_car1_tire: tire two one
+  visit_car1_light: light two one
+  visit_car1_windshield: windshield two one
+  visit_car2_chassis: chassis two two
+  visit_car2_tire: tire two two
+  visit_car2_light: light two two
+  visit_car2_windshield: windshield two two
+  visit_car3_chassis: chassis two three
+  visit_car3_tire: tire two three
+  visit_car3_light: light two three
+  visit_car3_windshield: windshield two three
+  visit_car4_chassis: chassis two four
+  visit_car4_tire: tire two four
+  visit_car4_light: light two four
+  visit_car4_windshield: windshield two four
+  visitor: visitor two
+  visitor_position: visitor position two
+  visitor_tel: visitor tel two
+  visitor_email: visitor_two@example.com
+  visited_confirm_date: <%= Time.zone.now %>
+  confirm_result: true
+  confirm_comment: confirmed
+  award_expire_date: <%= Time.zone.now %>
+  extend: false

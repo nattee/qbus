@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   number: c1
   name: criterium 1
   description: condition a b c
@@ -9,6 +10,7 @@ one:
   criteria_group: one
 
 two:
+  id: 2
   number: c2
   name: criterium 2
   description: condition x y z

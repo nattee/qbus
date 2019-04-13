@@ -1,6 +1,6 @@
 
 .row
-  .col.s12
+  .col.s6.offset-s3
     .container
       .card-panel
         %h3 ลงชื่อเข้าใช้งานระบบ
@@ -33,7 +33,14 @@
                     = f.label :remember_me  do
                       = f.input_field :remember_me, as: :boolean
                       %span= t(:remember_me)
-
-          %button{ class: "btn waves-light waves-effect left gradient-45deg-purple-deep-purple white-text"}= t(:session_login_submit)
-          = link_to t(:cancel), root_path, style: "margin-left: 2em", class: "strong btn-flat white black-text waves-black waves-effect"
+          .row
+            .input-field.col.s12
+              = f.submit 'เข้าสู่ระบบ', class: 'btn border-round col s12 gradient-45deg-purple-deep-purple'
+          .row
+            .input-field.col.s6
+              %p.margin.medium-small
+                = link_to 'สมัครใช้งาน', register_path
+            .input-field.col.s6
+              %p.margin.right-align.medium-small
+                = link_to 'ลืมรหัสผ่าน', new_password_reset_path
 %p

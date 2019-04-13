@@ -30,7 +30,7 @@
       %h5 ข้อมูลผู้ประกอบการ
     .section
       %h6= t(:name, scope: 'activerecord.attributes.licensee')
-      = @application.licensee.name || "-"
+      = @application.licensee&.name || "-"
     .section
       %h6= t(:license_no, scope: 'activerecord.attributes.application')
       = @application.license_no || "-"

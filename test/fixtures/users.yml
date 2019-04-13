@@ -1,17 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   name: test1@gmail.com
   email: test1@gmail.com
   password_digest: <%= User.digest('testtest') %>
   roles: '{"admin": "1", "verifier": "1", "surveyor": "0"}'
   activated: true
   activated_at: <%= Time.zone.now %>
+  tel: 123456789
 
 two:
-  name: test1@gmail.com
-  email: test1@gmail.com
+  id: 2
+  name: test2@gmail.com
+  email: test2@gmail.com
   password_digest: <%= User.digest('testtest') %>
   activation_digest: <%= User.digest('testtest') %>
   roles: '{"admin": "0", "verifier": "0", "surveyor": "1"}'
   activated: false
+  tel: 987654321

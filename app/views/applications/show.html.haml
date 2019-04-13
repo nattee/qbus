@@ -11,16 +11,16 @@
           = @application.number
         .section
           %h6= t(:user, scope: 'activerecord.attributes.application')
-          = @application.user.name
+          = @application.user&.name
         .section
           %h6= t(:state, scope: 'activerecord.attributes.application')
           = @application.state_text
         .section
           %h6= t(:licensee, scope: 'activerecord.attributes.application')
-          = @application.licensee.name
+          = @application.licensee&.name
         .section
           %h6= t(:route, scope: 'activerecord.attributes.application')
-          = @application.route.name
+          = @application.route&.name
         .section
           %h6= t(:category, scope: 'activerecord.attributes.application')
           = @application.category_text
@@ -32,7 +32,7 @@
           = @application.appointment_remark
         .section
           %h6= t(:appointment_user, scope: 'activerecord.attributes.application')
-          = @application.appointment_user.name
+          = @application.appointment_user&.name
         .section
           %h6= t(:awarded_date, scope: 'activerecord.attributes.application')
           = @application.awarded_date

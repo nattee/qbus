@@ -7,16 +7,13 @@ class SessionsController < ApplicationController
 
   # POST /register
   def register_post
-    register_params = params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    register_params = params.require(:user).permit(:name, :email, :tel, :password, :password_confirmation)
     @user = User.new(register_params)
-    @user.licensee=1
+    @user.licensee = 1
 
     respond_to do |format|
       if @user.save
         @user.send_activation_email
-        # TODO: remove those two line when sending email is working properly
-        @user.activate
-        log_in @user
         format.html { redirect_to root_url, notice: 'ลงทะเบียนเรียบร้อย' }
         format.json { render :show, status: :created, location: @user }
       else

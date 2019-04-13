@@ -1,6 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
+  route_no: no 1
   name: route 1
   start: first stop
   destination: last stop
@@ -8,6 +10,8 @@ one:
   route_type: bus
 
 two:
+  id: 2
+  route_no: no 2
   name: route 2
   start: first station
   destination: last station

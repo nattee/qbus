@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_07_082454) do
+ActiveRecord::Schema.define(version: 2019_04_12_075900) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -117,14 +117,10 @@ ActiveRecord::Schema.define(version: 2019_04_07_082454) do
     t.string "filename"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "criterium_attachment_id"
     t.bigint "application_id"
     t.integer "attachment_type"
     t.bigint "evidence_id"
-    t.bigint "announcement_id"
-    t.index ["announcement_id"], name: "index_attachments_on_announcement_id"
     t.index ["application_id"], name: "index_attachments_on_application_id"
-    t.index ["criterium_attachment_id"], name: "index_attachments_on_criterium_attachment_id"
     t.index ["evidence_id"], name: "index_attachments_on_evidence_id"
   end
 
@@ -169,16 +165,6 @@ ActiveRecord::Schema.define(version: 2019_04_07_082454) do
     t.integer "group_weight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "criterium_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.bigint "criterium_id"
-    t.boolean "required"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["criterium_id"], name: "index_criterium_attachments_on_criterium_id"
   end
 
   create_table "datafiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -269,6 +255,8 @@ ActiveRecord::Schema.define(version: 2019_04_07_082454) do
     t.boolean "activated", default: false
     t.datetime "activated_at"
     t.string "tel"
+    t.string "reset_digest"
+    t.datetime "reset_sent_at"
   end
 
   create_table "violations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -285,7 +273,6 @@ ActiveRecord::Schema.define(version: 2019_04_07_082454) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "announcements", "users"
   add_foreign_key "attachments", "applications"
-  add_foreign_key "attachments", "criterium_attachments"
   add_foreign_key "cars", "applications"
   add_foreign_key "criteria_evidences", "criteria"
   add_foreign_key "criteria_evidences", "evidences"

@@ -8,7 +8,7 @@
       .card-content
         .section
           %h6= t(:criteria_group, scope: 'activerecord.models')
-          = @criterium.criteria_group.name
+          = @criterium.criteria_group&.name
         .section
         %p
           %h6= t(:number, scope: 'activerecord.attributes.criterium')

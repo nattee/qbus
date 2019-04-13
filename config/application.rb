@@ -20,5 +20,21 @@ module Qbus
     config.i18n.available_locales = [:en, :th]
     config.i18n.default_locale = :th
     config.i18n.fallbacks = [:en]
+
+    # active storage validation constants
+    config.attachment_max_file = 5
+    config.attachment_max_size = 10.megabytes
+    config.attachment_content_type = [
+        'application/pdf',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'application/vnd.ms-powerpoint',
+        'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+        'application/vnd.ms-excel',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'image/bmp',
+        'image/jpeg',
+        'image/png'
+    ].freeze
   end
 end

@@ -18,6 +18,7 @@ class Application < ApplicationRecord
   has_many :evaluations, dependent: :destroy
   has_many :attachments, dependent: :destroy
   has_many :cars, dependent: :destroy
+  has_many :logs, dependent: :nullify
 
   #scope
   #for user
@@ -220,11 +221,6 @@ class Application < ApplicationRecord
     self.contact_email = licensee.contact_email if self.contact_email.blank?
   end
 
-
-  def sorted_attachments
-    return attachments.where(attachment_type: :criterium_evidence).includes(:criterium_attachment => [:criterium => :criteria_group]).order('criteria_groups.id, criteria.number')
-  end
-
   def evaluated_count
     evaluation_main.where.not(result: nil).count
   end
@@ -233,12 +229,6 @@ class Application < ApplicationRecord
     Criterium.where.not(id: Evaluation.select(:criterium_id).where(application: self)).each do |cri|
       evaluations << Evaluation.new(criterium_id: cri.id)
     end
-  end
-
-  def add_missing_attachments
-    #CriteriumAttachment.where.not(id: Attachment.select(:criterium_attachment_id).where(application: self)).each do |cri|
-    #  attachments << Attachment.new(criterium_attachment_id: cri.id, attachment_type: :criterium_evidence)
-    #end
   end
 
   def evaluation_main

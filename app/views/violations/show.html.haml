@@ -8,7 +8,7 @@
       .card-content
         .section
           %h6= t(:car, scope: 'activerecord.attributes.violation')
-          = @violation.car.plate
+          = @violation.car&.plate
         .section
           %h6= t(:count, scope: 'activerecord.attributes.violation')
           = @violation.count
@@ -17,7 +17,7 @@
           = @violation.month_year
         .section
           %h6= t(:datafile, scope: 'activerecord.attributes.violation')
-          = @violation.datafile.name
+          = @violation.datafile&.name
       .card-action
         = link_to t(:edit), edit_violation_path(@violation)
         = link_to t(:back), violations_path

@@ -1,17 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   application: one
   criterium: one
-  evaluator: evaluator 1
+  evaluator: one
   evaluation_date: <%= Time.zone.now %>
-  result: true
+  result: 1
   description: result passed
 
 two:
+  id: 2
   application: two
   criterium: two
-  evaluator: evaluator 2
+  evaluator: two
   evaluation_date: <%= Time.zone.now %>
-  result: false
+  result: 0
   description: result failed

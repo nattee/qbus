@@ -148,7 +148,6 @@ class ApplicationsController < ApplicationController
 
   #attachment index
   def add_evidences
-    @application.add_missing_attachments
     @attachment = Attachment.new
     @missing = @application.count_missing_attachments
   end
@@ -163,7 +162,7 @@ class ApplicationsController < ApplicationController
     @attachment = Attachment.create(attachment_params) unless @attachment
     @attachment.data.purge
     @attachment.data.attach(attachment_params[:data])
-    @attachment.attachment_type = :criterium_evidence
+    @attachment.attachment_type = :evidence
     @attachment.save
 
     @application.attachments << @attachment
