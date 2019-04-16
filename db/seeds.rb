@@ -28,6 +28,10 @@ PublicComment.destroy_all
 User.create(id: 1, name: 'สมศักดิ์ (ดูแลระบบ)', email: 'test1@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 1, verifier: 1, surveyor: 0})
 User.create(id: 2, name: 'สมปอง (เจ้าหน้าที่)', email: 'test2@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 0, verifier: 1, surveyor: 1, committee: 1, evaluator: 1})
 User.create(id: 3, name: 'คุณสมชาย (ผู้ประกอบการ)', email: 'test3@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 0, licensee: 1})
+User.create(id: 4, name: 'เจ้าหน้าที่ 1 ', email: 'o1@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 0, verifier: 1})
+User.create(id: 5, name: 'เจ้าหน้าที่ 2 ', email: 'o2@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 0, surveyor: 1})
+User.create(id: 6, name: 'เจ้าหน้าที่ 3 ', email: 'o3@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 0, evaluator: 1})
+User.create(id: 7, name: 'เจ้าหน้าที่ 4 ', email: 'o4@gmail.com', password_digest: User.digest('testtest'), activated: true, activated_at: 1.month.ago, roles: {admin: 0, committee: 1})
 
 Licensee.create(id: 1, name: 'ผู้ประกอบการหนึ่ง', contact: 'สมหญิง', contact_tel: '0123456789')
 Licensee.create(id: 2, name: 'ผู้ประกอบการสอง', contact: 'สมชาย', contact_tel: '0987654321')
@@ -41,8 +45,8 @@ Datafile.create(id: 2, name: 'ไฟล์ข้อมูลสอง', month_ye
 Violation.create(id: 1, car: Car.first(), count: 10, month_year: Time.zone.now, datafile: Datafile.first())
 Violation.create(id: 2, car: Car.last(), count: 20, month_year: Time.zone.now, datafile: Datafile.last())
 
-Application.create(id: 1, number: 'หนึ่ง', user: User.first(), state: 0, licensee: Licensee.first(), route: Route.first(), appointment_date: 5.day.from_now, appointment_remark: 'กำหนดการนัดหมาย', appointment_user: User.last(), award: 'ถ้วยรางวัล', award_remark: 'พร้อมเงินโบนัส', contact: 'ผู้มารับรางวัล', contact_tel: '0192837465', category: 0, car_count: 10, trip_count: 1000)
-Application.create(id: 2, number: 'สอง', user: User.last(), state: 0, licensee: Licensee.last(), route: Route.last(), appointment_date: 3.day.from_now, appointment_remark: 'นัดแล้วนะ', appointment_user: User.first(), award: 'รางวัลชมเชย', award_remark: 'พร้อมหนี้สิน', contact: 'ตัวแทน', contact_tel: '0594875632', category: 0, car_count: 4, trip_count: 100)
+Application.create(id: 1, number: 'หนึ่ง', user: User.last(), state: 0, licensee: Licensee.first(), route: Route.first(), appointment_date: 5.day.from_now, appointment_remark: 'กำหนดการนัดหมาย', appointment_user: User.first(), award: 'ถ้วยรางวัล', award_remark: 'ผ่าน', contact: 'ผู้มารับรางวัล', contact_tel: '0192837465', category: 0, car_count: 10, trip_count: 1000)
+Application.create(id: 2, number: 'สอง', user: User.last(), state: 0, licensee: Licensee.last(), route: Route.last(), appointment_date: 3.day.from_now, appointment_remark: 'นัดแล้วนะ', appointment_user: User.first(), award: 'รางวัลชมเชย', award_remark: '', contact: 'ตัวแทน', contact_tel: '0594875632', category: 0, car_count: 4, trip_count: 100)
 
 Car.create(id: 1, plate: 'เลขทะเบียนรถหนึ่ง', chassis: 'เลขตัวรถหนึ่ง', application: Application.first(), car_type: 'รถเมล์', last_accident: 5.day.ago, last_accident_desc: 'ประสานงา')
 Car.create(id: 2, plate: 'เลขทะเบียนรถสอง', chassis: 'เลขตัวรถสอง', application: Application.last(), car_type: 'รถสองแถว', last_accident: 2.week.ago, last_accident_desc: 'รถเสียกลางสี่แยก')

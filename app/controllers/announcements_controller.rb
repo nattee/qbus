@@ -1,5 +1,6 @@
 class AnnouncementsController < ApplicationController
   before_action :set_announcement, only: [:show, :edit, :update, :destroy, :publish, :delete_main_attachment, :delete_other_attachments]
+  before_action :admin_authorization, except: [:lists, :publish]
 
   # GET /announcements
   # GET /announcements.json

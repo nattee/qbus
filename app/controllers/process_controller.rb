@@ -4,11 +4,31 @@ class ProcessController < ApplicationController
                                           :evaluation, :evaluation_post, :evaluation_finish, :evaluation_reject,
                                           :award, :award_post,
                                         ]
+  before_action :logged_in_user
 
+  before_action only: [ :registered_index, :registered, :registered_post] do
+    logged_in_with_role( [:verifier] )
+  end
+
+  before_action only: [ :appointment_index, :appointment_post, :appointed, :appointment_visit, :appointment_visit_post ] do
+    logged_in_with_role( [:surveyor] )
+  end
+
+  before_action only: [ :evaluation_index, :evaluation, :evaluation_post, :evaluation_finish, :evaluation_reject] do
+    logged_in_with_role( [:evaluator] )
+  end
+
+  before_action only: [ :award_index, :award, :award_post ] do
+    logged_in_with_role( [:committee] )
+  end
 
   def dashboard
-    @applying = Application.applying
-    @need_evidences = Application.waiting_evidence
+    #for licensee
+    @applying = Application.applying.owning
+    @need_evidences = Application.waiting_evidence.owning
+    @finished = Application.finished.owning
+
+    #for officer & admin
     @to_be_confirmed = Application.to_be_confirmed
     @to_be_appointed = Application.to_be_appointed
     @to_be_appointed_filled = Application.to_be_appointed_filled
@@ -16,13 +36,17 @@ class ProcessController < ApplicationController
     @to_be_evaluated = Application.to_be_evaluated
     @to_be_awarded = Application.to_be_awarded
 
-    @to_be_done = @to_be_confirmed + @to_be_evaluated + @to_be_awarded
-    @finished = Application.finished
+    @to_be_done = @to_be_confirmed + @to_be_evaluated + @to_be_awarded + @to_be_appointed + @to_be_visited
   end
 
+  #-------- verifier -----------------
   def registered_index
     @to_be_confirmed = Application.to_be_confirmed
     @latest_confirmed = Application.latest_confirmed
+  end
+
+  def registered
+
   end
 
   def registered_post
@@ -39,10 +63,8 @@ class ProcessController < ApplicationController
     redirect_to process_registers_path, notice: "บันทึกผลการตรวจใบสมัครหมายเลข #{@application.id} เรียบร้อย"
   end
 
-  def registered
 
-  end
-
+  #-------- surveyor -----------------
   def appointment_index
     @to_be_appointed = Application.to_be_appointed
     @to_be_appointed_filled = Application.to_be_appointed_filled
@@ -102,6 +124,7 @@ class ProcessController < ApplicationController
     end
   end
 
+  #-------- evaluator -----------------
   def evaluation_index
     @to_be_evaluated = Application.to_be_evaluated
     @latest_evaluated = Application.latest_evaluated
@@ -146,6 +169,7 @@ class ProcessController < ApplicationController
     redirect_to process_evaluations_path
   end
 
+  #--------------- committee ---------------------------
   def award_index
     @to_be_awarded = Application.to_be_awarded
     @awarded_recent = Application.latest_awarded
