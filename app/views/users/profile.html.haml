@@ -25,4 +25,4 @@
               - @current_user.role_array.each do |r|
                 %li= r
       .card-action
-        = link_to t(:edit), profile_edit_user_path(@current_user,'profile')
+        = link_to t(:edit), profile_edit_user_path(@current_user)

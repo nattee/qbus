@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :update_profile, :edit_profile]
+
+  before_action :logged_in_user
+  before_action :owner_authorization, only: [:update_profile, :edit_profile]
+  before_action :admin_authorization, only: [:destroy, :edit, :update, :create]
 
   # GET /users
   # GET /users.json
@@ -19,7 +23,12 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @as_profile = true if params[:profile]
+  end
+
+  # GET /users/1/edit
+  def edit_profile
+    @as_profile = true
+    render :edit
   end
 
   # POST /users
@@ -42,15 +51,21 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if params[:from_profile]
-        target = profile_path
-        @as_profile = true
-      else
-        target = user_path(@user)
-      end
       @user.roles.clear
       if @user.update(user_params)
         format.html { redirect_to target, notice: 'แก้ไขข้อมูลผู้ใช้เรียบร้อย' }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_profile
+    respond_to do |format|
+      if @user.update(user_profile_params)
+        format.html { redirect_to profile_path, notice: 'แก้ไขข้อมูลผู้ใช้เรียบร้อย' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -78,5 +93,15 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :activated, :password, :password_confirmation, :admin, :verifier, :surveyor, :evaluator, :committee, :licensee, :tel)
+    end
+
+    def user_profile_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :tel)
+    end
+
+    def owner_authorization
+      unless @current_user.id == @user.id
+        redirect_to root_path, flash: {error: 'ท่านไม่มีสิทธิ์ในการทำรายการดังกล่าว'}
+      end
     end
 end
