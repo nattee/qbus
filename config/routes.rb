@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :criteria_groups
   resources :violations
   resources :logs
-  resources :public_comments do
+  resources :public_comments, except: :edit do
     collection do
       get 'application/:application_id', to: 'public_comments#application'
     end

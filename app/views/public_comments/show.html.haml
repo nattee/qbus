@@ -38,7 +38,7 @@
           = @public_comment.commenter_address
         .section
           %h6= t(:updated_at)
-          = @public_comment.updated_at
+          = l(@public_comment.updated_at, format: :long, default: nil)
 
       .card-action
         = link_to t(:edit), edit_public_comment_path(@public_comment)

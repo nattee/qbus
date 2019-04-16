@@ -133,11 +133,11 @@
                   .row
                     .col.s6
                       .input-field
-                        = f.input_field :car_count, class: 'required'
+                        = f.input_field :car_count, class: 'required', min: 0, digits: true
                         = f.label :car_count, 'จำนวนรถที่มีอยู่จริง (คัน)'
                     .col.s6
                       .input-field
-                        = f.input_field :trip_count, class: 'required'
+                        = f.input_field :trip_count, class: 'required', min: 0, digits: true
                         = f.label :trip_count, 'จำนวนเที่ยวเดินรถจริงเฉลี่ยต่อวัน (เที่ยว)'
 
               = hidden_field_tag 'application[stage]', 'step1'

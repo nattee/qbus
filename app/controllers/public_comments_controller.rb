@@ -36,9 +36,6 @@ class PublicCommentsController < ApplicationController
     end
   end
 
-  # GET /public_comments/1/edit
-  def edit
-  end
 
   # POST /public_comments
   # POST /public_comments.json

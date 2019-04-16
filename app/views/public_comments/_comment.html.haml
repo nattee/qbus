@@ -24,8 +24,8 @@
                   %td.right-align
                     %a{:href => public_comment_path(public_comment)}
                       %i.material-icons pageview
-                    %a{:href => edit_public_comment_path(public_comment)}
-                      %i.material-icons edit
+                    /%a{:href => edit_public_comment_path(public_comment)}
+                    /  %i.material-icons edit
                     %a{"href" => public_comment_path(public_comment), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
                       %i.material-icons delete
       .card-action

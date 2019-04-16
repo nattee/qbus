@@ -24,7 +24,7 @@
               %li.tab
                 %a{href: '#tab_car'}ข้อมูลรถ
           #tab_visit
-            = simple_form_for @application, url: appointment_visit_path(@application), local: true, method: :post do |f|
+            = simple_form_for @application, url: appointment_visit_path(@application), local: true, html: {class: 'form_validate'}, method: :post do |f|
               / section a
               .card-content.brown.lighten-5
                 .card-title
@@ -62,7 +62,7 @@
                   /  อีเมล์ ผู้ตรวจประเมิน
                   .col.s6
                     .input-field
-                      = f.input_field :visitor_email
+                      = f.input_field :visitor_email, as: :email
                       = f.label :visitor_email, t(:visitor_email, scope: 'activerecord.attributes.application')
 
               / section 2
@@ -124,11 +124,11 @@
                     %p ในกรณีที่ไม่ได้ชำระภาษีทุกคันขอให้ระบุข้อมูลต่อไปนี้
                   .col.s12.m4
                     .input-field
-                      = f.text_field :visit_tax_accrued, value: @application.visit_tax_accrued
+                      = f.text_field :visit_tax_accrued, value: @application.visit_tax_accrued, digits: true, min: 0
                       = f.label :visit_tax_accrued, 'จำนวนรถที่ค้างชำระภาษี (คัน)'
                   .col.s12.m4
                     .input-field
-                      = f.text_field :visit_tax_89, value: @application.visit_tax_89
+                      = f.text_field :visit_tax_89, value: @application.visit_tax_89, digits: true, min: 0
                       = f.label :visit_tax_89, 'แจ้งหยุดใช้รถตามมาตรา 89 (คัน)'
               .card-content.brown.lighten-5
                 .card-title
