@@ -18,7 +18,7 @@
     %h2.white-text ข่าวประชาสัมพันธ์ 2
 .container{style: 'width: 70% !important;'}
   = render 'layouts/flash'
-  .row
+  .row#left-menu
     - if !logged_in?
       .col.s12.m4
         .card.border-radius-6
