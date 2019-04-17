@@ -1,12 +1,12 @@
 .row
-  .col.s12
+  .col.s8.offset-s2
     .card
       .card-image{style: 'background-color: white; min-height:240px;'}
-        - if @announcement.main_attachment&.attached? && @announcement.main_attachment.content_type.starts_with?('image/')
+        - if @announcement.main_attachment.attached? && @announcement.main_attachment&.attached? && @announcement.main_attachment.content_type.starts_with?('image/')
           = image_tag rails_blob_url(@announcement.main_attachment)
-        %span.card-title{style: 'background-color: gray; font-weight: bold;'}
+        %span.card-title{style: 'background-color: purple; font-weight: bold;'}
           = @announcement.title
-      .card-content
+      .card-content.announcement
         %div
           = raw @announcement.description
         - if @announcement.other_attachments&.attached? == true
@@ -15,9 +15,9 @@
           - @announcement.other_attachments.each do |other_attachment|
             %p
               = link_to other_attachment.filename, rails_blob_path(other_attachment, disposition: "attachment")
-        %h6.section{style: 'text-align: right;'}
+        %h6{style: 'text-align: right;'}
           = 'ผู้เขียน: ' + (@announcement.user&.name || '<ไม่ระบุตัวตน>')
-        %h6.section{style: 'text-align: right;'}
+        %h6{style: 'text-align: right;'}
           = 'สร้างเมื่อ: ' + @announcement.created_at.to_s
       .card-action
         %a{:href => public_announcement_path}

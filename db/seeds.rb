@@ -115,6 +115,25 @@ Application.create(
 Car.create(id: 1, plate: 'เลขทะเบียนรถหนึ่ง', chassis: 'เลขตัวรถหนึ่ง', application: Application.first(), car_type: 'รถเมล์', last_accident: 5.day.ago, last_accident_desc: 'ประสานงา')
 Car.create(id: 2, plate: 'เลขทะเบียนรถสอง', chassis: 'เลขตัวรถสอง', application: Application.last(), car_type: 'รถสองแถว', last_accident: 2.week.ago, last_accident_desc: 'รถเสียกลางสี่แยก')
 
+a1 = Announcement.create(
+  id: 1,
+  published: true,
+  title: "การประชุมกลุ่มย่อยเกณฑ์มาตรฐานรถโดยสารสาธารณะ",
+  description: "<p>กรมการขนส่งทางบกและสถาบันขนส่งแห่งจุฬาลงกรณ์มหาวิทยาลัย ได้จัดกิจกรรมประชุมกลุ่มย่อยเพื่อชี้แจงและรับฟังความคิดเห็นเกี่ยวกับ การประเมินเกณฑ์มาตรฐานรถโดยสารสาธารณะ </p> <p>โดยจัดขึ้นเมื่อวันจันทร์ที่ 7 มกราคม 2562 ณ ห้อง Orchid โรงแรมรามาการ์เด้นส์ </p>",
+  user_id: 1
+)
+
+a2 = Announcement.create(
+  id: 2,
+  published: true,
+  title: "การสัมภาษณ์ผู้ประกอบการเรื่องเกณฑ์การประเมิน",
+  description: "<p>กรมการขนส่งทางบกและสถาบันขนส่งแห่งจุฬาลงกรณ์มหาวิทยาลัย ดำเนินการสัมภาษณ์ผู้ประกอบการเรื่องเกณฑ์การประเมินมาตรฐานรถโดยสาร (Q-Bus) เพื่อส่งเสริมความปลอดภัยในการใช้รถใช้ถนน</p> <p>โดยจัดขึ้นเมื่อวันที่ 27 กุมภาพันธ์ 2562</p>",
+  user_id: 1
+)
+
+a1.main_attachment.attach io: File.open('example/announcement/ann1.jpg'), filename: 'ann1.jpg'
+a2.main_attachment.attach io: File.open('example/announcement/ann2.jpg'), filename: 'ann2.jpg'
+
 CriteriaGroup.create(id: 1, name: 'ข้อกำหนดด้านองค์กรและการบริหารจัดการ',group_weight: 12)
 CriteriaGroup.create(id: 2, name: 'ข้อกำหนดด้านปฏิบัติงาน',group_weight: 12)
 CriteriaGroup.create(id: 3, name: 'ข้อกำหนดด้านยานหาพนะ',group_weight: 15)

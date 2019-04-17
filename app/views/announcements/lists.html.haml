@@ -1,12 +1,16 @@
 .row
   - @publishes.each do |announcement|
     .col.s4
-      .card
-        .card-image{style: 'height: 240px; background-color: white;'}
-          - if announcement.main_attachment&.representable?
+      .card.large
+        - if announcement.main_attachment.attached? && announcement.main_attachment&.representable?
+          .card-image{style: 'background-color: white;'}
             = image_tag rails_representation_url(announcement.main_attachment.representation(resize: '320x240'))
-          %span.card-title{style: 'background-color: gray; font-weight: bold;'}
-            = announcement.title
+            %span.card-title{style: 'background-color: purple; font-weight: bold;'}
+              = announcement.title
+        - else
+          .card-image{style: 'height: 340px; background-color: white;'}
+            %span.card-title{style: 'background-color: purple; font-weight: bold;'}
+              = announcement.title
         .card-content{style: 'height: 6em; overflow: hidden'}
           = raw announcement.description
         .card-action
