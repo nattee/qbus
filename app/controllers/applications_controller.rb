@@ -1,11 +1,23 @@
 class ApplicationsController < ApplicationController
-  before_action :set_application, only: [:show, :edit, :update, :destroy, :show_full,
+  before_action :set_application,
+                                  only: [:show, :edit, :update, :destroy, :show_full,
                                          :apply_step1, :apply_step2, :apply_step3,:fail_self_evaluation,
                                          :post_step1,:post_step2,:post_step3,
                                          :add_evidences,:add_attachment,:finish_add_evidences,
                                          :add_car, :remove_car,
                                          :extend_from,
                                         ]
+  before_action only: [:apply] do
+    logged_in_with_role([:admin, :licensee])
+  end
+
+  before_action :owner_or_admin,
+                only: [:apply_step1, :apply_step2, :apply_step3, :apply_step3,
+                       :post_step1, :post_step2, :post_step3,
+                       :add_evidences, :add_attachment, :finish_add_evidences,
+                       :add_car, :remove_car,
+                       :extend_from
+                      ]
 
   # GET /applications
   # GET /applications.json
@@ -237,7 +249,6 @@ class ApplicationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_application
-
       @application = Application.find(params[:id])
     end
 

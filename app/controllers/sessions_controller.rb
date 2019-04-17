@@ -47,9 +47,10 @@ class SessionsController < ApplicationController
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         redirect_to root_url, notice: 'เข้าสู่ระบบเรียบร้อย'
       else
-        message  = "Account not activated. "
-        message += "Check your email for the activation link."
-        redirect_to root_url, notice: message
+        message  = "ท่านยังไม่ได้ยืนยันอีเมล์ที่ใช้ในการลงทะเบียน "
+        message += "กรุณาตรวจสอบอีเมล์องท่านเพื่อทำการยืนยันอีเมล์"
+        flash[:error] = message
+        redirect_to root_url
       end
     else
       redirect_to login_url, notice: 'อีเมล์หรือรหัสผ่านไม่ถูกต้อง'

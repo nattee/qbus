@@ -21,6 +21,7 @@ class Application < ApplicationRecord
   has_many :logs, dependent: :nullify
 
   #scope
+  scope :owning, -> { where(user: @current_user) }
   #for user
   scope :applying, -> { where(state: :applying) }
   scope :waiting_evidence, -> { where(state: :confirmed) }

@@ -63,19 +63,56 @@ User.create(
     licensee: 1
   }
  )
+User.create(
+  id: 4,
+  name: 'เจ้าหน้าที่ 1 ',
+  email: 'o1@gmail.com',
+  password_digest: User.digest('testtest'),
+  activated: true,
+  activated_at: 1.month.ago,
+  roles: {
+    admin: 0,
+    verifier: 1
+  }
+)
+User.create(
+  id: 5,
+  name: 'เจ้าหน้าที่ 2 ',
+  email: 'o2@gmail.com',
+  password_digest: User.digest('testtest'),
+  activated: true,
+  activated_at: 1.month.ago,
+  roles: {
+    admin: 0,
+    surveyor: 1
+  }
+)
+User.create(id: 6,
+  name: 'เจ้าหน้าที่ 3 ',
+  email: 'o3@gmail.com',
+  password_digest: User.digest('testtest'),
+  activated: true,
+  activated_at: 1.month.ago,
+  roles: {
+    admin: 0,
+    evaluator: 1
+  }
+)
+User.create(
+  id: 7, 
+  name: 'เจ้าหน้าที่ 4 ', 
+  email: 'o4@gmail.com', 
+  password_digest: User.digest('testtest'), 
+  activated: true, 
+  activated_at: 1.month.ago, 
+  roles: {
+    admin: 0, 
+    committee: 1
+  }
+)
 
-Licensee.create(
-  id: 1,
-  name: 'ผู้ประกอบการหนึ่ง',
-  contact: 'สมหญิง',
-  contact_tel: '0123456789'
-)
-Licensee.create(
-  id: 2,
-  name: 'ผู้ประกอบการสอง',
-  contact: 'สมชาย',
-  contact_tel: '0987654321'
-)
+Licensee.create(id: 1, name: 'ผู้ประกอบการหนึ่ง', contact: 'สมหญิง', contact_tel: '0123456789')
+Licensee.create(id: 2, name: 'ผู้ประกอบการสอง', contact: 'สมชาย', contact_tel: '0987654321')
 
 Route.create(
   id: 1,

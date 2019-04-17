@@ -84,6 +84,13 @@ class User < ApplicationRecord
     return roles[role].to_s == '1'
   end
 
+  def has_roles(roles = [])
+    roles.each do |r|
+      return true if has_role(r)
+    end
+    return false
+  end
+
   def is_official?
     return has_role(:committee) || has_role(:surveyor) || has_role(:evaluator) || has_role(:verifier)
   end
