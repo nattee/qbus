@@ -46,8 +46,71 @@ Violation.create(id: 1, car: Car.first(), count: 10, month_year: Time.zone.now, 
 Violation.create(id: 2, car: Car.last(), count: 20, month_year: Time.zone.now, datafile: Datafile.last())
 
 
-Application.create(id: 1, number: 'หนึ่ง', user: User.find(3), state: 0, licensee: Licensee.first(), route: Route.first(), appointment_date: 5.day.from_now, appointment_remark: 'กำหนดการนัดหมาย', appointment_user: User.first(), award: 'ถ้วยรางวัล', award_remark: 'ผ่าน', contact: 'ผู้มารับรางวัล', contact_tel: '0192837465', category: 0, car_count: 10, trip_count: 1000)
-Application.create(id: 2, number: 'สอง', user: User.find(3), state: 0, licensee: Licensee.last(), route: Route.last(), appointment_date: 3.day.from_now, appointment_remark: 'นัดแล้วนะ', appointment_user: User.first(), award: 'รางวัลชมเชย', award_remark: '', contact: 'ตัวแทน', contact_tel: '0594875632', category: 0, car_count: 4, trip_count: 100)
+# applying
+Application.create(
+  id: 1,
+  state: 0,
+  category: 1,
+  user_id: 3
+)
+# registered
+Application.create(
+  id: 2,
+  state: 1,
+  category: 0,
+  licensee: Licensee.first(),
+  route: Route.first(),
+  contact: 'ตัวแทน',
+  contact_tel: '0594875632',
+  contact_email: 'test3@gmail.com',
+  license_no: "sdfsafa",
+  license_expire: 1.year.since,
+  car_count: 4,
+  trip_count: 100,
+  user_id: 3
+)
+# confirmed before appoint
+Application.create(
+  id: 3,
+  state: 2,
+  category: 0,
+  licensee: Licensee.first(),
+  route: Route.first(),
+  contact: 'ตัวแทน',
+  contact_tel: '0594875632',
+  contact_email: 'test3@gmail.com',
+  license_no: "sdfsafa",
+  license_expire: 1.year.since,
+  car_count: 4,
+  trip_count: 100,
+  confirmed_date: 1.week.ago,
+  confirm_comment: 'ใบสมัครถูกต้อง',
+  confirm_result: true,
+  appointment_date: 1.day.ago,
+  appointment_remark: 'test appointment',
+  user_id: 3
+)
+# confirmed after appoint
+Application.create(
+  id: 4,
+  state: 2,
+  category: 0,
+  licensee: Licensee.first(),
+  route: Route.first(),
+  contact: 'ตัวแทน',
+  contact_tel: '0594875632',
+  contact_email: 'test3@gmail.com',
+  license_no: "sdfsafa",
+  license_expire: 1.year.since,
+  car_count: 4,
+  trip_count: 100,
+  confirmed_date: 1.week.ago,
+  confirm_comment: 'ใบสมัครถูกต้อง',
+  confirm_result: true,
+  user_id: 3
+)
+
+
 
 Car.create(id: 1, plate: 'เลขทะเบียนรถหนึ่ง', chassis: 'เลขตัวรถหนึ่ง', application: Application.first(), car_type: 'รถเมล์', last_accident: 5.day.ago, last_accident_desc: 'ประสานงา')
 Car.create(id: 2, plate: 'เลขทะเบียนรถสอง', chassis: 'เลขตัวรถสอง', application: Application.last(), car_type: 'รถสองแถว', last_accident: 2.week.ago, last_accident_desc: 'รถเสียกลางสี่แยก')
@@ -176,7 +239,7 @@ Evidence.create(id: 28, name: 'หลักฐานการจดบันท�
 CriteriumEvidence.create(id: 1, criterium_id:1, evidence_id:1)
 CriteriumEvidence.create(id: 2, criterium_id:1, evidence_id:2)
 CriteriumEvidence.create(id: 3, criterium_id:1, evidence_id:3)
-CriteriumEvidence.create(id: 4, criterium_id:1, evidence_id:4)
+CriteriumEvidence.create(id: 4, criterium_id:2, evidence_id:4)
 CriteriumEvidence.create(id: 5, criterium_id:3, evidence_id:5)
 CriteriumEvidence.create(id: 6, criterium_id:4, evidence_id:6)
 CriteriumEvidence.create(id: 7, criterium_id:5, evidence_id:7)
