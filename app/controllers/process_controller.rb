@@ -24,9 +24,9 @@ class ProcessController < ApplicationController
 
   def dashboard
     #for licensee
-    @applying = Application.applying.owning
-    @need_evidences = Application.waiting_evidence.owning
-    @finished = Application.finished.owning
+    @applying = Application.applying.where(user: @current_user)
+    @need_evidences = Application.waiting_evidence.where(user: @current_user)
+    @finished = Application.finished.where(user: @current_user)
 
     #for officer & admin
     @to_be_confirmed = Application.to_be_confirmed
