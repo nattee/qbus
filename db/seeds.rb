@@ -99,14 +99,14 @@ User.create(id: 6,
   }
 )
 User.create(
-  id: 7, 
-  name: 'เจ้าหน้าที่ 4 ', 
-  email: 'o4@gmail.com', 
-  password_digest: User.digest('testtest'), 
-  activated: true, 
-  activated_at: 1.month.ago, 
+  id: 7,
+  name: 'เจ้าหน้าที่ 4 ',
+  email: 'o4@gmail.com',
+  password_digest: User.digest('testtest'),
+  activated: true,
+  activated_at: 1.month.ago,
   roles: {
-    admin: 0, 
+    admin: 0,
     committee: 1
   }
 )
@@ -180,7 +180,7 @@ Application.create(
   car_count: 4,
   trip_count: 100
 )
-# confirmed
+# confirmed before appoint
 Application.create(
   id: 3,
   state: 2,
@@ -199,6 +199,24 @@ Application.create(
   confirm_result: true,
   appointment_date: 1.day.ago,
   appointment_remark: 'test appointment'
+)
+# confirmed after appoint
+Application.create(
+  id: 4,
+  state: 2,
+  category: 0,
+  licensee: Licensee.first(),
+  route: Route.first(),
+  contact: 'ตัวแทน',
+  contact_tel: '0594875632',
+  contact_email: 'test3@gmail.com',
+  license_no: "sdfsafa",
+  license_expire: 1.year.since,
+  car_count: 4,
+  trip_count: 100,
+  confirmed_date: 1.week.ago,
+  confirm_comment: 'ใบสมัครถูกต้อง',
+  confirm_result: true
 )
 
 Car.create(
