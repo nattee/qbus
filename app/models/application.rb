@@ -253,7 +253,11 @@ class Application < ApplicationRecord
   end
 
   def evaluation_visit
-    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9')
+    if category3?
+      return evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9 and criteria.id >= 50')
+    else
+      return evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9')
+    end
   end
 
   def evaluation_visit_sec2

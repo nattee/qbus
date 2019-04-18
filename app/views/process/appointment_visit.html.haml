@@ -69,36 +69,39 @@
               .card-content.brown.lighten-5
                 .card-title
                   %h5 ส่วนที่ 2: เงื่อนไขการเดินรถ
-                .row
-                  .col.s7.strong
-                    เงื่อนไขการตรวจสอบ
-                  .col.s5.strong
-                    ผลการตรวจหน้างาน
-                - @application.evaluation_visit_sec2.each do |ev|
+                  - if @application.category3?
+                    สำหรับหมวดการเดินรถไม่ประจำทาง ไม่จำเป็นต้องตรวจสอบเงื่อนไขในกลุ่มนี้
+                - unless @application.category3?
                   .row
-                    .col.s7
-                      = "#{ev.criterium.number}. #{ev.criterium.name}"
-                    .col.s5
-                      %label
-                        = radio_button_tag "result[#{ev.id}]", 1, ev.result == 1
-                        %span ใช่
-                      %label
-                        = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
-                        %span ไม่ใช่
-                %br
-                .row
-                  .col.s12.m4
-                    %p ในกรณีที่มีข้อใดข้อหนึ่งตอบว่าไม่ใช่ ขอให้ระบุสภาพของปัญหาและสาเหตุของปัญหา
-                  .col.s12.m4
-                    .input-field
-                      = f.text_area :visit_problem, value: @application.visit_problem, class: 'materialize-textarea'
-                      = f.label :visit_problem, t(:visit_problem, scope: 'activerecord.attributes.application')
-                    %p ตัวอย่างสภาพปัญหา เช่น จำนวนรถสูง/ต่ำกว่าเงื่อนไขการเดินรถ, จำนวนเที่ยวรถสูง/ต่ำกว่าเงื่อนไขการเดินรถ, เดินรถไม่ถึงปลายทาง, ไม่เดินรถตามเส้นทางที่กำหนด, ไม่เก็บค่าโดยสารตามอัตราที่กำหนด
-                  .col.s12.m4
-                    .input-field
-                      = f.text_area :visit_problem_cause, value: @application.visit_problem_cause, class: 'materialize-textarea'
-                      = f.label :visit_problem_cause, t(:visit_problem_cause, scope: 'activerecord.attributes.application')
-                    %p ตัวอย่างสาเหตุของปัญหา เช่น ประชาชนต้องการ/ไม่ต้องการใช้บริการ เนื่องจาก ..., ผู้ประกอบการขนส่งไม่มีความตั้งใจในการให้บริการ, ไม่สามารถควบคุมรถร่วมบริการได้, ปัญหาสภาพทางอยู่ในระหว่างการก่อสร้าง/ชำรุด
+                    .col.s7.strong
+                      เงื่อนไขการตรวจสอบ
+                    .col.s5.strong
+                      ผลการตรวจหน้างาน
+                  - @application.evaluation_visit_sec2.each do |ev|
+                    .row
+                      .col.s7
+                        = "#{ev.criterium.number}. #{ev.criterium.name}"
+                      .col.s5
+                        %label
+                          = radio_button_tag "result[#{ev.id}]", 1, ev.result == 1
+                          %span ใช่
+                        %label
+                          = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
+                          %span ไม่ใช่
+                  %br
+                  .row
+                    .col.s12.m4
+                      %p ในกรณีที่มีข้อใดข้อหนึ่งตอบว่าไม่ใช่ ขอให้ระบุสภาพของปัญหาและสาเหตุของปัญหา
+                    .col.s12.m4
+                      .input-field
+                        = f.text_area :visit_problem, value: @application.visit_problem, class: 'materialize-textarea'
+                        = f.label :visit_problem, t(:visit_problem, scope: 'activerecord.attributes.application')
+                      %p ตัวอย่างสภาพปัญหา เช่น จำนวนรถสูง/ต่ำกว่าเงื่อนไขการเดินรถ, จำนวนเที่ยวรถสูง/ต่ำกว่าเงื่อนไขการเดินรถ, เดินรถไม่ถึงปลายทาง, ไม่เดินรถตามเส้นทางที่กำหนด, ไม่เก็บค่าโดยสารตามอัตราที่กำหนด
+                    .col.s12.m4
+                      .input-field
+                        = f.text_area :visit_problem_cause, value: @application.visit_problem_cause, class: 'materialize-textarea'
+                        = f.label :visit_problem_cause, t(:visit_problem_cause, scope: 'activerecord.attributes.application')
+                      %p ตัวอย่างสาเหตุของปัญหา เช่น ประชาชนต้องการ/ไม่ต้องการใช้บริการ เนื่องจาก ..., ผู้ประกอบการขนส่งไม่มีความตั้งใจในการให้บริการ, ไม่สามารถควบคุมรถร่วมบริการได้, ปัญหาสภาพทางอยู่ในระหว่างการก่อสร้าง/ชำรุด
               .card-content.brown.lighten-5
                 .card-title
                   %h5 ส่วนที่ 3 ข้อมูลการจดทะเบียนและชำระภาษีรถ (ตรวจสอบจาก ขส.บ.11)
