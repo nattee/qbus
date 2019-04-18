@@ -73,6 +73,7 @@
                           %i.material-icons.left error
                           ใบสมัครไม่ถูกต้อง
                     %td
-                      = link_to 'แก้ไข', process_register_path(app), class: 'button waves-effect waves-light btn-small gradient-45deg-deep-orange-orange'
+                      - if @current_user.is_admin?
+                        = link_to 'แก้ไข', process_register_path(app), class: 'button waves-effect waves-light btn-small gradient-45deg-deep-orange-orange'
 
 

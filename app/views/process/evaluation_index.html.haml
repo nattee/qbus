@@ -63,6 +63,8 @@
                     %td= app.state_text
                     %td= l(app.evaluated_date, format: '%d %b %Y')
                     %td= app.evaluation_result
-                    %td= link_to 'แก้ไขผลประเมิน', process_evaluation_path(app.id), class: 'waves-effect waves-light gradient-45deg-deep-orange-orange btn'
+                    %td
+                      - if @current_user.is_admin?
+                        = link_to 'แก้ไขผลประเมิน', process_evaluation_path(app.id), class: 'waves-effect waves-light gradient-45deg-deep-orange-orange btn'
 
 

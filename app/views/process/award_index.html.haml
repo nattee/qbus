@@ -64,6 +64,8 @@
                     %td= app.total_score
                     %td= l(app.awarded_date, format: '%d %b %y')
                     %td= final_award_text(app)
-                    %td= link_to 'แก้ไขผล', process_award_path(app.id), class: 'waves-effect waves-light btn gradient-45deg-deep-orange-orange'
+                    %td
+                      - if @current_user.is_admin?
+                        = link_to 'แก้ไขผล', process_award_path(app.id), class: 'waves-effect waves-light btn gradient-45deg-deep-orange-orange'
 
 
