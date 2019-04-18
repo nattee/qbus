@@ -292,7 +292,7 @@ Application.all.each do |app|
   filename = 'หนังสือยืนยันการเข้าร่วม Q-Bus.pdf'
   att = Attachment.new(
     filename: filename,
-    application: app,
+    application_id: app.id,
     attachment_type: :signup
   )
   att.data.attach io: File.open(folder+filename), filename: filename
@@ -301,7 +301,7 @@ Application.all.each do |app|
   filename = 'ใบอนุญาตประกอบการขนส่ง.jpg'
   att = Attachment.new(
     filename: filename,
-    application: app,
+    application_id: app.id,
     attachment_type: :license
   )
   att.data.attach io: File.open(folder+filename), filename: filename
@@ -310,7 +310,7 @@ Application.all.each do |app|
   filename = 'สัญญาประกอบการรถขนส่งสาธารณะ.pdf'
   att = Attachment.new(
     filename: filename,
-    application: app,
+    application_id: app.id,
     attachment_type: :contract
   )
   att.data.attach io: File.open(folder+filename), filename: filename
@@ -325,7 +325,7 @@ Application.all.each do |app|
       puts "adding [#{fn}] to the application [#{app.id}]"
       att = Attachment.new(
         filename: filename,
-        application: app,
+        application_id: app.id,
         attachment_type: :evidence,
         evidence_id: a
       )
