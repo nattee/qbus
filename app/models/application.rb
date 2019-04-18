@@ -20,9 +20,11 @@ class Application < ApplicationRecord
   has_many :cars, dependent: :destroy
   has_many :logs, dependent: :nullify
 
-  #for user
-  scope :applying, -> { where(state: :applying) }
-  scope :waiting_evidence, -> { where(state: :confirmed) }
+  #for user (licensee)
+  scope :applying, -> (user) { where(user: user, state: :applying) }
+  scope :need_evidence, -> (user) { where(user: user, state: :confirmed) }
+  scope :waiting_official, -> (user) { where(user: user, state: [:registered, :submitted]) }
+  scope :finished, -> (user) {where(user: user, state: :awarded) }
 
   #for officer
   scope :to_be_confirmed, -> { where(state: :registered) }
@@ -39,7 +41,6 @@ class Application < ApplicationRecord
   scope :latest_evaluated, -> {where(state: [:confirmed, :evaluated]).where('evaluated_date >= ?',30.days.ago) }
 
   scope :to_be_awarded, -> {where(state: :evaluated) }
-  scope :finished, -> {where(state: :awarded) }
   scope :latest_awarded, -> {where(state: :awarded).where('awarded_date >= ?',30.days.ago) }
 
   scope :won_award, -> {where(state: :awarded).where(award_won: true) }

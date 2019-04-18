@@ -14,6 +14,7 @@
                 %table
                   %thead
                     %tr
+                      %th หมายเลข
                       %th= t(:name, scope: 'activerecord.attributes.licensee')
                       %th= t(:route_no, scope: 'activerecord.attributes.application')
                       %th= t(:route_info, scope: 'activerecord.attributes.application')
@@ -23,6 +24,7 @@
                   %tbody
                     - @applying.each do |app|
                       %tr
+                        %td= app.id_text
                         %td= app.licensee&.name
                         %td= app.route_no
                         %td= app.route_info
@@ -46,19 +48,23 @@
                 %table
                   %thead
                     %tr
+                      %th หมายเลข
                       %th= t(:name, scope: 'activerecord.attributes.licensee')
                       %th= t(:route_no, scope: 'activerecord.attributes.application')
                       %th= t(:route_info, scope: 'activerecord.attributes.application')
                       %th วันที่ยื่นใบสมัคร
+                      %th วันนัดตรวจหน้างาน
                       %th= t(:state, scope: 'activerecord.attributes.application')
                       %th
                   %tbody
                     - @need_evidences.each do |app|
                       %tr
+                        %td= app.id_text
                         %td= app.licensee&.name
                         %td= app.route_no
                         %td= app.route_info
-                        %td= l(app.created_at, format: '%d %b %Y')
+                        %td= l(app.created_at, format: :short_date, default: nil)
+                        %td= l(app.appointment_date, format: :short_date, default: nil)
                         %td= state_full(app)
                         %td.strong
                           = link_to 'ส่งหลักฐาน', add_evidences_application_path(app)
@@ -69,23 +75,27 @@
           .card
             .card-content
               %h5 ใบสมัครรอการตรวจสอบโดยเจ้าหน้าที่
-              - if @to_be_done.count > 0
+              - if @waiting_official.count > 0
                 ใบสมัครต่อไปนี้อยู่ระหว่างการตรวจสอบข้อมูลหรือหลักฐานต่าง ๆ โดยกรมการขนส่งทางบก ขอให้ผู้ใช้รอผล
                 %table
                   %thead
                     %tr
+                      %th หมายเลข
                       %th= t(:name, scope: 'activerecord.attributes.licensee')
                       %th= t(:route_no, scope: 'activerecord.attributes.application')
                       %th= t(:route_info, scope: 'activerecord.attributes.application')
                       %th วันที่ยื่นใบสมัคร
+                      %th วันนัดตรวจหน้างาน
                       %th= t(:state, scope: 'activerecord.attributes.application')
                   %tbody
-                    - @to_be_done.each do |app|
+                    - @waiting_official.each do |app|
                       %tr
+                        %td= app.id_text
                         %td= app.licensee&.name
                         %td= app.route_no
                         %td= app.route_info
-                        %td= l(app.created_at, format: '%d %b %Y')
+                        %td= l(app.created_at, format: :short_date, default: nil)
+                        %td= l(app.appointment_date, format: :short_date, default: nil)
                         %td= state_full(app)
               - else
                 ไม่มีใบสมัครรอการตรวจสอบ

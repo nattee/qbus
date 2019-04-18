@@ -290,27 +290,31 @@ CriteriumEvidence.create(id: 28, criterium_id:26, evidence_id:28)
 Application.all.each do |app|
   folder = 'example/identity/'
   filename = 'หนังสือยืนยันการเข้าร่วม Q-Bus.pdf'
-  att = Attachment.create(
+  att = Attachment.new(
     filename: filename,
     application: app,
     attachment_type: :signup
   )
   att.data.attach io: File.open(folder+filename), filename: filename
+  att.save
+
   filename = 'ใบอนุญาตประกอบการขนส่ง.jpg'
-  att = Attachment.create(
+  att = Attachment.new(
     filename: filename,
     application: app,
     attachment_type: :license
   )
   att.data.attach io: File.open(folder+filename), filename: filename
+  att.save
 
   filename = 'สัญญาประกอบการรถขนส่งสาธารณะ.pdf'
-  att = Attachment.create(
+  att = Attachment.new(
     filename: filename,
     application: app,
     attachment_type: :contract
   )
   att.data.attach io: File.open(folder+filename), filename: filename
+  att.save
 
   if app.state != 'applying'
     # -- add evidence
@@ -319,13 +323,14 @@ Application.all.each do |app|
       filename = File.basename(fn)
       a = filename[0...(filename.index('.'))].to_i
       puts "adding [#{fn}] to the application [#{app.id}]"
-      att = Attachment.create(
+      att = Attachment.new(
         filename: filename,
         application: app,
         attachment_type: :evidence,
         evidence_id: a
       )
       att.data.attach io: File.open(fn), filename: filename
+      att.save
     end
   end
 end

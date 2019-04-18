@@ -5,6 +5,6 @@ class Evaluation < ApplicationRecord
 
   def is_main_evaluation?
     criterium.criteria_group.id <= 5
-
   end
+
 end

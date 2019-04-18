@@ -24,9 +24,10 @@ class ProcessController < ApplicationController
 
   def dashboard
     #for licensee
-    @applying = Application.applying.where(user: @current_user)
-    @need_evidences = Application.waiting_evidence.where(user: @current_user)
-    @finished = Application.finished.where(user: @current_user)
+    @applying = Application.applying(@current_user)
+    @need_evidences = Application.need_evidence(@current_user)
+    @finished = Application.finished(@current_user)
+    @waiting_official = Application.waiting_official(@current_user)
 
     #for officer & admin
     @to_be_confirmed = Application.to_be_confirmed
@@ -36,7 +37,6 @@ class ProcessController < ApplicationController
     @to_be_evaluated = Application.to_be_evaluated
     @to_be_awarded = Application.to_be_awarded
 
-    @to_be_done = @to_be_confirmed + @to_be_evaluated + @to_be_awarded + @to_be_appointed + @to_be_visited
   end
 
   #-------- verifier -----------------
