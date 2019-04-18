@@ -79,7 +79,7 @@
       #tab_eval
         .card-content.indigo.lighten-5
           - last_cg = nil
-          - @application.evaluations.joins(:criterium => :criteria_group).order('criteria_groups.id, criteria.number').each do |ev|
+          - @application.evaluations.joins(:criterium => :criteria_group).order('criteria_groups.id, criteria.id').each do |ev|
             - if ev.criterium.criteria_group != last_cg
               - last_cg = ev.criterium.criteria_group
               .divider

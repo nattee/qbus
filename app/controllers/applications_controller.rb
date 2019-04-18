@@ -189,7 +189,7 @@ class ApplicationsController < ApplicationController
 
   def finish_add_evidences
     @application.submit_for_approve
-    redirect_to process_dashboard_path, notice: "ได้ยืนยันการยื่นหลักฐานของใบสมัครหมายเลข #{@application.id} แล้ว"
+    redirect_to process_dashboard_path, notice: "ได้ยืนยันการยื่นหลักฐานของใบสมัครหมายเลข #{@application.id_text} แล้ว"
   end
 
 
