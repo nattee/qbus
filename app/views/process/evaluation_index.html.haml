@@ -8,9 +8,10 @@
             %table
               %thead
                 %tr
+                  %th หมายเลข
                   %th= t(:name, scope: 'activerecord.attributes.licensee')
-                  %th= t(:start, scope: 'activerecord.attributes.route')
-                  %th= t(:destination, scope: 'activerecord.attributes.route')
+                  %th= t(:route_no, scope: 'activerecord.attributes.application')
+                  %th= t(:route_info, scope: 'activerecord.attributes.application')
                   %th วันที่ยื่นใบสมัคร
                   %th= t(:appointment_date, scope: 'activerecord.attributes.application')
                   %th= t(:appointment_remark, scope: 'activerecord.attributes.application')
@@ -19,9 +20,10 @@
               %tbody
                 - @to_be_evaluated.each do |app|
                   %tr
+                    %td= app.id_text
                     %td= app.licensee&.name
-                    %td= app.route_start
-                    %td= app.route_destination
+                    %td= app.route_no
+                    %td= app.route_info
                     %td= l(app.created_at, format: '%d %b %y')
                     %td= app.appoint_date
                     %td= app.appointment_remark
@@ -41,9 +43,10 @@
             %table
               %thead
                 %tr
+                  %th หมายเลข
                   %th= t(:name, scope: 'activerecord.attributes.licensee')
-                  %th= t(:start, scope: 'activerecord.attributes.route')
-                  %th= t(:destination, scope: 'activerecord.attributes.route')
+                  %th= t(:route_no, scope: 'activerecord.attributes.application')
+                  %th= t(:route_info, scope: 'activerecord.attributes.application')
                   %th วันที่ยื่นใบสมัคร
                   %th= t(:state, scope: 'activerecord.attributes.application')
                   %th วันประเมิน
@@ -52,9 +55,10 @@
               %tbody
                 - @latest_evaluated.each do |app|
                   %tr
+                    %td= app.id_text
                     %td= app.licensee&.name
-                    %td= app.route_start
-                    %td= app.route_destination
+                    %td= app.route_no
+                    %td= app.route_info
                     %td= l(app.created_at, format: '%d %b %Y')
                     %td= app.state_text
                     %td= l(app.evaluated_date, format: '%d %b %Y')

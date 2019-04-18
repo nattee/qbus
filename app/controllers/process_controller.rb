@@ -84,7 +84,7 @@ class ProcessController < ApplicationController
   end
 
   def appointment_visit
-
+    @application.add_missing_evaluation
   end
 
   def appointment_visit_post
@@ -118,7 +118,7 @@ class ProcessController < ApplicationController
     @application.save
 
     if params[:confirm]
-      redirect_to process_appointments_path(@application), notice: 'ยืนยันผลการตรวจหน้างานเรียบร้อย'
+      redirect_to process_appointments_path, notice: 'ยืนยันผลการตรวจหน้างานเรียบร้อย'
     else
       redirect_to appointment_visit_path(@application), notice: 'บันทึกผลการตรวจหน้างานเรียบร้อย'
     end
@@ -190,7 +190,7 @@ class ProcessController < ApplicationController
     else
     end
     @application.set_award
-    redirect_to process_dashboard_path, notice: "บันทึกการตัดสินผลเรียบร้อย"
+    redirect_to process_awards_path, notice: "บันทึกการตัดสินผลเรียบร้อย"
   end
 
   private

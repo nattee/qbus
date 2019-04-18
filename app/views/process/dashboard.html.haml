@@ -53,7 +53,7 @@
                       %th= t(:route_no, scope: 'activerecord.attributes.application')
                       %th= t(:route_info, scope: 'activerecord.attributes.application')
                       %th วันที่ยื่นใบสมัคร
-                      %th วันนัดตรวจหน้างาน
+                      %th การตรวจหน้างาน
                       %th= t(:state, scope: 'activerecord.attributes.application')
                       %th
                   %tbody
@@ -64,7 +64,7 @@
                         %td= app.route_no
                         %td= app.route_info
                         %td= l(app.created_at, format: :short_date, default: nil)
-                        %td= l(app.appointment_date, format: :short_date, default: nil)
+                        %td= app.visit_status
                         %td= state_full(app)
                         %td.strong
                           = link_to 'ส่งหลักฐาน', add_evidences_application_path(app)
@@ -74,7 +74,7 @@
               = link_to 'สร้างใบสมัครใหม่', apply_applications_path, class: 'btn waves-effect waves-light green'
           .card
             .card-content
-              %h5 ใบสมัครรอการตรวจสอบโดยเจ้าหน้าที่
+              %h5 ใบสมัครรอดำเนินการโดยเจ้าหน้าที่
               - if @waiting_official.count > 0
                 ใบสมัครต่อไปนี้อยู่ระหว่างการตรวจสอบข้อมูลหรือหลักฐานต่าง ๆ โดยกรมการขนส่งทางบก ขอให้ผู้ใช้รอผล
                 %table
@@ -85,7 +85,7 @@
                       %th= t(:route_no, scope: 'activerecord.attributes.application')
                       %th= t(:route_info, scope: 'activerecord.attributes.application')
                       %th วันที่ยื่นใบสมัคร
-                      %th วันนัดตรวจหน้างาน
+                      %th การตรวจหน้างาน
                       %th= t(:state, scope: 'activerecord.attributes.application')
                   %tbody
                     - @waiting_official.each do |app|
@@ -95,7 +95,7 @@
                         %td= app.route_no
                         %td= app.route_info
                         %td= l(app.created_at, format: :short_date, default: nil)
-                        %td= l(app.appointment_date, format: :short_date, default: nil)
+                        %td= app.visit_status
                         %td= state_full(app)
               - else
                 ไม่มีใบสมัครรอการตรวจสอบ

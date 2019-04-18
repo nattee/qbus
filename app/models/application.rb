@@ -83,6 +83,7 @@ class Application < ApplicationRecord
     return "#{route.start} - #{route.destination}"
   end
 
+
   def total_score
     sum = 0.0
     evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id <= 6").each do |ev|
@@ -133,8 +134,14 @@ class Application < ApplicationRecord
   end
 
   def visit_summary_text
-    return 'ไม่่ผ่าน' if visit_evaluation_fail_count > 0
+    return 'ไม่ผ่าน' if visit_evaluation_fail_count > 0
     return 'ผ่าน'
+  end
+
+  def visit_status
+    return "ตรวจแล้วเมื่อ #{I18n.localize(visited_date, format: '%d %b %y', default:nil)}" if visited?
+    return "นัดตรวจ #{I18n.localize(appointment_date, format: '%d %b %y', default:nil)}" if appointment_date
+    return "ยังไม่ได้นัดหมาย"
   end
 
   def appoint_date
