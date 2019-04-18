@@ -19,15 +19,15 @@
       .card-content
         .card-title
           %h6 วิธีใช้งาน
-        การส่งไฟล์ทำได้โดยเลือก "ประเภทของไฟล์" จากนั้นให้กดปุ่ม "แนบไฟล์" แล้วเลือกไฟล์ที่ต้องการ เมื่อเลือกแล้วให้กดปุ่ม "ส่ง"
+        การส่งไฟล์ทำได้โดยเลือก "ประเภทของไฟล์" จากนั้นให้กดปุ่ม "เลือกไฟล์" แล้วเลือกไฟล์ที่ต้องการ เมื่อเลือกแล้วให้กดปุ่ม "ส่ง"
         %br
         %br
-        เมื่อแนบหลักฐานครบแล้ว ให้กดปุ่ม "ยืนยันหลักฐาน" ด้านล่างนี้
+        เมื่อแนบหลักฐานทั้งหมดแล้ว ให้กดปุ่ม "ยืนยันหลักฐาน"
   .col.s12.m8.pull-m4
     .card
       = simple_form_for @attachment, url: add_attachment_application_path(@application), method: :post , html: { class: 'form_validate', multipart: true } do |f|
         .card-content
-          %h4 แนบหลักฐาน
+          %h4 ส่งหลักฐาน
           .row
             .input-field.col.s12
               - #= f.input_field :criterium_attachment_id, data: {constrainwidth: 'false'}, collection: @application.sorted_attachments.map {|x| ["(#{x.criterium_attachment.criterium.name}) #{x.criterium_attachment.name}",x.criterium_attachment_id] }
@@ -50,6 +50,17 @@
           เอกสาร จากที่ต้องการทั้งหมด
           %span.strong #{@missing[:total]}
           เอกสาร
+          %ul
+            - last_cg = nil
+            - CriteriaGroup.need_evidence.each do |cg|
+              %li{style:  'list-style-type: circle !important; margin-left: 3rem;'}
+                #{cg.name}
+                - if @missing[cg.id][:ok]
+                  %span.green-text หลักฐานครบแล้ว
+                - else
+                  %span.red-text ส่งมาแล้ว #{@missing[cg.id][:present]} จาก #{@missing[cg.id][:total]}
+          - if @missing[:present] != @missing[:total]
+            ยังมีเกณฑ์การประเมินที่แนบเอกสารไม่ครบ ผู้ประเมินอาจพิจารณาไม่ให้คะแนนสำหรับเกณฑ์ข้อนั้นๆ ได้
           .section
           = link_to 'ยืนยันหลักฐาน', finish_add_evidences_application_path(@application), class: 'btn waves-effect waves-light gradient-45deg-purple-deep-purple', data: {confirm: 'เมื่อยืนยันแล้ว จะไม่สามารถแก้ไขเพิ่มเติมหลักฐานได้อีก ท่านจะยืนยันหรือไม่?'}
 :css

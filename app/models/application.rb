@@ -184,7 +184,7 @@ class Application < ApplicationRecord
       end
       result[:total] += total
       result[:present] += present
-      result[cg.id] = {total: total, present: present}
+      result[cg.id] = {total: total, present: present, ok: total == present}
     end
     #hard code for checking all evidence of cri 1.1
     if result[:has][1] and result[:has][2] and result[:has][3]

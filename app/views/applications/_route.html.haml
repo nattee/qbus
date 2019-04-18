@@ -12,11 +12,12 @@
         = @application.route_destination
     - else
       %p
-        %h6= t(@application.category)
+        %h6 ไม่ประจำทาง
   .col.s6
-    %p
-      %h6= 'จำนวนรถที่มีอยู่จริง (คัน)'
-      = @application.car_count || "ไม่ระบุ"
-    %p
-      %h6= 'จำนวนเที่ยวเดินรถจริงเฉลี่ยต่อวัน (เที่ยว)'
-      = @application.trip_count || "ไม่ระบุ"
+    - unless @application.category3?
+      %p
+        %h6= 'จำนวนรถที่มีอยู่จริง (คัน)'
+        = @application.car_count || "ไม่ระบุ"
+      %p
+        %h6= 'จำนวนเที่ยวเดินรถจริงเฉลี่ยต่อวัน (เที่ยว)'
+        = @application.trip_count || "ไม่ระบุ"
