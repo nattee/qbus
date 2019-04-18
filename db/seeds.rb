@@ -292,25 +292,29 @@ Application.all.each do |app|
   filename = 'หนังสือยืนยันการเข้าร่วม Q-Bus.pdf'
   att = Attachment.create(
     filename: filename,
-    application: app,
+    application_id: app.id,
     attachment_type: :signup
   )
   att.data.attach io: File.open(folder+filename), filename: filename
+  att.save
+
   filename = 'ใบอนุญาตประกอบการขนส่ง.jpg'
   att = Attachment.create(
     filename: filename,
-    application: app,
+    application_id: app.id,
     attachment_type: :license
   )
   att.data.attach io: File.open(folder+filename), filename: filename
+  att.save
 
   filename = 'สัญญาประกอบการรถขนส่งสาธารณะ.pdf'
   att = Attachment.create(
     filename: filename,
-    application: app,
+    application_id: app.id,
     attachment_type: :contract
   )
   att.data.attach io: File.open(folder+filename), filename: filename
+  att.save
 
   if app.state != 'applying'
     # -- add evidence
@@ -321,11 +325,12 @@ Application.all.each do |app|
       puts "adding [#{fn}] to the application [#{app.id}]"
       att = Attachment.create(
         filename: filename,
-        application: app,
+        application_id: app.id,
         attachment_type: :evidence,
         evidence_id: a
       )
       att.data.attach io: File.open(fn), filename: filename
+      att.save
     end
   end
 end
