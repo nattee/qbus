@@ -195,7 +195,7 @@ class ApplicationsController < ApplicationController
   end
 
   def extend
-    @apps = Application.finished
+    @apps = Application.finished(@current_user)
   end
 
   def extend_from

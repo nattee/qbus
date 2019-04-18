@@ -109,8 +109,74 @@ Application.create(
   confirm_result: true,
   user_id: 3
 )
-
-
+# submitted
+Application.create(
+  id: 5,
+  state: 3,
+  category: 0,
+  licensee: Licensee.first(),
+  route: Route.first(),
+  contact: 'ตัวแทน',
+  contact_tel: '0594875632',
+  contact_email: 'test3@gmail.com',
+  license_no: "sdfsafa",
+  license_expire: 1.year.since,
+  car_count: 4,
+  trip_count: 100,
+  confirmed_date: 1.week.ago,
+  confirm_comment: 'ใบสมัครถูกต้อง',
+  confirm_result: true,
+  submitted_date: 6.day.ago,
+  user_id: 3
+)
+# evaluated
+Application.create(
+  id: 6,
+  state: 4,
+  category: 0,
+  licensee: Licensee.first(),
+  route: Route.first(),
+  contact: 'ตัวแทน',
+  contact_tel: '0594875632',
+  contact_email: 'test3@gmail.com',
+  license_no: "sdfsafa",
+  license_expire: 1.year.since,
+  car_count: 4,
+  trip_count: 100,
+  confirmed_date: 1.week.ago,
+  confirm_comment: 'ใบสมัครถูกต้อง',
+  confirm_result: true,
+  submitted_date: 6.day.ago,
+  evaluation_result: '',
+  evaluated_date: 5.day.ago,
+  user_id: 3
+)
+# awarded
+Application.create(
+  id: 7,
+  state: 5,
+  category: 0,
+  licensee: Licensee.first(),
+  route: Route.first(),
+  contact: 'ตัวแทน',
+  contact_tel: '0594875632',
+  contact_email: 'test3@gmail.com',
+  license_no: "sdfsafa",
+  license_expire: 1.year.since,
+  car_count: 4,
+  trip_count: 100,
+  confirmed_date: 1.week.ago,
+  confirm_comment: 'ใบสมัครถูกต้อง',
+  confirm_result: true,
+  submitted_date: 6.day.ago,
+  evaluation_result: '',
+  evaluated_date: 5.day.ago,
+  awarded_date: 4.day.ago,
+  award: 'ได้รับตราสัญลักษณ์',
+  award_won: true,
+  award_expire_date: 1.year.since,
+  user_id: 3
+)
 
 Car.create(id: 1, plate: 'เลขทะเบียนรถหนึ่ง', chassis: 'เลขตัวรถหนึ่ง', application: Application.first(), car_type: 'รถเมล์', last_accident: 5.day.ago, last_accident_desc: 'ประสานงา')
 Car.create(id: 2, plate: 'เลขทะเบียนรถสอง', chassis: 'เลขตัวรถสอง', application: Application.last(), car_type: 'รถสองแถว', last_accident: 2.week.ago, last_accident_desc: 'รถเสียกลางสี่แยก')
@@ -317,6 +383,7 @@ Application.all.each do |app|
   att.save
 
   if app.state != 'applying'
+    app.add_missing_evaluation
     # -- add evidence
     folder = 'example/evidence/'
     Dir.glob(folder+'*').each do |fn|
@@ -333,5 +400,14 @@ Application.all.each do |app|
       att.save
     end
   end
+  # add evaluation result
+  if app.state == 'evaluated' || app.state == 'awarded'
+    app.evaluation_main.each do |ev|
+      ev.result = 1
+      ev.description = 'ok'
+      ev.save
+    end
+  end
+
 end
 

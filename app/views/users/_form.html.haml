@@ -39,7 +39,8 @@
               = f.label :activated do
                 = f.input_field :activated, as: :boolean
                 %span= "#{t :activated, scope: 'activerecord.attributes.user'}"
-                %span=" - #{@user.activated_at}"
+                - if @user.activated_at
+                  %span=" - #{@user.activated_at}"
         .row
           .input-field.col.s12
             %i.material-icons.prefix business_center
