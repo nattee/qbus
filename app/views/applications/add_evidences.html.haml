@@ -31,7 +31,7 @@
           .row
             .input-field.col.s12
               - #= f.input_field :criterium_attachment_id, data: {constrainwidth: 'false'}, collection: @application.sorted_attachments.map {|x| ["(#{x.criterium_attachment.criterium.name}) #{x.criterium_attachment.name}",x.criterium_attachment_id] }
-              = f.input_field :evidence_id, data: {constrainwidth: 'false'},  collection: Evidence.all.each {|x| [x.name,x.id] }, class: 'required'
+              = f.input_field :evidence_id, data: {constrainwidth: 'false'},  collection: Evidence.all.each.map {|x| ["#{x.first_cri_num} #{x.name}",x.id] }, class: 'required'
               = f.label 'ประเภทหลักฐาน'
           .row
             .col.s12
