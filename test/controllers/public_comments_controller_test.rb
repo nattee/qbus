@@ -24,11 +24,17 @@ class PublicCommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show public_comment" do
+    @user = users(:two)
+    # login as official
+    post login_url, params: { session: { email: @user.email, password: 'testtest'}}
     get public_comment_url(@public_comment)
     assert_response :success
   end
 
   test "should get edit" do
+    @user = users(:two)
+    # login as official
+    post login_url, params: { session: { email: @user.email, password: 'testtest'}}
     get edit_public_comment_url(@public_comment)
     assert_response :success
   end
