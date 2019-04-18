@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     respond_to do |format|
       if @user.save
         @user.send_activation_email
-        format.html { redirect_to root_url, notice: 'ลงทะเบียนเรียบร้อย' }
+        format.html { redirect_to root_url, notice: 'ลงทะเบียนเรียบร้อย กรุณาตรวจสอบอีเมล์ของท่านเพื่อยืนยันการใช้งาน' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :register }

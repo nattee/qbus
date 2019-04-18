@@ -8,7 +8,7 @@ class UserMailerTest < ActionMailer::TestCase
     mail = UserMailer.account_activation(user)
     assert_equal "QBUS Account Activation", mail.subject
     assert_equal [User.last().email], mail.to
-    assert_equal ["nattee@nattee.net"], mail.from
+    assert_equal ["admin@qbusthailand.com"], mail.from
     # TODO assert mail's content
   end
 
@@ -19,7 +19,7 @@ class UserMailerTest < ActionMailer::TestCase
     mail = UserMailer.password_reset(user)
     assert_equal "QBUS Password Reset", mail.subject
     assert_equal [User.first().email], mail.to
-    assert_equal ["nattee@nattee.net"], mail.from
+    assert_equal ["admin@qbusthailand.com"], mail.from
     # TODO assert mail's content
   end
 
