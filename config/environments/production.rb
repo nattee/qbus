@@ -65,7 +65,8 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.default_url_options = { :host => "https://www.qbusthailand.com" }
+  Rails.application.routes.default_url_options[:host] = "www.qbusthailand.com"
+  Rails.application.routes.default_url_options[:protocol] = "https"
 
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
@@ -75,7 +76,8 @@ Rails.application.configure do
   :user_name            => Rails.application.secrets.mail[:username],
   :password             => Rails.application.secrets.mail[:password],
   :authentication       => "plain",
-  :enable_starttls_auto => true
+  :enable_starttls_auto => true,
+  :openssl_verify_mode  => 'none',
   }
 
 

@@ -11,7 +11,7 @@ class PasswordResetsController < ApplicationController
     if @user
       @user.create_reset_digest
       @user.send_password_reset_email
-      redirect_to root_url, flash: { notice: "Email sent with password reset instructions" }
+      redirect_to root_url, flash: { notice: "ระบบได้ส่งอีเมล์ระบุวิธีการเปลี่ยนรหัสผ่านไปให้ท่านแล้ว กรุณาตรวจสอบอีเมล์" }
     else
       flash.now[:error] = "Email address not found"
       render 'new'
@@ -27,7 +27,7 @@ class PasswordResetsController < ApplicationController
       render 'edit'
     elsif @user.update_attributes(user_params)
       log_in @user
-      redirect_to root_path, flash: { success: "Password has been reset." }
+      redirect_to root_path, flash: { success: "เปลี่ยนรหัสผ่านเรียบร้อย" }
     else
       render 'edit'
     end
@@ -53,7 +53,7 @@ class PasswordResetsController < ApplicationController
 
     def check_expiration
       if @user.password_reset_expired?
-        redirect_to new_password_reset_url, flash: { error: "Password reset has expired." }
+        redirect_to new_password_reset_url, flash: { error: "ไม่สามารถเปลี่ยนรหัสได้เนื่องจากใช้เวลานานเกินไป กรุณากดเปลี่ยนรหัสใหม่อีกครั้งหนึ่ง" }
       end
     end
 end
