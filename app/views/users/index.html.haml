@@ -27,7 +27,7 @@
                     %a{"href" => user_path(user), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
                       %i.material-icons delete
       .card-action
-        = link_to t(:new), new_route_path, class: 'btn green waves-effect waves-light'
+        = link_to t(:new), new_user_path, class: 'btn green waves-effect waves-light'
 
 :coffee
   $(document).ready ->

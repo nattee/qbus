@@ -22,7 +22,7 @@ class QbusTest < ApplicationSystemTestCase
     assert_text 'เข้าสู่ระบบเรียบร้อย' # root (logged in)
     visit process_dashboard_url
     assert_text 'ใบสมัครรอการดำเนินการโดยผู้ประกอบการ'
-    assert_text 'ใบสมัครรอการตรวจสอบโดยเจ้าหน้าที่'
+    assert_text 'ใบสมัครรอดำเนินการโดยเจ้าหน้าที่'
     assert_text 'ใบสมัครดำเนินการเสร็จแล้ว'
   end
 
@@ -59,6 +59,50 @@ class QbusTest < ApplicationSystemTestCase
     assert_text 'เข้าสู่ระบบเรียบร้อย'
     click_on 'ออกจากระบบ'
     assert_selector 'form.session'
+  end
+
+  test "test offical confirm signup" do
+    visit root_url
+    assert_selector 'form.session' # root
+    fill_in 'session[email]', with: @user_offical.email
+    fill_in 'session[password]', with: 'testtest'
+    click_on 'เข้าสู่ระบบ'
+    assert_text 'เข้าสู่ระบบเรียบร้อย' # root (logged in)
+    visit process_dashboard_url
+    assert_text 'ระบบงานตรวจสอบใบสมัคร' # dashboard
+    click_on 'ตรวจสอบ'
+    assert_text 'ใบสมัครรอการตรวจสอบความถูกต้อง' # registers
+    click_on 'ตรวจ'
+    assert_text 'ตรวจใบสมัคร' # registers (edit)
+    choose 'result_ok', allow_label_click: true
+    fill_in 'confirm_comment', with: 'test confirm comment'
+    click_on 'ยืนยันผลการตรวจ'
+    page.driver.browser.switch_to.alert.accept
+    assert_text 'ใบสมัครรอการตรวจสอบความถูกต้อง' # registers
+    assert_text 'บันทึกผลการตรวจใบสมัคร'
+    assert_text 'เรียบร้อย'
+  end
+
+  test "test offical make appointment" do
+    visit root_url
+    assert_selector 'form.session' # root
+    fill_in 'session[email]', with: @user_offical.email
+    fill_in 'session[password]', with: 'testtest'
+    click_on 'เข้าสู่ระบบ'
+    assert_text 'เข้าสู่ระบบเรียบร้อย' # root (logged in)
+    visit process_dashboard_url
+    assert_text 'ระบบงานนัดหมาย และ ตรวจหน้างาน'
+    click_on 'นัดหมาย'
+    assert_text 'ใบสมัครที่ยังไม่ได้นัดหมาย'
+    within(:xpath, '(//table)[1]') do
+      click_on 'นัดหมาย', match: :first
+    end
+    within(:css, 'div#appoint') do
+      fill_in 'appointment_date', with: 1.day.since
+      fill_in 'appointment_remark', with: 'test appointment remark'
+      click_on 'ทำการนัดหมาย'
+    end
+    assert_text 'test appointment remark'
   end
 
   test "test licensee apply" do
@@ -102,56 +146,12 @@ class QbusTest < ApplicationSystemTestCase
     attach_file('attachment[b11_data]', Rails.root.join('example', 'identity', 'หนังสือยืนยันการเข้าร่วม Q-Bus.pdf'), make_visible: true)
     click_on 'ไปยังขั้นตอนต่อไป'
     assert_text 'ทำแบบประเมินตนเอง' #apply_step3
-    all('input[value="ok"]').each do |ok|
-      choose ok[:name]
+    all(:xpath, '//input[@value="ok"]', visible: false).each do |ok|
+      choose ok[:id], allow_label_click: true
     end
     click_on 'ยืนยันใบสมัคร'
     assert_text 'สร้างใบสมัครเรียบร้อย'
   end
-
-  test "test offical confirm signup" do
-    visit root_url
-    assert_selector 'form.session' # root
-    fill_in 'session[email]', with: @user_offical.email
-    fill_in 'session[password]', with: 'testtest'
-    click_on 'เข้าสู่ระบบ'
-    assert_text 'เข้าสู่ระบบเรียบร้อย' # root (logged in)
-    visit process_dashboard_url
-    assert_text 'ระบบงานตรวจสอบใบสมัคร' # dashboard
-    click_on 'ตรวจสอบ'
-    assert_text 'ใบสมัครรอการตรวจสอบความถูกต้อง' # registers
-    click_on 'ตรวจ'
-    assert_text 'ตรวจใบสมัคร' # registers (edit)
-    choose 'result_ok', allow_label_click: true
-    fill_in 'confirm_comment', with: 'test confirm comment'
-    click_on 'ยืนยันผลการตรวจ'
-    alert = page.driver.browser.switch_to.alert
-    alert.accept
-    assert_text 'ใบสมัครรอการตรวจสอบความถูกต้อง' # registers
-    assert_text 'บันทึกผลการตรวจใบสมัคร'
-    assert_text 'เรียบร้อย'
-  end
-
-  test "test offical make appointment" do
-    visit root_url
-    assert_selector 'form.session' # root
-    fill_in 'session[email]', with: @user_offical.email
-    fill_in 'session[password]', with: 'testtest'
-    click_on 'เข้าสู่ระบบ'
-    assert_text 'เข้าสู่ระบบเรียบร้อย' # root (logged in)
-    visit process_dashboard_url
-    assert_text 'ระบบงานนัดหมาย และ ตรวจหน้างาน'
-    click_on 'นัดหมาย'
-    assert_text 'ใบสมัครที่ยังไม่ได้นัดหมาย'
-    click_on 'นัดหมาย'
-    within(:css, 'div#appoint') do
-      fill_in 'appointment_date', with: 1.day.since
-      fill_in 'appointment_remark', with: 'test appointment remark'
-      click_on 'ทำการนัดหมาย'
-    end
-    assert_text 'test appointment remark'
-  end
-
 
   test "test offical make visit report" do
     visit root_url
@@ -175,30 +175,200 @@ class QbusTest < ApplicationSystemTestCase
     fill_in 'application[visit_problem_cause]', with: 'test visit problem cause'
     fill_in 'application[visit_tax_accrued]', with: '10'
     fill_in 'application[visit_tax_89]', with: '100'
-    choose 'application_visit_car1_chassis_1', allow_label_click: true
-    choose 'application_visit_car2_chassis_1', allow_label_click: true
-    choose 'application_visit_car3_chassis_1', allow_label_click: true
-    choose 'application_visit_car4_chassis_1', allow_label_click: true
-    choose 'application_visit_car1_tire_1', allow_label_click: true
-    choose 'application_visit_car2_tire_1', allow_label_click: true
-    choose 'application_visit_car3_tire_1', allow_label_click: true
-    choose 'application_visit_car4_tire_1', allow_label_click: true
-    choose 'application_visit_car1_light_1', allow_label_click: true
-    choose 'application_visit_car2_light_1', allow_label_click: true
-    choose 'application_visit_car3_light_1', allow_label_click: true
-    choose 'application_visit_car4_light_1', allow_label_click: true
-    choose 'application_visit_car1_windshield_1', allow_label_click: true
-    choose 'application_visit_car2_windshield_1', allow_label_click: true
-    choose 'application_visit_car3_windshield_1', allow_label_click: true
-    choose 'application_visit_car4_windshield_1', allow_label_click: true
+    all(:xpath, '//input[@value="ok"]', visible: false).each do |ok|
+      choose ok[:id], allow_label_click: true
+    end
+
+    all(:xpath, '//input[@value="1" and @type="radio"]', visible: false).each do |ok|
+      choose ok[:id], allow_label_click: true
+    end
     choose 'application_visit_result_ดี', allow_label_click: true
     fill_in 'application[visit_comment]', with: 'test visit comment'
     click_on 'บันทึก'
     assert_text 'บันทึกผลการตรวจหน้างานเรียบร้อย'
     click_on 'ยืนยันผลการตรวจหน้างาน'
-    alert = page.driver.browser.switch_to.alert
-    alert.accept
+    page.driver.browser.switch_to.alert.accept
     assert_text 'ยืนยันผลการตรวจหน้างานเรียบร้อย'
     assert_text 'ใบสมัครที่ได้รับการตรวจหน้างานแล้ว'
+  end
+
+  test "test licensee send evidence" do
+    visit root_url
+    assert_selector 'form.session' # root
+    fill_in 'session[email]', with: @user_licensee.email
+    fill_in 'session[password]', with: 'testtest'
+    click_on 'เข้าสู่ระบบ'
+    assert_text 'เข้าสู่ระบบเรียบร้อย' # root (logged in)
+    visit process_dashboard_url
+    assert_text 'ใบสมัครรอการดำเนินการโดยผู้ประกอบการ'
+    assert_text 'ใบสมัครรอดำเนินการโดยเจ้าหน้าที่'
+    assert_text 'ใบสมัครดำเนินการเสร็จแล้ว'
+    assert_text 'รอหลักฐานประกอบการประเมิน'
+    click_on 'ส่งหลักฐาน', match: :first
+    assert_text 'แนบหลักฐาน'
+    # -- add evidence
+    folder = 'example/evidence/'
+    Dir.glob(folder+'*').each do |fn|
+      filename = File.basename(fn)
+      a = filename[0...(filename.index('.'))].to_i
+      puts "attaching [#{fn}] ..."
+
+      # cannot interact with <select/> element directly... use javascript instead
+      page.execute_script("$('select#attachment_evidence_id').val(#{a})")
+      attach_file('attachment_data', Rails.root.join(fn), make_visible: true)
+      click_on 'ส่งไฟล์แนบ'
+      assert_text 'แนบหลักฐาน'
+      assert_text 'สำเร็จ'
+    end
+    click_on 'ยืนยันหลักฐาน'
+    page.driver.browser.switch_to.alert.accept
+    assert_text 'ได้ยืนยันการยื่นหลักฐานของใบสมัคร'
+  end
+
+  test "test offical evaluate application" do
+    visit root_url
+    assert_selector 'form.session' # root
+    fill_in 'session[email]', with: @user_offical.email
+    fill_in 'session[password]', with: 'testtest'
+    click_on 'เข้าสู่ระบบ'
+    assert_text 'เข้าสู่ระบบเรียบร้อย' # root (logged in)
+    visit process_dashboard_url
+    assert_text 'ระบบประเมินผล'
+    click_on 'ประเมิน'
+    assert_text 'ใบสมัครรอข้อมูลการประเมิน'
+    click_on 'ประเมิน'
+    assert_text 'ยืนยันการประเมินผล'
+    click_on id: 'confirm_button'
+    page.driver.browser.switch_to.alert.accept
+    assert_text 'ยังประเมินไม่ครบทุกหัวข้อ'
+    all(:xpath, '//input[@value="1" and @type="radio"]', visible: false).each do |ok|
+      choose ok[:id], allow_label_click: true
+    end
+    all(:xpath, '//input[starts-with(@name, "description") and @type="text"]', visible: false).each do |desc|
+      fill_in desc[:id], with: 'perfect !!'
+    end
+    click_on 'บันทึก'
+    assert_text 'บันทึกผลการประเมินเรียบร้อย'
+    click_on id: 'confirm_button'
+    page.driver.browser.switch_to.alert.accept
+    assert_text 'ยืนยันผลการประเมินเรียบร้อย'
+    assert_text 'ใบสมัครรอข้อมูลการประเมิน'
+  end
+
+  test "test offical evaluate award" do
+    visit root_url
+    assert_selector 'form.session' # root
+    fill_in 'session[email]', with: @user_offical.email
+    fill_in 'session[password]', with: 'testtest'
+    click_on 'เข้าสู่ระบบ'
+    assert_text 'เข้าสู่ระบบเรียบร้อย' # root (logged in)
+    visit process_dashboard_url
+    assert_text 'ระบบยืนยันผลการประเมิน'
+    click_on 'ตัดสินผล'
+    assert_text 'ใบสมัครรอการตัดสินผล'
+    click_on 'ตัดสินผล', match: :first
+    assert_text 'การบันทึกผลการตัดสิน'
+    choose 'result_ok', allow_label_click: true
+    fill_in 'award_remark', with: 'pass award'
+    click_on 'ยืนยันการตัดสินผล'
+    page.driver.browser.switch_to.alert.accept
+    assert_text 'บันทึกการตัดสินผลเรียบร้อย'
+    assert_text 'ใบสมัครรอการตัดสินผล'
+  end
+
+  test "test licensee verify award" do
+    visit root_url
+    assert_selector 'form.session' # root
+    fill_in 'session[email]', with: @user_licensee.email
+    fill_in 'session[password]', with: 'testtest'
+    click_on 'เข้าสู่ระบบ'
+    assert_text 'เข้าสู่ระบบเรียบร้อย' # root (logged in)
+    visit process_dashboard_url
+    assert_text 'ใบสมัครรอการดำเนินการโดยผู้ประกอบการ'
+    assert_text 'ใบสมัครรอดำเนินการโดยเจ้าหน้าที่'
+    assert_text 'ใบสมัครดำเนินการเสร็จแล้ว'
+    assert_text 'ได้มาตรฐาน Q-BUS' # should have application that awarded already
+  end
+
+  test "test licensee extend application" do
+    visit root_url
+    assert_selector 'form.session' # root
+    fill_in 'session[email]', with: @user_licensee.email
+    fill_in 'session[password]', with: 'testtest'
+    click_on 'เข้าสู่ระบบ'
+    assert_text 'เข้าสู่ระบบเรียบร้อย' # root (logged in)
+    click_on 'ต่ออายุ'
+    assert_text 'ต่ออายุใบสมัคร'
+    click_on 'ต่ออายุ'
+    assert_text 'ใบสมัครต่ออายุมาจากใบสมัครหมายเลข'
+    attach_file('attachment[license_data]', Rails.root.join('example', 'identity', 'ใบอนุญาตประกอบการขนส่ง.jpg'), make_visible: true)
+    attach_file('attachment[contract_data]', Rails.root.join('example', 'identity', 'สัญญาประกอบการรถขนส่งสาธารณะ.pdf'), make_visible: true)
+    attach_file('attachment[signup_data]', Rails.root.join('example', 'identity', 'หนังสือยืนยันการเข้าร่วม Q-Bus.pdf'), make_visible: true)
+    click_on 'ไปยังขั้นตอนต่อไป'
+    assert_text 'กรอกข้อมูลรถ' # apply_step2
+    click_on 'เพิ่มรถ'
+    within(:css, 'div#add-car') do
+      fill_in 'province', with: 'new province'
+      fill_in 'plate', with: 'new plate'
+      fill_in 'brand', with: 'new brand'
+      fill_in 'car_type', with: 'new car type'
+      click_on 'เพิ่มรถ'
+    end
+    attach_file('attachment[b11_data]', Rails.root.join('example', 'identity', 'หนังสือยืนยันการเข้าร่วม Q-Bus.pdf'), make_visible: true)
+    click_on 'ไปยังขั้นตอนต่อไป'
+    assert_text 'ทำแบบประเมินตนเอง' #apply_step3
+    all(:xpath, '//input[@value="ok"]', visible: false).each do |ok|
+      choose ok[:id], allow_label_click: true
+    end
+    click_on 'ยืนยันใบสมัคร'
+    assert_text 'สร้างใบสมัครเรียบร้อย'
+  end
+
+  test "test anyone comment on public" do
+    visit root_url
+    assert_selector 'form.session' # root
+    click_on 'ส่งข้อคิดเห็น'
+    fill_in 'public_comment_route_no', with: 'test route no'
+    fill_in 'public_comment_car_plate', with: 'test car plate'
+    fill_in 'public_comment_licensee_name', with: 'test licensee name'
+    fill_in 'public_comment_comment', with: 'test comment'
+    fill_in 'public_comment_commenter_name', with: 'test commenter name'
+    fill_in 'public_comment_commenter_contact', with: 'test commenter contact'
+    fill_in 'public_comment_commenter_address', with: 'test commenter address'
+    click_on 'ส่งข้อคิดเห็น'
+    assert_text 'ข้อคิดเห็นของท่านไ้ดรับการบันทึกเรียบร้อยแล้ว'
+    assert_selector 'form.session' # root
+  end
+
+  test "test admin create user" do
+    visit root_url
+    assert_selector 'form.session' # root
+    fill_in 'session[email]', with: @user_admin.email
+    fill_in 'session[password]', with: 'testtest'
+    click_on 'เข้าสู่ระบบ'
+    assert_text 'เข้าสู่ระบบเรียบร้อย' # root (logged in)
+    visit process_dashboard_url
+    click_on 'ผู้ใช้งาน'
+    assert_text 'รายการผู้ใช้งาน'
+    click_on 'เพิ่ม'
+    assert_text 'เพิ่มผู้ใช้งาน'
+    fill_in 'user_name', with: 'test new user'
+    fill_in 'user_tel', with: 'test new tel'
+    fill_in 'user_email', with: 'test999@gmail.com'
+    fill_in 'user_password', with: 'testtest'
+    fill_in 'user_password_confirmation', with: 'testtest'
+    all(:xpath, '//input[@type="checkbox"]', visible: false).each do |ok|
+      check ok[:id], allow_label_click: true
+    end
+    click_on 'สร้างผู้ใช้งาน'
+    assert_text 'สร้างผู้ใช้ใหม่เรียบร้อย'
+    click_on 'ออกจากระบบ'
+    assert_selector 'form.session' # root
+    fill_in 'session[email]', with: 'test999@gmail.com'
+    fill_in 'session[password]', with: 'testtest'
+    click_on 'เข้าสู่ระบบ'
+    assert_text 'เข้าสู่ระบบเรียบร้อย'
+    click_on 'ออกจากระบบ'
+    assert_selector 'form.session'
   end
 end

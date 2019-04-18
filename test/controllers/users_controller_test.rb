@@ -3,6 +3,8 @@ require 'test_helper'
 class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
+    # login as admin
+    post login_url, params: { session: { email: @user.email, password: 'testtest'}}
   end
 
   test "should get index" do
@@ -17,7 +19,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test "should create user" do
     assert_difference('User.count') do
-      new_user = { name: 'test3@gmail.com', email: 'test3@gmail.com', password: 'testtest', password_confirmation: 'testtest' }
+      new_user = { name: 'test999@gmail.com', email: 'test999@gmail.com', password: 'testtest', password_confirmation: 'testtest' }
       post users_url, params: { user: new_user }
     end
 

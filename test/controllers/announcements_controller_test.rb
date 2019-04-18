@@ -3,6 +3,9 @@ require 'test_helper'
 class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @announcement = announcements(:one)
+    @user = users(:one)
+    # login as admin
+    post login_url, params: { session: { email: @user.email, password: 'testtest'}}
   end
 
   test "should get index" do
