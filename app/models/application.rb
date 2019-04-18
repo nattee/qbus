@@ -284,6 +284,7 @@ class Application < ApplicationRecord
       att = Attachment.new({attachment_type: attachment_type, filename: params[filename_param]})
       att.data.attach(params[data_param])
       attachments << att
+      att.save
     end
     return save && att.data.attached?
   end
