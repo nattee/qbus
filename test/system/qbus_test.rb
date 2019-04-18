@@ -125,8 +125,7 @@ class QbusTest < ApplicationSystemTestCase
     choose 'result_ok', allow_label_click: true
     fill_in 'confirm_comment', with: 'test confirm comment'
     click_on 'ยืนยันผลการตรวจ'
-    alert = page.driver.browser.switch_to.alert
-    alert.accept
+    page.driver.browser.switch_to.alert.accept
     assert_text 'ใบสมัครรอการตรวจสอบความถูกต้อง' # registers
     assert_text 'บันทึกผลการตรวจใบสมัคร'
     assert_text 'เรียบร้อย'
@@ -196,9 +195,41 @@ class QbusTest < ApplicationSystemTestCase
     click_on 'บันทึก'
     assert_text 'บันทึกผลการตรวจหน้างานเรียบร้อย'
     click_on 'ยืนยันผลการตรวจหน้างาน'
-    alert = page.driver.browser.switch_to.alert
-    alert.accept
+    page.driver.browser.switch_to.alert.accept
     assert_text 'ยืนยันผลการตรวจหน้างานเรียบร้อย'
     assert_text 'ใบสมัครที่ได้รับการตรวจหน้างานแล้ว'
+  end
+
+  test "test licensee send evidence" do
+    visit root_url
+    assert_selector 'form.session' # root
+    fill_in 'session[email]', with: @user_licensee.email
+    fill_in 'session[password]', with: 'testtest'
+    click_on 'เข้าสู่ระบบ'
+    assert_text 'เข้าสู่ระบบเรียบร้อย' # root (logged in)
+    visit process_dashboard_url
+    assert_text 'ใบสมัครรอการดำเนินการโดยผู้ประกอบการ'
+    assert_text 'ใบสมัครรอการตรวจสอบโดยเจ้าหน้าที่'
+    assert_text 'ใบสมัครดำเนินการเสร็จแล้ว'
+    assert_text 'รอหลักฐานประกอบการประเมิน'
+    click_on 'ส่งหลักฐาน', match: :first
+    assert_text 'แนบหลักฐาน'
+    # -- add evidence
+    folder = 'example/evidence/'
+    Dir.glob(folder+'*').each do |fn|
+      filename = File.basename(fn)
+      a = filename[0...(filename.index('.'))].to_i
+      puts "attaching [#{fn}] ..."
+
+      # cannot interact with <select/> element directly... use javascript instead
+      page.execute_script("$('select#attachment_evidence_id').val(#{a})")
+      attach_file('attachment_data', Rails.root.join(fn), make_visible: true)
+      click_on 'ส่งไฟล์แนบ'
+      assert_text 'แนบหลักฐาน'
+      assert_text 'สำเร็จ'
+    end
+    click_on 'ยืนยันหลักฐาน'
+    page.driver.browser.switch_to.alert.accept
+    assert_text 'ได้ยืนยันการยื่นหลักฐานของใบสมัคร'
   end
 end
