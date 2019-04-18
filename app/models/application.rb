@@ -20,9 +20,11 @@ class Application < ApplicationRecord
   has_many :cars, dependent: :destroy
   has_many :logs, dependent: :nullify
 
-  #for user
-  scope :applying, -> { where(state: :applying) }
-  scope :waiting_evidence, -> { where(state: :confirmed) }
+  #for user (licensee)
+  scope :applying, -> (user) { where(user: user, state: :applying) }
+  scope :need_evidence, -> (user) { where(user: user, state: :confirmed) }
+  scope :waiting_official, -> (user) { where(user: user, state: [:registered, :submitted]) }
+  scope :finished, -> (user) {where(user: user, state: :awarded) }
 
   #for officer
   scope :to_be_confirmed, -> { where(state: :registered) }
@@ -39,7 +41,6 @@ class Application < ApplicationRecord
   scope :latest_evaluated, -> {where(state: [:confirmed, :evaluated]).where('evaluated_date >= ?',30.days.ago) }
 
   scope :to_be_awarded, -> {where(state: :evaluated) }
-  scope :finished, -> {where(state: :awarded) }
   scope :latest_awarded, -> {where(state: :awarded).where('awarded_date >= ?',30.days.ago) }
 
   scope :won_award, -> {where(state: :awarded).where(award_won: true) }
@@ -81,6 +82,7 @@ class Application < ApplicationRecord
     return '-' if category3? or route == nil
     return "#{route.start} - #{route.destination}"
   end
+
 
   def total_score
     sum = 0.0
@@ -132,8 +134,14 @@ class Application < ApplicationRecord
   end
 
   def visit_summary_text
-    return 'ไม่่ผ่าน' if visit_evaluation_fail_count > 0
+    return 'ไม่ผ่าน' if visit_evaluation_fail_count > 0
     return 'ผ่าน'
+  end
+
+  def visit_status
+    return "ตรวจแล้วเมื่อ #{I18n.localize(visited_date, format: '%d %b %y', default:nil)}" if visited?
+    return "นัดตรวจ #{I18n.localize(appointment_date, format: '%d %b %y', default:nil)}" if appointment_date
+    return "ยังไม่ได้นัดหมาย"
   end
 
   def appoint_date
@@ -276,6 +284,7 @@ class Application < ApplicationRecord
       att = Attachment.new({attachment_type: attachment_type, filename: params[filename_param]})
       att.data.attach(params[data_param])
       attachments << att
+      att.save
     end
     return save && att.data.attached?
   end

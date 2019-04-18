@@ -4,7 +4,7 @@
       %h5 ข้อมูลพื้นฐาน
     .section
       %h6= t(:number, scope: 'activerecord.attributes.application')
-      = @application.id
+      = @application.id_text
     .section
       %h6 วันที่ยื่นใบสมัคร
       =l( @application.created_at, format: "%d %B %Y")

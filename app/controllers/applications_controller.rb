@@ -7,7 +7,7 @@ class ApplicationsController < ApplicationController
                                          :add_car, :remove_car,
                                          :extend_from,
                                         ]
-  before_action only: [:apply] do
+  before_action only: [:apply,:post_apply] do
     logged_in_with_role([:admin, :licensee])
   end
 
@@ -53,6 +53,7 @@ class ApplicationsController < ApplicationController
 
   def post_apply
     @application = Application.new(application_params)
+    @application.user = @current_user
 
     if @application.save
       redirect_to apply_step1_application_path(@application)

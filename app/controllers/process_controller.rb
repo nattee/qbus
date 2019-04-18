@@ -24,9 +24,10 @@ class ProcessController < ApplicationController
 
   def dashboard
     #for licensee
-    @applying = Application.applying.where(user: @current_user)
-    @need_evidences = Application.waiting_evidence.where(user: @current_user)
-    @finished = Application.finished.where(user: @current_user)
+    @applying = Application.applying(@current_user)
+    @need_evidences = Application.need_evidence(@current_user)
+    @finished = Application.finished(@current_user)
+    @waiting_official = Application.waiting_official(@current_user)
 
     #for officer & admin
     @to_be_confirmed = Application.to_be_confirmed
@@ -36,7 +37,6 @@ class ProcessController < ApplicationController
     @to_be_evaluated = Application.to_be_evaluated
     @to_be_awarded = Application.to_be_awarded
 
-    @to_be_done = @to_be_confirmed + @to_be_evaluated + @to_be_awarded + @to_be_appointed + @to_be_visited
   end
 
   #-------- verifier -----------------
@@ -84,7 +84,7 @@ class ProcessController < ApplicationController
   end
 
   def appointment_visit
-
+    @application.add_missing_evaluation
   end
 
   def appointment_visit_post
@@ -118,7 +118,7 @@ class ProcessController < ApplicationController
     @application.save
 
     if params[:confirm]
-      redirect_to process_appointments_path(@application), notice: 'ยืนยันผลการตรวจหน้างานเรียบร้อย'
+      redirect_to process_appointments_path, notice: 'ยืนยันผลการตรวจหน้างานเรียบร้อย'
     else
       redirect_to appointment_visit_path(@application), notice: 'บันทึกผลการตรวจหน้างานเรียบร้อย'
     end
@@ -190,7 +190,7 @@ class ProcessController < ApplicationController
     else
     end
     @application.set_award
-    redirect_to process_dashboard_path, notice: "บันทึกการตัดสินผลเรียบร้อย"
+    redirect_to process_awards_path, notice: "บันทึกการตัดสินผลเรียบร้อย"
   end
 
   private

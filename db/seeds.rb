@@ -290,7 +290,7 @@ CriteriumEvidence.create(id: 28, criterium_id:26, evidence_id:28)
 Application.all.each do |app|
   folder = 'example/identity/'
   filename = 'หนังสือยืนยันการเข้าร่วม Q-Bus.pdf'
-  att = Attachment.create(
+  att = Attachment.new(
     filename: filename,
     application_id: app.id,
     attachment_type: :signup
@@ -299,7 +299,7 @@ Application.all.each do |app|
   att.save
 
   filename = 'ใบอนุญาตประกอบการขนส่ง.jpg'
-  att = Attachment.create(
+  att = Attachment.new(
     filename: filename,
     application_id: app.id,
     attachment_type: :license
@@ -308,7 +308,7 @@ Application.all.each do |app|
   att.save
 
   filename = 'สัญญาประกอบการรถขนส่งสาธารณะ.pdf'
-  att = Attachment.create(
+  att = Attachment.new(
     filename: filename,
     application_id: app.id,
     attachment_type: :contract
@@ -323,7 +323,7 @@ Application.all.each do |app|
       filename = File.basename(fn)
       a = filename[0...(filename.index('.'))].to_i
       puts "adding [#{fn}] to the application [#{app.id}]"
-      att = Attachment.create(
+      att = Attachment.new(
         filename: filename,
         application_id: app.id,
         attachment_type: :evidence,

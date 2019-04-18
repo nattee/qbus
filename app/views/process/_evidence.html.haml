@@ -2,6 +2,7 @@
 %table
   %thead
     %tr
+      %th ข้อ
       %th ชื่อหลักฐาน
       %th วัน/เวลา ยื่นเอการ
       %th
@@ -10,14 +11,15 @@
       - cg.criterium.each do |ci|
         - ci.evidences.each do |ev|
           %tr
-            %td= ev.name
+            %td{style: 'vertical-align: top'}= ci.number_text
+            %td{style: 'vertical-align: top'}= ev.name
             - att = @application.attachments.where(evidence: ev)
-            %td
+            %td{style: 'vertical-align: top'}
               - if att.count > 0
-                = l(ev.created_at,format: :long)
+                = l(ev.created_at,format: :short_date)
               - else
                 %span.red-text - ยังไม่ได้แนบ -
-            %td
+            %td{style: 'vertical-align: top'}
               - if att.count > 0
                 = link_to rails_blob_path(att.first.data, disposition: "attachment") do
                   %i.material-icons.small insert_drive_file

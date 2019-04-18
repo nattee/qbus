@@ -7,11 +7,11 @@ module ApplicationsHelper
     when 'registered'
       width = 20
     when 'confirmed'
-      width = 40
+      width = 50
     when 'submitted'
-      width = 60
+      width = 75
     when 'evaluated'
-      width = 80
+      width = 90
     when 'awarded'
       width = 100
     end
