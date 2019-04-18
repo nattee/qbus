@@ -20,8 +20,6 @@ class Application < ApplicationRecord
   has_many :cars, dependent: :destroy
   has_many :logs, dependent: :nullify
 
-  #scope
-  scope :owning, -> { where(user: @current_user) }
   #for user
   scope :applying, -> { where(state: :applying) }
   scope :waiting_evidence, -> { where(state: :confirmed) }
@@ -64,7 +62,8 @@ class Application < ApplicationRecord
   end
 
   def route_no
-    return 'ไม่ประจำทาง' if category3? or route == nil
+    return 'ไม่ประจำทาง' if category3?
+    return '' if route == nil
     return route.route_no
   end
 
