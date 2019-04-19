@@ -176,16 +176,20 @@ class ApplicationsController < ApplicationController
     @attachment.data.purge
     @attachment.data.attach(attachment_params[:data])
     @attachment.attachment_type = :evidence
-    @attachment.save
+    if @attachment.save
+      @application.attachments << @attachment
+      @application.save
+      redirect_to add_evidences_application_path(@application), notice: "แนบหลักฐาน #{@attachment.evidence.name} สำเร็จ"
+    else
+      flash[:error] = @attachment.errors.full_messages.to_sentence
+      redirect_to add_evidences_application_path(@application)
 
-    @application.attachments << @attachment
-    @application.save
-    redirect_to add_evidences_application_path(@application), notice: "แนบหลักฐาน #{@attachment.evidence.name} สำเร็จ"
+    end
   end
 
   def finish_add_evidences
     @application.submit_for_approve
-    redirect_to process_dashboard_path, notice: "ได้ยืนยันการยื่นหลักฐานของใบสมัครหมายเลข #{@application.id} แล้ว"
+    redirect_to process_dashboard_path, notice: "ได้ยืนยันการยื่นหลักฐานของใบสมัครหมายเลข #{@application.id_text} แล้ว"
   end
 
 

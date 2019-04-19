@@ -12,10 +12,10 @@
         %br
         %br
       = link_to 'สมัครเข้าร่วมโครงการ', apply_applications_path, class: 'btn gradient-45deg-deep-orange-orange border-round'
-  .carousel-item.purple.white-text{href: "#two!"}
-    %h2.white-text ข่าวประชาสัมพันธ์ 1
-  .carousel-item.purple.white-text{href: "#three!"}
-    %h2.white-text ข่าวประชาสัมพันธ์ 2
+  /.carousel-item.purple.white-text{href: "#two!"}
+  /  %h2.white-text ข่าวประชาสัมพันธ์ 1
+  /.carousel-item.purple.white-text{href: "#three!"}
+  /  %h2.white-text ข่าวประชาสัมพันธ์ 2
 .container{style: 'width: 70% !important;'}
   = render 'layouts/flash'
   .row#left-menu
@@ -121,10 +121,33 @@
                 %br
                 แบบยืนยันการเข้าร่วมโครงการ
             .col.s4.center
+              %a{href: '/form/ตัวอย่างเอกสารประกอบการประเมิน.pdf'}
+                %i.material-icons{style: 'font-size: 3rem;'} insert_drive_file
+                %br
+                ตัวอย่างเอกสารประกอบการประเมิน
             .col.s4.center
 
-.row.deep-purple.lighten-3
-  .col.s12
+  .row
+    .col.s12
+      %h4 ข่าวประชาสัมพันธ์
+  .row
+    - Announcement.last(3).each do |announcement|
+      .col.s4
+        .card.medium
+          - if announcement.main_attachment.attached? && announcement.main_attachment&.representable?
+            .card-image{style: 'background-color: white;'}
+              = image_tag rails_representation_url(announcement.main_attachment.representation(resize: '320x240'))
+              %span.card-title{style: 'background-color: purple; font-weight: bold; padding: 10px'}
+                = announcement.title
+          - else
+            .card-image{style: 'height: 340px; background-color: white;'}
+              %span.card-title{style: 'background-color: purple; font-weight: bold; padding: 10px'}
+                = announcement.title
+          .card-content{style: 'height: 5rem; overflow: hidden; padding: 10px'}
+            = raw announcement.description
+          .card-action
+            %a{:href => publish_announcement_path(announcement)}
+              อ่านต่อ
 
 
 

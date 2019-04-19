@@ -55,12 +55,20 @@ class ProcessController < ApplicationController
       @application.confirm_comment = "ใบสมัครถูกต้อง"
       @application.confirm_registration
     elsif params[:result] == 'no'
-      @application.confirm_result = false
-      @application.confirm_comment = "#{params[:confirm_comment]}"
-      @application.reject_registration
+      comment = params[:confirm_comment].strip
+      if comment.blank?
+        redirect_to process_register_path(@application), flash: {error: "ในกรณีที่ไม่ผ่านการตรวจ จะต้องระบุคำอธิบาย"}
+        return
+      else
+        @application.confirm_result = false
+        @application.confirm_comment = "#{params[:confirm_comment]}"
+        @application.reject_registration
+      end
     else
+      redirect_to process_register_path(@application), flash: {error: "โปรดระบุผลการตรวจ"}
+      return
     end
-    redirect_to process_registers_path, notice: "บันทึกผลการตรวจใบสมัครหมายเลข #{@application.id} เรียบร้อย"
+    redirect_to process_registers_path, notice: "บันทึกผลการตรวจใบสมัครหมายเลข #{@application.id_text} เรียบร้อย"
   end
 
 
