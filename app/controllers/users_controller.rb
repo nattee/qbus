@@ -53,7 +53,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       @user.roles.clear
       if @user.update(user_params)
-        format.html { redirect_to target, notice: 'แก้ไขข้อมูลผู้ใช้เรียบร้อย' }
+        format.html { redirect_to users_path, notice: 'แก้ไขข้อมูลผู้ใช้เรียบร้อย' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }

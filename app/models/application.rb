@@ -254,7 +254,7 @@ class Application < ApplicationRecord
 
   def evaluation_visit
     if category3?
-      return evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9 and criteria.id >= 50')
+      return evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9 and criteria.id >= 46')
     else
       return evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9')
     end
@@ -265,15 +265,15 @@ class Application < ApplicationRecord
   end
 
   def evaluation_visit_sec3
-    evaluations.joins(:criterium => :criteria_group).where('criteria.id = 50').order('criteria.id')
+    evaluations.joins(:criterium => :criteria_group).where('criteria.id = 46').order('criteria.id')
   end
 
   def evaluation_visit_sec4
-    evaluations.joins(:criterium => :criteria_group).where('criteria.id = 51').order('criteria.id')
+    evaluations.joins(:criterium => :criteria_group).where('criteria.id = 47').order('criteria.id')
   end
 
   def evaluation_visit_sec5
-    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9 and criteria.id > 51').order('criteria.id')
+    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9 and criteria.id > 47').order('criteria.id')
   end
 
   def attach_data(attachment_type, params)
