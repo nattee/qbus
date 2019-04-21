@@ -321,7 +321,23 @@ class Application < ApplicationRecord
     return save && contract.data.attached?
   end
 
+  def copy_licensee_evidence_from(original)
+    #delete current evidence
+    # calling destroy_all will automatically purge ActiveStorage
+    self.attachments.where.not(evidence_id: nil).destroy_all
 
+    #copy attachment
+    original.attachments.where.not(evidence_id: nil).each do |att|
+      #copy attachment
+      new_att = att.dup
+      new_att.data.attach io: StringIO.new(att.data.download),
+                          filename: att.data.filename,
+                          content_type: att.data.content_type
+      new_att.save
+
+      self.attachments << new_att
+    end
+  end
 
   def change_state(new_state)
     self.state = new_state
@@ -364,5 +380,6 @@ class Application < ApplicationRecord
     app.add_missing_evaluation
     return app
   end
+
 
 end
