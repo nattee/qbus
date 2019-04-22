@@ -65,6 +65,7 @@ class ApplicationsController < ApplicationController
   def post_step1
     #routes and licensee data
     @application.update(application_params)
+    @application.state = :applying
 
     unless @application.category3?
       @route = Route.where(route_no: route_params[:route_no]).first
@@ -87,13 +88,28 @@ class ApplicationsController < ApplicationController
     @application.save
 
     att_param = attachment_contract_signup_params
+    attach_check = {}
     [:license,:contract,:signup].each do |att_sym|
       if att_param["#{att_sym.to_s}_data".to_sym]
-        next if @application.attach_data(att_sym, att_param)
+        if @application.attach_data(att_sym, att_param)
+          attach_check[att_sym] = :ok
+          next
+        end
       else
-        next if @application.get_attachment(att_sym)
+        if @application.get_attachment(att_sym)
+          attach_check[att_sym] = :present
+          next
+        end
       end
-      redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบเอกสารให้ครบถ้วน'}) and return
+      attach_check[att_sym] = :fail
+    end
+
+    if attach_check[:signup] == :fail
+      redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบเอกสารยืนยันการเข้าร่วมโครงการ'}) and return
+    end
+
+    if attach_check[:contract] == :fail &&  attach_check[:license] == :fail
+      redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบเอกสารใบอนุญาตประกอบการขนส่ง และ/หรือ สัญญาการเดินรถ'}) and return
     end
 
     if @application.save

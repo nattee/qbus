@@ -9,21 +9,33 @@
             = render "current_apply_step"
           .col.s12.m9
             %h4 เลือกหมวดการเดินรถ
-            = form_for @application, url: apply_applications_path do |f|
+            = form_for @application, url: apply_applications_path, html: {id: 'form-apply'} do |f|
               = hidden_field_tag 'application[stage]', 'apply'
               %p
                 %label
-                  = f.radio_button :category, :category1
+                  = f.radio_button :category, :category1 ,class: 'required'
                   %span= t(:category1, scope: 'qbus.application')
               %br
               %p
                 %label
-                  = f.radio_button :category, :category2
+                  = f.radio_button :category, :category2 ,class: 'required'
                   %span= t(:category2, scope: 'qbus.application')
               %br
               %p
                 %label
-                  = f.radio_button :category, :category3
+                  = f.radio_button :category, :category3 ,class: 'required'
                   %span= t(:category3, scope: 'qbus.application')
               %br
-              = f.submit 'ต่อไป', class: 'btn'
+              .div.input-field#error-box{style: 'display: none;'}
+                %ul#error-list
+              %button.btn.waves-effect.waves-light.gradient-45deg-purple-deep-purple ไปยังขั้นตอนต่อไป
+
+:javascript
+  $("#form-apply").validate({
+    messages: {
+      category: 'โปรดระบุหมวดการเดินรถ'
+    },
+    errorContainer: '#error-box',
+    errorLabelContainer: '#error-list',
+    errorElement: 'div',
+  });

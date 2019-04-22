@@ -24,7 +24,7 @@ class ProcessController < ApplicationController
 
   def dashboard
     #for licensee
-    @applying = Application.applying(@current_user)
+    @applying = Application.on_applying(@current_user)
     @need_evidences = Application.need_evidence(@current_user)
     @finished = Application.finished(@current_user)
     @waiting_official = Application.waiting_official(@current_user)
