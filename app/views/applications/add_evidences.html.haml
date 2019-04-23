@@ -104,4 +104,4 @@
       - CriteriaGroup.need_evidence.each do |cg|
         %div{ id: "tab_cg#{cg.id}"}
           .card-content.teal.lighten-5
-            = render partial: "process/evidence", locals: {cgroups: [cg]}
+            = render partial: "process/evidence", locals: {cgroups: [cg], enable_delete: true}

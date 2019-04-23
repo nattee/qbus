@@ -6,6 +6,8 @@
       %th ชื่อหลักฐาน
       %th วัน/เวลา ยื่นเอการ
       %th
+      - if enable_delete
+        %th
   %tbody
     - cgroups.each do |cg|
       - cg.criterium.each do |ci|
@@ -24,5 +26,9 @@
                 = link_to rails_blob_path(att.first.data, disposition: "attachment") do
                   %i.material-icons.small insert_drive_file
                   = att.first.data.filename
+            - if enable_delete
+              %td
+                - if att.count > 0
+                  = link_to 'ลบ', remove_attachment_path(att.first), data: {confirm: "ต้องการลบหลักฐาน \"#{att.first.data.filename}\" หรือไม่?"}
 
 
