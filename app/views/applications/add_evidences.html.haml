@@ -44,10 +44,10 @@
           .row
             .col.s12
               = f.button :submit, 'ส่งไฟล์แนบ', class: "btn waves-light left green"
-      .card-action
-        %button.btn.waves-effect.waves-light.green.modal-trigger{ data: {target: 'copy-evidence'}} ใช้หลักฐานจากใบสมัครอื่น
-        %br
-        ในกรณีที่ท่านได้เคยแนบหลักฐานมาก่อนหน้านี้ในใบสมัครอื่น ๆ ท่านสามารถใช้หลักฐานที่ได้เคยส่งมาแล้วมาเป็นหลักฐานสำหรับใบสมัครปัจจุบันนี้ได้เลย
+      -#.card-action
+      -#  %button.btn.waves-effect.waves-light.green.modal-trigger{ data: {target: 'copy-evidence'}} ใช้หลักฐานจากใบสมัครอื่น
+      -#  %br
+      -#  ในกรณีที่ท่านได้เคยแนบหลักฐานมาก่อนหน้านี้ในใบสมัครอื่น ๆ ท่านสามารถใช้หลักฐานที่ได้เคยส่งมาแล้วมาเป็นหลักฐานสำหรับใบสมัครปัจจุบันนี้ได้เลย
       .card-action
         ท่านได้ส่งเอกสารมาแล้ว 
         %span.strong #{@missing[:present]}
@@ -108,7 +108,7 @@
       - CriteriaGroup.need_evidence.each do |cg|
         %div{ id: "tab_cg#{cg.id}"}
           .card-content.teal.lighten-5
-            = render partial: "process/evidence", locals: {cgroups: [cg]}
+            = render partial: "process/evidence", locals: {cgroups: [cg],enable_delete: true}
 
 
 #copy-evidence.modal

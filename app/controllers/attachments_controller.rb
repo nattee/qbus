@@ -1,5 +1,6 @@
 class AttachmentsController < ApplicationController
-  before_action :set_attachment, only: [:show, :edit, :update, :destroy]
+  before_action :set_attachment, only: [:show, :edit, :update, :destroy, :remove]
+  before_action :admin_authorization, except: [:remove]
 
   # GET /attachments
   # GET /attachments.json
@@ -60,6 +61,15 @@ class AttachmentsController < ApplicationController
       format.html { redirect_to attachments_url, notice: 'Attachment was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def remove
+    unless logged_in? && @current_user == @attachment.application&.user
+      redirect_to root_path, flash: {error: 'ท่านไม่มีสิทธิ์ในการทำรายการดังกล่าว'}
+      return
+    end
+    @attachment.destroy
+    redirect_to add_evidences_application_path(@attachment.application)
   end
 
   private

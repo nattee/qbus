@@ -55,7 +55,6 @@ class ApplicationController < ActionController::Base
 
   def owner_or_admin
     unless logged_in? && (@current_user.is_admin? || @current_user == @application.user)
-      puts @current_user&.is_admin? || false
       redirect_to root_path, flash: {error: 'ท่านไม่มีสิทธิ์ในการทำรายการดังกล่าว'}
     end
   end
