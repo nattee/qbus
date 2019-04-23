@@ -44,25 +44,29 @@
           .row
             .col.s12
               = f.button :submit, 'ส่งไฟล์แนบ', class: "btn waves-light left green"
-        .card-action
-          ท่านได้ส่งเอกสารมาแล้ว 
-          %span.strong #{@missing[:present]}
-          เอกสาร จากที่ต้องการทั้งหมด
-          %span.strong #{@missing[:total]}
-          เอกสาร
-          %ul
-            - last_cg = nil
-            - CriteriaGroup.need_evidence.each do |cg|
-              %li{style:  'list-style-type: circle !important; margin-left: 3rem;'}
-                #{cg.name}
-                - if @missing[cg.id][:ok]
-                  %span.green-text หลักฐานครบแล้ว
-                - else
-                  %span.red-text ส่งมาแล้ว #{@missing[cg.id][:present]} จาก #{@missing[cg.id][:total]}
-          - if @missing[:present] != @missing[:total]
-            ยังมีเกณฑ์การประเมินที่แนบเอกสารไม่ครบ ผู้ประเมินอาจพิจารณาไม่ให้คะแนนสำหรับเกณฑ์ข้อนั้นๆ ได้
-          .section
-          = link_to 'ยืนยันหลักฐาน', finish_add_evidences_application_path(@application), class: 'btn waves-effect waves-light gradient-45deg-purple-deep-purple', data: {confirm: 'เมื่อยืนยันแล้ว จะไม่สามารถแก้ไขเพิ่มเติมหลักฐานได้อีก ท่านจะยืนยันหรือไม่?'}
+      .card-action
+        %button.btn.waves-effect.waves-light.green.modal-trigger{ data: {target: 'copy-evidence'}} ใช้หลักฐานจากใบสมัครอื่น
+        %br
+        ในกรณีที่ท่านได้เคยแนบหลักฐานมาก่อนหน้านี้ในใบสมัครอื่น ๆ ท่านสามารถใช้หลักฐานที่ได้เคยส่งมาแล้วมาเป็นหลักฐานสำหรับใบสมัครปัจจุบันนี้ได้เลย
+      .card-action
+        ท่านได้ส่งเอกสารมาแล้ว 
+        %span.strong #{@missing[:present]}
+        เอกสาร จากที่ต้องการทั้งหมด
+        %span.strong #{@missing[:total]}
+        เอกสาร
+        %ul
+          - last_cg = nil
+          - CriteriaGroup.need_evidence.each do |cg|
+            %li{style:  'list-style-type: circle !important; margin-left: 3rem;'}
+              #{cg.name}
+              - if @missing[cg.id][:ok]
+                %span.green-text หลักฐานครบแล้ว
+              - else
+                %span.red-text ส่งมาแล้ว #{@missing[cg.id][:present]} จาก #{@missing[cg.id][:total]}
+        - if @missing[:present] != @missing[:total]
+          ยังมีเกณฑ์การประเมินที่แนบเอกสารไม่ครบ ผู้ประเมินอาจพิจารณาไม่ให้คะแนนสำหรับเกณฑ์ข้อนั้นๆ ได้
+        .section
+        = link_to 'ยืนยันหลักฐาน', finish_add_evidences_application_path(@application), class: 'btn waves-effect waves-light gradient-45deg-purple-deep-purple', data: {confirm: 'เมื่อยืนยันแล้ว จะไม่สามารถแก้ไขเพิ่มเติมหลักฐานได้อีก ท่านจะยืนยันหรือไม่?'}
 :css
   .tabs .tab a:hover {
     color: white;
@@ -105,3 +109,16 @@
         %div{ id: "tab_cg#{cg.id}"}
           .card-content.teal.lighten-5
             = render partial: "process/evidence", locals: {cgroups: [cg]}
+
+
+#copy-evidence.modal
+  = form_with url: add_car_application_path(@application), local: true do |f|
+    .modal-content
+      %h4 คัดลอกหลักฐานจากใบสมัครอื่น
+      %p
+        ท่านได้เคยทำใบสมัครที่ได้กรอกข้อมูลของผู้ประกอบการต่อไปนี้ไว้แล้ว ให้กดปุ่ม "คัดลอก" เพื่อนำเอาหลักฐานจากใบสมัครที่เลือกมาใช้เป็นหลักฐานในใบสมัครปัจจุบัน
+      %p
+        ท่านสามารถเพิ่มหลักฐานอื่นได้อีกหลังจากทำการคัดลอกแล้ว
+    .modal-footer
+      %a.modal-close.waves-effect.wave-flat.btn-flat{href: "#!"} ยกเลิก
+
