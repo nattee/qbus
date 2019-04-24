@@ -65,6 +65,26 @@
                       = f.input_field :visitor_email, as: :email
                       = f.label :visitor_email, t(:visitor_email, scope: 'activerecord.attributes.application')
 
+              / accidence section
+              .card-content.brown.lighten-5
+                .card-title
+                  %h5 เงื่อนไขด้านความปลอดภัย
+                .row
+                  .col.s7.strong
+                    เงื่อนไขการตรวจสอบ
+                  .col.s5.strong
+                    ผลการตรวจหน้างาน
+                - @application.evaluation_visit_accidence.each do |ev|
+                  .row
+                    .col.s7
+                      = "#{ev.criterium.number}. #{ev.criterium.name}"
+                    .col.s5
+                      %label
+                        = radio_button_tag "result[#{ev.id}]", 1, ev.result == 1
+                        %span ใช่
+                      %label
+                        = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
+                        %span ไม่ใช่
               / section 2
               .card-content.brown.lighten-5
                 .card-title
