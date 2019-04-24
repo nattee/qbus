@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   resources :licensees
   resources :criteria
   resources :datafiles
-  resources :attachments
+  resources :attachments do
+    member do
+      get 'remove'
+    end
+  end
   resources :criteria_groups
   resources :violations
   resources :logs

@@ -246,7 +246,7 @@ class Application < ApplicationRecord
   #return self evaluations
   def self_evaluations
     if category3?
-      return evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id = 8")
+      return evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id = 7")
     else
       return evaluations.joins(:criterium => :criteria_group).where("criteria_groups.id in (7,8)")
     end
@@ -254,26 +254,30 @@ class Application < ApplicationRecord
 
   def evaluation_visit
     if category3?
-      return evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9 and criteria.id >= 46')
+      return evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9 and (criteria.id >= 47 or criteria.id = 41)')
     else
       return evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9')
     end
   end
 
+  def evaluation_visit_accidence
+    evaluations.joins(:criterium => :criteria_group).where('criteria.id = 41')
+  end
+
   def evaluation_visit_sec2
-    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9').order('criteria.id').limit(5)
+    evaluations.joins(:criterium => :criteria_group).where('criteria.id >= 42 and criteria.id <= 46').order('criteria.id')
   end
 
   def evaluation_visit_sec3
-    evaluations.joins(:criterium => :criteria_group).where('criteria.id = 46').order('criteria.id')
+    evaluations.joins(:criterium => :criteria_group).where('criteria.id = 47')
   end
 
   def evaluation_visit_sec4
-    evaluations.joins(:criterium => :criteria_group).where('criteria.id = 47').order('criteria.id')
+    evaluations.joins(:criterium => :criteria_group).where('criteria.id = 48')
   end
 
   def evaluation_visit_sec5
-    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9 and criteria.id > 47').order('criteria.id')
+    evaluations.joins(:criterium => :criteria_group).where('criteria_groups.id = 9 and criteria.id > 48').order('criteria.id')
   end
 
   def attach_data(attachment_type, params)
