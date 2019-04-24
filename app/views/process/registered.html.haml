@@ -26,7 +26,7 @@
           .row
             .input-field.col.s12
               = f.text_area :confirm_comment, {value: @application.confirm_comment, class: 'materialize-textarea'}
-              %label คำอธิบายกรณีใบสมัครไม่ถูกต้อง
+              = f.label :confirm_comment, 'คำอธิบายกรณีใบสมัครไม่ถูกต้อง'
           .section
           .row
             .col.s12
