@@ -263,7 +263,7 @@ class QbusTest < ApplicationSystemTestCase
     click_on 'เข้าสู่ระบบ'
     assert_text 'เข้าสู่ระบบเรียบร้อย' # root (logged in)
     visit process_dashboard_url
-    assert_text 'ระบบตัดสินผล'
+    assert_text 'ระบบตัดสินผลมาตรฐาน'
     click_on 'ตัดสินผล'
     assert_text 'ใบสมัครรอการตัดสินผล'
     click_on 'ตัดสินผล', match: :first
