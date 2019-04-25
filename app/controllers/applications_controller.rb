@@ -7,7 +7,9 @@ class ApplicationsController < ApplicationController
                                          :add_car, :remove_car,
                                          :extend_from,
                                         ]
-  before_action only: [:apply,:post_apply] do
+  before_action :apply_authorization, only: [:apply]
+
+  before_action only: [:post_apply] do
     logged_in_with_role([:admin, :licensee])
   end
 
@@ -296,6 +298,13 @@ class ApplicationsController < ApplicationController
 
     def application_evaluation_params
       params.fetch(:result, {})
+    end
+
+    def apply_authorization
+      unless logged_in?
+        redirect_to login_path('register_help')
+        return
+      end
     end
 
 end

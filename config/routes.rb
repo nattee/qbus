@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   #session
   get 'register', to: 'sessions#register'
   post 'register', to: 'sessions#register_post'
-  get 'login', to: 'sessions#new'
+  get 'login(/:options)', to: 'sessions#new', as: 'login'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   get 'profile', to: 'sessions#profile'

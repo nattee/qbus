@@ -2,6 +2,19 @@
 .row
   .col.s6.offset-s3
     .container
+      - if @register_help
+        .card-panel.gradient-45deg-light-green-amber
+          ผู้ใช้งานจะต้องทำการเข้าสู่ระบบก่อนเริ่มดำเนินการสมัคร โดยใช้อีเมล์และรหัสผ่านที่ได้ลงทะเบียนไว้
+          .section
+          ถ้าหากยังไม่ได้ลงทะเบียนผู้ใช้ ให้ดำเนินการลงทะเบียนผู้ใช้โดยกดปุ่ม "สมัครใช้งาน" ด้านล่างนี้
+          .section
+          ในกรณีที่ลืมรหัสผ่าน ให้กดปุ่ม "ลืมรหัสผ่าน" เพื่อทำการเปลี่ยนรหัสผ่านทางอีเมล์
+          .row
+            .input-field.col.s8.offset-s2
+              = link_to 'สมัครใช้งาน', register_path, class: 'btn border-round col s12 gradient-45deg-purple-deep-purple waves-effect waves-light'
+          .row
+            .input-field.col.s8.offset-s2
+              = link_to 'ลืมรหัสผ่าน', new_password_reset_path, class: 'btn border-round col s12 gradient-45deg-purple-deep-purple waves-effect waves-light'
       .card-panel
         %h3 ลงชื่อเข้าใช้งานระบบ
         %p#notice= notice

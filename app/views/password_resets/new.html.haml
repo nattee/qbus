@@ -5,6 +5,8 @@
       .card-panel
         %h3 ลืมรหัสผ่าน
         %p#notice= notice
+        %p
+          กรุณากรอกอีเมล์ที่ได้ใช้ในการลงทะเบียน แล้วกดปุ่ม "รีเซ็ตรหัสผ่าน" ระบบจะส่งอีเมล์ซึ่งระบุวิธีการในการรีเซ็ตรหัสผ่านไปยังอีเมล์ดังกล่าว
         = simple_form_for(:password_reset, :url => password_resets_path, :method => :post) do |f|
           - if f.error_notification
             .row

@@ -34,6 +34,7 @@ class SessionsController < ApplicationController
 
   # GET /login
   def new
+    @register_help = params[:options] == 'register_help'
   end
 
   # POST /login

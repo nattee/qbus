@@ -63,7 +63,7 @@ th:
         approved_date: วันที่อนุมัติ  #g
         evaluated_date: วันที่สิ้นสุดการประเมิน  #g
         evaluation_result: คำอธิบายผลการประเมิน
-        awarded_date: วันที่ตัดสินผลรางวัล  #g
+        awarded_date: วันที่ได้รับการรับรอง  #g
         visited: เข้าตรวจหน้างาน
         visited_date: วันที่เข้าตรวจหน้างาน
         visited_confirm_date: วันที่ยืนยันผลการตรวจหน้างาน

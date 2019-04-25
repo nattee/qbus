@@ -13,7 +13,7 @@ class PasswordResetsController < ApplicationController
       @user.send_password_reset_email
       redirect_to root_url, flash: { notice: "ระบบได้ส่งอีเมล์ระบุวิธีการเปลี่ยนรหัสผ่านไปให้ท่านแล้ว กรุณาตรวจสอบอีเมล์" }
     else
-      flash.now[:error] = "Email address not found"
+      flash.now[:error] = "อีเมล์ดังกล่าวไม่ปรากฎอยู่ในระบบ ท่านสามารถลงทะเบียนใช้งานได้โดยใช้อีเมล์ดังกล่าว"
       render 'new'
     end
   end
