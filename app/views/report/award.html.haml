@@ -16,7 +16,6 @@
                 %th= t(:route_no, scope: 'activerecord.attributes.route')
                 %th เส้นทาง
                 %th= t(:awarded_date, scope: 'activerecord.attributes.application')
-                %th คะแนนที่ได้
             %tbody
               - @apps.each do |app|
                 %tr
@@ -24,7 +23,6 @@
                   %td= app.route_no
                   %td= app.route_info
                   %td= l(app.awarded_date, format: '%d %B %Y')
-                  %td= app.total_score
 
 :javascript
   $(document).ready( function() {

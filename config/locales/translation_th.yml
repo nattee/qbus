@@ -160,7 +160,7 @@ th:
         licensee: ผู้ประกอบการ
         comment: ความคิดเห็น
         commenter_name: ชื่อผู้ออกความคิดเห็น
-        commenter_contact: ข้อมูลสำหรับติดต่อผู้ออกความคิดเห็น
+        commenter_contact: หมายเลขโทรศัพท์
         commenter_address: ที่อยู่ผู้ออกความคิดเห็น
 
       route:

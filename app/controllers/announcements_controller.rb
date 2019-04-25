@@ -16,6 +16,7 @@ class AnnouncementsController < ApplicationController
   # GET /announcements/new
   def new
     @announcement = Announcement.new
+    @announcement.user = @current_user
   end
 
   # GET /announcements/1/edit
