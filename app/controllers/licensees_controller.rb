@@ -1,5 +1,6 @@
 class LicenseesController < ApplicationController
   before_action :set_licensee, only: [:show, :edit, :update, :destroy]
+  before_action :admin_authorization
 
   # GET /licensees
   # GET /licensees.json

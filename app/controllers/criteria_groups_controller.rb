@@ -1,5 +1,6 @@
 class CriteriaGroupsController < ApplicationController
   before_action :set_criteria_group, only: [:show, :edit, :update, :destroy]
+  before_action :admin_authorization
 
   # GET /criteria_groups
   # GET /criteria_groups.json

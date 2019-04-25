@@ -1,5 +1,6 @@
 class ViolationsController < ApplicationController
   before_action :set_violation, only: [:show, :edit, :update, :destroy]
+  before_action :admin_authorization
 
   # GET /violations
   # GET /violations.json

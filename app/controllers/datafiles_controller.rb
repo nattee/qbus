@@ -1,5 +1,6 @@
 class DatafilesController < ApplicationController
   before_action :set_datafile, only: [:show, :edit, :update, :destroy]
+  before_action :admin_authorization
 
   # GET /datafiles
   # GET /datafiles.json

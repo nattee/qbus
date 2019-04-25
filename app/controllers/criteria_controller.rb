@@ -1,5 +1,6 @@
 class CriteriaController < ApplicationController
   before_action :set_criterium, only: [:show, :edit, :update, :destroy]
+  before_action :admin_authorization
 
   # GET /criteria
   # GET /criteria.json
