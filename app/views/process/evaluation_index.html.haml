@@ -50,6 +50,8 @@
                   %th วันที่ยื่นใบสมัคร
                   %th= t(:state, scope: 'activerecord.attributes.application')
                   %th วันประเมิน
+                  %th.right-align คะแนนรวม
+                  %th.right-align คะแนนความปลอดภัย
                   %th= t(:evaluation_result, scope: 'activerecord.attributes.application')
                   %th
               %tbody
@@ -62,6 +64,8 @@
                     %td= l(app.created_at, format: '%d %b %Y')
                     %td= app.state_text
                     %td= l(app.evaluated_date, format: '%d %b %Y')
+                    %td.right-align= "#{app.total_score}/100"
+                    %td.right-align= "#{app.safety_score}/30"
                     %td= app.evaluation_result
                     %td
                       - if @current_user.is_admin?

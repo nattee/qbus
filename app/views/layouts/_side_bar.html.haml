@@ -27,16 +27,16 @@
           %a.waves-effect.waves-cyan{:href => process_registers_path}
             %i.material-icons zoom_in
             %span.menu-title{"data-i18n" => ""} ตรวจสอบ
-      - if @current_user.has_role(:surveyor)
-        %li.bold
-          %a.waves-effect.waves-cyan{:href => process_appointments_path}
-            %i.material-icons chat_bubble_outline
-            %span.menu-title{"data-i18n" => ""} นัดหมาย
       - if @current_user.has_role(:evaluator)
         %li.bold
           %a.waves-effect.waves-cyan{:href => process_evaluations_path}
             %i.material-icons check
             %span.menu-title{"data-i18n" => ""} ประเมินผล
+      - if @current_user.has_role(:surveyor)
+        %li.bold
+          %a.waves-effect.waves-cyan{:href => process_appointments_path}
+            %i.material-icons chat_bubble_outline
+            %span.menu-title{"data-i18n" => ""} นัดหมาย
       - if @current_user.has_role(:committee)
         %li.bold
           %a.waves-effect.waves-cyan{:href => process_awards_path}

@@ -150,6 +150,16 @@
                     มีใบสมัครจำนวน #{@to_be_confirmed.count} ใบที่รอการตรวจสอบ
                   .col.s4.right-align
                     = link_to 'ตรวจสอบ', process_registers_path, class: 'btn btn-small gradient-45deg-deep-orange-orange'
+            - if @current_user.has_role(:evaluator)
+              .divider
+              .card-content
+                .card-title
+                  %h6 ระบบประเมินผล
+                .row
+                  .col.s8
+                    มีใบสมัครจำนวน #{@to_be_evaluated.count} ใบที่รอการประเมิน
+                  .col.s4.right-align
+                    = link_to 'ประเมิน', process_evaluations_path, class: 'btn btn-small gradient-45deg-deep-orange-orange'
             - if @current_user.has_role(:surveyor)
               .divider
               .card-content
@@ -162,16 +172,6 @@
                     มีใบสมัครจำนวน #{@to_be_visited.count} ใบที่รอการตรวจหน้างาน
                   .col.s4.right-align
                     = link_to 'นัดหมาย', process_appointments_path, class: 'btn btn-small gradient-45deg-deep-orange-orange'
-            - if @current_user.has_role(:evaluator)
-              .divider
-              .card-content
-                .card-title
-                  %h6 ระบบประเมินผล
-                .row
-                  .col.s8
-                    มีใบสมัครจำนวน #{@to_be_evaluated.count} ใบที่รอการประเมิน
-                  .col.s4.right-align
-                    = link_to 'ประเมิน', process_evaluations_path, class: 'btn btn-small gradient-45deg-deep-orange-orange'
             - if @current_user.has_role(:committee)
               .divider
               .card-content

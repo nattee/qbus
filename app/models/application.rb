@@ -31,9 +31,12 @@ class Application < ApplicationRecord
   scope :latest_confirmed, -> { where(state: [:confirmed,:applying]).where('confirmed_date >= ?',30.days.ago) }
 
 
-  scope :to_be_appointed, -> { where(state: [:confirmed, :submitted, :evaluated], appointment_date: nil).where(visited: [false,nil]) }
-  scope :to_be_appointed_filled, -> { where(state: [:confirmed, :submitted, :evaluated]).where.not(appointment_date: !nil) }
-  scope :to_be_visited, -> { where(state: [:confirmed, :submitted, :evaluated]).where(visited: [false,nil]) }
+  #scope :to_be_appointed, -> { where(state: [:confirmed, :submitted, :evaluated], appointment_date: nil).where(visited: [false,nil]) }
+  #scope :to_be_appointed_filled, -> { where(state: [:confirmed, :submitted, :evaluated]).where.not(appointment_date: !nil) }
+  #scope :to_be_visited, -> { where(state: [:confirmed, :submitted, :evaluated]).where(visited: [false,nil]) }
+  scope :to_be_appointed, -> { where(state: [:evaluated], appointment_date: nil).where(visited: [false,nil]) }
+  scope :to_be_appointed_filled, -> { where(state: [:evaluated]).where.not(appointment_date: !nil) }
+  scope :to_be_visited, -> { where(state: [:evaluated]).where(visited: [false,nil]) }
   scope :latest_visited, -> {where('visited_confirm_date >= ?',30.days.ago) }
 
   scope :to_be_evaluated, -> { where(state: :submitted) }

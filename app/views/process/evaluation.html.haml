@@ -105,17 +105,36 @@
                           %span.red-text - ไม่ได้แนบ -
                   %br
                 .col.s2
-                  %label
-                    = radio_button_tag "result[#{ev.id}]", 1, ev.result == 1
-                    %span 100%
-                  %br
-                  %label
-                    = radio_button_tag "result[#{ev.id}]", 0.5, ev.result == 0.5
-                    %span 50%
-                  %br
-                  %label
-                    = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
-                    %span 0%
+                  - if ev.criterium&.id == 29
+                    %label
+                      = radio_button_tag "result[#{ev.id}]", 1, ev.result == 1
+                      %span 100%
+                    %br
+                    %label
+                      = radio_button_tag "result[#{ev.id}]", 0.67, ev.result == 0.67
+                      %span 67%
+                    %br
+                    %label
+                      = radio_button_tag "result[#{ev.id}]", 0.33, ev.result == 0.33
+                      %span 33%
+                    %br
+                    %label
+                      = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
+                      %span 0%
+                    %br
+                    %br
+                  - else
+                    %label
+                      = radio_button_tag "result[#{ev.id}]", 1, ev.result == 1
+                      %span 100%
+                    %br
+                    %label
+                      = radio_button_tag "result[#{ev.id}]", 0.5, ev.result == 0.5
+                      %span 50%
+                    %br
+                    %label
+                      = radio_button_tag "result[#{ev.id}]", 0, ev.result == 0
+                      %span 0%
                 .col.s3
                   .input-field
                     = f.text_field "description[#{ev.id}]", value: ev.description, class: 'materialize-textarea'

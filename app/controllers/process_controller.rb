@@ -31,10 +31,13 @@ class ProcessController < ApplicationController
 
     #for officer & admin
     @to_be_confirmed = Application.to_be_confirmed
+
     @to_be_appointed = Application.to_be_appointed
     @to_be_appointed_filled = Application.to_be_appointed_filled
     @to_be_visited = Application.to_be_visited
+
     @to_be_evaluated = Application.to_be_evaluated
+
     @to_be_awarded = Application.to_be_awarded
 
   end
@@ -146,12 +149,8 @@ class ProcessController < ApplicationController
     #save evaluations
     ev_result = application_evaluation_params
     @application.evaluation_main.each do |ev|
-      if ev_result[ev.id.to_s] == '1'
-        ev.result = 1
-      elsif ev_result[ev.id.to_s] == '0.5'
-        ev.result = 0.5
-      elsif ev_result[ev.id.to_s] == '0'
-        ev.result = 0
+      if ['1','0.67','0.5', '0.33', '0'].include? ev_result[ev.id.to_s]
+        ev.result = ev_result[ev.id.to_s].to_f
       end
       ev.description = params.require(:description)[ev.id.to_s]
       ev.save
