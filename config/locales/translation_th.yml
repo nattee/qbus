@@ -36,7 +36,7 @@ th:
           registered: รอตรวจใบสมัคร
           confirmed: รอหลักฐานประกอบการประเมิน
           submitted: รอการตรวจประเมิน
-          evaluated: ประเมินผลแล้ว
+          evaluated: ตรวจหลักฐานแล้ว
           awarded: ตัดสินผลแล้ว
         licensee: ผู้ประกอบการ  #g
         route: เส้นทาง  #g

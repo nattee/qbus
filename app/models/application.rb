@@ -23,7 +23,7 @@ class Application < ApplicationRecord
   #for user (licensee)
   scope :on_applying, -> (user) { where(user: user, state: :applying) }
   scope :need_evidence, -> (user) { where(user: user, state: :confirmed) }
-  scope :waiting_official, -> (user) { where(user: user, state: [:registered, :submitted]) }
+  scope :waiting_official, -> (user) { where(user: user, state: [:registered, :submitted, :evaluated]) }
   scope :finished, -> (user) {where(user: user, state: :awarded) }
 
   #for officer
