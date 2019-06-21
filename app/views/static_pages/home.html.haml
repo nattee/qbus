@@ -1,18 +1,21 @@
 .carousel.carousel-slider.center
-  .carousel-item.purple.white-text{href: "#one!"}
-    .container{style: 'width: 70% !important'}
-      %p.white-text{style: 'font-size: 2.28rem;'}
-        เปิดรับสมัครเข้าร่วมโครงการ Q-BUS
-        รุ่นที่ 1 ประจำปี 2562
-      %h5.white-text
-        ขอเชิญผู้ประกอบการขนส่งรถโดยสารสาธารณะสมัครเข้าร่วมโครงการ
-        %br
-        ได้ตั้งแต่วันที่ 1 เม.ย. 2562 ถึง 15 พ.ค. 2562
-        %br
-        สอบถามรายละเอียดเพิ่มเติม: 02-271-8503
-        %br
-        %br
-      = link_to 'สมัครเข้าร่วมโครงการ', apply_applications_path, class: 'btn gradient-45deg-deep-orange-orange border-round'
+  - Announcement.where("priority > 0").order(:priority).each do |ann|
+    .carousel-item.purple.white-text{href: "#one!"}
+      = raw ann.description
+
+  /  .container{style: 'width: 70% !important'}
+  /    %p.white-text{style: 'font-size: 2.28rem;'}
+  /      เปิดรับสมัครเข้าร่วมโครงการ Q-BUS
+  /      รุ่นที่ 1 ประจำปี 2562
+  /    %h5.white-text
+  /      ขอเชิญผู้ประกอบการขนส่งรถโดยสารสาธารณะสมัครเข้าร่วมโครงการ
+  /      %br
+  /      ได้ตั้งแต่วันที่ 1 เม.ย. 2562 ถึง 15 พ.ค. 2562
+  /      %br
+  /      สอบถามรายละเอียดเพิ่มเติม: 02-271-8503
+  /      %br
+  /      %br
+  /    = link_to 'สมัครเข้าร่วมโครงการ', apply_applications_path, class: 'btn gradient-45deg-deep-orange-orange border-round'
   /.carousel-item.purple.white-text{href: "#two!"}
   /  %h2.white-text ข่าวประชาสัมพันธ์ 1
   /.carousel-item.purple.white-text{href: "#three!"}
@@ -132,7 +135,7 @@
     .col.s12
       %h4 ข่าวประชาสัมพันธ์
   .row
-    - Announcement.last(3).each do |announcement|
+    - Announcement.where(priority: 0).last(3).each do |announcement|
       .col.s4
         .card.medium
           - if announcement.main_attachment.attached? && announcement.main_attachment&.representable?

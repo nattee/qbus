@@ -4,12 +4,12 @@
     .col.s12
       .row
         .input-field.col.s12
-          %i.material-icons.prefix help
+          %i.material-icons.prefix title
           = f.input_field :title
           = f.label :title
           = f.full_error :title
         .input-field.col.s12
-          %i.material-icons.prefix help
+          %i.material-icons.prefix notes
           = f.input_field :description, class: 'materialize-textarea', style: 'height: 300px;'
           = f.label :description
           = f.full_error :description
@@ -21,10 +21,16 @@
               %span= "#{t :published, scope: 'activerecord.attributes.announcement'}"
       .row
         .input-field.col.s12
-          %i.material-icons.prefix help
+          %i.material-icons.prefix person
           = f.input_field :user_id, data: {contrainwidth: 'false'}, collection: User.all, label_method: :name, value_method: :id
           = f.label :user
           = f.full_error :user
+      .row
+        .input-field.col.s12
+          %i.material-icons.prefix arrow_upward
+          = f.input_field :priority
+          = f.label :priority, "ความสำคัญ (ใส่ค่า 0 สำหรับข่าวประชาสัมพันธ์ด้านล่าง)"
+          = f.full_error :priority
       .row
         .col.s12
           = f.label :main_attachment

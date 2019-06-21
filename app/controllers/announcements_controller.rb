@@ -89,6 +89,6 @@ class AnnouncementsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def announcement_params
-      params.require(:announcement).permit(:title, :description, :published, :user_id, :main_attachment, other_attachments: [])
+      params.require(:announcement).permit(:title, :description, :published, :user_id, :priority, :main_attachment, other_attachments: [])
     end
 end

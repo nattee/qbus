@@ -23,6 +23,7 @@ th:
         description: รายละเอียด
         published: เผยแพร่
         user: ผู้เขียน
+        priority: ความสำคัญ
         main_attachment: ไฟล์แนบหลัก
         other_attachments: ไฟล์แนบอื่นๆ
 
