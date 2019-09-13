@@ -14,22 +14,24 @@
                 %th= t(:route_no, scope: 'activerecord.attributes.application')
                 %th= t(:route_info, scope: 'activerecord.attributes.application')
                 %th= t(:state, scope: 'activerecord.attributes.application')
-                %th
+                -#%th
             %tbody
               - @applications.each do |application|
                 %tr
-                  %td= application.id_text
+                  %td
+                    %a{:href => application_path(application)}
+                      = application.id_text
                   %td= application.licensee&.name
                   %td= application.route_no
                   %td= application.route_info
                   %td= application.state_text
-                  %td.right-align
-                    %a{:href => application_path(application)}
-                      %i.material-icons pageview
-                    -#%a{:href => edit_application_path(application)}
-                    -#  %i.material-icons edit
-                    -#%a{"href" => application_path(application), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
-                    -#  %i.material-icons delete
+                  -#%td.right-align
+                  -#  %a{:href => application_path(application)}
+                  -#    %i.material-icons pageview
+                  -#  %a{:href => edit_application_path(application)}
+                  -#    %i.material-icons edit
+                  -#  %a{"href" => application_path(application), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                  -#    %i.material-icons delete
       -#.card-action
       -#  = link_to t(:new), apply_applications_path, class: 'btn green waves-effect waves-light'
 
