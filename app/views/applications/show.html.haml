@@ -1,68 +1,51 @@
 .row
-  .col.s6.offset-s3
-    .card
-      .card-content.deep-purple
-        .card-title.white-text
-          =t(:application, scope: 'activerecord.models')
-          =@application.id
+  .col.s12
+    .card.grey.darken-3
       .card-content
-        .section
-          %h6= t(:number, scope: 'activerecord.attributes.application')
-          = @application.number
-        .section
-          %h6= t(:user, scope: 'activerecord.attributes.application')
-          = @application.user&.name
-        .section
-          %h6= t(:state, scope: 'activerecord.attributes.application')
-          = @application.state_text
-        .section
-          %h6= t(:licensee, scope: 'activerecord.attributes.application')
-          = @application.licensee&.name
-        .section
-          %h6= t(:route, scope: 'activerecord.attributes.application')
-          = @application.route&.name
-        .section
-          %h6= t(:category, scope: 'activerecord.attributes.application')
-          = @application.category_text
-        .section
-          %h6= t(:appointment_date, scope: 'activerecord.attributes.application')
-          = @application.appointment_date
-        .section
-          %h6= t(:appointment_remark, scope: 'activerecord.attributes.application')
-          = @application.appointment_remark
-        .section
-          %h6= t(:appointment_user, scope: 'activerecord.attributes.application')
-          = @application.appointment_user&.name
-        .section
-          %h6= t(:awarded_date, scope: 'activerecord.attributes.application')
-          = @application.awarded_date
-        .section
-          %h6= t(:award, scope: 'activerecord.attributes.application')
-          = @application.award
-        .section
-          %h6= t(:contact, scope: 'activerecord.attributes.application')
-          = @application.contact
-        .section
-          %h6= t(:contact_tel, scope: 'activerecord.attributes.application')
-          = @application.contact_tel
-        .section
-          %h6= t(:confirmed_date, scope: 'activerecord.attributes.application')
-          = @application.confirmed_date
-        .section
-          %h6= t(:submitted_date, scope: 'activerecord.attributes.application')
-          = @application.submitted_date
-        .section
-          %h6= t(:approved_date, scope: 'activerecord.attributes.application')
-          = @application.approved_date
-        .section
-          %h6= t(:evaluated_date, scope: 'activerecord.attributes.application')
-          = @application.evaluated_date
-        .section
-          %h6= t(:car_count, scope: 'activerecord.attributes.application')
-          = @application.car_count
-        .section
-          %h6= t(:trip_count, scope: 'activerecord.attributes.application')
-          = @application.trip_count
-      .card-action
-        = link_to t(:edit), edit_application_path(@application)
-        = link_to t(:back), applications_path
+        %h5.white-text ข้อมูลใบสมัคร
+      .card-tabs
+        %ul.tabs.tabs-fixed-width.tabs-transparent.grey-text
+          %li.tab
+            %a.active{href: '#tab_app'}ข้อมูลใบสมัคร
+          %li.tab
+            %a{href: '#tab_evidence'}หลักฐาน
+          %li.tab
+            %a{href: '#tab_car'}ข้อมูลรถ
+          %li.tab
+            %a{href: '#tab_eval'}การประเมิน
+          %li.tab
+            %a{href: '#tab_visit'}การตรวจหน้างาน
+          %li.tab
+            %a{href: '#tab_award'}การตัดสินผล
+      #tab_eval
+        .card-content.grey.lighten-5
+          = render 'process/evaluation'
+        .card-action.grey.lighten-3
+          -#= link_to 'แก้ไขข้อมูลการประเมิน', process_evaluation_path(@application), class: 'btn btn-green'
+      #tab_evidence
+        .card-content.grey.lighten-5
+          %h4 รายการหลักฐาน
+          = render "process/evidence"
+        .card-action.grey.lighten-3
+          -#= link_to 'แก้ไขข้อมูลหลักฐาน', add_evidences_application_path(@application), class: 'btn btn-green'
+      #tab_visit
+        .card-content.grey.lighten-5
+          %h4 ข้อมูลการตรวจประะเมินหน้างาน
+          = render "process/visit"
+        .card-action.grey.lighten-3
+          -#= link_to 'แก้ไขข้อมูลการตรวจหน้างาน', appointment_visit_path(@application), class: 'btn btn-green'
+      #tab_app
+        .card-content.grey.lighten-5
+          = render partial: "applications/application"
+        .card-action.grey.lighten-3
+          -#= link_to 'แก้ไขข้อมูลใบสมัคร', edit_application_path(@application), class: 'btn btn-green'
+      #tab_car
+        .card-content.grey.lighten-5
+          = render partial: "applications/cars"
+        .card-action.grey.lighten-3
+          -#= link_to 'แก้ไขข้อมูลรถ', edit_application_path(@application), class: 'btn btn-green'
+      #tab_award
+        .card-content.grey.lighten-5
+          = render partial: "applications/cars"
+        .card-action.grey.lighten-3
+          -#= link_to 'แก้ไขการตัดสินผล', process_award_path(@application), class: 'btn btn-green'

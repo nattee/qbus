@@ -3,7 +3,7 @@
     .card
       .card-content.deep-purple
         .card-title
-          %h4.white-text= t(:list) + t(:application, scope: 'activerecord.models')
+          %h4.white-text= @title
       .card-content
         .dataTables_wrapper
           %table#table.dataTable.display
@@ -13,6 +13,7 @@
                 %th= t(:name, scope: 'activerecord.attributes.licensee')
                 %th= t(:route_no, scope: 'activerecord.attributes.application')
                 %th= t(:route_info, scope: 'activerecord.attributes.application')
+                %th= t(:state, scope: 'activerecord.attributes.application')
                 %th
             %tbody
               - @applications.each do |application|
@@ -21,22 +22,23 @@
                   %td= application.licensee&.name
                   %td= application.route_no
                   %td= application.route_info
+                  %td= application.state_text
                   %td.right-align
                     %a{:href => application_path(application)}
                       %i.material-icons pageview
-                    %a{:href => edit_application_path(application)}
-                      %i.material-icons edit
-                    %a{"href" => application_path(application), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
-                      %i.material-icons delete
-      .card-action
-        = link_to t(:new), apply_applications_path, class: 'btn green waves-effect waves-light'
+                    -#%a{:href => edit_application_path(application)}
+                    -#  %i.material-icons edit
+                    -#%a{"href" => application_path(application), "rel" => "nofollow", "data-method" => "delete", "data-confirm" => t(:confirm_delete)}
+                    -#  %i.material-icons delete
+      -#.card-action
+      -#  = link_to t(:new), apply_applications_path, class: 'btn green waves-effect waves-light'
 
 :coffee
   $(document).ready ->
     $('#table').DataTable(
       $.extend(
         {
-          'responsive': true,
+          #'responsive': true,
           'lengthChange': false,
           'columnDefs': [
             {'orderable': false, 'targets': -1},

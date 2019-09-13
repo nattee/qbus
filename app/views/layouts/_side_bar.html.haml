@@ -51,10 +51,10 @@
             %i.material-icons announcement
             %span.menu-title=t(:public_comment, scope: 'activerecord.models')
         - if @current_user.is_admin?
-          /%li.bold
-          /  %a.waves-effect.waves-cyan{:href => applications_path}
-          /    %i.material-icons content_paste
-          /    %span.menu-title=t(:application, scope: 'activerecord.models')
+          %li.bold
+            %a.waves-effect.waves-cyan{:href => applications_path}
+              %i.material-icons content_paste
+              %span.menu-title=t(:application, scope: 'activerecord.models')
           %li.bold
             %a.waves-effect.waves-cyan{:href => announcements_path}
               %i.material-icons volume_up

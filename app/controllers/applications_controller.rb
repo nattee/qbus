@@ -1,4 +1,7 @@
 class ApplicationsController < ApplicationController
+
+  before_action :admin_authorization, only: [:index, :finished, :in_progress, :show, :edit]
+
   before_action :set_application,
                                   only: [:show, :edit, :update, :destroy, :show_full,
                                          :apply_step1, :apply_step2, :apply_step3,:fail_self_evaluation,
@@ -24,7 +27,21 @@ class ApplicationsController < ApplicationController
   # GET /applications
   # GET /applications.json
   def index
-    @applications = Application.all
+    @applications = Application.all.reverse
+    @title = 'รายการใบสมัครทั้งหมด'
+  end
+
+  def finished
+    @applications = Application.finished_all.reverse
+    @title = 'รายการใบสมัครดำเนินการเสร็จแล้ว'
+    render :index
+
+  end
+
+  def in_progress
+    @applications = Application.in_progress.reverse
+    @title = 'รายการใบสมัครอยู่ระหว่างดำเนินการ'
+    render :index
   end
 
   # GET /applications/1

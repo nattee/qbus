@@ -71,6 +71,8 @@ Rails.application.routes.draw do
       get 'extend'
       post 'apply', to: 'applications#post_apply'
       get 'dashboard'
+      get 'finished'
+      get 'in_progress'
     end
   end
 

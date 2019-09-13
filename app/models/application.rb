@@ -48,6 +48,9 @@ class Application < ApplicationRecord
 
   scope :won_award, -> {where(state: :awarded).where(award_won: true) }
 
+  scope :in_progress, -> {where(state: [:registered, :confirmed, :evaluated, :submitted])}
+  scope :finished_all, -> {where(state: :awarded)}
+
   def to_label
     "#{self.number} - #{self.state_text}"
   end
