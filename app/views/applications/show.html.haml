@@ -17,35 +17,75 @@
             %a{href: '#tab_visit'}การตรวจหน้างาน
           %li.tab
             %a{href: '#tab_award'}การตัดสินผล
+      #tab_app
+        .card-content.grey.lighten-5
+          = render partial: "applications/application"
+        .card-action.grey.lighten-3
+          //= link_to 'แก้ไขข้อมูลใบสมัคร', apply_step1_application_path(@application), class: 'btn btn-green'
+          = link_to 'ลบใบสมัคร', application_path(@application), method: 'delete', class: 'btn orange', data: {confirm: 'ต้องการลบใบสมัครออกจากระบบหรือไม่? คำเตือน: เมื่อลบแล้ว ข้อมูลทั้งหมดของใบสมัครนี้จะถูกลบ และจะไม่สามารถแก้ไขได้อีก' }
       #tab_eval
         .card-content.grey.lighten-5
           = render 'process/evaluation'
         .card-action.grey.lighten-3
-          -#= link_to 'แก้ไขข้อมูลการประเมิน', process_evaluation_path(@application), class: 'btn btn-green'
+          //= link_to 'แก้ไขข้อมูลการประเมิน', process_evaluation_path(@application), class: 'btn btn-green'
+      #tab_car
+        .card-content.grey.lighten-5
+          = render partial: "applications/cars"
+        .card-action.grey.lighten-3
+          //= link_to 'แก้ไขข้อมูลรถ', apply_step2_application_path(@application,admin_edit:true), class: 'btn btn-green'
       #tab_evidence
         .card-content.grey.lighten-5
           %h4 รายการหลักฐาน
           = render "process/evidence"
         .card-action.grey.lighten-3
-          -#= link_to 'แก้ไขข้อมูลหลักฐาน', add_evidences_application_path(@application), class: 'btn btn-green'
+          //= link_to 'แก้ไขข้อมูลหลักฐาน', add_evidences_application_path(@application), class: 'btn btn-green'
       #tab_visit
         .card-content.grey.lighten-5
           %h4 ข้อมูลการตรวจประะเมินหน้างาน
           = render "process/visit"
         .card-action.grey.lighten-3
-          -#= link_to 'แก้ไขข้อมูลการตรวจหน้างาน', appointment_visit_path(@application), class: 'btn btn-green'
-      #tab_app
-        .card-content.grey.lighten-5
-          = render partial: "applications/application"
-        .card-action.grey.lighten-3
-          -#= link_to 'แก้ไขข้อมูลใบสมัคร', edit_application_path(@application), class: 'btn btn-green'
-      #tab_car
-        .card-content.grey.lighten-5
-          = render partial: "applications/cars"
-        .card-action.grey.lighten-3
-          -#= link_to 'แก้ไขข้อมูลรถ', edit_application_path(@application), class: 'btn btn-green'
+          //= link_to 'แก้ไขข้อมูลการตรวจหน้างาน', appointment_visit_path(@application), class: 'btn btn-green'
       #tab_award
         .card-content.grey.lighten-5
-          = render partial: "applications/cars"
+          .card-title
+          .row
+            .col.s6
+              .row
+                .col.s12
+                  %h5 ผลการตัดสิน
+                  - if @application.award_won
+                    %span ได้มาตรฐาน  Q-BUS
+                  - else
+                    %span ไม่ผ่านมาตรฐาน  Q-BUS
+              .section
+              .row
+                .col.s12
+                  %h5 คำอธิบายผลการตัดสิน
+                  = @application.award_remark
+            .col.s6
+              .row
+                .col.s12
+                  %h5 รายละเอียดคะแนน
+              .row
+                .col.s8.strong
+                  คะแนนรวม
+                .col.s4.right-align
+                  = @application.total_score_text
+              .row
+                .col.s8.strong
+                  คะแนนความปลอดภัย
+                .col.s4.right-align
+                  = @application.safety_score_text
+              .row
+                .col.s8.strong
+                  การตรวจหน้างาน
+                .col.s4.right-align
+                  = @application.visit_summary_text
+              .section
+              .row
+                .col.s8.strong
+                  ผลที่ควรจะได้
+                .col.s4.right-align
+                  = @application.passed
         .card-action.grey.lighten-3
-          -#= link_to 'แก้ไขการตัดสินผล', process_award_path(@application), class: 'btn btn-green'
+          //= link_to 'แก้ไขการตัดสินผล', process_award_path(@application), class: 'btn btn-green'

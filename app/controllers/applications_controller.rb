@@ -63,7 +63,7 @@ class ApplicationsController < ApplicationController
   end
 
   def apply_step2
-
+    @admin_edit = true if @current_user && @current_user.is_admin? && params[:admin_edit]
   end
 
   def apply_step3

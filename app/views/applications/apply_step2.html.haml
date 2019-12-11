@@ -65,8 +65,11 @@
           .row
             .col.s12.m3
             .col.s12.m4
-              = hidden_field_tag 'application[stage]', 'step2'
-              %button{class: 'btn waves-effect waves-light gradient-45deg-purple-deep-purple'} ไปยังขั้นตอนต่อไป
+              - unless @admin_edit
+                = hidden_field_tag 'application[stage]', 'step2'
+                %button{class: 'btn waves-effect waves-light gradient-45deg-purple-deep-purple'} ไปยังขั้นตอนต่อไป
+              - else
+                = link_to "กลับไปหน้าแก้ไขใบสมัคร", edit_application_path(@application), class: 'btn yellow'
 
 /modal
 #add-car.modal
