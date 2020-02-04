@@ -196,4 +196,5 @@ th:
         activated: เปิดการใช้บัญชี
         activated_at: เปิดการใช้บัญชี เมื่อวันที่
         province: จังหวัด
+        all_provinces: ใช้งานได้ทุกจังหวัด
 

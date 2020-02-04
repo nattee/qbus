@@ -17,7 +17,7 @@
         /  = @current_user.activated
         .section
           %h6= t(:activated_at, scope: 'activerecord.attributes.user')
-          = l(@current_user.activated_at, format: '%d %B %Y')
+          = ldate @current_user.activated_at, format: '%d %B %Y'
         .section
           %h6 สิทธิ์ในการใช้งาน
           %p

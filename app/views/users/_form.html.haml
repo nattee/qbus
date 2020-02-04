@@ -77,6 +77,10 @@
             %p
               = f.input :province, as: :select, collection: User.province_options_for_select
             %br
+            %p
+              = f.label :all_provinces  do
+                = f.input_field :all_provinces, as: :boolean
+                %span= t(:all_provinces, scope: 'activerecord.attributes.user')
           .input-field.col.s11.offset-s1
             %h6 สิทธิ์พิเศษสำหรับผู้ดูแลระบบเท่านั้น
             %p

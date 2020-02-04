@@ -16,8 +16,13 @@ module ApplicationHelper
   def flash_class(flash_type)
     FLASH_MSG_CLASS.fetch(flash_type.to_sym, flash_type.to_s)
   end
+
   def flash_textcolor(flash_type)
     FLASH_MSG_TEXTCOLOR.fetch(flash_type.to_sym, flash_type.to_s)
+  end
+
+  def ldate(dt, hash = {})
+    dt ? l(dt, hash) : nil
   end
 
 end

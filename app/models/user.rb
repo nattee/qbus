@@ -24,6 +24,10 @@ class User < ApplicationRecord
     BCrypt::Password.create(string, cost: cost)
   end
 
+  def can_view_all_provinces?
+    return self.is_admin? || self.all_provinces?
+  end
+
   # Returns a random token.
   def User.new_token
     SecureRandom.urlsafe_base64

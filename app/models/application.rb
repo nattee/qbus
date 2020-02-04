@@ -52,13 +52,20 @@ class Application < ApplicationRecord
   scope :in_progress, -> {where(state: [:registered, :confirmed, :evaluated, :submitted])}
   scope :finished_all, -> {where(state: :awarded)}
 
+  validate :validate_license_no, on: :edit_license_no
+
   def to_label
     "#{self.number} - #{self.state_text}"
   end
 
   def validate_license_no
-    st = self.license_no[0..1]
-
+    st = self.license_no || ''
+    st = st.strip[0..1]
+    unless User::PROVINCE_ABBR.detect { |v| v[:short] == st }
+      errors.add(:license_no, 'รูปแบบไม่ถูกต้อง สองตัวแรกต้องเป็นรหัสจังหวัด')
+      return false
+    end
+    return true
   end
 
   def id_text

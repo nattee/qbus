@@ -39,7 +39,7 @@ class ProcessController < ApplicationController
     @waiting_official = Application.waiting_official(@current_user)
 
     #for officer & admin
-    if @current_user.is_admin?
+    if @current_user.can_view_all_provinces?
       @to_be_confirmed = Application.to_be_confirmed
       @to_be_appointed = Application.to_be_appointed
       @to_be_appointed_filled = Application.to_be_appointed_filled
@@ -47,19 +47,24 @@ class ProcessController < ApplicationController
       @to_be_evaluated = Application.to_be_evaluated
       @to_be_awarded = Application.to_be_awarded
     else
-      @to_be_confirmed = Application.to_be_confirmed.where('license_no LIKE "?%"',@current_user.province)
-      @to_be_appointed = Application.to_be_appointed.where('license_no LIKE "?%"',@current_user.province)
-      @to_be_appointed_filled = Application.to_be_appointed_filled.where('license_no LIKE "?%"',@current_user.province)
-      @to_be_visited = Application.to_be_visited.where('license_no LIKE "?%"',@current_user.province)
-      @to_be_evaluated = Application.to_be_evaluated.where('license_no LIKE "?%"',@current_user.province)
-      @to_be_awarded = Application.to_be_awarded.where('license_no LIKE "?%"',@current_user.province)
+      @to_be_confirmed = Application.to_be_confirmed.where('license_no LIKE ?',"#{@current_user.province}%")
+      @to_be_appointed = Application.to_be_appointed.where('license_no LIKE ?',"#{@current_user.province}%")
+      @to_be_appointed_filled = Application.to_be_appointed_filled.where('license_no LIKE ?',"#{@current_user.province}%")
+      @to_be_visited = Application.to_be_visited.where('license_no LIKE ?',"#{@current_user.province}%")
+      @to_be_evaluated = Application.to_be_evaluated.where('license_no LIKE ?',"#{@current_user.province}%")
+      @to_be_awarded = Application.to_be_awarded.where('license_no LIKE ?',"#{@current_user.province}%")
     end
   end
 
   #-------- verifier -----------------
   def registered_index
-    @to_be_confirmed = Application.to_be_confirmed
-    @latest_confirmed = Application.latest_confirmed
+    if @current_user.can_view_all_provinces?
+      @to_be_confirmed = Application.to_be_confirmed
+      @latest_confirmed = Application.latest_confirmed
+    else
+      @to_be_confirmed = Application.to_be_confirmed.where('license_no LIKE ?',"#{@current_user.province}%")
+      @latest_confirmed = Application.latest_confirmed.where('license_no LIKE ?',"#{@current_user.province}%")
+    end
   end
 
   def registered
@@ -91,10 +96,17 @@ class ProcessController < ApplicationController
 
   #-------- surveyor -----------------
   def appointment_index
-    @to_be_appointed = Application.to_be_appointed
-    @to_be_appointed_filled = Application.to_be_appointed_filled
-    @to_be_visited = Application.to_be_visited
-    @latest_visited = Application.latest_visited
+    if @current_user.can_view_all_provinces?
+      @to_be_appointed = Application.to_be_appointed
+      @to_be_appointed_filled = Application.to_be_appointed_filled
+      @to_be_visited = Application.to_be_visited
+      @latest_visited = Application.latest_visited
+    else
+      @to_be_appointed = Application.to_be_appointed.where('license_no LIKE ?',"#{@current_user.province}%")
+      @to_be_appointed_filled = Application.to_be_appointed_filled.where('license_no LIKE ?',"#{@current_user.province}%")
+      @to_be_visited = Application.to_be_visited.where('license_no LIKE ?',"#{@current_user.province}%")
+      @latest_visited = Application.latest_visited.where('license_no LIKE ?',"#{@current_user.province}%")
+    end
   end
 
   def appointment_post
@@ -151,8 +163,14 @@ class ProcessController < ApplicationController
 
   #-------- evaluator -----------------
   def evaluation_index
-    @to_be_evaluated = Application.to_be_evaluated
-    @latest_evaluated = Application.latest_evaluated
+
+    if @current_user.can_view_all_provinces?
+      @to_be_evaluated = Application.to_be_evaluated
+      @latest_evaluated = Application.latest_evaluated
+    else
+      @to_be_evaluated = Application.to_be_evaluated.where('license_no LIKE ?',"#{@current_user.province}%")
+      @latest_evaluated = Application.latest_evaluated.where('license_no LIKE ?',"#{@current_user.province}%")
+    end
   end
 
   def evaluation
@@ -192,8 +210,13 @@ class ProcessController < ApplicationController
 
   #--------------- committee ---------------------------
   def award_index
-    @to_be_awarded = Application.to_be_awarded
-    @awarded_recent = Application.latest_awarded
+    if @current_user.can_view_all_provinces?
+      @to_be_awarded = Application.to_be_awarded
+      @awarded_recent = Application.latest_awarded
+    else
+      @to_be_awarded = Application.to_be_awarded.where('license_no LIKE ?',"#{@current_user.province}%")
+      @awarded_recent = Application.latest_awarded.where('license_no LIKE ?',"#{@current_user.province}%")
+    end
   end
 
   def award

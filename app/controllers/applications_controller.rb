@@ -87,8 +87,6 @@ class ApplicationsController < ApplicationController
     @application.license_no.strip!
     @application.state = :applying
 
-    #check license_no
-    @application.validate_license_no
 
     unless @application.category3?
       @route = Route.where(route_no: route_params[:route_no]).first
@@ -135,10 +133,10 @@ class ApplicationsController < ApplicationController
       redirect_to(apply_step1_application_path(@application), flash: {error: 'กรุณาแนบเอกสารใบอนุญาตประกอบการขนส่ง และ/หรือ สัญญาการเดินรถ'}) and return
     end
 
-    if @application.save
+    if @application.save && @application.valid?(:edit_license_no)
       redirect_to apply_step2_application_path(@application)
     else
-      redirect_to(apply_applications_path)
+      render :apply_step1
     end
 
 
@@ -156,7 +154,7 @@ class ApplicationsController < ApplicationController
     if @application.save
       redirect_to apply_step3_application_path(@application)
     else
-      redirect_to apply_applications_path
+      redirect_to(apply_step2_application_path @application)
     end
   end
 

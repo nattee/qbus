@@ -10,6 +10,12 @@
           .col.s12.m9
             = simple_form_for(@application, url: apply_step1_application_path(@application), method: :post, html: { class: 'form_validate', multipart: true }) do |f|
               %h4 กรอกข้อมูลพื้นฐาน
+              - if @application.errors.any?
+                .card.cart-alert.gradient-45deg-red-pink
+                  .card-content.white-text
+                    %ul
+                      - @application.errors.full_messages.each do |message|
+                        %li= message
               - if @application.extend
                 .card-panel.light-blue.lighten-4
                   ใบสมัครต่ออายุมาจากใบสมัครหมายเลข #{@application.extend_app&.id_text}
@@ -104,6 +110,7 @@
                     .input-field
                       = f.input_field :license_no, placeholder: 'กท. 1xx/25yy', class: 'required'
                       = f.label :license_no
+                      = f.error :license_no
                   .col.s6
                     .input-field
                       = f.text_field :license_expire, class: 'datepicker required'
