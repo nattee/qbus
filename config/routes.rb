@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   resources :users
   get 'users/:id/edit_profile', to: 'users#edit_profile', as: 'profile_edit_user'
+  patch 'users/:id/edit_profile', to: 'users#update_profile'
 
 
   resources :account_activations, only: [:edit]

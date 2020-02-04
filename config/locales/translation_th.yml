@@ -46,6 +46,8 @@ th:
           category1: รถโดยสารประจำทาง หมวด 2
           category2: รถโดยสารประจำทาง หมวด 3
           category3: รถโดยสารไม่ประจำทาง
+          category0: รถโดยสารประจำทาง หมวด 1
+          category4: รถโดยสารประจำทาง หมวด 4
         appointment_date: วันนัด  #g
         appointment_remark: คำอธิบายการนัด  #g
         appointment_user: ผู้ทำการนัด  #g
@@ -193,4 +195,5 @@ th:
         committee: กรรมการตัดสินรางวัล
         activated: เปิดการใช้บัญชี
         activated_at: เปิดการใช้บัญชี เมื่อวันที่
+        province: จังหวัด
 

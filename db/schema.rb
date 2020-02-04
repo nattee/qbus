@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_21_124916) do
+ActiveRecord::Schema.define(version: 2020_02_04_102538) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -258,6 +258,8 @@ ActiveRecord::Schema.define(version: 2019_06_21_124916) do
     t.string "tel"
     t.string "reset_digest"
     t.datetime "reset_sent_at"
+    t.string "province", default: "กท"
+    t.boolean "limit_province", default: true
   end
 
   create_table "violations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

@@ -1,4 +1,5 @@
-= simple_form_for(@user) do |f|
+- url = @as_profile ? profile_edit_user_path(@user) : user_path(@user)
+= simple_form_for(@user, url: url) do |f|
   = f.error_notification
   .row
     .col.s12
@@ -73,6 +74,10 @@
                 = f.input_field :committee, as: :boolean
                 %span= t(:committee, scope: 'activerecord.attributes.user')
             %br
+            %p
+              = f.input :province, as: :select, collection: User.province_options_for_select
+            %br
+          .input-field.col.s11.offset-s1
             %h6 สิทธิ์พิเศษสำหรับผู้ดูแลระบบเท่านั้น
             %p
               = f.label :admin  do

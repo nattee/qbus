@@ -84,7 +84,11 @@ class ApplicationsController < ApplicationController
   def post_step1
     #routes and licensee data
     @application.update(application_params)
+    @application.license_no.strip!
     @application.state = :applying
+
+    #check license_no
+    @application.validate_license_no
 
     unless @application.category3?
       @route = Route.where(route_no: route_params[:route_no]).first

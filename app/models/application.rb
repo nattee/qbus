@@ -7,7 +7,7 @@ class Application < ApplicationRecord
                 :awarded,
               ]
 
-  enum category: [ :category1, :category2, :category3 ]
+  enum category: [ :category1, :category2, :category3, :category0, :category4 ]
 
   #association
   belongs_to :route, optional: true
@@ -29,6 +29,7 @@ class Application < ApplicationRecord
   #for officer
   scope :to_be_confirmed, -> { where(state: :registered) }
   scope :latest_confirmed, -> { where(state: [:confirmed,:applying]).where('confirmed_date >= ?',30.days.ago) }
+
 
 
   #scope :to_be_appointed, -> { where(state: [:confirmed, :submitted, :evaluated], appointment_date: nil).where(visited: [false,nil]) }
@@ -53,6 +54,11 @@ class Application < ApplicationRecord
 
   def to_label
     "#{self.number} - #{self.state_text}"
+  end
+
+  def validate_license_no
+    st = self.license_no[0..1]
+
   end
 
   def id_text

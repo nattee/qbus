@@ -65,7 +65,12 @@
                         %td= app.route_info
                         %td= l(app.created_at, format: :short_date, default: nil)
                         %td= app.visit_status
-                        %td= state_full(app)
+                        %td
+                          = state_full(app)
+                          - if app.evaluation_result.blank? == false && app.evaluated_date
+                            %p.red-text.tooltipped{data: {tooltip: app.evaluation_result, position: 'bottom'}}
+                              %i.material-icons.left error
+                              หลักฐานมีปัญหา
                         %td.strong
                           = link_to 'ส่งหลักฐาน', add_evidences_application_path(app)
               - else

@@ -53,6 +53,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def can_access_app_by_province(application)
+    return if @current_user.is_admin
+    if st = application.license_no[0..1] != @current_user.province
+      redirect_to root_path, flash: {error: "ท่านไม่มีสิทธิ์ในการเข้าถึงใบสมัครหมายเลข #{application.id_text}"}
+    end
+  end
+
   def owner_or_admin
     unless logged_in? && (@current_user.is_admin? || @current_user == @application.user)
       redirect_to root_path, flash: {error: 'ท่านไม่มีสิทธิ์ในการทำรายการดังกล่าว'}

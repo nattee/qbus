@@ -107,6 +107,7 @@ class User < ApplicationRecord
     return st.join ', '
   end
 
+
   private
 
     # Converts email to all lower-case.
@@ -119,4 +120,91 @@ class User < ApplicationRecord
       self.activation_token  = User.new_token
       self.activation_digest = User.digest(activation_token)
     end
+
+  public
+
+  PROVINCE_ABBR = [
+    { short: 'กบ', full: 'กระบี่'},
+    { short: 'กท', full: 'กรุงเทพมหานคร'},
+    { short: 'กจ', full: 'กาญจนบุรี'},
+    { short: 'กส', full: 'กาฬสินธุ์'},
+    { short: 'กพ', full: 'กำแพงเพชร'},
+    { short: 'ขก', full: 'ขอนแก่น'},
+    { short: 'จบ', full: 'จันทบุรี'},
+    { short: 'ฉช', full: 'ฉะเชิงเทรา'},
+    { short: 'ชบ', full: 'ชลบุรี'},
+    { short: 'ชน', full: 'ชัยนาท'},
+    { short: 'ชย', full: 'ชัยภูมิ'},
+    { short: 'ชพ', full: 'ชุมพร'},
+    { short: 'ชร', full: 'เชียงราย'},
+    { short: 'ชม', full: 'เชียงใหม่'},
+    { short: 'ตง', full: 'ตรัง'},
+    { short: 'ตร', full: 'ตราด'},
+    { short: 'ตก', full: 'ตาก'},
+    { short: 'นย', full: 'นครนายก'},
+    { short: 'นฐ', full: 'นครปฐม'},
+    { short: 'นพ', full: 'นครพนม'},
+    { short: 'นม', full: 'นครราชสีมา'},
+    { short: 'นศ', full: 'นครศรีธรรมราช'},
+    { short: 'นว', full: 'นครสวรรค์'},
+    { short: 'นบ', full: 'นนทบุรี'},
+    { short: 'นธ', full: 'นราธิวาส'},
+    { short: 'นน', full: 'น่าน'},
+    { short: 'บก', full: 'บึงกาฬ'},
+    { short: 'บร', full: 'บุรีรัมย์'},
+    { short: 'ปท', full: 'ปทุมธานี'},
+    { short: 'ปข', full: 'ประจวบคีรีขันธ์'},
+    { short: 'ปจ', full: 'ปราจีนบุรี'},
+    { short: 'ปน', full: 'ปัตตานี'},
+    { short: 'พย', full: 'พะเยา'},
+    { short: 'อย', full: 'พระนครศรีอยุธยา'},
+    { short: 'พง', full: 'พังงา'},
+    { short: 'พท', full: 'พัทลุง'},
+    { short: 'พจ', full: 'พิจิตร'},
+    { short: 'พล', full: 'พิษณุโลก'},
+    { short: 'พบ', full: 'เพชรบุรี'},
+    { short: 'พช', full: 'เพชรบูรณ์'},
+    { short: 'พร', full: 'แพร่'},
+    { short: 'ภก', full: 'ภูเก็ต'},
+    { short: 'มค', full: 'มหาสารคาม'},
+    { short: 'มห', full: 'มุกดาหาร'},
+    { short: 'มส', full: 'แม่ฮ่องสอน'},
+    { short: 'ยส', full: 'ยโสธร'},
+    { short: 'ยล', full: 'ยะลา'},
+    { short: 'รอ', full: 'ร้อยเอ็ด'},
+    { short: 'รน', full: 'ระนอง'},
+    { short: 'รย', full: 'ระยอง'},
+    { short: 'รบ', full: 'ราชบุรี'},
+    { short: 'ลบ', full: 'ลพบุรี'},
+    { short: 'ลป', full: 'ลำปาง'},
+    { short: 'ลพ', full: 'ลำพูน'},
+    { short: 'ลย', full: 'เลย'},
+    { short: 'ศก', full: 'ศรีสะเกษ'},
+    { short: 'สน', full: 'สกลนคร'},
+    { short: 'สข', full: 'สงขลา'},
+    { short: 'สต', full: 'สตูล'},
+    { short: 'สป', full: 'สมุทรปราการ'},
+    { short: 'สส', full: 'สมุทรสงคราม'},
+    { short: 'สค', full: 'สมุทรสาคร'},
+    { short: 'สก', full: 'สระแก้ว'},
+    { short: 'สบ', full: 'สระบุรี'},
+    { short: 'สห', full: 'สิงห์บุรี'},
+    { short: 'สท', full: 'สุโขทัย'},
+    { short: 'สพ', full: 'สุพรรณบุรี'},
+    { short: 'สฎ', full: 'สุราษฎร์ธานี'},
+    { short: 'สร', full: 'สุรินทร์'},
+    { short: 'นค', full: 'หนองคาย'},
+    { short: 'นภ', full: 'หนองบัวลำภู'},
+    { short: 'อท', full: 'อ่างทอง'},
+    { short: 'อจ', full: 'อำนาจเจริญ'},
+    { short: 'อด', full: 'อุดรธานี'},
+    { short: 'อต', full: 'อุตรดิตถ์'},
+    { short: 'อน', full: 'อุทัยธานี'},
+    { short: 'อบ', full: 'อุบลราชธานี'},
+  ]
+
+  def self.province_options_for_select
+    PROVINCE_ABBR.map { |x| [x[:full],x[:short]]}
+
+  end
 end

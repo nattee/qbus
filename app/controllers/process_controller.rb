@@ -22,6 +22,15 @@ class ProcessController < ApplicationController
     logged_in_with_role( [:committee] )
   end
 
+  before_action only: [
+                        :registered, :registered_post,
+                        :appointment_post, :appointed, :appointment_visit, :appointment_visit_post,
+                        :evaluation, :evaluation_post, :evaluation_finish, :evaluation_reject,
+                        :award, :award_post,
+                      ] do
+    can_access_app_by_province(@application)
+  end
+
   def dashboard
     #for licensee
     @applying = Application.on_applying(@current_user)
@@ -30,16 +39,21 @@ class ProcessController < ApplicationController
     @waiting_official = Application.waiting_official(@current_user)
 
     #for officer & admin
-    @to_be_confirmed = Application.to_be_confirmed
-
-    @to_be_appointed = Application.to_be_appointed
-    @to_be_appointed_filled = Application.to_be_appointed_filled
-    @to_be_visited = Application.to_be_visited
-
-    @to_be_evaluated = Application.to_be_evaluated
-
-    @to_be_awarded = Application.to_be_awarded
-
+    if @current_user.is_admin?
+      @to_be_confirmed = Application.to_be_confirmed
+      @to_be_appointed = Application.to_be_appointed
+      @to_be_appointed_filled = Application.to_be_appointed_filled
+      @to_be_visited = Application.to_be_visited
+      @to_be_evaluated = Application.to_be_evaluated
+      @to_be_awarded = Application.to_be_awarded
+    else
+      @to_be_confirmed = Application.to_be_confirmed.where('license_no LIKE "?%"',@current_user.province)
+      @to_be_appointed = Application.to_be_appointed.where('license_no LIKE "?%"',@current_user.province)
+      @to_be_appointed_filled = Application.to_be_appointed_filled.where('license_no LIKE "?%"',@current_user.province)
+      @to_be_visited = Application.to_be_visited.where('license_no LIKE "?%"',@current_user.province)
+      @to_be_evaluated = Application.to_be_evaluated.where('license_no LIKE "?%"',@current_user.province)
+      @to_be_awarded = Application.to_be_awarded.where('license_no LIKE "?%"',@current_user.province)
+    end
   end
 
   #-------- verifier -----------------
