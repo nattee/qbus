@@ -158,8 +158,8 @@ class Application < ApplicationRecord
   end
 
   def visit_status
-    return "ตรวจแล้วเมื่อ #{I18n.localize(visited_date, format: '%d %b %y', default:nil)}" if visited?
-    return "นัดตรวจ #{I18n.localize(appointment_date, format: '%d %b %y', default:nil)}" if appointment_date
+    return "ตรวจแล้วเมื่อ #{ApplicationController.helpers.thai_year(visited_date, '%d %b tYY')}" if visited?
+    return "นัดตรวจ #{ApplicationController.helpers.thai_year(appointment_date, '%d %b tYY')}" if appointment_date
     return "ยังไม่ได้นัดหมาย"
   end
 

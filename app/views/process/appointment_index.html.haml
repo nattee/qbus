@@ -23,7 +23,7 @@
                     %td= app.licensee&.name
                     %td= app.route_no
                     %td= app.route_info
-                    %td= l(app.created_at, format: :short_date, default: nil)
+                    %td= thai_year(app.created_at, '%d %b tYY')
                     %td= app.contact
                     %td= app.contact_tel
                     %td
@@ -59,13 +59,13 @@
                     %td= app.licensee&.name
                     %td= app.route_no
                     %td= app.route_info
-                    %td= l(app.created_at, format: :short_date, default: nil)
+                    %td= thai_year(app.created_at, '%d %b tYY')
                     %td= app.contact
                     %td= app.contact_tel
-                    %td= l(app.appointment_date, format: :short_date, default: nil)
+                    %td= thai_year(app.appointment_date, '%d %b tYY')
                     %td= app.appointment_remark
                     %td
-                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date, remark: app.appointment_remark}} แก้ไขนัดหมาย
+                      %button.waves-effect.waves-light.green.modal-trigger.btn{ data: {target: 'appoint',application: app.id, date: app.appointment_date&.to_date, remark: app.appointment_remark}} แก้ไขนัดหมาย
                     %td
                       %a.btn.waves-effect.waves-light.gradient-45deg-deep-orange-orange.modal-trigger{href: appointment_visit_path(app)} บันทึกผลตรวจหน้างาน
 
@@ -94,11 +94,11 @@
                     %td= app.licensee&.name
                     %td= app.route_no
                     %td= app.route_info
-                    %td= l(app.created_at, format: :short_date, default: nil)
+                    %td= thai_year(app.created_at, '%d %b tYY')
                     %td= app.contact
                     %td= app.contact_tel
-                    %td= l(app.visited_date, format: :short_date, default: nil)
-                    %td= l(app.visited_confirm_date, format: :short_date, default: nil)
+                    %td= thai_year(app.visited_date, '%d %b tYY')
+                    %td= thai_year(app.visited_confirm_date, '%d %b tYY')
                     %td
                       %a.btn.waves-effect.waves-light.modal-trigger{href: appointment_visit_path(app)} แก้ไขผลตรวจหน้างาน
 
@@ -112,7 +112,8 @@
       .row
         .input-field.col.s6
           %i.material-icons.prefix today
-          = f.text_field :appointment_date, class: 'datepicker'
+          = text_field_tag :tmp_appointment_date, nil, class: 'material-datepicker'
+          = f.hidden_field :appointment_date
           = f.label :appointment_date, t(:appointment_date, scope: 'activerecord.attributes.application')
       .row
         .input-field.col.s6
@@ -128,8 +129,23 @@
       %button.btn.waves-effect.waves-light.green ทำการนัดหมาย
       %a.modal-close.waves-effect.waves-green.btn-flat{href: "#!"} ยกเลิก
 
+:javascript
+  mdp = new MaterialDatepicker('.material-datepicker', {
+    lang: 'th',
+    topHeaderFormat: 'tYYYY',
+    sitePickerFormat: 'MMMM tYYYY',
+    orientation: 'portrait',
+    outputFormat: 'DD MMM tYYYY',
+    zIndex: 1004,
+    position: 'fixed',
+    onChange: function() {
+      $('#appointment_date').val(moment(mdp.date).format('YYYY-MM-DD'))
+    }
+  } )
+
 :coffee
   @setform = (date,remark,id) ->
+    mdp.newDate( moment(date).toDate() )
     $(".modal #appointment_date").val(date)
     $(".modal #appointment_remark").val(remark)
     $(".modal #application_id").val(id)

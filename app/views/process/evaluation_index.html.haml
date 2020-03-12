@@ -24,7 +24,7 @@
                     %td= app.licensee&.name
                     %td= app.route_no
                     %td= app.route_info
-                    %td= l(app.created_at, format: '%d %b %y')
+                    %td= thai_year(app.created_at, '%d %b tYY')
                     %td= app.appoint_date
                     %td= app.appointment_remark
                     %td= "#{app.evaluated_count}/#{Criterium.need_evaluation.count}"
@@ -61,9 +61,9 @@
                     %td= app.licensee&.name
                     %td= app.route_no
                     %td= app.route_info
-                    %td= l(app.created_at, format: '%d %b %Y')
+                    %td= thai_year(app.created_at, '%d %b tYY')
                     %td= app.state_text
-                    %td= l(app.evaluated_date, format: '%d %b %Y')
+                    %td= thai_year(app.evaluated_date, '%d %b tYY')
                     %td.right-align= "#{app.total_score}/100"
                     %td.right-align= "#{app.safety_score}/30"
                     %td= app.evaluation_result

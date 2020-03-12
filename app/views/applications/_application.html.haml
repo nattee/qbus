@@ -7,7 +7,7 @@
       = @application.id_text
     .section
       %h6 วันที่ยื่นใบสมัคร
-      =l( @application.created_at, format: "%d %B %Y")
+      = thai_year(@application.created_at)
     .section
       %h6 สถานะ
       = state_full(@application)
@@ -36,7 +36,7 @@
       = @application.license_no || "-"
     .section
       %h6= t(:license_expire, scope: 'activerecord.attributes.application')
-      = l(@application.license_expire, format: '%d %B %y', default: nil)
+      = thai_year(@application.license_expire)
     .section
       %h6= t(:category, scope: 'activerecord.attributes.application')
       = @application.category_text

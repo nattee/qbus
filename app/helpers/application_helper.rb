@@ -25,4 +25,11 @@ module ApplicationHelper
     dt ? l(dt, hash) : nil
   end
 
+  def thai_year(date, format = '%d %b tYYYY')
+    return '' unless date && format
+    format.gsub!('tYYYY', (date.year.to_i+543).to_s)
+    format.gsub!('tYY', ((date.year.to_i+543) % 100).to_s)
+
+    localize date, format: format
+  end
 end
