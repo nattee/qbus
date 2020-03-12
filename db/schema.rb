@@ -259,7 +259,7 @@ ActiveRecord::Schema.define(version: 2020_02_04_102538) do
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.string "province", default: "กท"
-    t.boolean "all_provinces", default: false
+    t.boolean "limit_province", default: true
   end
 
   create_table "violations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|

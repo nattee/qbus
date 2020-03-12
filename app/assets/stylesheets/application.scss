@@ -26,6 +26,8 @@
 @import "materialize-admin/vendor/data-tables/extensions/responsive/css/responsive.dataTables.min.css";
 @import "materialize-admin/vendor/data-tables/css/select.dataTables.min.css";
 
+@import "material-datepicker/material-datepicker.css";
+
 @import "default";
 //@import "datatables"; //seems to conflict with materialize-admin
 @import "my_datatable";

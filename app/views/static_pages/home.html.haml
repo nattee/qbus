@@ -136,7 +136,7 @@
       %h4 ข่าวประชาสัมพันธ์
   .row
     - Announcement.where(priority: 0).last(3).each do |announcement|
-      .col.s4
+      .col.m4
         .card.medium
           - if announcement.main_attachment.attached? && announcement.main_attachment&.representable?
             .card-image{style: 'background-color: white;'}

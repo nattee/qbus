@@ -113,7 +113,7 @@
                       = f.error :license_no
                   .col.s6
                     .input-field
-                      = f.text_field :license_expire, class: 'datepicker required'
+                      = f.text_field :license_expire, class: 'material-datepicker required'
                       = f.label :license_expire
                 - if @application.category3?
                   กรุณาระบุพื้นที่ให้บริการ
@@ -150,3 +150,12 @@
               = hidden_field_tag 'application[stage]', 'step1'
               %button.btn.waves-effect.waves-light.gradient-45deg-purple-deep-purple ไปยังขั้นตอนต่อไป
 
+:javascript
+  x = new MaterialDatepicker('.material-datepicker', {
+    lang: 'th',
+    topHeaderFormat: 'tYYYY',
+    sitePickerFormat: 'MMMM tYYYY',
+    orientation: 'portrait',
+    outputFormat: 'DD MMM tYYYY',
+  } )
+  x.newDate( new Date('#{@application.license_expire}') )

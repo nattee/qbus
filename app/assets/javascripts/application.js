@@ -22,6 +22,9 @@
 //= require materialize-admin/vendor/data-tables/extensions/responsive/js/dataTables.responsive.min.js
 //= require materialize-admin/vendor/data-tables/js/dataTables.select.min.js
 //
+//= require moment-dae/moment-with-locales-dae.js
+//= require material-datepicker/material-datepicker.js
+//
 //= require materialize-admin/plugins
 //= /require materialize-admin/custom/custom-script
 //= /require datatables
