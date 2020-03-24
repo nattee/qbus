@@ -269,4 +269,4 @@
       $('#application_visited_date').val(moment(mdp.date).format('YYYY-MM-DD'))
     }
   } )
-  mdp.newDate( new Date('#{@application.visited_date.to_date}') )
+  mdp.newDate( new Date('#{@application.visited_date&.to_date}') )

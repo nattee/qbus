@@ -115,6 +115,7 @@
                 %table
                   %thead
                     %tr
+                      %th หมายเลข
                       %th ผู้ประกอบการ
                       %th= t(:route_no, scope: 'activerecord.attributes.application')
                       %th= t(:route_info, scope: 'activerecord.attributes.application')
@@ -126,15 +127,16 @@
                   %tbody
                     - @finished.each do |app|
                       %tr
+                        %td= app.id_text
                         %td= app.licensee&.name
                         %td= app.route_no
                         %td= app.route_info
-                        %td= thai_year(app.created_at, '%d %B tYY')
+                        %td= thai_year(app.created_at, '%d %b tYY')
                         -# %td= l(app.created_at, format: :short_date, default: nil)
-                        %td= thai_year(app.awarded_date, '%d %B tYY')
+                        %td= thai_year(app.awarded_date, '%d %b tYY')
                         -# %td= l(app.awarded_date, format: :short_date, default: nil)
                         %td= final_award_text(app)
-                        %td= thai_year(app.awarded_expire_date, '%d %B tYY')
+                        %td= thai_year(app.award_expire_date, '%d %b tYY')
                         -# %td= l(app.award_expire_date, format: :short_date, default: nil)
                         %td
                           - if app.award_won

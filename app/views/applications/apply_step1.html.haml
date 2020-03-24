@@ -162,4 +162,4 @@
       $('#application_license_expire').val(moment(mdp.date).format('YYYY-MM-DD'))
     }
   } )
-  mdp.newDate( new Date('#{@application.license_expire}') )
+  mdp.newDate( new Date('#{@application.license_expire&.to_date}') )

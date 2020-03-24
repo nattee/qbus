@@ -6,7 +6,7 @@
           %h4.white-text= t(:list) + t(:user, scope: 'activerecord.models')
       .card-content
         .dataTables_wrapper
-          %table#table.dataTable.display
+          %table#table.dataTable.display{style: 'width: 100%'}
             %thead
               %tr
                 %th= t(:name, scope: 'activerecord.attributes.user')
@@ -19,7 +19,7 @@
                   %td= user.name
                   %td= user.email
                   %td= user.role_summary
-                  %td.right-align
+                  %td
                     %a{:href => user_path(user)}
                       %i.material-icons pageview
                     %a{:href => edit_user_path(user)}
