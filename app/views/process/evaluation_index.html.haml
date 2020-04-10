@@ -4,7 +4,7 @@
       .card-content
         .row
           .col.s12.m9
-            %h4 ใบสมัครรอข้อมูลการประเมิน
+            %h4 ใบสมัครรอการประเมินหลักฐาน
             %table
               %thead
                 %tr
@@ -13,8 +13,8 @@
                   %th= t(:route_no, scope: 'activerecord.attributes.application')
                   %th= t(:route_info, scope: 'activerecord.attributes.application')
                   %th วันที่ยื่นใบสมัคร
-                  %th= t(:appointment_date, scope: 'activerecord.attributes.application')
-                  %th= t(:appointment_remark, scope: 'activerecord.attributes.application')
+                  -# %th= t(:appointment_date, scope: 'activerecord.attributes.application')
+                  -# %th= t(:appointment_remark, scope: 'activerecord.attributes.application')
                   %th กรอกแล้ว
                   %th
               %tbody
@@ -25,16 +25,16 @@
                     %td= app.route_no
                     %td= app.route_info
                     %td= thai_year(app.created_at, '%d %b tYY')
-                    %td= app.appoint_date
-                    %td= app.appointment_remark
+                    -# %td= app.appoint_date
+                    -# %td= app.appointment_remark
                     %td= "#{app.evaluated_count}/#{Criterium.need_evaluation.count}"
                     %td= link_to 'ประเมิน', process_evaluation_path(app.id), class: 'waves-effect waves-light gradient-45deg-deep-orange-orange btn'
           .col.s12.m3
-            %h4 การกรอกผลการประเมิน
+            %h4 การประเมินหลักฐาน
             .section
-              %p หลังจากเจ้าหน้าที่เข้าประเมินผู้ประกอบการเพื่อทำการประเมินตามใบสมัครแล้ว ให้กรอกข้อมูลผลการประเมินของใบสมัครต่าง ๆ ทางด้านซ้ายโดยกดปุ่ม "ประเมิน"
+              %p ให้เจ้าหน้าที่ตรวจสอบหลักฐาน และประเมินผลหลักฐานตามใบสมัครต่าง ๆ ทางด้านซ้ายโดยกดปุ่ม "ประเมิน"
             .section
-              %p หลังจากกรอกข้อมูลครบถ้วนและตรวจทานเรียบร้อยแล้ว ให้กดปุ่ม "ส่งต่อ" เพื่อทำการส่งผลการประเมินไปยังคณะกรรมการตัดสินผลการมอบตราสัญลักษณ์
+              %p หลังจากกรอกข้อมูลครบถ้วนและตรวจทานเรียบร้อยแล้ว ให้กดปุ่ม "ยืนยันผล" เพื่อส่งไปสมัครไปยังขั้นตอนการนัดหมายและตรวจหน้างานต่อไป
     .card
       .card-content
         .row

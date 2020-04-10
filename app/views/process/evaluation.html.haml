@@ -139,5 +139,17 @@
                   .input-field
                     = f.text_field "description[#{ev.id}]", value: ev.description, class: 'materialize-textarea'
           .card-action.orange.lighten-5
-            %button.btn.waves-effect.gradient-45deg-deep-orange-orange.waves-light{value:  :submit} บันทึก
-            %button#confirm_button.btn.gradient-45deg-purple-deep-purple.waves-effect.waves-light{name: :confirm, value:  :confirm,type: :submit, data: {confirm: 'เมื่อยืนยันแล้วจะไม่สามารถแก้ไขการประเมินได้อีก ยืนยันหรือไม่'}} ยืนยันผลการประเมิน
+            %h6 คะแนนปัจจุบัน
+            .row
+              .col.s12
+                คะแนนปัจจุบันจะคำนวณใหม่เมื่อทำการกดปุ่มบันทึก หรือ ปุ่มยืนยัน
+            .row
+              .col.s3
+                %span.strong คะแนนรวม
+                = @application.total_score_text
+              .col.s3
+                %span.strong คะแนนความปลอดภัย
+                = @application.safety_score_text
+            .row
+              %button.btn.waves-effect.gradient-45deg-deep-orange-orange.waves-light{value:  :submit} บันทึก
+              %button#confirm_button.btn.gradient-45deg-purple-deep-purple.waves-effect.waves-light{name: :confirm, value:  :confirm,type: :submit, data: {confirm: 'เมื่อยืนยันแล้วจะไม่สามารถแก้ไขการประเมินได้อีก ยืนยันหรือไม่'}} ยืนยันผลการประเมิน
