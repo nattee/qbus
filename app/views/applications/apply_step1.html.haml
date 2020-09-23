@@ -113,7 +113,8 @@
                       = f.error :license_no
                   .col.s6
                     .input-field
-                      = f.text_field :license_expire, class: 'material-datepicker required'
+                      = text_field_tag :tmp_license_expire, nil, class: 'material-datepicker required'
+                      = f.hidden_field :license_expire
                       = f.label :license_expire
                 - if @application.category3?
                   กรุณาระบุพื้นที่ให้บริการ
@@ -151,11 +152,14 @@
               %button.btn.waves-effect.waves-light.gradient-45deg-purple-deep-purple ไปยังขั้นตอนต่อไป
 
 :javascript
-  x = new MaterialDatepicker('.material-datepicker', {
+  mdp = new MaterialDatepicker('.material-datepicker', {
     lang: 'th',
     topHeaderFormat: 'tYYYY',
     sitePickerFormat: 'MMMM tYYYY',
     orientation: 'portrait',
     outputFormat: 'DD MMM tYYYY',
+    onChange: function() {
+      $('#application_license_expire').val(moment(mdp.date).format('YYYY-MM-DD'))
+    }
   } )
-  x.newDate( new Date('#{@application.license_expire}') )
+  mdp.newDate( new Date('#{@application.license_expire&.to_date}') )

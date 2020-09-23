@@ -34,7 +34,8 @@
                   /  วันที่ตรวจหน้างาน
                   .col.s6
                     .input-field
-                      = f.text_field :visited_date, value: @application.visited_date&.to_date, class: 'datepicker'
+                      = text_field_tag :tmp_visited_date, @application.visited_date&.to_date, class: 'material-datepicker'
+                      = f.hidden_field :visited_date
                       = f.label :visited_date, t(:visited_date, scope: 'activerecord.attributes.application')
                 .row
                   /.col.s6
@@ -256,3 +257,16 @@
           #tab_car
             .card-content.brown.lighten-5
               = render partial: "applications/cars"
+
+:javascript
+  mdp = new MaterialDatepicker('.material-datepicker', {
+    lang: 'th',
+    topHeaderFormat: 'tYYYY',
+    sitePickerFormat: 'MMMM tYYYY',
+    orientation: 'portrait',
+    outputFormat: 'DD MMM tYYYY',
+    onChange: function() {
+      $('#application_visited_date').val(moment(mdp.date).format('YYYY-MM-DD'))
+    }
+  } )
+  mdp.newDate( new Date('#{@application.visited_date&.to_date}') )
