@@ -24,6 +24,11 @@
             %ul
               - @user.role_array.each do |r|
                 %li= r
+        .section
+          - if @user.all_provinces
+            ใช้งานได้ทุกจังหวัด
+          - else
+            ใช้ได้เฉพาะจังหวัด #{User.province_code_hash()[@user.province]}
       .card-action
         = link_to t(:edit), edit_user_path(@user)
         = link_to t(:back), users_path

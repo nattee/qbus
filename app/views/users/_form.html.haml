@@ -1,4 +1,4 @@
-- url = @as_profile ? profile_edit_user_path(@user) : user_path(@user)
+- url = @as_profile ? profile_edit_user_path(@user) : ( @user.id ? user_path(@user) : users_path() )
 = simple_form_for(@user, url: url) do |f|
   = f.error_notification
   .row

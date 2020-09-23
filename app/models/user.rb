@@ -209,6 +209,11 @@ class User < ApplicationRecord
 
   def self.province_options_for_select
     PROVINCE_ABBR.map { |x| [x[:full],x[:short]]}
+  end
 
+  def self.province_code_hash
+    h = {}
+    PROVINCE_ABBR.each { |x| h[x[:short]] = x[:full]}
+    return h
   end
 end
